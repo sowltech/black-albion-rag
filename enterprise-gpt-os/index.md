@@ -6,6 +6,8 @@ pack.
 ## Start Here
 
 - [README](README.md)
+- [Machine-Readable Manifest](manifest.yaml)
+- [Manifest Validator](scripts/validate_manifest.py)
 - [Standard GPT Build Template](templates/standard_gpt_build_template.md)
 - [90-Day Rollout Plan](workflows/rollout_plan_90_days.md)
 
@@ -27,6 +29,7 @@ pack.
 - [Operations SOP GPT](gpts/operations_sop_gpt.md)
 - [Sales GPT](gpts/sales_gpt.md)
 - [Support GPT](gpts/support_gpt.md)
+- [Governance Auditor GPT](gpts/governance_auditor_gpt.md)
 
 ## Workflows
 
@@ -50,6 +53,15 @@ pack.
 6. Roll out in phases using the 90-day rollout plan.
 7. Review active GPTs on the required cadence and record changes, incidents,
    and approvals.
+
+## Manifest Validation
+
+Run the manifest validator before rollout reviews, governance changes, or
+dashboard imports:
+
+```bash
+python3 enterprise-gpt-os/scripts/validate_manifest.py
+```
 
 ## Current Rollout Order
 
