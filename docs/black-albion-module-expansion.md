@@ -294,6 +294,126 @@ git diff --cached --check
 scripts/smoke_test.sh
 ```
 
+## Item-Level Tier I Source Pass 002
+
+This pass reviewed only the remaining documented item-level gaps:
+
+- Metchley.
+- Wolverhampton Cross.
+- Coate Water.
+- Cooper's Hill primary archaeology.
+- Hardwicke.
+- Hawkesbury.
+- Brockworth.
+- Witcombe reservoirs.
+- Apperley.
+- Exact Domesday entries.
+- Local geology specifics.
+
+Target modules were `UK-RAG-MOD-048`, `UK-RAG-MOD-051`,
+`UK-RAG-MOD-055`, and `UK-RAG-MOD-056`. No new regional modules were added,
+and broad regional inventory claims remain `partial`.
+
+### Sources Added
+
+Added 13 source records:
+
+- `src_ads_metchley_roman_forts_2017`
+- `src_he_wolverhampton_anglian_cross_1005886`
+- `src_swindon_coate_water_country_park`
+- `src_he_day_house_coate_stone_circle_1016359`
+- `src_glos_wildlife_coopers_hill_high_brotheridge`
+- `src_opendomesday_hawkesbury`
+- `src_opendomesday_deerhurst`
+- `src_opendomesday_deerhurst_hundred_hardwicke`
+- `src_he_brockworth_court_1091764`
+- `src_brockworth_pc_parish_history`
+- `src_bgs_tewkesbury_sheet_216_memoir`
+- `src_nt_a417_witcombe_reservoir_written_representation`
+- `src_apperley_deerhurst_history_page`
+
+### Item-Level Claims Added
+
+Added 14 item-level Tier I claims:
+
+- `claim_048_metchley_roman_forts`
+- `claim_048_wolverhampton_anglian_cross`
+- `claim_051_coate_water_country_park`
+- `claim_051_day_house_coate_stone_circle`
+- `claim_055_coopers_hill_high_brotheridge`
+- `claim_055_hardwicke_domesday_index`
+- `claim_055_hawkesbury_domesday_entry`
+- `claim_055_brockworth_court`
+- `claim_055_brockworth_parish_history`
+- `claim_055_witcombe_reservoirs_brockworth_mill`
+- `claim_055_witcombe_reservoirs_modern_hydrology`
+- `claim_056_deerhurst_exact_domesday_entry`
+- `claim_056_apperley_local_context`
+- `claim_055_056_local_geology_tewkesbury_sheet`
+
+### Claims Upgraded To `verified`
+
+The following narrow item-level claims are `verified`:
+
+- `claim_048_metchley_roman_forts`
+- `claim_048_wolverhampton_anglian_cross`
+- `claim_051_coate_water_country_park`
+- `claim_051_day_house_coate_stone_circle`
+- `claim_055_hawkesbury_domesday_entry`
+- `claim_055_brockworth_court`
+- `claim_056_deerhurst_exact_domesday_entry`
+
+### Claims Left `partial`
+
+The following item-level claims remain `partial` because the attached sources
+support the named place or context but not full item-level detail:
+
+- `claim_055_coopers_hill_high_brotheridge`
+- `claim_055_hardwicke_domesday_index`
+- `claim_055_brockworth_parish_history`
+- `claim_055_witcombe_reservoirs_brockworth_mill`
+- `claim_055_witcombe_reservoirs_modern_hydrology`
+- `claim_056_apperley_local_context`
+- `claim_055_056_local_geology_tewkesbury_sheet`
+
+Existing partial claims also received stronger support:
+
+- `claim_055_coopers_hill_nature_reserve`
+- `claim_056_westminster_abbey_estate_link`
+- `claim_056_mercia_mudstone_context`
+
+### Gaps Still Unresolved
+
+Remaining gaps after this pass:
+
+- Cooper's Hill primary archaeology: stronger NHLE/HER or excavation record
+  still needed for full verification.
+- Hardwicke: Open Domesday supports the Deerhurst-hundred index entry, but a
+  directly retrievable Hardwicke place page or folio transcription is still
+  needed for manor-level verification.
+- Brockworth: Historic England verifies Brockworth Court; parish-history
+  detail still needs VCH/HER/NHLE item records before full verification.
+- Witcombe reservoirs: parish-history and National Trust/planning evidence
+  support late 19th-century reservoir context, but water-company or official
+  reservoir engineering records are still needed.
+- Apperley: local-history context is attached, but VCH, parish, NHLE, or HER
+  records are still needed for full settlement-history verification.
+- Local geology specifics: BGS supports regional Mercia Mudstone/alluvium
+  context, but precise BGS GeoIndex, borehole, or map-sheet extracts are still
+  needed for each named place.
+
+### Validation Commands Run
+
+```bash
+python3 -m json.tool data/raw/black_albion_sources.json
+python3 -m json.tool data/raw/black_albion_claims.json
+python3 -m pytest -q
+python3 -m compileall backend
+git diff --check
+git diff --cached --check
+scripts/smoke_test.sh
+```
+
 ## Tier I Source Enrichment Pass 002
 
 Pass 002 enriched the remaining eight regional inventory modules that were

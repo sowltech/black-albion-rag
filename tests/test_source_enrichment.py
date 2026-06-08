@@ -57,6 +57,22 @@ ITEM_LEVEL_CLAIM_IDS = {
     "claim_056_westminster_abbey_estate_link",
     "claim_056_mercia_mudstone_context",
 }
+ITEM_LEVEL_PASS_002_CLAIM_IDS = {
+    "claim_048_metchley_roman_forts",
+    "claim_048_wolverhampton_anglian_cross",
+    "claim_051_coate_water_country_park",
+    "claim_051_day_house_coate_stone_circle",
+    "claim_055_coopers_hill_high_brotheridge",
+    "claim_055_hardwicke_domesday_index",
+    "claim_055_hawkesbury_domesday_entry",
+    "claim_055_brockworth_court",
+    "claim_055_brockworth_parish_history",
+    "claim_055_witcombe_reservoirs_brockworth_mill",
+    "claim_055_witcombe_reservoirs_modern_hydrology",
+    "claim_056_deerhurst_exact_domesday_entry",
+    "claim_056_apperley_local_context",
+    "claim_055_056_local_geology_tewkesbury_sheet",
+}
 
 
 class SourceEnrichmentTests(unittest.TestCase):
@@ -106,7 +122,10 @@ class SourceEnrichmentTests(unittest.TestCase):
     def test_verified_item_level_claims_have_sources(self) -> None:
         for claim in self.claims:
             if (
-                claim["claim_id"] in ITEM_LEVEL_CLAIM_IDS
+                (
+                    claim["claim_id"] in ITEM_LEVEL_CLAIM_IDS
+                    or claim["claim_id"] in ITEM_LEVEL_PASS_002_CLAIM_IDS
+                )
                 and claim.get("source_status") == "verified"
             ):
                 self.assertTrue(claim.get("source_ids"), claim["claim_id"])
@@ -119,6 +138,23 @@ class SourceEnrichmentTests(unittest.TestCase):
             self.assertEqual(claim.get("tier"), "I", claim_id)
             self.assertIn(claim.get("source_status"), {"partial", "verified"}, claim_id)
             self.assertTrue(claim.get("source_ids"), claim_id)
+
+    def test_pass_002_item_level_claims_exist(self) -> None:
+        claims_by_id = {claim["claim_id"]: claim for claim in self.claims}
+        for claim_id in ITEM_LEVEL_PASS_002_CLAIM_IDS:
+            self.assertIn(claim_id, claims_by_id)
+            claim = claims_by_id[claim_id]
+            self.assertEqual(claim.get("tier"), "I", claim_id)
+            self.assertIn(claim.get("source_status"), {"partial", "verified"}, claim_id)
+            self.assertTrue(claim.get("source_ids"), claim_id)
+
+    def test_pass_002_documentation_exists(self) -> None:
+        doc = (PROJECT_ROOT / "docs" / "black-albion-module-expansion.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("Item-Level Tier I Source Pass 002", doc)
+        for gap in ("Metchley", "Wolverhampton Cross", "Coate Water", "Apperley"):
+            self.assertIn(gap, doc)
 
 
 if __name__ == "__main__":  # pragma: no cover

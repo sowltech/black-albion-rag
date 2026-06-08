@@ -1109,8 +1109,9 @@
     "required_sources": [
       "Attach direct Gloucestershire County Council, SSSI, HER, or Historic England records for full archaeological and conservation detail."
     ],
-    "notes": "The local destination listing supports the named reserve, limestone grassland/woodland, and Iron Age settlement reference; stronger primary designation records are still needed.",
+    "notes": "Partial Tier I support: local destination and Gloucestershire Wildlife Trust sources support Cooper's Hill nature reserve and High Brotheridge Camp / possible Iron Age hillfort context. Direct NHLE/HER archaeology records are still required for full verification.",
     "source_ids": [
+      "src_glos_wildlife_coopers_hill_high_brotheridge",
       "src_visit_cheltenham_coopers_hill_nature_reserve"
     ]
   },
@@ -1209,9 +1210,10 @@
     "required_sources": [
       "Attach direct Domesday, VCH, or Westminster Abbey estate record for full verification."
     ],
-    "notes": "English Heritage Odda's Chapel material supports a Westminster Abbey transfer reference, but full estate-chain detail remains partially sourced.",
+    "notes": "Partial-to-strong Tier I support: Open Domesday directly supports Westminster Abbey ownership of Deerhurst in 1066 and 1086, while English Heritage supports a Westminster Abbey transfer reference for Odda's Chapel context. Full estate-chain detail beyond the Domesday entry remains partially sourced.",
     "source_ids": [
-      "src_eh_oddas_chapel_history"
+      "src_eh_oddas_chapel_history",
+      "src_opendomesday_deerhurst"
     ]
   },
   {
@@ -1227,8 +1229,249 @@
     "required_sources": [
       "Attach local BGS map-sheet, borehole, or conservation geology source for exact Deerhurst/Apperley ground conditions."
     ],
-    "notes": "BGS directly supports the Mercia Mudstone Group as a geological unit; exact site-level Deerhurst/Apperley geology still needs map-specific confirmation.",
+    "notes": "Partial Tier I support: BGS sources support Mercia Mudstone Group and regional Tewkesbury-sheet alluvium/Mercia Mudstone context. Exact Deerhurst/Apperley ground conditions still need map-specific or borehole confirmation.",
     "source_ids": [
+      "src_bgs_mercia_mudstone_group",
+      "src_bgs_tewkesbury_sheet_216_memoir"
+    ]
+  },
+  {
+    "claim_id": "claim_048_metchley_roman_forts",
+    "id": "claim_048_metchley_roman_forts",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Metchley is sourced as a Roman-fort item in UK-RAG-MOD-048 through Birmingham Archaeology / ADS records of the Metchley Roman forts and annexes.",
+    "title": "Metchley Roman forts item-level source",
+    "summary": "Metchley is sourced as a Roman-fort item in UK-RAG-MOD-048 through Birmingham Archaeology / ADS records of the Metchley Roman forts and annexes.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Directly supports the Metchley Roman-fort item. It does not verify any wider Mercian lattice or symbolic reading.",
+    "source_ids": [
+      "src_ads_metchley_roman_forts_2017"
+    ]
+  },
+  {
+    "claim_id": "claim_048_wolverhampton_anglian_cross",
+    "id": "claim_048_wolverhampton_anglian_cross",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "The Wolverhampton Cross item is sourced as the Anglian cross south of St Peter's Collegiate Church, a scheduled monument in Wolverhampton.",
+    "title": "Wolverhampton Anglian cross item-level source",
+    "summary": "The Wolverhampton Cross item is sourced as the Anglian cross south of St Peter's Collegiate Church, a scheduled monument in Wolverhampton.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports the scheduled Anglian cross. Roman-column reuse is not verified here and remains outside the claim.",
+    "source_ids": [
+      "src_he_wolverhampton_anglian_cross_1005886"
+    ]
+  },
+  {
+    "claim_id": "claim_051_coate_water_country_park",
+    "id": "claim_051_coate_water_country_park",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Coate Water is sourced as a Swindon country park with a 56-acre reservoir built in the 1820s as a Wilts and Berks Canal headwater tank, later designated as a Local Nature Reserve/SSSI context.",
+    "title": "Coate Water country park and reservoir item-level source",
+    "summary": "Coate Water is sourced as a Swindon country park with a 56-acre reservoir built in the 1820s as a Wilts and Berks Canal headwater tank, later designated as a Local Nature Reserve/SSSI context.",
+    "tier": "I",
+    "claim_type": "hydrology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Swindon Borough Council directly supports the Coate Water reservoir/nature-reserve item. This claim does not verify disputed prehistoric stone-alignment readings.",
+    "source_ids": [
+      "src_swindon_coate_water_country_park"
+    ]
+  },
+  {
+    "claim_id": "claim_051_day_house_coate_stone_circle",
+    "id": "claim_051_day_house_coate_stone_circle",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "The stone circle immediately north east of Day House, Coate is sourced as a scheduled prehistoric monument near the Coate Water landscape.",
+    "title": "Day House Coate stone circle item-level source",
+    "summary": "The stone circle immediately north east of Day House, Coate is sourced as a scheduled prehistoric monument near the Coate Water landscape.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports the scheduled stone circle. This does not verify any wider lost stone-circle network beyond the listed monument.",
+    "source_ids": [
+      "src_he_day_house_coate_stone_circle_1016359"
+    ]
+  },
+  {
+    "claim_id": "claim_055_coopers_hill_high_brotheridge",
+    "id": "claim_055_coopers_hill_high_brotheridge",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Cooper's Hill is partially sourced as part of the High Brotheridge Camp scheduled-monument landscape, described by Gloucestershire Wildlife Trust as a possible Iron Age hillfort.",
+    "title": "Cooper's Hill / High Brotheridge Camp item-level source",
+    "summary": "Cooper's Hill is partially sourced as part of the High Brotheridge Camp scheduled-monument landscape, described by Gloucestershire Wildlife Trust as a possible Iron Age hillfort.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach direct NHLE, HER, or excavation record for High Brotheridge Camp / Cooper's Hill archaeology."
+    ],
+    "notes": "This strengthens the Cooper's Hill archaeology anchor but remains partial because the source is a wildlife-trust reserve page rather than the primary NHLE/HER record.",
+    "source_ids": [
+      "src_glos_wildlife_coopers_hill_high_brotheridge",
+      "src_visit_cheltenham_coopers_hill_nature_reserve"
+    ]
+  },
+  {
+    "claim_id": "claim_055_hardwicke_domesday_index",
+    "id": "claim_055_hardwicke_domesday_index",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Hardwicke is sourced as a Domesday Book place in the Hundred of Deerhurst with 10.9 recorded households.",
+    "title": "Hardwicke Domesday index item-level source",
+    "summary": "Hardwicke is sourced as a Domesday Book place in the Hundred of Deerhurst with 10.9 recorded households.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach the directly retrievable Hardwicke place page or folio transcription for full manor-level detail."
+    ],
+    "notes": "Open Domesday supports Hardwicke in the Deerhurst hundred index and county list, but the individual Hardwicke page was not retrievable in this pass; keep partial.",
+    "source_ids": [
+      "src_opendomesday_deerhurst_hundred_hardwicke"
+    ]
+  },
+  {
+    "claim_id": "claim_055_hawkesbury_domesday_entry",
+    "id": "claim_055_hawkesbury_domesday_entry",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Hawkesbury is sourced as a Domesday Book settlement in Grimboldestou hundred with 52 recorded households in 1086 and Pershore Abbey as tenant-in-chief/lord.",
+    "title": "Hawkesbury Domesday item-level source",
+    "summary": "Hawkesbury is sourced as a Domesday Book settlement in Grimboldestou hundred with 52 recorded households in 1086 and Pershore Abbey as tenant-in-chief/lord.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Open Domesday directly supports the named place, hundred, household count, abbey ownership, resources, value, and Phillimore reference Gloucestershire 14,2.",
+    "source_ids": [
+      "src_opendomesday_hawkesbury"
+    ]
+  },
+  {
+    "claim_id": "claim_055_brockworth_court",
+    "id": "claim_055_brockworth_court",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Brockworth Court is sourced as a Grade II* listed building in Brockworth, built for Richard Hart, the last prior of Lanthony, in 1534-9.",
+    "title": "Brockworth Court item-level source",
+    "summary": "Brockworth Court is sourced as a Grade II* listed building in Brockworth, built for Richard Hart, the last prior of Lanthony, in 1534-9.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports Brockworth Court and the listed-building facts. This is a Brockworth settlement/history anchor, not a full parish history.",
+    "source_ids": [
+      "src_he_brockworth_court_1091764"
+    ]
+  },
+  {
+    "claim_id": "claim_055_brockworth_parish_history",
+    "id": "claim_055_brockworth_parish_history",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Brockworth parish history is partially sourced through Brockworth Parish Council, including St George's Church, Brockworth Court, Brockworth Mill, Ermin Street, and local settlement-history notes.",
+    "title": "Brockworth parish-history item-level source",
+    "summary": "Brockworth parish history is partially sourced through Brockworth Parish Council, including St George's Church, Brockworth Court, Brockworth Mill, Ermin Street, and local settlement-history notes.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach VCH, HER, or NHLE records for each individual Brockworth historical sub-claim before full verification."
+    ],
+    "notes": "Parish Council material gives useful local context but is not treated as full verification for every historical detail.",
+    "source_ids": [
+      "src_brockworth_pc_parish_history"
+    ]
+  },
+  {
+    "claim_id": "claim_055_witcombe_reservoirs_brockworth_mill",
+    "id": "claim_055_witcombe_reservoirs_brockworth_mill",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Brockworth Parish Council partially supports the claim that Witcombe Reservoir was built in 1863 and affected Brockworth Mill.",
+    "title": "Witcombe reservoir / Brockworth Mill item-level source",
+    "summary": "Brockworth Parish Council partially supports the claim that Witcombe Reservoir was built in 1863 and affected Brockworth Mill.",
+    "tier": "I",
+    "claim_type": "hydrology",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach water-company, reservoir, estate, or local authority engineering records for full verification."
+    ],
+    "notes": "Parish-history support is useful but not enough to verify full reservoir construction and hydrology history.",
+    "source_ids": [
+      "src_brockworth_pc_parish_history"
+    ]
+  },
+  {
+    "claim_id": "claim_055_witcombe_reservoirs_modern_hydrology",
+    "id": "claim_055_witcombe_reservoirs_modern_hydrology",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Witcombe Reservoir is partially sourced as a late 19th-century hydrology/heritage feature in the A417 Missing Link landscape context.",
+    "title": "Witcombe Reservoir modern hydrology item-level source",
+    "summary": "Witcombe Reservoir is partially sourced as a late 19th-century hydrology/heritage feature in the A417 Missing Link landscape context.",
+    "tier": "I",
+    "claim_type": "hydrology",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach official reservoir-owner, water supply, or local authority reservoir records for full verification."
+    ],
+    "notes": "National Trust planning evidence supports late 19th-century dating and landscape relevance, but not full reservoir engineering history.",
+    "source_ids": [
+      "src_nt_a417_witcombe_reservoir_written_representation"
+    ]
+  },
+  {
+    "claim_id": "claim_056_deerhurst_exact_domesday_entry",
+    "id": "claim_056_deerhurst_exact_domesday_entry",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Deerhurst is sourced in Open Domesday as a settlement in Deerhurst hundred with 34 households in 1086 and Westminster Abbey as tenant-in-chief/lord in 1066 and 1086.",
+    "title": "Deerhurst exact Domesday item-level source",
+    "summary": "Deerhurst is sourced in Open Domesday as a settlement in Deerhurst hundred with 34 households in 1086 and Westminster Abbey as tenant-in-chief/lord in 1066 and 1086.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Open Domesday directly supports the exact entry details. This strengthens the existing Westminster Abbey estate-link claim but does not resolve Apperley separately.",
+    "source_ids": [
+      "src_opendomesday_deerhurst"
+    ]
+  },
+  {
+    "claim_id": "claim_056_apperley_local_context",
+    "id": "claim_056_apperley_local_context",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Apperley is partially sourced as part of the Apperley/Deerhurst local-history context within UK-RAG-MOD-056.",
+    "title": "Apperley local-context item-level source",
+    "summary": "Apperley is partially sourced as part of the Apperley/Deerhurst local-history context within UK-RAG-MOD-056.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach VCH, parish, Historic England, or HER records for Apperley before verifying detailed settlement claims."
+    ],
+    "notes": "The community history page is enough to keep Apperley findable in the item-level ledger, but not enough for full verification.",
+    "source_ids": [
+      "src_apperley_deerhurst_history_page"
+    ]
+  },
+  {
+    "claim_id": "claim_055_056_local_geology_tewkesbury_sheet",
+    "id": "claim_055_056_local_geology_tewkesbury_sheet",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "BGS Tewkesbury sheet 216 supports local Severn Vale geology context for the Deerhurst/Apperley and Gloucester-radial modules, including Mercia Mudstone and floodplain alluvium descriptions, but exact site-level mapping remains partial.",
+    "title": "Tewkesbury sheet local geology item-level source",
+    "summary": "BGS Tewkesbury sheet 216 supports local Severn Vale geology context for the Deerhurst/Apperley and Gloucester-radial modules, including Mercia Mudstone and floodplain alluvium descriptions, but exact site-level mapping remains partial.",
+    "tier": "I",
+    "claim_type": "geology",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach precise BGS GeoIndex/map-sheet extracts or borehole records for Deerhurst, Apperley, Hardwicke, Brockworth, and Witcombe before site-level verification."
+    ],
+    "notes": "The BGS memoir is a strong regional geology source but not a point-location proof for every named item.",
+    "source_ids": [
+      "src_bgs_tewkesbury_sheet_216_memoir",
       "src_bgs_mercia_mudstone_group"
     ]
   }
