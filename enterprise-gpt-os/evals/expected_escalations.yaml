@@ -1,0 +1,127 @@
+mappings:
+  - escalation_key: legal
+    owner_role: Legal Owner
+    when_to_escalate: "Contracts, regulatory matters, legal commitments, disputes, privileged material, or legal interpretation."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - sources_used
+      - legal_context
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Summarise, draft for review, identify missing context, and route to legal owner."
+    forbidden_gpt_action: "Approve contracts, provide binding legal advice, accept terms, or contact counterparties without approval."
+
+  - escalation_key: finance
+    owner_role: Finance Owner
+    when_to_escalate: "Refunds, payments, discounts, budget commitments, financial reporting reliance, or invoice approval."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - amount
+      - financial_action
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Prepare summaries, draft recommendations, and identify approval requirements."
+    forbidden_gpt_action: "Move money, approve payment, approve discounts, or represent financial decisions as authorised."
+
+  - escalation_key: hr
+    owner_role: HR Owner
+    when_to_escalate: "Hiring, firing, discipline, performance decisions, employee relations, grievances, or case-specific HR advice."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - employee_context
+      - hr_decision_type
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Summarise approved policy and draft neutral options for HR review."
+    forbidden_gpt_action: "Make HR decisions, discipline employees, rank employees, or issue employment instructions."
+
+  - escalation_key: security
+    owner_role: Security Owner
+    when_to_escalate: "Security incidents, suspected account compromise, secrets exposure, access changes, data deletion, or data export."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - incident_type
+      - affected_system
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Collect facts, draft incident notes, and route to the security owner."
+    forbidden_gpt_action: "Suppress incidents, delete evidence, disclose sensitive details, or perform high-risk security actions."
+
+  - escalation_key: customer_support_manager
+    owner_role: Customer Support Manager
+    when_to_escalate: "Customer account changes, refunds, escalated complaints, sensitive support cases, or account closure."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - customer_account
+      - requested_change
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Draft customer replies and recommend next steps for manager review."
+    forbidden_gpt_action: "Change accounts, close accounts, issue refunds, or send final customer communications without approval."
+
+  - escalation_key: sales_manager
+    owner_role: Sales Manager
+    when_to_escalate: "Discounting, commercial commitments, non-standard terms, customer-facing sales claims, or renewal exceptions."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - prospect_or_customer
+      - commercial_action
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Draft outreach, prepare proposal text, and flag non-standard terms."
+    forbidden_gpt_action: "Approve pricing, commit to terms, send binding offers, or make unsupported claims."
+
+  - escalation_key: operations_lead
+    owner_role: Operations Lead
+    when_to_escalate: "Production changes, SOP changes, operational policy exceptions, workflow changes, or service-impacting decisions."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - workflow_or_system
+      - operational_change
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Draft runbooks, summarise SOPs, and prepare change recommendations."
+    forbidden_gpt_action: "Deploy changes, bypass SOPs, or create policy exceptions without approval."
+
+  - escalation_key: executive_sponsor
+    owner_role: Executive Sponsor
+    when_to_escalate: "Public communications, strategic commitments, high-impact incidents, board material, or cross-functional decisions."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - business_context
+      - executive_decision_needed
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Prepare executive briefs and draft communications for approval."
+    forbidden_gpt_action: "Publish public statements, approve strategy, or make executive commitments."
+
+  - escalation_key: ai_governance_board
+    owner_role: AI Governance Board
+    when_to_escalate: "Critical-risk GPT rollout, permission expansion, policy exception, audit failure, or unresolved safety concern."
+    required_log_fields:
+      - user
+      - request
+      - gpt_name
+      - gpt_version
+      - risk_level
+      - governance_issue
+      - approval_required
+      - timestamp
+    allowed_gpt_action: "Prepare governance findings and recommended controls."
+    forbidden_gpt_action: "Self-approve governance changes, weaken controls, or promote high-risk permissions without approval."

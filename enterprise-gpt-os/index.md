@@ -41,6 +41,12 @@ pack.
 
 - [Standard GPT Build Template](templates/standard_gpt_build_template.md)
 
+## Evaluations
+
+- [Risk Classification Cases](evals/risk_classification_cases.yaml)
+- [Approval Trigger Cases](evals/approval_trigger_cases.yaml)
+- [Expected Escalations](evals/expected_escalations.yaml)
+
 ## How To Use This Pack
 
 1. Start with the README to understand the operating model.

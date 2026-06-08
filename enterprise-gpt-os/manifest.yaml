@@ -111,6 +111,14 @@ templates:
   standard_gpt_build_template:
     file: enterprise-gpt-os/templates/standard_gpt_build_template.md
 
+evals:
+  risk_classification_cases:
+    file: enterprise-gpt-os/evals/risk_classification_cases.yaml
+  approval_trigger_cases:
+    file: enterprise-gpt-os/evals/approval_trigger_cases.yaml
+  expected_escalations:
+    file: enterprise-gpt-os/evals/expected_escalations.yaml
+
 risk_levels:
   1:
     name: Low

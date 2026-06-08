@@ -23,6 +23,7 @@ REQUIRED_TOP_LEVEL = [
     "gpts",
     "workflows",
     "templates",
+    "evals",
     "risk_levels",
     "permission_levels",
     "approval_triggers",
@@ -64,6 +65,12 @@ REQUIRED_APPROVAL_TRIGGERS = {
     "policy_exception",
     "production_change",
     "regulatory_matter",
+}
+
+REQUIRED_EVAL_FILES = {
+    "risk_classification_cases": ("cases", "risk classification cases"),
+    "approval_trigger_cases": ("cases", "approval trigger cases"),
+    "expected_escalations": ("mappings", "expected escalation mappings"),
 }
 
 
@@ -132,6 +139,48 @@ def validate_reference_group(
     return checked
 
 
+def load_yaml_file(path_value: str, label: str, errors: list[str]) -> Any:
+    full_path = REPO_ROOT / path_value
+    try:
+        return yaml.safe_load(full_path.read_text(encoding="utf-8"))
+    except OSError as exc:
+        add_error(errors, f"{label} could not be read: {exc}")
+    except yaml.YAMLError as exc:
+        add_error(errors, f"{label} YAML syntax error: {exc}")
+    return None
+
+
+def validate_eval_files(evals: dict[str, Any], errors: list[str]) -> int:
+    checked = 0
+    for eval_key, (list_key, description) in REQUIRED_EVAL_FILES.items():
+        entry = evals.get(eval_key)
+        if not isinstance(entry, dict) or "file" not in entry:
+            add_error(errors, f"evals.{eval_key} must include a file reference.")
+            continue
+
+        file_path = entry["file"]
+        validate_file_path(file_path, f"evals.{eval_key}.file", errors)
+        checked += 1
+
+        if not isinstance(file_path, str):
+            continue
+
+        eval_data = load_yaml_file(file_path, f"evals.{eval_key}.file", errors)
+        if not isinstance(eval_data, dict):
+            add_error(errors, f"evals.{eval_key}.file must contain a mapping/object.")
+            continue
+
+        records = eval_data.get(list_key)
+        if not isinstance(records, list) or not records:
+            add_error(errors, f"evals.{eval_key}.file must include {description}.")
+
+    for eval_key in evals:
+        if eval_key not in REQUIRED_EVAL_FILES:
+            add_error(errors, f"Unknown eval manifest entry: evals.{eval_key}")
+
+    return checked
+
+
 def validate_manifest(data: dict[str, Any]) -> tuple[list[str], int]:
     errors: list[str] = []
     referenced_files = 0
@@ -163,6 +212,9 @@ def validate_manifest(data: dict[str, Any]) -> tuple[list[str], int]:
     for group_name in ("governance", "workflows", "templates"):
         group = require_mapping(data, group_name, errors)
         referenced_files += validate_reference_group(group, group_name, errors)
+
+    evals = require_mapping(data, "evals", errors)
+    referenced_files += validate_eval_files(evals, errors)
 
     gpts = require_mapping(data, "gpts", errors)
     for gpt_key, gpt in gpts.items():
@@ -231,6 +283,7 @@ def main() -> int:
     print(f"- Top-level sections checked: {len(REQUIRED_TOP_LEVEL)}")
     print(f"- GPT entries checked: {len(data.get('gpts', {}))}")
     print(f"- Referenced files checked: {referenced_files}")
+    print(f"- Eval files checked: {len(REQUIRED_EVAL_FILES)}")
     print(f"- Approval triggers checked: {len(REQUIRED_APPROVAL_TRIGGERS)}")
     return 0
 
