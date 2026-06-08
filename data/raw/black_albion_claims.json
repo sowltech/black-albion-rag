@@ -164,11 +164,15 @@
     "summary": "Cotswold Way, Chipping Campden, Bath terminal, oolitic limestone escarpment, and Belas Knap are the module inventory; item-level source verification remains required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support the 102-mile Cotswold Way from Chipping Campden to Bath and Belas Knap as a long barrow on the route. Detailed Jurassic/oolitic limestone escarpment claims need a geological source record.",
+    "source_ids": [
+      "src_cotswold_way_official",
+      "src_eh_belas_knap_long_barrow"
+    ]
   },
   {
     "claim_id": "claim_044_interpretation",
@@ -250,11 +254,17 @@
     "summary": "Woodchester Roman Villa, Orpheus Mosaic, Uley Bury, West Hill Mercury Temple, Hetty Pegler's Tump, Nympsfield Long Barrow, and Painswick Beacon/Kimsbury Camp are inventoried; verification remains required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Woodchester Roman Villa, Orpheus Mosaic, Uley/West Hill Roman temple context, Hetty Pegler's Tump/Uley Long Barrow, and Uley Bury. Nympsfield Long Barrow and Painswick Beacon/Kimsbury Camp still need direct records.",
+    "source_ids": [
+      "src_he_woodchester_villa_1004839",
+      "src_he_uley_long_barrow_hetty_pegler",
+      "src_he_west_hill_uley_metalworking_1987",
+      "src_he_severn_vale_nmp_uley_bury"
+    ]
   },
   {
     "claim_id": "claim_046_interpretation",
@@ -293,11 +303,16 @@
     "summary": "Lydney Park/Nodens Temple, Clearwell Caves, Puzzlewood Roman coin hoard, Forest of Dean ochre/iron mining, Highnam, Ross-on-Wye, and Hempsted/Lady's Well are inventoried; sources required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Lydney/Camp Hill, Nodens temple, Severn floodplain setting, Roman iron-mining context, Clearwell-area Roman occupation, and Forest of Dean research framing. Clearwell Caves, Puzzlewood coin hoard, Highnam, Ross-on-Wye, Hempsted/Lady's Well, and ochre details need direct source records.",
+    "source_ids": [
+      "src_he_lydney_nodens_1017373",
+      "src_he_clearwell_farm_villa_1406971",
+      "src_he_forest_of_dean_research_framework_2017"
+    ]
   },
   {
     "claim_id": "claim_047_interpretation",
@@ -508,11 +523,17 @@
     "summary": "Cirencester/Corinium, Bagendon oppidum, Chedworth Roman Villa, Cirencester Amphitheatre, Roman walls, A417 Roman mutatio, Rodmarton/Windmill Tump, Cirencester Abbey, and St John Baptist Church are inventoried; source verification required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Cirencester/Corinium, Corinium finds/mosaics, Cirencester Amphitheatre, Chedworth Roman Villa, and Bagendon landscape/geology context. Roman walls, A417 mutatio, Rodmarton/Windmill Tump, Cirencester Abbey, and St John Baptist Church need direct source records.",
+    "source_ids": [
+      "src_corinium_museum_collection",
+      "src_eh_cirencester_amphitheatre_history",
+      "src_nt_chedworth_roman_villa_collection",
+      "src_vch_gloucestershire_bagendon"
+    ]
   },
   {
     "claim_id": "claim_052_interpretation",
@@ -551,11 +572,15 @@
     "summary": "Tewkesbury, Oldbury Roman settlement, Tewkesbury Abbey, Severn Ham, Bloody Meadow, Battle of Tewkesbury 1471, Deerhurst, Odda's Chapel, Bredon Hill/Kemerton Camp, Ashchurch/Walton Cardiff/Carrant Brook are inventoried; sources required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: Historic England directly supports the Battle of Tewkesbury 1471, Bloody Meadow/Gastons battlefield features, Severn Ham SSSI mention, and Abbey Church of St Mary/Tewkesbury Abbey. Oldbury, Deerhurst/Odda, Bredon/Kemerton, Ashchurch/Walton Cardiff/Carrant Brook still need direct source records.",
+    "source_ids": [
+      "src_he_tewkesbury_battlefield_1000039",
+      "src_he_tewkesbury_abbey_1201159"
+    ]
   },
   {
     "claim_id": "claim_053a_interpretation",
@@ -594,11 +619,16 @@
     "summary": "Hereford Cathedral, Mappa Mundi, Chained Library, Castle Green, River Wye crossing, Rotherwas Ribbon, Dinedor Camp, Sutton Walls, Kenchester/Magnis, Arthur's Stone, Golden Valley, Leominster, Weobley, Goodrich Castle, Wigmore, Ledbury, and Bromyard are inventoried; source verification required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Hereford Cathedral/Mappa Mundi/Chained Library, Dinedor Camp, and Arthur's Stone. Castle Green, Wye crossing, Rotherwas Ribbon, Sutton Walls, Kenchester/Magnis, Golden Valley, Leominster, Weobley, Goodrich, Wigmore, Ledbury, and Bromyard need direct source records.",
+    "source_ids": [
+      "src_mappa_mundi_hereford_cathedral",
+      "src_he_dinedor_camp_1001758",
+      "src_he_arthurs_stone_dorstone"
+    ]
   },
   {
     "claim_id": "claim_053b_interpretation",

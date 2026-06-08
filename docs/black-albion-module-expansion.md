@@ -4,9 +4,9 @@ This document records the expanded regional module layer added to the local
 Black Albion RAG system.
 
 The new module data lives in `data/raw/black_albion_modules.json`. Each module
-keeps Tier I, Tier II, and Tier III fields separate. Most Tier I inventories are
-currently marked `needs_verification` because the supplied module list names
-sites and landscape features but does not yet attach item-level source records.
+keeps Tier I, Tier II, and Tier III fields separate. Tier I inventory claims are
+upgraded only when source records are attached. If a source supports only part
+of a module inventory, the claim remains `partial`.
 
 ## Module Table
 
@@ -76,7 +76,87 @@ git diff --check
 
 ## Current Source Gaps
 
-All newly added Tier I module inventory claims are currently marked
-`needs_verification` unless future source records are attached. The next data
-work should add public, citable records for the named monuments, geology,
-hydrology, route records, conservation statuses, and historical documents.
+Tier I source enrichment is incomplete. The next data work should add public,
+citable records for named monuments, geology, hydrology, route records,
+conservation statuses, and historical documents not covered by the current
+source ledger.
+
+## Tier I Source Enrichment Pass 001
+
+Pass 001 enriched only six target modules:
+
+- `UK-RAG-MOD-053A` — Tewkesbury Severn-Avon River-Gate.
+- `UK-RAG-MOD-053B` — Hereford Western Marches Corridor.
+- `UK-RAG-MOD-046` — Stroud Frome Valley Radials.
+- `UK-RAG-MOD-052` — Corinium Dobunnorum Palimpsest.
+- `UK-RAG-MOD-047` — Trans-Severn Frontier and Forest of Dean Karst Scowles.
+- `UK-RAG-MOD-044` — Cotswold Way Jurassic Escarpment Ridge Line.
+
+### Claims Upgraded
+
+The following Tier I inventory claims were upgraded from `needs_verification`
+to `partial`:
+
+- `claim_053a_inventory`
+- `claim_053b_inventory`
+- `claim_046_inventory`
+- `claim_052_inventory`
+- `claim_047_inventory`
+- `claim_044_inventory`
+
+No target claim was upgraded to `verified` in this pass. Each claim covers a
+multi-site inventory, and the attached sources support strong factual parts of
+the inventory but not every named site or landscape detail.
+
+### Sources Added
+
+Pass 001 added 18 source records to `data/raw/black_albion_sources.json`:
+
+- `src_he_tewkesbury_battlefield_1000039`
+- `src_he_tewkesbury_abbey_1201159`
+- `src_mappa_mundi_hereford_cathedral`
+- `src_he_dinedor_camp_1001758`
+- `src_he_arthurs_stone_dorstone`
+- `src_he_woodchester_villa_1004839`
+- `src_he_uley_long_barrow_hetty_pegler`
+- `src_he_west_hill_uley_metalworking_1987`
+- `src_he_severn_vale_nmp_uley_bury`
+- `src_corinium_museum_collection`
+- `src_eh_cirencester_amphitheatre_history`
+- `src_nt_chedworth_roman_villa_collection`
+- `src_vch_gloucestershire_bagendon`
+- `src_he_lydney_nodens_1017373`
+- `src_he_clearwell_farm_villa_1406971`
+- `src_he_forest_of_dean_research_framework_2017`
+- `src_cotswold_way_official`
+- `src_eh_belas_knap_long_barrow`
+
+### Unresolved Gaps
+
+Remaining direct-source gaps include:
+
+- Tewkesbury: Oldbury Roman settlement, Deerhurst/Odda, Bredon/Kemerton,
+  Ashchurch, Walton Cardiff, and Carrant Brook.
+- Hereford: Castle Green, River Wye crossing, Rotherwas Ribbon, Sutton Walls,
+  Kenchester/Magnis, Golden Valley, Leominster, Weobley, Goodrich Castle,
+  Wigmore, Ledbury, and Bromyard.
+- Stroud: Nympsfield Long Barrow and Painswick Beacon/Kimsbury Camp.
+- Corinium: Roman walls, A417 mutatio, Rodmarton/Windmill Tump, Cirencester
+  Abbey, and St John Baptist Church.
+- Forest of Dean: Clearwell Caves, Puzzlewood Roman coin hoard, Highnam,
+  Ross-on-Wye, Hempsted/Lady's Well, ochre detail, and direct iron-mining
+  source records beyond Lydney/Clearwell context.
+- Cotswold Way: direct geological source for Jurassic / oolitic limestone
+  escarpment framing.
+
+### Validation Commands Run
+
+```bash
+python3 -m json.tool data/raw/black_albion_sources.json
+python3 -m json.tool data/raw/black_albion_claims.json
+python3 -m pytest -q
+python3 -m compileall backend
+git diff --check
+git diff --cached --check
+scripts/smoke_test.sh
+```

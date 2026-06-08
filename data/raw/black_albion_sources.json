@@ -1,1 +1,290 @@
-[]
+[
+  {
+    "source_id": "src_he_tewkesbury_battlefield_1000039",
+    "title": "Battle of Tewkesbury 1471, Tewkesbury - 1000039",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1000039?section=official-list-entry",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-053A"
+    ],
+    "supports_claims": [
+      "claim_053a_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Battle of Tewkesbury 1471, battlefield registration, Bloody Meadow/Gastons features, Severn Ham SSSI mention, and group value with Abbey Church of St Mary. Does not verify every Tewkesbury module subsite."
+  },
+  {
+    "source_id": "src_he_tewkesbury_abbey_1201159",
+    "title": "Abbey Church of St Mary, Tewkesbury - 1201159",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1201159",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-053A"
+    ],
+    "supports_claims": [
+      "claim_053a_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports the Abbey Church of St Mary / Tewkesbury Abbey as a listed heritage asset. Wider monastery chronology and all river-gate claims remain outside this source."
+  },
+  {
+    "source_id": "src_mappa_mundi_hereford_cathedral",
+    "title": "Hereford Cathedral - Home of the Mappa Mundi",
+    "author_or_body": "Mappa Mundi Ltd / Hereford Cathedral",
+    "url": "https://www.themappamundi.co.uk/",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-053B"
+    ],
+    "supports_claims": [
+      "claim_053b_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Hereford Cathedral, Mappa Mundi, Chained Library, and preservation context. Does not verify all western marches places."
+  },
+  {
+    "source_id": "src_he_dinedor_camp_1001758",
+    "title": "Dinedor Camp, Dinedor - 1001758",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1001758",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-053B"
+    ],
+    "supports_claims": [
+      "claim_053b_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Dinedor Camp as a scheduled promontory hillfort near the Wye/Lugg confluence. Does not verify all Herefordshire corridor sites."
+  },
+  {
+    "source_id": "src_he_arthurs_stone_dorstone",
+    "title": "Arthur's Stone, Dorstone, Herefordshire",
+    "author_or_body": "Historic England",
+    "url": "https://historicengland.org.uk/education/schools-resources/educational-images/arthurs-stone-dorstone-herefordshire-26043-003",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-053B"
+    ],
+    "supports_claims": [
+      "claim_053b_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Arthur's Stone as a Neolithic chambered tomb. The attached Arthur legend remains folklore and is not upgraded as factual history."
+  },
+  {
+    "source_id": "src_he_woodchester_villa_1004839",
+    "title": "Woodchester Roman villa, Woodchester - 1004839",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1004839",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-046"
+    ],
+    "supports_claims": [
+      "claim_046_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Woodchester Roman Villa and the Orpheus Mosaic. Other Stroud/Frome radials remain unresolved by this source."
+  },
+  {
+    "source_id": "src_he_uley_long_barrow_hetty_pegler",
+    "title": "Uley Long Barrow (Hetty Pegler's Tump), Uley, Gloucestershire",
+    "author_or_body": "Historic England",
+    "url": "https://historicengland.org.uk/education/schools-resources/educational-images/uley-long-barrow-hetty-peglers-tump-uley-gloucestershire-plb-j930042",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-046"
+    ],
+    "supports_claims": [
+      "claim_046_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Uley Long Barrow / Hetty Pegler's Tump as a Neolithic chambered long barrow. Does not verify every Stroud module site."
+  },
+  {
+    "source_id": "src_he_west_hill_uley_metalworking_1987",
+    "title": "The Metalworking Evidence from West Hill, Uley, Gloucs.",
+    "author_or_body": "Historic England / Justine Bayley",
+    "url": "https://historicengland.org.uk/research/results/reports/25-1987",
+    "source_type": "published_report",
+    "supports_modules": [
+      "UK-RAG-MOD-046"
+    ],
+    "supports_claims": [
+      "claim_046_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports West Hill, Uley as a Roman temple excavation context and metalworking evidence. Does not verify broader radial interpretation."
+  },
+  {
+    "source_id": "src_he_severn_vale_nmp_uley_bury",
+    "title": "An Archaeological Survey in the Severn Vale, Gloucestershire: National Mapping Programme Highlight Report",
+    "author_or_body": "Historic England / Gloucestershire County Council",
+    "url": "https://historicengland.org.uk/research/results/reports/6888/AnArchaeologicalSurveyintheSevernValeGloucestershire_AHighlightReportfortheNationalMappingProgrammeNMP",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-046"
+    ],
+    "supports_claims": [
+      "claim_046_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Uley Bury as an Iron Age hillfort/settlement feature in the Severn Vale project. Other Stroud sites require separate records."
+  },
+  {
+    "source_id": "src_corinium_museum_collection",
+    "title": "Corinium Museum - Discover the archaeology of the Cotswolds",
+    "author_or_body": "Corinium Museum",
+    "url": "https://coriniummuseum.org/",
+    "source_type": "museum",
+    "supports_modules": [
+      "UK-RAG-MOD-052"
+    ],
+    "supports_claims": [
+      "claim_052_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Cirencester/Corinium, Roman town finds, Roman mosaics, and Corinium Dobunnorum as a fort/capital context. Does not verify all listed Corinium module subsites."
+  },
+  {
+    "source_id": "src_eh_cirencester_amphitheatre_history",
+    "title": "History of Cirencester Amphitheatre",
+    "author_or_body": "English Heritage",
+    "url": "https://www.english-heritage.org.uk/visit/places/cirencester-amphitheatre/history/",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-052"
+    ],
+    "supports_claims": [
+      "claim_052_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Cirencester Amphitheatre, Corinium naming, early second-century construction, and Roman urban context. Other module places require further sources."
+  },
+  {
+    "source_id": "src_nt_chedworth_roman_villa_collection",
+    "title": "Chedworth Roman Villa, Gloucestershire",
+    "author_or_body": "National Trust Collections",
+    "url": "https://www.nationaltrustcollections.org.uk/place/chedworth-roman-villa",
+    "source_type": "museum",
+    "supports_modules": [
+      "UK-RAG-MOD-052"
+    ],
+    "supports_claims": [
+      "claim_052_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Chedworth Roman Villa as one of the largest second-century AD Roman villas in England with artefacts including mosaic fragments. Does not verify all Corinium module entries."
+  },
+  {
+    "source_id": "src_vch_gloucestershire_bagendon",
+    "title": "VCH Gloucestershire: Volume XVI, Bagendon",
+    "author_or_body": "Victoria County History / Institute of Historical Research",
+    "url": "https://www.history.ac.uk/sites/default/files/gloucestershire-bagendon.pdf",
+    "source_type": "published_report",
+    "supports_modules": [
+      "UK-RAG-MOD-052"
+    ],
+    "supports_claims": [
+      "claim_052_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Bagendon landscape, ancient routeways, brook/Churn context, and oolitic limestone geology. The oppidum claim still needs a direct archaeological source record."
+  },
+  {
+    "source_id": "src_he_lydney_nodens_1017373",
+    "title": "Camp Hill promontory fort and Romano-British temple complex, Lydney - 1017373",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1017373",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-047"
+    ],
+    "supports_claims": [
+      "claim_047_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Lydney Park/Camp Hill, the Nodens temple complex, River Severn floodplain setting, Roman iron mining, and temple/baths/mansio structures. Does not verify Clearwell Caves, Puzzlewood, or all Forest of Dean entries."
+  },
+  {
+    "source_id": "src_he_clearwell_farm_villa_1406971",
+    "title": "Roman Villa at Clearwell Farm, Newland - 1406971",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1406971",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-047"
+    ],
+    "supports_claims": [
+      "claim_047_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Roman occupation near Clearwell and group value within a key Roman iron-working area. Does not directly verify Clearwell Caves or Puzzlewood coin hoard."
+  },
+  {
+    "source_id": "src_he_forest_of_dean_research_framework_2017",
+    "title": "Research Framework for the Forest of Dean District",
+    "author_or_body": "Historic England",
+    "url": "https://historicengland.org.uk/images-books/publications/research-framework-forest-of-dean-district/forest-of-dean-glos-research-framework-2017/",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-047"
+    ],
+    "supports_claims": [
+      "claim_047_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Forest of Dean archaeological research framing, Lydney/Nodens, Roman temple discussion, and Roman-period material context. Specific cave/hoard claims remain partly unresolved."
+  },
+  {
+    "source_id": "src_cotswold_way_official",
+    "title": "The Cotswold Way",
+    "author_or_body": "Cotswold Way National Trail",
+    "url": "https://cotswoldway.org/",
+    "source_type": "official",
+    "supports_modules": [
+      "UK-RAG-MOD-044"
+    ],
+    "supports_claims": [
+      "claim_044_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports the Cotswold Way as a 102-mile National Trail from Chipping Campden to Bath along the western edge of the Cotswold Hills. Does not verify Belas Knap or detailed Jurassic geology."
+  },
+  {
+    "source_id": "src_eh_belas_knap_long_barrow",
+    "title": "Belas Knap Long Barrow",
+    "author_or_body": "English Heritage",
+    "url": "https://www.english-heritage.org.uk/visit/places/belas-knap-long-barrow/",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-044"
+    ],
+    "supports_claims": [
+      "claim_044_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Belas Knap as a Gloucestershire long barrow on the Cotswold Way and links it with other Gloucestershire Neolithic long barrows. Detailed geology still requires a geological source."
+  }
+]
