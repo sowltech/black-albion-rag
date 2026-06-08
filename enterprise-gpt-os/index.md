@@ -75,6 +75,12 @@ Use the project-level validation wrapper when running repo checks:
 bash scripts/validate_enterprise_gpt_os.sh
 ```
 
+Run the eval case checker directly when updating governance evals:
+
+```bash
+python3 enterprise-gpt-os/scripts/run_evals.py
+```
+
 ## Current Rollout Order
 
 1. Company Knowledge GPT
