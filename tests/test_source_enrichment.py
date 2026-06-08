@@ -12,6 +12,22 @@ if str(PROJECT_ROOT) not in sys.path:
 
 RAW_DIR = PROJECT_ROOT / "data" / "raw"
 VALID_SOURCE_STATUSES = {"verified", "partial", "needs_verification", "speculative"}
+INVENTORY_CLAIM_IDS = {
+    "claim_043_inventory",
+    "claim_044_inventory",
+    "claim_045_inventory",
+    "claim_046_inventory",
+    "claim_047_inventory",
+    "claim_048_inventory",
+    "claim_049_inventory",
+    "claim_050_inventory",
+    "claim_051_inventory",
+    "claim_052_inventory",
+    "claim_053a_inventory",
+    "claim_053b_inventory",
+    "claim_055_inventory",
+    "claim_056_inventory",
+}
 
 
 class SourceEnrichmentTests(unittest.TestCase):
@@ -50,6 +66,13 @@ class SourceEnrichmentTests(unittest.TestCase):
     def test_source_status_values_are_valid(self) -> None:
         for claim in self.claims:
             self.assertIn(claim.get("source_status"), VALID_SOURCE_STATUSES)
+
+    def test_inventory_claims_are_at_least_partially_sourced(self) -> None:
+        claims_by_id = {claim["claim_id"]: claim for claim in self.claims}
+        for claim_id in INVENTORY_CLAIM_IDS:
+            claim = claims_by_id[claim_id]
+            self.assertIn(claim.get("source_status"), {"partial", "verified"}, claim_id)
+            self.assertTrue(claim.get("source_ids"), claim_id)
 
 
 if __name__ == "__main__":  # pragma: no cover

@@ -286,5 +286,421 @@
     "evidence_tier": "I",
     "reliability": "high",
     "notes": "Directly supports Belas Knap as a Gloucestershire long barrow on the Cotswold Way and links it with other Gloucestershire Neolithic long barrows. Detailed geology still requires a geological source."
+  },
+  {
+    "source_id": "src_roman_baths_sacred_spring",
+    "title": "Roman Sacred Spring",
+    "author_or_body": "The Roman Baths, Bath and North East Somerset Council",
+    "url": "https://www.romanbaths.co.uk/roman-sacred-spring-0",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-043"
+    ],
+    "supports_claims": [
+      "claim_043_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Bath Roman Baths, the Sacred Spring, Temple of Sulis Minerva, water feeding the Roman Baths, and the Roman drain to the River Avon. Does not verify all Bristol/Avon Gorge/Hwicce frontier elements."
+  },
+  {
+    "source_id": "src_bgs_bath_hot_springs_geology_2006",
+    "title": "The geology of the hot springs at Bath Spa",
+    "author_or_body": "British Geological Survey / NERC Open Research Archive",
+    "url": "https://nora.nerc.ac.uk/id/eprint/4841/1/Hot_Springs_2006.pdf",
+    "source_type": "geology",
+    "supports_modules": [
+      "UK-RAG-MOD-043"
+    ],
+    "supports_claims": [
+      "claim_043_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Bath hot springs hydrogeology, Carboniferous Limestone, Mendip recharge model, spring pipes, artesian head, and geothermal heating. Hwicce political framing remains unsourced in Tier I."
+  },
+  {
+    "source_id": "src_geoguide_avon_gorge_hotwells_limestone",
+    "title": "Avon Gorge, Bristol, Avon",
+    "author_or_body": "GeoGuide / Geological Conservation Review",
+    "url": "https://geoguide.scottishgeologytrust.org/p/gcr/gcr29/gcr29_avongorge",
+    "source_type": "geology",
+    "supports_modules": [
+      "UK-RAG-MOD-043"
+    ],
+    "supports_claims": [
+      "claim_043_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Avon Gorge geology, Avon Thrust, Hotwells Limestone, and fossiliferous limestone sections. Does not verify Bristol harbour or Hwicce frontier claims."
+  },
+  {
+    "source_id": "src_tewkesbury_town_severn_ham_sssi",
+    "title": "Severn Ham",
+    "author_or_body": "Tewkesbury Town Council",
+    "url": "https://tewkesburytowncouncil.gov.uk/environment-amenities/",
+    "source_type": "official",
+    "supports_modules": [
+      "UK-RAG-MOD-045"
+    ],
+    "supports_claims": [
+      "claim_045_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Severn Ham as a 70-hectare SSSI on Severn Vale alluvium, winter flood area, committee-managed site, and access via bridges by Healings Mill and old Abbey Mill. Mill histories need further source records."
+  },
+  {
+    "source_id": "src_tewkesbury_borough_healings_mill",
+    "title": "Healing's Mill",
+    "author_or_body": "Tewkesbury Borough Council",
+    "url": "https://tewkesbury.gov.uk/services/planning/conservation/tewkesbury-high-street-heritage-action-zone/healings-mill/",
+    "source_type": "local_authority",
+    "supports_modules": [
+      "UK-RAG-MOD-045"
+    ],
+    "supports_claims": [
+      "claim_045_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Healing’s Mill at the gateway to Tewkesbury where the Rivers Avon and Severn meet, with earliest parts dating from 1865 and listed building status. Abbey Mill and common-land records remain incomplete."
+  },
+  {
+    "source_id": "src_birmingham_museums_staffordshire_hoard",
+    "title": "Staffordshire Hoard",
+    "author_or_body": "Birmingham Museums Trust",
+    "url": "https://www.birminghammuseums.org.uk/birmingham-museum-and-art-gallery/highlights/staffordshire-hoard",
+    "source_type": "museum",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Staffordshire Hoard as the largest hoard of Anglo-Saxon gold ever found, its display, conservation, and seventh-century Anglo-Saxon context."
+  },
+  {
+    "source_id": "src_he_staffordshire_hoard_research",
+    "title": "Understanding the Staffordshire Hoard",
+    "author_or_body": "Historic England",
+    "url": "https://historicengland.org.uk/whats-new/research/back-issues/understanding-the-staffordshire-hoard/",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Staffordshire Hoard research programme, Historic England funding, and museum stewardship. Does not verify other Mercian lattice sites."
+  },
+  {
+    "source_id": "src_eh_wroxeter_roman_city_history",
+    "title": "History of Wroxeter Roman City",
+    "author_or_body": "English Heritage",
+    "url": "https://www.english-heritage.org.uk/visit/places/wroxeter-roman-city/history/",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Wroxeter/Viroconium Roman city and its civic/urban history. Other module sites need separate records."
+  },
+  {
+    "source_id": "src_he_old_oswestry_1014899",
+    "title": "Old Oswestry hillfort, and two adjacent sections of Wat's Dyke - 1014899",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1014899",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Old Oswestry hillfort as an earthwork and buried remains on a glacial mound north of Oswestry. Does not verify all central sandstone/cavity sites."
+  },
+  {
+    "source_id": "src_dudley_wrens_nest_geology",
+    "title": "Geology of Wren's Nest National Nature Reserve",
+    "author_or_body": "Dudley Council",
+    "url": "https://www.dudley.gov.uk/things-to-do/nature-reserves/wrens-nest-national-nature-reserve/geology-of-wrens-nest-national-nature-reserve/",
+    "source_type": "geology",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Wren's Nest geological reserve and Seven Sisters Mine limestone heritage. Wolverhampton Cross, Kinver, Lunt, Creswell, Nottingham caves and Borough Hill require further source records."
+  },
+  {
+    "source_id": "src_lunt_roman_fort_official",
+    "title": "Lunt Roman Fort",
+    "author_or_body": "Lunt Roman Fort / Coventry visitor heritage site",
+    "url": "https://www.luntromanfort.org/",
+    "source_type": "official",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "medium",
+    "notes": "Supports Lunt Roman Fort as a partially reconstructed timber fort with exhibition and gyrus feature. Detailed archaeological report still needed for stronger Tier I support."
+  },
+  {
+    "source_id": "src_london_museum_mithraeum_walbrook",
+    "title": "Roman London's Temple of Mithras",
+    "author_or_body": "London Museum",
+    "url": "https://www.londonmuseum.org.uk/collections/london-stories/roman-londons-temple-mithras/",
+    "source_type": "museum",
+    "supports_modules": [
+      "UK-RAG-MOD-049"
+    ],
+    "supports_claims": [
+      "claim_049_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports London Mithraeum/Temple of Mithras, Walbrook/Londinium context, and Roman-period date. Does not verify Oxford/Ridgeway elements."
+  },
+  {
+    "source_id": "src_oxford_city_port_meadow",
+    "title": "Port Meadow - Oxford's Outdoor Venue Guide",
+    "author_or_body": "Oxford City Council",
+    "url": "https://www.oxford.gov.uk/directory-record/246/port-meadow",
+    "source_type": "official",
+    "supports_modules": [
+      "UK-RAG-MOD-049"
+    ],
+    "supports_claims": [
+      "claim_049_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Port Meadow as SSSI, SAC, and scheduled-monument-consent landscape. Archaeological detail still needs direct records."
+  },
+  {
+    "source_id": "src_oxford_dorchester_on_thames_archaeology",
+    "title": "Dorchester-on-Thames",
+    "author_or_body": "University of Oxford School of Archaeology",
+    "url": "https://www.arch.ox.ac.uk/node/1257921",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-049"
+    ],
+    "supports_claims": [
+      "claim_049_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Dorchester-on-Thames as a key archaeological site with nationally important monuments and a walled Roman town area. London/Oxford corridor interpretation remains Tier II."
+  },
+  {
+    "source_id": "src_eh_waylands_smithy_history",
+    "title": "History of Wayland's Smithy",
+    "author_or_body": "English Heritage",
+    "url": "https://www.english-heritage.org.uk/visit/places/waylands-smithy/history/",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-049"
+    ],
+    "supports_claims": [
+      "claim_049_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Wayland's Smithy as a two-phase Neolithic tomb built along the Ridgeway close to the Vale of White Horse. Folklore remains non-Tier-I."
+  },
+  {
+    "source_id": "src_nt_white_horse_hill_uffington",
+    "title": "History at White Horse Hill",
+    "author_or_body": "National Trust",
+    "url": "https://www.nationaltrust.org.uk/visit/oxfordshire-buckinghamshire-berkshire/white-horse-hill/history-at-white-horse-hill",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-049"
+    ],
+    "supports_claims": [
+      "claim_049_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports White Horse Hill, Bronze Age white horse, Iron Age hillfort, and Wayland Smithy landscape. Dragon/St George legends remain folklore and are not factual evidence."
+  },
+  {
+    "source_id": "src_he_car_dyke_1009999",
+    "title": "Earthworks of Car Dyke in Park Wood - 1009999",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1009999",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-050"
+    ],
+    "supports_claims": [
+      "claim_050_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Car Dyke as a Roman canal/earthwork on the Fen edge, low-lying Fenland Roman canals, waterlogged deposits, and Jurassic clays. Does not verify all Fenland module elements."
+  },
+  {
+    "source_id": "src_cambridge_must_farm_project",
+    "title": "Must Farm Project",
+    "author_or_body": "University of Cambridge Department of Archaeology / Cambridge Archaeological Unit",
+    "url": "https://www.arch.cam.ac.uk/research/projects/current-projects/must-farm-project",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-050"
+    ],
+    "supports_claims": [
+      "claim_050_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports deep Fenland landscape-scale archaeology and a waterlogged site excavated with Cambridge Archaeological Unit. This supports the waterlogged timber settlement theme generally but not every Fen-edge villa or drainage claim."
+  },
+  {
+    "source_id": "src_wildlife_bcn_fleam_dyke",
+    "title": "Fleam Dyke",
+    "author_or_body": "Wildlife Trust for Bedfordshire, Cambridgeshire and Northamptonshire",
+    "url": "https://www.wildlifebcn.org/nature-reserves/fleam-dyke",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-050"
+    ],
+    "supports_claims": [
+      "claim_050_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "medium",
+    "notes": "Supports Fleam Dyke as a major Cambridgeshire earthwork, Scheduled Ancient Monument and SSSI. Historic England direct record still preferred for strongest source support."
+  },
+  {
+    "source_id": "src_he_cambridgeshire_dykes_bran_context_1410907",
+    "title": "Bran Ditch and Cambridgeshire Dykes context - 1410907",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1410907",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-050"
+    ],
+    "supports_claims": [
+      "claim_050_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Fleam and Devil's Dykes as part of the protected Cambridgeshire Dykes group and gives early medieval/post-Roman context. Does not directly source Bedford Level drainage."
+  },
+  {
+    "source_id": "src_nt_avebury_stone_circles_henge",
+    "title": "Avebury's stone circles and henge",
+    "author_or_body": "National Trust",
+    "url": "https://www.nationaltrust.org.uk/visit/wiltshire/avebury/exploring-the-stone-circles-at-avebury",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-051"
+    ],
+    "supports_claims": [
+      "claim_051_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Avebury henge/stone circles, West Kennet Avenue, Silbury Hill, West Kennet Long Barrow, and broader Neolithic/Bronze Age monument landscape. Swindon hillfort/Roman elements need separate records."
+  },
+  {
+    "source_id": "src_eh_avebury_world_heritage_site",
+    "title": "The Avebury World Heritage Site",
+    "author_or_body": "English Heritage",
+    "url": "https://www.english-heritage.org.uk/visit/places/avebury/avebury-world-heritage-site/",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-051"
+    ],
+    "supports_claims": [
+      "claim_051_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Avebury World Heritage landscape, Silbury Hill, West Kennet Long Barrow, West Kennet Avenue and the Sanctuary. Does not verify Barbury/Liddington/Wanborough/Coate Water."
+  },
+  {
+    "source_id": "src_he_west_kennet_long_barrow_1010628",
+    "title": "West Kennet long barrow, 800m south-east of Silbury Hill - 1010628",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1010628",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-051"
+    ],
+    "supports_claims": [
+      "claim_051_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports West Kennet Long Barrow and the Avebury/Silbury monument context."
+  },
+  {
+    "source_id": "src_he_great_witcombe_villa_1014826",
+    "title": "Great Witcombe Romano-British villa - 1014826",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1014826",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-055"
+    ],
+    "supports_claims": [
+      "claim_055_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Great Witcombe Roman Villa, its position beneath the Cotswold scarp, springs above the villa, nearby stream, and villa group around Roman Gloucester. Does not verify all Gloucester radial locations."
+  },
+  {
+    "source_id": "src_gloucester_horsbere_brook_fas",
+    "title": "Horsbere Brook Flood Alleviation Scheme",
+    "author_or_body": "Gloucester City Council",
+    "url": "https://www.gloucester.gov.uk/environment-waste-recycling/nature-and-conservation/habitat-countryside/horsbere-brook-flood-alleviation-scheme/",
+    "source_type": "local_authority",
+    "supports_modules": [
+      "UK-RAG-MOD-055"
+    ],
+    "supports_claims": [
+      "claim_055_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Horsbere Brook flood storage and Gloucester hydrology/flood-management context. Does not verify NATO/military overlays, Framilode, Hardwicke, Hawkesbury, Brockworth, Cooper’s Hill, or Witcombe reservoirs."
+  },
+  {
+    "source_id": "src_eh_oddas_chapel_history",
+    "title": "History of Odda's Chapel",
+    "author_or_body": "English Heritage",
+    "url": "https://www.english-heritage.org.uk/visit/places/oddas-chapel/history/",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-056"
+    ],
+    "supports_claims": [
+      "claim_056_inventory"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Odda's Chapel at Deerhurst as a surviving Saxon chapel, its relation to Deerhurst Priory/St Mary's, the Odda Stone, Edward the Confessor/Westminster Abbey reference, local blue lias stone, and Deerhurst Saxon/priory context."
   }
 ]

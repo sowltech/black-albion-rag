@@ -121,11 +121,16 @@
     "summary": "Avon Gorge, Bristol / Hotwells, Bath hot springs, and the Mendip-to-Bath geothermal circuit are the factual inventory for this module; source records still need item-level verification.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Bath Roman Baths/Sacred Spring/Aquae Sulis context, Bath hot springs hydrogeology, Carboniferous Limestone/Mendip recharge model, Avon Gorge geology, Avon Thrust and Hotwells Limestone. Bristol harbour, Hotwells built environment, and Hwicce frontier framing still need direct records.",
+    "source_ids": [
+      "src_roman_baths_sacred_spring",
+      "src_bgs_bath_hot_springs_geology_2006",
+      "src_geoguide_avon_gorge_hotwells_limestone"
+    ]
   },
   {
     "claim_id": "claim_043_interpretation",
@@ -211,11 +216,15 @@
     "summary": "Tewkesbury Severn Ham, Avon-Severn confluence, Healings Mill, Abbey Mill, SSSI/common land/floodplain logic are inventoried; source verification is required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Severn Ham as SSSI on Severn Vale alluvium, winter floodplain, access by Healings Mill and old Abbey Mill, and Healing’s Mill at the Avon-Severn meeting point. Abbey Mill history, common-land title detail, and fuller floodplain management records still need direct sources.",
+    "source_ids": [
+      "src_tewkesbury_town_severn_ham_sssi",
+      "src_tewkesbury_borough_healings_mill"
+    ]
   },
   {
     "claim_id": "claim_045_interpretation",
@@ -351,11 +360,19 @@
     "summary": "Birmingham/Metchley Roman Fort, Staffordshire Hoard, Wren's Nest, Wolverhampton Cross, Kinver Rock Houses, Lunt Roman Fort, Wroxeter/Viroconium, Old Oswestry, Creswell Crags, Nottingham City of Caves, and Borough Hill are inventoried; verification required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Staffordshire Hoard, Wroxeter/Viroconium, Old Oswestry, Wren’s Nest, and Lunt Roman Fort. Birmingham/Metchley, Wolverhampton Cross, Kinver Rock Houses, Creswell Crags, Nottingham City of Caves, and Borough Hill still need direct source records.",
+    "source_ids": [
+      "src_birmingham_museums_staffordshire_hoard",
+      "src_he_staffordshire_hoard_research",
+      "src_eh_wroxeter_roman_city_history",
+      "src_he_old_oswestry_1014899",
+      "src_dudley_wrens_nest_geology",
+      "src_lunt_roman_fort_official"
+    ]
   },
   {
     "claim_id": "claim_048_interpretation",
@@ -394,11 +411,18 @@
     "summary": "Londinium, Walbrook, London Mithraeum, Oxford, Dorchester-on-Thames, Port Meadow, Ridgeway, Wayland's Smithy, and Uffington White Horse are inventoried; source verification is required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support London Mithraeum/Walbrook/Londinium context, Port Meadow, Dorchester-on-Thames archaeology, Wayland’s Smithy, White Horse Hill/Uffington and Ridgeway/Vale of White Horse context. Londinium more broadly, London Wall, Oxford city archaeology, and detailed chalk-corridor geology still need direct records.",
+    "source_ids": [
+      "src_london_museum_mithraeum_walbrook",
+      "src_oxford_city_port_meadow",
+      "src_oxford_dorchester_on_thames_archaeology",
+      "src_eh_waylands_smithy_history",
+      "src_nt_white_horse_hill_uffington"
+    ]
   },
   {
     "claim_id": "claim_049_interpretation",
@@ -437,11 +461,17 @@
     "summary": "Cambridgeshire, Ely, Peterborough, Car Dyke, Fen-edge villas, Bronze Age waterlogged timber settlements, Devil's Dyke/Fleam Dyke, and Bedford Level/Fen drainage enclosure are inventoried; sources required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Car Dyke as a Roman Fen-edge canal, Must Farm/deep Fenland waterlogged archaeology, Fleam Dyke, and the Cambridgeshire Dykes group including Devil’s/Fleam context. Ely, Peterborough, Fen-edge villas, Bedford Level drainage/enclosure, and full Bronze Age timber-settlement detail need additional direct records.",
+    "source_ids": [
+      "src_he_car_dyke_1009999",
+      "src_cambridge_must_farm_project",
+      "src_wildlife_bcn_fleam_dyke",
+      "src_he_cambridgeshire_dykes_bran_context_1410907"
+    ]
   },
   {
     "claim_id": "claim_050_interpretation",
@@ -480,11 +510,16 @@
     "summary": "Swindon, Barbury Castle, Liddington Castle, Wanborough/Durocornovium, Coate Water, Avebury, Silbury Hill, West Kennet Long Barrow, Ridgeway, and Vale of White Horse are inventoried; sources required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Avebury, Silbury Hill, West Kennet Long Barrow, West Kennet Avenue/Sanctuary, and the wider Avebury World Heritage prehistoric landscape. Swindon, Barbury Castle, Liddington Castle, Wanborough/Durocornovium, Coate Water, Ridgeway route and Vale of White Horse need direct source records.",
+    "source_ids": [
+      "src_nt_avebury_stone_circles_henge",
+      "src_eh_avebury_world_heritage_site",
+      "src_he_west_kennet_long_barrow_1010628"
+    ]
   },
   {
     "claim_id": "claim_051_interpretation",
@@ -667,11 +702,15 @@
     "summary": "Hardwicke, Framilode/Frome mouth, Hawkesbury, Brockworth, Cooper's Hill, Witcombe, Great Witcombe Roman Villa, Innsworth, Gloucester southern/scarp-vale arc, Horsbere Brook, Witcombe reservoirs, and NATO/military overlays where relevant are inventoried; sources required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: sources directly support Great Witcombe Roman Villa, Cotswold scarp/spring/stream context, villa group around Roman Gloucester, and Horsbere Brook flood-management context. Hardwicke, Framilode/Frome mouth, Hawkesbury, Brockworth, Cooper’s Hill, Witcombe reservoirs, Innsworth, and public NATO/military overlays need direct source records.",
+    "source_ids": [
+      "src_he_great_witcombe_villa_1014826",
+      "src_gloucester_horsbere_brook_fas"
+    ]
   },
   {
     "claim_id": "claim_055_interpretation",
@@ -710,11 +749,14 @@
     "summary": "Deerhurst, Apperley, Odda's Chapel, St Mary's Priory Church, Severn river meander landscape, Saxon basilica/pre-Conquest sacred architecture, Domesday/Westminster Abbey estate references, river terrace/alluvial clay/Triassic Mercia Mudstone context are inventoried; sources required.",
     "tier": "I",
     "claim_type": "settlement",
-    "source_status": "needs_verification",
+    "source_status": "partial",
     "required_sources": [
-      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+      "Attach direct source records for every named inventory item not covered by the current source_ids."
     ],
-    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+    "notes": "Partial Tier I support: English Heritage directly supports Odda’s Chapel, Deerhurst, St Mary’s/Priory relationship, Saxon chapel/priory context, Westminster Abbey transfer, and local blue lias stone. Apperley, St Mary’s Priory Church as a separate list record, Domesday estate detail, Severn meander landscape, river terrace/alluvial clay, and Triassic Mercia Mudstone need direct source records.",
+    "source_ids": [
+      "src_eh_oddas_chapel_history"
+    ]
   },
   {
     "claim_id": "claim_056_interpretation",

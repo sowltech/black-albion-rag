@@ -160,3 +160,110 @@ git diff --check
 git diff --cached --check
 scripts/smoke_test.sh
 ```
+
+## Tier I Source Enrichment Pass 002
+
+Pass 002 enriched the remaining eight regional inventory modules that were
+still marked `needs_verification` after Pass 001:
+
+- `UK-RAG-MOD-043` — Southwestern Mercian Border Matrix.
+- `UK-RAG-MOD-045` — Severn Ham Alluvial Convergence.
+- `UK-RAG-MOD-048` — Mercian Lattice and Central Sandstone Cavity Complex.
+- `UK-RAG-MOD-049` — Tamensis Basin and Upper Cretaceous Chalk Corridors.
+- `UK-RAG-MOD-050` — Fenland Basin and East Anglian Chalk Escarpments.
+- `UK-RAG-MOD-051` — North Wessex Chalk Gateway and Ridgeway Corridor.
+- `UK-RAG-MOD-055` — Gloucester Southern Radials and Witcombe Scarp Intercept.
+- `UK-RAG-MOD-056` — Deerhurst / Apperley Monastic Axis.
+
+### Claims Upgraded
+
+The following Tier I inventory claims were upgraded from `needs_verification`
+to `partial`:
+
+- `claim_043_inventory`
+- `claim_045_inventory`
+- `claim_048_inventory`
+- `claim_049_inventory`
+- `claim_050_inventory`
+- `claim_051_inventory`
+- `claim_055_inventory`
+- `claim_056_inventory`
+
+No claim was upgraded to `verified` in this pass. Each inventory claim covers a
+multi-site module, and the source records support major named sites or core
+landscape facts but do not yet support every listed item at item level.
+
+After this pass, all 14 regional module inventory claims are at least
+`partial`.
+
+### Sources Added
+
+Pass 002 added 26 source records to `data/raw/black_albion_sources.json`:
+
+- `src_roman_baths_sacred_spring`
+- `src_bgs_bath_hot_springs_geology_2006`
+- `src_geoguide_avon_gorge_hotwells_limestone`
+- `src_tewkesbury_town_severn_ham_sssi`
+- `src_tewkesbury_borough_healings_mill`
+- `src_birmingham_museums_staffordshire_hoard`
+- `src_he_staffordshire_hoard_research`
+- `src_eh_wroxeter_roman_city_history`
+- `src_he_old_oswestry_1014899`
+- `src_dudley_wrens_nest_geology`
+- `src_lunt_roman_fort_official`
+- `src_london_museum_mithraeum_walbrook`
+- `src_oxford_city_port_meadow`
+- `src_oxford_dorchester_on_thames_archaeology`
+- `src_eh_waylands_smithy_history`
+- `src_nt_white_horse_hill_uffington`
+- `src_he_car_dyke_1009999`
+- `src_cambridge_must_farm_project`
+- `src_wildlife_bcn_fleam_dyke`
+- `src_he_cambridgeshire_dykes_bran_context_1410907`
+- `src_nt_avebury_stone_circles_henge`
+- `src_eh_avebury_world_heritage_site`
+- `src_he_west_kennet_long_barrow_1010628`
+- `src_he_great_witcombe_villa_1014826`
+- `src_gloucester_horsbere_brook_fas`
+- `src_eh_oddas_chapel_history`
+
+### Claims Left `needs_verification`
+
+No regional module inventory claims remain `needs_verification` after Pass 002.
+Non-inventory or future item-level claims may still need separate sourcing.
+
+### Unresolved Gaps
+
+Remaining direct-source gaps include:
+
+- Southwestern Mercian Border Matrix: Bristol harbour, Hotwells built
+  environment, and Hwicce frontier framing.
+- Severn Ham Alluvial Convergence: Abbey Mill history, common-land title
+  detail, and fuller floodplain-management sourcing.
+- Mercian Lattice: Birmingham / Metchley, Wolverhampton Cross, Kinver Rock
+  Houses, Creswell Crags, Nottingham City of Caves, and Borough Hill.
+- Tamensis Basin: wider Londinium / London Wall, Oxford city archaeology, and
+  detailed chalk-corridor geology.
+- Fenland Basin: Ely, Peterborough, Fen-edge villas, Bedford Level drainage /
+  enclosure, and full Bronze Age timber-settlement detail.
+- North Wessex Chalk Gateway: Swindon, Barbury Castle, Liddington Castle,
+  Wanborough / Durocornovium, Coate Water, Ridgeway route detail, and Vale of
+  White Horse.
+- Gloucester Southern Radials: Hardwicke, Framilode / Frome mouth, Hawkesbury,
+  Brockworth, Cooper's Hill, Witcombe reservoirs, Innsworth, and public NATO /
+  military overlays.
+- Deerhurst / Apperley: Apperley, separate St Mary's Priory Church records,
+  Domesday estate detail, Severn meander, river terrace / alluvial clay, and
+  Triassic Mercia Mudstone context.
+
+### Validation Commands Run
+
+```bash
+python3 -m json.tool data/raw/black_albion_sources.json
+python3 -m json.tool data/raw/black_albion_claims.json
+python3 -m pytest -q
+python3 -m compileall backend
+git diff --check
+git diff --cached --check
+scripts/smoke_test.sh
+```
