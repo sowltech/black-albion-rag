@@ -1,0 +1,193 @@
+system:
+  name: Enterprise GPT Operating System
+  version: 0.1.0
+  status: active
+  owner: AI Operating Owner
+  repo_module: enterprise-gpt-os
+  control_file: enterprise-gpt-os/manifest.yaml
+
+registry:
+  file: enterprise-gpt-os/registry/gpt_registry_template.md
+
+governance:
+  risk_matrix:
+    file: enterprise-gpt-os/governance/risk_matrix.md
+  approval_matrix:
+    file: enterprise-gpt-os/governance/approval_matrix.md
+  audit_policy:
+    file: enterprise-gpt-os/governance/audit_policy.md
+  incident_response:
+    file: enterprise-gpt-os/governance/incident_response.md
+
+gpts:
+  company_knowledge_gpt:
+    name: Company Knowledge GPT
+    file: enterprise-gpt-os/gpts/company_knowledge_gpt.md
+    owner: Knowledge Manager
+    risk_level: Medium
+    permission_level: P1
+    status: active
+    approval_required_for:
+      - new_data_sources
+      - permission_level_change
+      - customer_facing_use
+      - high_risk_workflow
+    review_cadence: monthly_or_quarterly
+  executive_strategy_gpt:
+    name: Executive Strategy GPT
+    file: enterprise-gpt-os/gpts/executive_strategy_gpt.md
+    owner: Chief of Staff
+    risk_level: High
+    permission_level: P3
+    status: active
+    approval_required_for:
+      - confidential_strategy
+      - board_materials
+      - financial_summary
+      - public_communication
+    review_cadence: monthly
+  operations_sop_gpt:
+    name: Operations SOP GPT
+    file: enterprise-gpt-os/gpts/operations_sop_gpt.md
+    owner: Operations Lead
+    risk_level: Medium
+    permission_level: P1
+    status: active
+    approval_required_for:
+      - production_change
+      - policy_exception
+      - customer_account_change
+      - approval_gated_action
+    review_cadence: monthly_or_quarterly
+  sales_gpt:
+    name: Sales GPT
+    file: enterprise-gpt-os/gpts/sales_gpt.md
+    owner: Head of Sales
+    risk_level: High
+    permission_level: P3
+    status: active
+    approval_required_for:
+      - money
+      - legal_commitment
+      - customer_account_change
+      - public_communication
+    review_cadence: monthly
+  support_gpt:
+    name: Support GPT
+    file: enterprise-gpt-os/gpts/support_gpt.md
+    owner: Head of Support
+    risk_level: High
+    permission_level: P3
+    status: active
+    approval_required_for:
+      - customer_account_change
+      - security_incident
+      - data_deletion_or_export
+      - public_communication
+    review_cadence: monthly
+  governance_auditor_gpt:
+    name: Governance Auditor GPT
+    file: enterprise-gpt-os/gpts/governance_auditor_gpt.md
+    owner: AI Operating Owner
+    risk_level: High
+    permission_level: P2
+    status: planned
+    approval_required_for:
+      - policy_exception
+      - audit_scope_change
+      - access_to_sensitive_logs
+      - production_change
+    review_cadence: monthly
+
+workflows:
+  new_gpt_request_workflow:
+    file: enterprise-gpt-os/workflows/new_gpt_request_workflow.md
+  high_risk_approval_workflow:
+    file: enterprise-gpt-os/workflows/high_risk_approval_workflow.md
+  rollout_plan_90_days:
+    file: enterprise-gpt-os/workflows/rollout_plan_90_days.md
+
+templates:
+  standard_gpt_build_template:
+    file: enterprise-gpt-os/templates/standard_gpt_build_template.md
+
+risk_levels:
+  1:
+    name: Low
+    controls: basic_logging
+  2:
+    name: Medium
+    controls: approved_sources_owner_review
+  3:
+    name: High
+    controls: human_approval_detailed_logging
+  4:
+    name: Critical
+    controls: mandatory_approval_executive_oversight
+
+permission_levels:
+  P0: no_tool_access
+  P1: approved_knowledge_read
+  P2: business_system_read
+  P3: draft_only
+  P4: approval_gated_action
+  P5: low_risk_autonomous_action
+  P6: restricted_high_risk_action
+
+approval_triggers:
+  - money
+  - legal_commitment
+  - hr_decision
+  - customer_account_change
+  - security_incident
+  - public_communication
+  - data_deletion_or_export
+  - policy_exception
+  - production_change
+  - regulatory_matter
+
+rollout_order:
+  - Company Knowledge GPT
+  - Executive Strategy GPT
+  - Operations SOP GPT
+  - Sales GPT
+  - Support GPT
+  - Governance Auditor GPT
+  - Finance Summary GPT
+  - HR Policy GPT
+
+audit_requirements:
+  basic:
+    - user
+    - request
+    - gpt_name
+    - timestamp
+  standard:
+    - user
+    - request
+    - gpt_name
+    - gpt_version
+    - sources_used
+    - output_summary
+    - risk_level
+    - timestamp
+  detailed:
+    - user
+    - request
+    - gpt_name
+    - gpt_version
+    - sources_used
+    - tool_calls
+    - output_summary
+    - risk_level
+    - approval_required
+    - approver
+    - approval_decision
+    - final_action
+    - timestamp
+
+review_cadence:
+  low: quarterly
+  medium: monthly_or_quarterly
+  high: monthly
+  critical: monthly_and_incident_triggered
