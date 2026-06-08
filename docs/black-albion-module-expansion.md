@@ -161,6 +161,139 @@ git diff --cached --check
 scripts/smoke_test.sh
 ```
 
+## Item-Level Tier I Source Pass 001
+
+This pass added narrow item-level Tier I claims for the highest-value remaining
+source gaps in four partially sourced regional modules:
+
+- `UK-RAG-MOD-048` — Mercian Lattice and Central Sandstone Cavity Complex.
+- `UK-RAG-MOD-051` — North Wessex Chalk Gateway and Ridgeway Corridor.
+- `UK-RAG-MOD-055` — Gloucester Southern Radials and Witcombe Scarp Intercept.
+- `UK-RAG-MOD-056` — Deerhurst / Apperley Monastic Axis.
+
+The broad regional inventory claims remain `partial`; this pass does not claim
+that every named inventory item in those modules is fully verified.
+
+### Item-Level Claims Added
+
+Added 27 item-level Tier I claims:
+
+- `claim_048_staffordshire_hoard`
+- `claim_048_wroxeter_viroconium`
+- `claim_048_lunt_roman_fort`
+- `claim_048_wrens_nest`
+- `claim_048_old_oswestry`
+- `claim_048_kinver_rock_houses`
+- `claim_048_creswell_crags`
+- `claim_048_nottingham_city_of_caves`
+- `claim_048_borough_hill`
+- `claim_051_avebury`
+- `claim_051_silbury_hill`
+- `claim_051_west_kennet_long_barrow`
+- `claim_051_barbury_castle`
+- `claim_051_liddington_castle`
+- `claim_051_wanborough_durocornovium`
+- `claim_051_uffington_white_horse`
+- `claim_051_ridgeway_national_trail`
+- `claim_055_great_witcombe_villa`
+- `claim_055_horsbere_brook`
+- `claim_055_coopers_hill_nature_reserve`
+- `claim_055_framilode_frome_mouth`
+- `claim_055_innsworth_arrc`
+- `claim_056_oddas_chapel`
+- `claim_056_st_mary_deerhurst`
+- `claim_056_deerhurst_monastic_site`
+- `claim_056_westminster_abbey_estate_link`
+- `claim_056_mercia_mudstone_context`
+
+### Sources Added
+
+Added 14 source records:
+
+- `src_nt_kinver_edge_rock_houses`
+- `src_creswell_crags_rock_art_discovery`
+- `src_national_justice_museum_city_of_caves`
+- `src_he_borough_hill_1010696`
+- `src_he_barbury_castle_1014557`
+- `src_he_liddington_castle_1016312`
+- `src_he_wanborough_roman_town_1004684`
+- `src_ridgeway_national_trail_official`
+- `src_visit_cheltenham_coopers_hill_nature_reserve`
+- `src_vch_fretherne_saul_framilode`
+- `src_govuk_arrc_innsworth_relocation`
+- `src_he_deerhurst_st_mary_1151998`
+- `src_he_deerhurst_monastic_site_1018632`
+- `src_bgs_mercia_mudstone_group`
+
+Existing source records were also linked to new item-level claims where they
+already directly supported the named item.
+
+### Claims Marked `verified`
+
+The following item-level claims were marked `verified` because their attached
+source records directly support the specific named item:
+
+- `claim_048_staffordshire_hoard`
+- `claim_048_wroxeter_viroconium`
+- `claim_048_lunt_roman_fort`
+- `claim_048_wrens_nest`
+- `claim_048_old_oswestry`
+- `claim_048_kinver_rock_houses`
+- `claim_048_nottingham_city_of_caves`
+- `claim_048_borough_hill`
+- `claim_051_avebury`
+- `claim_051_silbury_hill`
+- `claim_051_west_kennet_long_barrow`
+- `claim_051_barbury_castle`
+- `claim_051_liddington_castle`
+- `claim_051_uffington_white_horse`
+- `claim_051_ridgeway_national_trail`
+- `claim_055_great_witcombe_villa`
+- `claim_055_horsbere_brook`
+- `claim_055_innsworth_arrc`
+- `claim_056_oddas_chapel`
+- `claim_056_st_mary_deerhurst`
+- `claim_056_deerhurst_monastic_site`
+
+### Claims Marked `partial`
+
+The following item-level claims remain `partial` because source support is
+strong enough to anchor the named site or context, but not strong enough to
+verify every implied detail:
+
+- `claim_048_creswell_crags`
+- `claim_051_wanborough_durocornovium`
+- `claim_055_coopers_hill_nature_reserve`
+- `claim_055_framilode_frome_mouth`
+- `claim_056_westminster_abbey_estate_link`
+- `claim_056_mercia_mudstone_context`
+
+### Gaps Left Unresolved
+
+Remaining item-level gaps include:
+
+- `UK-RAG-MOD-048`: Birmingham / Metchley Roman Fort and Wolverhampton Cross.
+- `UK-RAG-MOD-051`: Swindon as a wider gateway, Coate Water, and exact
+  Durocornovium identification beyond the Wanborough scheduled Roman-town
+  record.
+- `UK-RAG-MOD-055`: Hardwicke, Hawkesbury, Brockworth, Witcombe reservoirs,
+  and a stronger primary source for Cooper's Hill archaeological detail.
+- `UK-RAG-MOD-056`: Apperley, exact Domesday estate entries, site-specific
+  Severn river terrace / alluvial clay evidence, and map-specific
+  Deerhurst / Apperley Mercia Mudstone confirmation.
+
+### Validation Commands Run
+
+```bash
+python3 -m json.tool data/raw/black_albion_sources.json
+python3 -m json.tool data/raw/black_albion_claims.json
+python3 -m pytest -q
+python3 -m compileall backend
+git diff --check
+git diff --cached --check
+scripts/smoke_test.sh
+```
+
 ## Tier I Source Enrichment Pass 002
 
 Pass 002 enriched the remaining eight regional inventory modules that were

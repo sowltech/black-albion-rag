@@ -377,7 +377,8 @@
       "UK-RAG-MOD-048"
     ],
     "supports_claims": [
-      "claim_048_inventory"
+      "claim_048_inventory",
+      "claim_048_staffordshire_hoard"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -393,7 +394,8 @@
       "UK-RAG-MOD-048"
     ],
     "supports_claims": [
-      "claim_048_inventory"
+      "claim_048_inventory",
+      "claim_048_staffordshire_hoard"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -409,7 +411,8 @@
       "UK-RAG-MOD-048"
     ],
     "supports_claims": [
-      "claim_048_inventory"
+      "claim_048_inventory",
+      "claim_048_wroxeter_viroconium"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -425,7 +428,8 @@
       "UK-RAG-MOD-048"
     ],
     "supports_claims": [
-      "claim_048_inventory"
+      "claim_048_inventory",
+      "claim_048_old_oswestry"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -441,7 +445,8 @@
       "UK-RAG-MOD-048"
     ],
     "supports_claims": [
-      "claim_048_inventory"
+      "claim_048_inventory",
+      "claim_048_wrens_nest"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -457,7 +462,8 @@
       "UK-RAG-MOD-048"
     ],
     "supports_claims": [
-      "claim_048_inventory"
+      "claim_048_inventory",
+      "claim_048_lunt_roman_fort"
     ],
     "evidence_tier": "I",
     "reliability": "medium",
@@ -534,10 +540,12 @@
     "url": "https://www.nationaltrust.org.uk/visit/oxfordshire-buckinghamshire-berkshire/white-horse-hill/history-at-white-horse-hill",
     "source_type": "heritage",
     "supports_modules": [
-      "UK-RAG-MOD-049"
+      "UK-RAG-MOD-049",
+      "UK-RAG-MOD-051"
     ],
     "supports_claims": [
-      "claim_049_inventory"
+      "claim_049_inventory",
+      "claim_051_uffington_white_horse"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -617,6 +625,7 @@
       "UK-RAG-MOD-051"
     ],
     "supports_claims": [
+      "claim_051_avebury",
       "claim_051_inventory"
     ],
     "evidence_tier": "I",
@@ -633,7 +642,9 @@
       "UK-RAG-MOD-051"
     ],
     "supports_claims": [
-      "claim_051_inventory"
+      "claim_051_avebury",
+      "claim_051_inventory",
+      "claim_051_silbury_hill"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -649,7 +660,8 @@
       "UK-RAG-MOD-051"
     ],
     "supports_claims": [
-      "claim_051_inventory"
+      "claim_051_inventory",
+      "claim_051_west_kennet_long_barrow"
     ],
     "evidence_tier": "I",
     "reliability": "high",
@@ -665,6 +677,7 @@
       "UK-RAG-MOD-055"
     ],
     "supports_claims": [
+      "claim_055_great_witcombe_villa",
       "claim_055_inventory"
     ],
     "evidence_tier": "I",
@@ -681,6 +694,7 @@
       "UK-RAG-MOD-055"
     ],
     "supports_claims": [
+      "claim_055_horsbere_brook",
       "claim_055_inventory"
     ],
     "evidence_tier": "I",
@@ -697,10 +711,236 @@
       "UK-RAG-MOD-056"
     ],
     "supports_claims": [
-      "claim_056_inventory"
+      "claim_056_inventory",
+      "claim_056_oddas_chapel",
+      "claim_056_westminster_abbey_estate_link"
     ],
     "evidence_tier": "I",
     "reliability": "high",
     "notes": "Directly supports Odda's Chapel at Deerhurst as a surviving Saxon chapel, its relation to Deerhurst Priory/St Mary's, the Odda Stone, Edward the Confessor/Westminster Abbey reference, local blue lias stone, and Deerhurst Saxon/priory context."
+  },
+  {
+    "source_id": "src_nt_kinver_edge_rock_houses",
+    "title": "Kinver Edge and the Rock Houses",
+    "author_or_body": "National Trust",
+    "url": "https://www.nationaltrust.org.uk/visit/shropshire-staffordshire/kinver-edge-and-the-rock-houses",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_kinver_rock_houses"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Kinver Edge and Holy Austin Rock Houses as homes carved into sandstone on a sandstone ridge with an Iron Age hillfort landscape. Does not verify wider Mercian lattice interpretation."
+  },
+  {
+    "source_id": "src_creswell_crags_rock_art_discovery",
+    "title": "Twenty years since the rock art discovery at Creswell Crags",
+    "author_or_body": "Creswell Heritage Trust / Creswell Crags",
+    "url": "https://www.creswell-crags.org.uk/news-archive/twenty-years-since-the-rock-art-discovery-at-creswell-crags",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_creswell_crags"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Creswell Crags as a Palaeolithic cave-art site. Use for the named item only; detailed dating and wider cave archaeology need item-specific academic sources."
+  },
+  {
+    "source_id": "src_national_justice_museum_city_of_caves",
+    "title": "City of Caves",
+    "author_or_body": "National Justice Museum",
+    "url": "https://www.nationaljusticemuseum.org.uk/cityofcaves/",
+    "source_type": "museum",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_nottingham_city_of_caves"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Nottingham City of Caves as a major sandstone cave network beneath Nottingham. Does not verify all historical uses at item level."
+  },
+  {
+    "source_id": "src_he_borough_hill_1010696",
+    "title": "Borough Hill: two Iron Age hillforts and a defended enclosure, two Bronze Age barrows, a Roman building complex and barrow cemetery - 1010696",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1010696",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-048"
+    ],
+    "supports_claims": [
+      "claim_048_borough_hill"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Directly supports Borough Hill as a scheduled monument with Iron Age hillforts, Bronze Age barrows, Roman building complex, and barrow cemetery."
+  },
+  {
+    "source_id": "src_he_barbury_castle_1014557",
+    "title": "Barbury Castle: a hillfort and bowl barrow - 1014557",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1014557",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-051"
+    ],
+    "supports_claims": [
+      "claim_051_barbury_castle"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Barbury Castle as a scheduled hillfort and bowl barrow. Wider Ridgeway gateway interpretation remains Tier II."
+  },
+  {
+    "source_id": "src_he_liddington_castle_1016312",
+    "title": "Liddington Castle - 1016312",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1016312",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-051"
+    ],
+    "supports_claims": [
+      "claim_051_liddington_castle"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Liddington Castle as a scheduled slight univallate hillfort."
+  },
+  {
+    "source_id": "src_he_wanborough_roman_town_1004684",
+    "title": "Site of Roman town, W of Wanborough House - 1004684",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1004684",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-051"
+    ],
+    "supports_claims": [
+      "claim_051_wanborough_durocornovium"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports a scheduled Roman town west of Wanborough House. The record is a legacy OCN entry and does not itself verify the Durocornovium place-name; claim therefore remains partial."
+  },
+  {
+    "source_id": "src_ridgeway_national_trail_official",
+    "title": "The Ridgeway - National Trails",
+    "author_or_body": "National Trails",
+    "url": "https://www.nationaltrail.co.uk/en_GB/trails/the-ridgeway/",
+    "source_type": "official",
+    "supports_modules": [
+      "UK-RAG-MOD-051"
+    ],
+    "supports_claims": [
+      "claim_051_ridgeway_national_trail"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports the Ridgeway as an official National Trail through southern central England. Ancient-route interpretation should be separately sourced before being treated as Tier I."
+  },
+  {
+    "source_id": "src_visit_cheltenham_coopers_hill_nature_reserve",
+    "title": "Cooper's Hill Nature Reserve",
+    "author_or_body": "Visit Cheltenham / local destination listing",
+    "url": "https://www.visitcheltenham.com/listing/coopers-hill-nature-reserve/12732301/",
+    "source_type": "local_authority",
+    "supports_modules": [
+      "UK-RAG-MOD-055"
+    ],
+    "supports_claims": [
+      "claim_055_coopers_hill_nature_reserve"
+    ],
+    "evidence_tier": "I",
+    "reliability": "medium",
+    "notes": "Supports Cooper's Hill as a Brockworth local nature reserve with SSSI woodland/limestone grassland context and an Iron Age settlement reference. Needs stronger primary HER or Historic England support for archaeological detail."
+  },
+  {
+    "source_id": "src_vch_fretherne_saul_framilode",
+    "title": "Fretherne and Saul: Introduction / Economic History",
+    "author_or_body": "Victoria County History via British History Online",
+    "url": "https://www.british-history.ac.uk/vch/glos/vol10",
+    "source_type": "published_report",
+    "supports_modules": [
+      "UK-RAG-MOD-055"
+    ],
+    "supports_claims": [
+      "claim_055_framilode_frome_mouth"
+    ],
+    "evidence_tier": "I",
+    "reliability": "medium",
+    "notes": "Used as a VCH/BHO anchor for Framilode/Fretherne/Saul context. Exact subpage URL needs item-level confirmation; claim remains partial."
+  },
+  {
+    "source_id": "src_govuk_arrc_innsworth_relocation",
+    "title": "Gloucestershire welcomes the ARRC with formal cathedral service",
+    "author_or_body": "GOV.UK / Ministry of Defence",
+    "url": "https://www.gov.uk/government/news/gloucestershire-welcomes-the-arrc-with-formal-cathedral-service",
+    "source_type": "official",
+    "supports_modules": [
+      "UK-RAG-MOD-055"
+    ],
+    "supports_claims": [
+      "claim_055_innsworth_arrc"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports public NATO/ARRC overlay at Imjin Barracks, Innsworth, through a GOV.UK source. Does not support any classified or non-public military detail."
+  },
+  {
+    "source_id": "src_he_deerhurst_st_mary_1151998",
+    "title": "The Church of St Mary, Deerhurst - 1151998",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1151998",
+    "source_type": "heritage",
+    "supports_modules": [
+      "UK-RAG-MOD-056"
+    ],
+    "supports_claims": [
+      "claim_056_st_mary_deerhurst"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports St Mary's Deerhurst as a Grade I listed former monastery / parish church. Detailed Saxon chronology should use the full list entry or specialist architectural sources."
+  },
+  {
+    "source_id": "src_he_deerhurst_monastic_site_1018632",
+    "title": "Deerhurst monastic site and multi-period settlement - 1018632",
+    "author_or_body": "Historic England / National Heritage List for England",
+    "url": "https://historicengland.org.uk/listing/the-list/list-entry/1018632",
+    "source_type": "archaeology",
+    "supports_modules": [
+      "UK-RAG-MOD-056"
+    ],
+    "supports_claims": [
+      "claim_056_deerhurst_monastic_site"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Deerhurst monastic site, multi-period settlement, St Mary's, Priory Farmhouse, Odda's Chapel group value, and Edmund Ironside/Cnut context."
+  },
+  {
+    "source_id": "src_bgs_mercia_mudstone_group",
+    "title": "Mercia Mudstone Group",
+    "author_or_body": "British Geological Survey",
+    "url": "https://www.bgs.ac.uk/geology-projects/engineering-geology-maps/engineering-geological-studies-of-bedrock-formations/mercia-mudstone-group/",
+    "source_type": "geology",
+    "supports_modules": [
+      "UK-RAG-MOD-056"
+    ],
+    "supports_claims": [
+      "claim_056_mercia_mudstone_context"
+    ],
+    "evidence_tier": "I",
+    "reliability": "high",
+    "notes": "Supports Mercia Mudstone Group as a formal geological unit. Does not by itself prove exact Deerhurst/Apperley site geology without map-sheet or borehole confirmation."
   }
 ]

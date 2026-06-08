@@ -785,5 +785,451 @@
     "source_status": "speculative",
     "required_sources": [],
     "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_048_staffordshire_hoard",
+    "id": "claim_048_staffordshire_hoard",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "The Staffordshire Hoard is a sourced Tier I item within UK-RAG-MOD-048.",
+    "title": "Staffordshire Hoard item-level source",
+    "summary": "The Staffordshire Hoard is a sourced Tier I item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Birmingham Museums and Historic England directly support the named hoard item. Wider Mercian lattice interpretation remains outside this item-level claim.",
+    "source_ids": [
+      "src_birmingham_museums_staffordshire_hoard",
+      "src_he_staffordshire_hoard_research"
+    ]
+  },
+  {
+    "claim_id": "claim_048_wroxeter_viroconium",
+    "id": "claim_048_wroxeter_viroconium",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Wroxeter / Viroconium is a sourced Tier I Roman-city item within UK-RAG-MOD-048.",
+    "title": "Wroxeter / Viroconium item-level source",
+    "summary": "Wroxeter / Viroconium is a sourced Tier I Roman-city item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "English Heritage directly supports Wroxeter Roman City / Viroconium as the named item. This does not verify broader corridor synthesis.",
+    "source_ids": [
+      "src_eh_wroxeter_roman_city_history"
+    ]
+  },
+  {
+    "claim_id": "claim_048_lunt_roman_fort",
+    "id": "claim_048_lunt_roman_fort",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Lunt Roman Fort is a sourced Tier I Roman-fort item within UK-RAG-MOD-048.",
+    "title": "Lunt Roman Fort item-level source",
+    "summary": "Lunt Roman Fort is a sourced Tier I Roman-fort item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "The official Lunt Roman Fort source directly supports the named fort item.",
+    "source_ids": [
+      "src_lunt_roman_fort_official"
+    ]
+  },
+  {
+    "claim_id": "claim_048_wrens_nest",
+    "id": "claim_048_wrens_nest",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Wren's Nest is a sourced Tier I geological item within UK-RAG-MOD-048.",
+    "title": "Wren's Nest item-level source",
+    "summary": "Wren's Nest is a sourced Tier I geological item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "geology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Dudley Council directly supports Wren's Nest National Nature Reserve geology. Wider central-cavity mapping remains interpretation.",
+    "source_ids": [
+      "src_dudley_wrens_nest_geology"
+    ]
+  },
+  {
+    "claim_id": "claim_048_old_oswestry",
+    "id": "claim_048_old_oswestry",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Old Oswestry is a sourced Tier I hillfort item within UK-RAG-MOD-048.",
+    "title": "Old Oswestry item-level source",
+    "summary": "Old Oswestry is a sourced Tier I hillfort item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports Old Oswestry through NHLE entry 1014899.",
+    "source_ids": [
+      "src_he_old_oswestry_1014899"
+    ]
+  },
+  {
+    "claim_id": "claim_048_kinver_rock_houses",
+    "id": "claim_048_kinver_rock_houses",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Kinver Edge and the Rock Houses are sourced as a sandstone rock-house item within UK-RAG-MOD-048.",
+    "title": "Kinver Rock Houses item-level source",
+    "summary": "Kinver Edge and the Rock Houses are sourced as a sandstone rock-house item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "National Trust directly supports the named Kinver Edge / Rock Houses item and sandstone setting.",
+    "source_ids": [
+      "src_nt_kinver_edge_rock_houses"
+    ]
+  },
+  {
+    "claim_id": "claim_048_creswell_crags",
+    "id": "claim_048_creswell_crags",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Creswell Crags is sourced as a Palaeolithic cave-art item within UK-RAG-MOD-048.",
+    "title": "Creswell Crags item-level source",
+    "summary": "Creswell Crags is sourced as a Palaeolithic cave-art item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach Historic England scheduling or academic excavation records for full item-level detail."
+    ],
+    "notes": "Creswell Crags official material supports the named site and rock-art discovery; full cave archaeology and dating detail remain partially sourced.",
+    "source_ids": [
+      "src_creswell_crags_rock_art_discovery"
+    ]
+  },
+  {
+    "claim_id": "claim_048_nottingham_city_of_caves",
+    "id": "claim_048_nottingham_city_of_caves",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Nottingham City of Caves is sourced as a sandstone cave-network item within UK-RAG-MOD-048.",
+    "title": "Nottingham City of Caves item-level source",
+    "summary": "Nottingham City of Caves is sourced as a sandstone cave-network item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "The National Justice Museum directly supports City of Caves as the named Nottingham cave-network item.",
+    "source_ids": [
+      "src_national_justice_museum_city_of_caves"
+    ]
+  },
+  {
+    "claim_id": "claim_048_borough_hill",
+    "id": "claim_048_borough_hill",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Borough Hill is sourced as a multi-period scheduled monument item within UK-RAG-MOD-048.",
+    "title": "Borough Hill item-level source",
+    "summary": "Borough Hill is sourced as a multi-period scheduled monument item within UK-RAG-MOD-048.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports the named Borough Hill scheduled monument and its Bronze Age, Iron Age, Roman, and cemetery components.",
+    "source_ids": [
+      "src_he_borough_hill_1010696"
+    ]
+  },
+  {
+    "claim_id": "claim_051_avebury",
+    "id": "claim_051_avebury",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Avebury is a sourced Tier I prehistoric monument-landscape item within UK-RAG-MOD-051.",
+    "title": "Avebury item-level source",
+    "summary": "Avebury is a sourced Tier I prehistoric monument-landscape item within UK-RAG-MOD-051.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "National Trust and English Heritage directly support the Avebury monument landscape. This item claim does not verify wider chalk-gateway interpretation.",
+    "source_ids": [
+      "src_nt_avebury_stone_circles_henge",
+      "src_eh_avebury_world_heritage_site"
+    ]
+  },
+  {
+    "claim_id": "claim_051_silbury_hill",
+    "id": "claim_051_silbury_hill",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Silbury Hill is a sourced Tier I prehistoric monument item within UK-RAG-MOD-051.",
+    "title": "Silbury Hill item-level source",
+    "summary": "Silbury Hill is a sourced Tier I prehistoric monument item within UK-RAG-MOD-051.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "English Heritage's Avebury World Heritage Site source directly supports Silbury Hill within the Avebury landscape.",
+    "source_ids": [
+      "src_eh_avebury_world_heritage_site"
+    ]
+  },
+  {
+    "claim_id": "claim_051_west_kennet_long_barrow",
+    "id": "claim_051_west_kennet_long_barrow",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "West Kennet Long Barrow is a sourced Tier I Neolithic monument item within UK-RAG-MOD-051.",
+    "title": "West Kennet Long Barrow item-level source",
+    "summary": "West Kennet Long Barrow is a sourced Tier I Neolithic monument item within UK-RAG-MOD-051.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports West Kennet Long Barrow via NHLE 1010628.",
+    "source_ids": [
+      "src_he_west_kennet_long_barrow_1010628"
+    ]
+  },
+  {
+    "claim_id": "claim_051_barbury_castle",
+    "id": "claim_051_barbury_castle",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Barbury Castle is a sourced Tier I hillfort item within UK-RAG-MOD-051.",
+    "title": "Barbury Castle item-level source",
+    "summary": "Barbury Castle is a sourced Tier I hillfort item within UK-RAG-MOD-051.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports Barbury Castle as the named hillfort item.",
+    "source_ids": [
+      "src_he_barbury_castle_1014557"
+    ]
+  },
+  {
+    "claim_id": "claim_051_liddington_castle",
+    "id": "claim_051_liddington_castle",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Liddington Castle is a sourced Tier I hillfort item within UK-RAG-MOD-051.",
+    "title": "Liddington Castle item-level source",
+    "summary": "Liddington Castle is a sourced Tier I hillfort item within UK-RAG-MOD-051.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports Liddington Castle as the named hillfort item.",
+    "source_ids": [
+      "src_he_liddington_castle_1016312"
+    ]
+  },
+  {
+    "claim_id": "claim_051_wanborough_durocornovium",
+    "id": "claim_051_wanborough_durocornovium",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Wanborough has a scheduled Roman-town item in UK-RAG-MOD-051; the Durocornovium identification remains partial in this claim.",
+    "title": "Wanborough / Durocornovium item-level source",
+    "summary": "Wanborough has a scheduled Roman-town item in UK-RAG-MOD-051; the Durocornovium identification remains partial in this claim.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach a direct excavation or scholarly source for the Durocornovium identification."
+    ],
+    "notes": "Historic England directly supports a scheduled Roman town west of Wanborough House; the legacy entry does not itself fully substantiate the Durocornovium name.",
+    "source_ids": [
+      "src_he_wanborough_roman_town_1004684"
+    ]
+  },
+  {
+    "claim_id": "claim_051_uffington_white_horse",
+    "id": "claim_051_uffington_white_horse",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Uffington White Horse is a sourced Tier I chalk-figure item connected to the Ridgeway / Vale of White Horse context in UK-RAG-MOD-051.",
+    "title": "Uffington White Horse item-level source",
+    "summary": "Uffington White Horse is a sourced Tier I chalk-figure item connected to the Ridgeway / Vale of White Horse context in UK-RAG-MOD-051.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "National Trust directly supports White Horse Hill / Uffington White Horse. This item claim does not assert symbolic alignment.",
+    "source_ids": [
+      "src_nt_white_horse_hill_uffington"
+    ]
+  },
+  {
+    "claim_id": "claim_051_ridgeway_national_trail",
+    "id": "claim_051_ridgeway_national_trail",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "The Ridgeway is sourced as an official National Trail item within UK-RAG-MOD-051.",
+    "title": "Ridgeway National Trail item-level source",
+    "summary": "The Ridgeway is sourced as an official National Trail item within UK-RAG-MOD-051.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "National Trails directly supports the current official trail. Claims about prehistoric antiquity or continuous ancient use require separate source records.",
+    "source_ids": [
+      "src_ridgeway_national_trail_official"
+    ]
+  },
+  {
+    "claim_id": "claim_055_great_witcombe_villa",
+    "id": "claim_055_great_witcombe_villa",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Great Witcombe Roman Villa is a sourced Tier I Roman-villa item within UK-RAG-MOD-055.",
+    "title": "Great Witcombe Roman Villa item-level source",
+    "summary": "Great Witcombe Roman Villa is a sourced Tier I Roman-villa item within UK-RAG-MOD-055.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports Great Witcombe Roman Villa, its Cotswold scarp position, spring/stream setting, and villa-group context.",
+    "source_ids": [
+      "src_he_great_witcombe_villa_1014826"
+    ]
+  },
+  {
+    "claim_id": "claim_055_horsbere_brook",
+    "id": "claim_055_horsbere_brook",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Horsbere Brook is a sourced Tier I hydrology/flood-management item within UK-RAG-MOD-055.",
+    "title": "Horsbere Brook item-level source",
+    "summary": "Horsbere Brook is a sourced Tier I hydrology/flood-management item within UK-RAG-MOD-055.",
+    "tier": "I",
+    "claim_type": "hydrology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Gloucester City Council directly supports the Horsbere Brook flood alleviation scheme context.",
+    "source_ids": [
+      "src_gloucester_horsbere_brook_fas"
+    ]
+  },
+  {
+    "claim_id": "claim_055_coopers_hill_nature_reserve",
+    "id": "claim_055_coopers_hill_nature_reserve",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Cooper's Hill is sourced as a Brockworth scarp / nature reserve item within UK-RAG-MOD-055.",
+    "title": "Cooper's Hill item-level source",
+    "summary": "Cooper's Hill is sourced as a Brockworth scarp / nature reserve item within UK-RAG-MOD-055.",
+    "tier": "I",
+    "claim_type": "geology",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach direct Gloucestershire County Council, SSSI, HER, or Historic England records for full archaeological and conservation detail."
+    ],
+    "notes": "The local destination listing supports the named reserve, limestone grassland/woodland, and Iron Age settlement reference; stronger primary designation records are still needed.",
+    "source_ids": [
+      "src_visit_cheltenham_coopers_hill_nature_reserve"
+    ]
+  },
+  {
+    "claim_id": "claim_055_framilode_frome_mouth",
+    "id": "claim_055_framilode_frome_mouth",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Framilode / the River Frome mouth is partially sourced as a river-mouth item within UK-RAG-MOD-055.",
+    "title": "Framilode / River Frome mouth item-level source",
+    "summary": "Framilode / the River Frome mouth is partially sourced as a river-mouth item within UK-RAG-MOD-055.",
+    "tier": "I",
+    "claim_type": "hydrology",
+    "source_status": "partial",
+    "required_sources": [
+      "Confirm exact VCH/British History Online subpage and attach direct river-mouth source if available."
+    ],
+    "notes": "VCH/BHO volume anchor supports Framilode/Fretherne/Saul context but this pass did not confirm the exact subpage text; keep partial.",
+    "source_ids": [
+      "src_vch_fretherne_saul_framilode"
+    ]
+  },
+  {
+    "claim_id": "claim_055_innsworth_arrc",
+    "id": "claim_055_innsworth_arrc",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Innsworth has a public NATO/ARRC overlay sourced from GOV.UK within UK-RAG-MOD-055.",
+    "title": "Innsworth ARRC item-level source",
+    "summary": "Innsworth has a public NATO/ARRC overlay sourced from GOV.UK within UK-RAG-MOD-055.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "GOV.UK directly supports the ARRC relocation to Imjin Barracks, Innsworth. No classified or non-public military claims are made.",
+    "source_ids": [
+      "src_govuk_arrc_innsworth_relocation"
+    ]
+  },
+  {
+    "claim_id": "claim_056_oddas_chapel",
+    "id": "claim_056_oddas_chapel",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Odda's Chapel is a sourced Tier I pre-Conquest chapel item within UK-RAG-MOD-056.",
+    "title": "Odda's Chapel item-level source",
+    "summary": "Odda's Chapel is a sourced Tier I pre-Conquest chapel item within UK-RAG-MOD-056.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "English Heritage directly supports Odda's Chapel at Deerhurst and its Saxon chapel context.",
+    "source_ids": [
+      "src_eh_oddas_chapel_history"
+    ]
+  },
+  {
+    "claim_id": "claim_056_st_mary_deerhurst",
+    "id": "claim_056_st_mary_deerhurst",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "St Mary's Church, Deerhurst is a sourced Tier I former-monastery / parish-church item within UK-RAG-MOD-056.",
+    "title": "St Mary's Deerhurst item-level source",
+    "summary": "St Mary's Church, Deerhurst is a sourced Tier I former-monastery / parish-church item within UK-RAG-MOD-056.",
+    "tier": "I",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports St Mary's Church as a Grade I listed former monastery / parish church.",
+    "source_ids": [
+      "src_he_deerhurst_st_mary_1151998"
+    ]
+  },
+  {
+    "claim_id": "claim_056_deerhurst_monastic_site",
+    "id": "claim_056_deerhurst_monastic_site",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Deerhurst monastic site and multi-period settlement are sourced Tier I items within UK-RAG-MOD-056.",
+    "title": "Deerhurst monastic site item-level source",
+    "summary": "Deerhurst monastic site and multi-period settlement are sourced Tier I items within UK-RAG-MOD-056.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Historic England directly supports the Deerhurst monastic site, multi-period settlement, St Mary's / Priory Farmhouse survival, Odda's Chapel group value, and 1016 royal context.",
+    "source_ids": [
+      "src_he_deerhurst_monastic_site_1018632"
+    ]
+  },
+  {
+    "claim_id": "claim_056_westminster_abbey_estate_link",
+    "id": "claim_056_westminster_abbey_estate_link",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "The Deerhurst / Westminster Abbey estate link is partially sourced within UK-RAG-MOD-056.",
+    "title": "Deerhurst Westminster Abbey estate-link item-level source",
+    "summary": "The Deerhurst / Westminster Abbey estate link is partially sourced within UK-RAG-MOD-056.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach direct Domesday, VCH, or Westminster Abbey estate record for full verification."
+    ],
+    "notes": "English Heritage Odda's Chapel material supports a Westminster Abbey transfer reference, but full estate-chain detail remains partially sourced.",
+    "source_ids": [
+      "src_eh_oddas_chapel_history"
+    ]
+  },
+  {
+    "claim_id": "claim_056_mercia_mudstone_context",
+    "id": "claim_056_mercia_mudstone_context",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Mercia Mudstone is a sourced geological context item for UK-RAG-MOD-056, but exact Deerhurst/Apperley mapping remains partial.",
+    "title": "Mercia Mudstone item-level source",
+    "summary": "Mercia Mudstone is a sourced geological context item for UK-RAG-MOD-056, but exact Deerhurst/Apperley mapping remains partial.",
+    "tier": "I",
+    "claim_type": "geology",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach local BGS map-sheet, borehole, or conservation geology source for exact Deerhurst/Apperley ground conditions."
+    ],
+    "notes": "BGS directly supports the Mercia Mudstone Group as a geological unit; exact site-level Deerhurst/Apperley geology still needs map-specific confirmation.",
+    "source_ids": [
+      "src_bgs_mercia_mudstone_group"
+    ]
   }
 ]

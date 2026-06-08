@@ -28,6 +28,35 @@ INVENTORY_CLAIM_IDS = {
     "claim_055_inventory",
     "claim_056_inventory",
 }
+ITEM_LEVEL_CLAIM_IDS = {
+    "claim_048_staffordshire_hoard",
+    "claim_048_wroxeter_viroconium",
+    "claim_048_lunt_roman_fort",
+    "claim_048_wrens_nest",
+    "claim_048_old_oswestry",
+    "claim_048_kinver_rock_houses",
+    "claim_048_creswell_crags",
+    "claim_048_nottingham_city_of_caves",
+    "claim_048_borough_hill",
+    "claim_051_avebury",
+    "claim_051_silbury_hill",
+    "claim_051_west_kennet_long_barrow",
+    "claim_051_barbury_castle",
+    "claim_051_liddington_castle",
+    "claim_051_wanborough_durocornovium",
+    "claim_051_uffington_white_horse",
+    "claim_051_ridgeway_national_trail",
+    "claim_055_great_witcombe_villa",
+    "claim_055_horsbere_brook",
+    "claim_055_coopers_hill_nature_reserve",
+    "claim_055_framilode_frome_mouth",
+    "claim_055_innsworth_arrc",
+    "claim_056_oddas_chapel",
+    "claim_056_st_mary_deerhurst",
+    "claim_056_deerhurst_monastic_site",
+    "claim_056_westminster_abbey_estate_link",
+    "claim_056_mercia_mudstone_context",
+}
 
 
 class SourceEnrichmentTests(unittest.TestCase):
@@ -71,6 +100,23 @@ class SourceEnrichmentTests(unittest.TestCase):
         claims_by_id = {claim["claim_id"]: claim for claim in self.claims}
         for claim_id in INVENTORY_CLAIM_IDS:
             claim = claims_by_id[claim_id]
+            self.assertIn(claim.get("source_status"), {"partial", "verified"}, claim_id)
+            self.assertTrue(claim.get("source_ids"), claim_id)
+
+    def test_verified_item_level_claims_have_sources(self) -> None:
+        for claim in self.claims:
+            if (
+                claim["claim_id"] in ITEM_LEVEL_CLAIM_IDS
+                and claim.get("source_status") == "verified"
+            ):
+                self.assertTrue(claim.get("source_ids"), claim["claim_id"])
+
+    def test_sourced_priority_item_level_claims_exist(self) -> None:
+        claims_by_id = {claim["claim_id"]: claim for claim in self.claims}
+        for claim_id in ITEM_LEVEL_CLAIM_IDS:
+            self.assertIn(claim_id, claims_by_id)
+            claim = claims_by_id[claim_id]
+            self.assertEqual(claim.get("tier"), "I", claim_id)
             self.assertIn(claim.get("source_status"), {"partial", "verified"}, claim_id)
             self.assertTrue(claim.get("source_ids"), claim_id)
 
