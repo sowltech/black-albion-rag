@@ -1,0 +1,252 @@
+[
+  {
+    "id": "site_avebury_henge",
+    "tier": "I",
+    "name": "Avebury Henge and Stone Circles",
+    "region": "Marlborough Downs / Kennet Valley",
+    "nearest_place": "Avebury",
+    "county": "Wiltshire",
+    "country": "England",
+    "period": ["Neolithic", "Bronze Age"],
+    "coordinates": {"latitude": 51.4286, "longitude": -1.8542},
+    "themes": ["henge", "stone-circle", "winterbournes", "chalk-aquifer"],
+    "layer_0_geology": {
+      "mineral_strata": "Upper Cretaceous Seaford Chalk basin with sarsen silcrete blocks",
+      "fault_lines": "Marlborough Downs Cretaceous fractures / Vale of Pewsey fault rim",
+      "hydrology": "Subterranean chalk aquifer sponge; cyclic winterbourne springs feeding the River Kennet headwaters"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "National Trust spatial controls, CRoW Act 2000 access restrictions, Historic England asset mapping",
+      "target_records": [
+        "NHLE List Entry 1005683 (Avebury Henge)",
+        "Marlborough manorial registry logs",
+        "Wiltshire 18th-century enclosure maps"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "open-air biological computer circuit on the chalk aquifer",
+      "counter_intelligence_flag": "State heritage narrative reframed as containment script (Bobby Hemmit framework)"
+    },
+    "system_lock": "Chapter_8_seed"
+  },
+  {
+    "id": "site_silbury_hill",
+    "tier": "I",
+    "name": "Silbury Hill",
+    "region": "Wiltshire Downs / Kennet Alluvial Valley",
+    "nearest_place": "Avebury / Marlborough",
+    "county": "Wiltshire",
+    "country": "England",
+    "period": ["Neolithic"],
+    "coordinates": {"latitude": 51.4159, "longitude": -1.8576},
+    "themes": ["monumental-mound", "hydraulic-plug", "chalk-alluvium"],
+    "layer_0_geology": {
+      "mineral_strata": "Alternating dark organic silt core, layered turf mounds, cohesive chalk rubble blocks (~240,000 m^3)",
+      "fault_lines": "Kennet Valley stratigraphic trough / Vale of Pewsey fault extensions",
+      "hydrology": "Hydrostatic water-table intercept; subterranean alluvial aquifer pressure node"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "A4 imperial highway adjoining the southern base; permanent climbing ban; English Heritage perimeter",
+      "target_records": [
+        "NHLE List Entry 1009107 (Silbury Hill)",
+        "1776 Duke of Northumberland shaft log",
+        "1849 Ingrams shaft log",
+        "1968 BBC / Atkinson Hatfield shaft log (confirming total chamber absence)"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "alternating-silt hydraulic valve and orgone-style telluric plug",
+      "counter_intelligence_flag": "Burial-mound disinformation script masking hydraulic engineering"
+    },
+    "system_lock": "Chapter_9_seed"
+  },
+  {
+    "id": "site_stonehenge",
+    "tier": "I",
+    "name": "Stonehenge",
+    "region": "Salisbury Plain / Avon-Test watershed",
+    "nearest_place": "Amesbury",
+    "county": "Wiltshire",
+    "country": "England",
+    "period": ["Neolithic", "Bronze Age"],
+    "coordinates": {"latitude": 51.1789, "longitude": -1.8262},
+    "themes": ["megalithic", "sarsen", "bluestone", "salisbury-plain"],
+    "layer_0_geology": {
+      "mineral_strata": "Upper Cretaceous Seaford Chalk basin; sarsen silcrete (Marlborough Downs); Preseli spotted dolerite bluestone (Pembrokeshire)",
+      "fault_lines": "Salisbury Plain anticlinal dome / Vale of Wardour fault margin",
+      "hydrology": "Pressurised white chalk lithospheric aquifer; sub-surface artesian headwaters"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "Ministry of Defence Salisbury Plain Training Area (~111,000 acres); English Heritage commercial monopoly boundary",
+      "target_records": [
+        "NHLE List Entry 1010140 (Stonehenge)",
+        "Wiltshire manorial ordnance surveys",
+        "MoD Defence Infrastructure Organisation land ledgers"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "quartz / dolerite bimetallic telluric transducer at the convergence of the Salisbury Plain aquifer",
+      "counter_intelligence_flag": "Archaeological burial-ground framing reads as cover for an interplanetary receiver array"
+    },
+    "system_lock": "Chapter_16_seed"
+  },
+  {
+    "id": "site_glastonbury_tor",
+    "tier": "I",
+    "name": "Glastonbury Tor",
+    "region": "Somerset Levels / Avalon outcrop",
+    "nearest_place": "Glastonbury",
+    "county": "Somerset",
+    "country": "England",
+    "period": ["Pre-enclosure", "Medieval monastic", "Georgian drainage"],
+    "coordinates": {"latitude": 51.1444, "longitude": -2.6981},
+    "themes": ["blue-lias", "twin-springs", "monastic-enclosure", "fisher-king"],
+    "layer_0_geology": {
+      "mineral_strata": "Stratified Blue Lias limestone, Bridport sands, ferruginous sandstone caps",
+      "fault_lines": "Somerset Basin strike faults / Mid-Somerset Lias rim",
+      "hydrology": "Dual aquifer intercept: Chalybeate Red Spring (iron) and White Spring (calcium carbonate)"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "Glastonbury Abbey monastic real-estate ledger; Somerset Levels drainage enclosures",
+      "target_records": [
+        "Glastonbury Abbey cartulary surveys",
+        "Somerset marshland partition maps",
+        "NHLE Reference for Glastonbury Tor complex"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "alchemical battery formed by colliding chalybeate / calcium springs under a seven-tiered terraced antenna",
+      "counter_intelligence_flag": "Arthurian / Camelot folklore frames a tectonic science as romance"
+    },
+    "system_lock": "Chapter_11_seed"
+  },
+  {
+    "id": "site_giants_causeway",
+    "tier": "I",
+    "name": "Giant's Causeway",
+    "region": "Ulster Coast / North Channel basin margin",
+    "nearest_place": "Bushmills",
+    "county": "Antrim",
+    "country": "Northern Ireland",
+    "period": ["Paleogene volcanic"],
+    "coordinates": {"latitude": 55.2408, "longitude": -6.5117},
+    "themes": ["basalt-columns", "hexagonal-jointing", "atlantic-coast"],
+    "layer_0_geology": {
+      "mineral_strata": "~60 Mya tholeiitic basalt flows with regular columnar hexagonal jointing; basal Ulster White Chalk",
+      "fault_lines": "Great Glen Fault Ulster extensions / Tow Valley Fault system",
+      "hydrology": "Atlantic oceanic interface; pressurised sub-surface basalt aquifers"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "National Trust heritage zoning; UNESCO World Heritage Site inscription",
+      "target_records": [
+        "1897 Belfast Court of Appeal right-of-way judgments (Giant's Causeway Co. enclosure dispute)",
+        "Antrim manorial estate inclosure registries",
+        "Historic Environment Division NI listing"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "40,000-column hexagonal hydro-acoustic transducer bridging Antrim to Fingal's Cave (Staffa) along the sub-sea basalt continuity",
+      "counter_intelligence_flag": "Fionn / Benandonner giant folklore reads as scrambled memory of a cross-channel basalt circuit"
+    },
+    "system_lock": "Chapter_27_seed"
+  },
+  {
+    "id": "site_newgrange",
+    "tier": "I",
+    "name": "Newgrange (Brú na Bóinne)",
+    "region": "Boyne Valley upland / Meath basin rim",
+    "nearest_place": "Donore / Slane",
+    "county": "Meath",
+    "country": "Republic of Ireland",
+    "period": ["Neolithic", "Early medieval"],
+    "coordinates": {"latitude": 53.6947, "longitude": -6.4756},
+    "themes": ["passage-tomb", "winter-solstice", "quartz-facade"],
+    "layer_0_geology": {
+      "mineral_strata": "Carboniferous limestone / shale basement; Wicklow white quartz facing; Mourne granitic structural boulders",
+      "fault_lines": "Boyne Valley lineaments / Slane fault fracture zones",
+      "hydrology": "River Boyne alluvial aquifer loop; deep karst water tables"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "UNESCO World Heritage inscription (Brú na Bóinne); OPW lottery-gated solstice access; restricted bus corridor",
+      "target_records": [
+        "OPW archaeological excavation journals",
+        "Meath manorial boundary records",
+        "National Monuments Service Ireland List Entry for Brú na Bóinne complex"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "19 m corbelled passage tuned as a Helmholtz cavity resonator (~110-121 Hz brainwave modulation)",
+      "counter_intelligence_flag": "Agrarian sun-worship framing reads as cover for hydro-acoustic technology"
+    },
+    "system_lock": "Chapter_29_seed"
+  },
+  {
+    "id": "site_london_basin",
+    "tier": "I",
+    "name": "London Basin and the Lost Rivers Siphon Grid",
+    "region": "Thames syncline trough / Greater London core",
+    "nearest_place": "Fleet Street / City of London",
+    "county": "Greater London",
+    "country": "England",
+    "period": ["Roman", "Victorian", "Modern"],
+    "coordinates": {"latitude": 51.5142, "longitude": -0.1062},
+    "themes": ["lost-rivers", "victorian-sewers", "city-of-london"],
+    "layer_0_geology": {
+      "mineral_strata": "~150 m impermeable Eocene London Clay cap over Cretaceous White Chalk principal aquifer; Lambeth Group sands as basal conduit",
+      "fault_lines": "Thames Valley synclinal axis / Greenwich fault splits",
+      "hydrology": "Subterranean 'lost rivers' (Fleet, Tyburn, Walbrook, Effra); GARDIT artesian abstraction loops"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "City of London Corporation; Metropolitan Commission of Sewers / Bazalgette main drainage statutes (1859-1875)",
+      "target_records": [
+        "1858 Metropolitan Main Drainage Act engineering manifests",
+        "Environment Agency GARDIT groundwater monitoring reviews",
+        "Thames Tideway Tunnel construction record"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "318-million-brick Victorian sewer enclosure reframed as a frequency containment script over a Cretaceous chalk aquifer",
+      "counter_intelligence_flag": "Imperial-progress / public-sanitation narratives mask hydro-resonant imprisonment"
+    },
+    "system_lock": "Chapter_15_seed"
+  },
+  {
+    "id": "site_malvern_hills",
+    "tier": "I",
+    "name": "Malvern Hills Precambrian Spine",
+    "region": "Worcestershire / Herefordshire frontier",
+    "nearest_place": "Great Malvern",
+    "county": "Worcestershire",
+    "country": "England",
+    "period": ["Precambrian", "Medieval Royal Chase", "19th-century water cure"],
+    "coordinates": {"latitude": 52.1128, "longitude": -2.3478},
+    "themes": ["precambrian", "diorite", "holy-wells", "shire-ditch"],
+    "layer_0_geology": {
+      "mineral_strata": "~680 Mya plutonic diorite and hornblende granite; flanking Triassic red mudstones in the Severn Vale",
+      "fault_lines": "East Malvern lithospheric fault line / Severn Vale rift trough",
+      "hydrology": "Pressurised crystalline fissure aquifers; ultra-pure mineral-deficient springs (Holy Well, St Ann's Well)"
+    },
+    "tier_i_enclosure_evidence": {
+      "administrative_fencing": "Malvern Hills Conservators (statutory body, est. 1884); commercial water bottling leases",
+      "target_records": [
+        "1287 Shire Ditch / Red Earl's Dyke linear partitioning records",
+        "Hereford episcopal boundary registries",
+        "Worcestershire manorial forest charters",
+        "NHLE listing for British Camp Iron Age earthworks"
+      ]
+    },
+    "tier_iii_speculative": {
+      "tier": "III",
+      "lens": "~680 Mya plutonic crystalline battery anchoring the western wall of the Severn Vale capacitor",
+      "counter_intelligence_flag": "Aristocratic 'Water Cure' spa script masks the role of the springs as a de-calcification elixir"
+    },
+    "system_lock": "Chapter_13_seed"
+  }
+]

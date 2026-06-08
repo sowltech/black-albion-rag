@@ -1,0 +1,82 @@
+[
+  {
+    "id": "tl_1086_domesday",
+    "tier": "I",
+    "year": 1086,
+    "title": "Domesday Book completed",
+    "summary": "William I's commissioners record taxable manorial assets across most of England, organised by tenant-in-chief. Held at The National Archives, Kew.",
+    "source": "https://www.nationalarchives.gov.uk/domesday/"
+  },
+  {
+    "id": "tl_1240_frome_diversion",
+    "tier": "I",
+    "year": 1240,
+    "title": "Frome Channel diversion at St Augustine's Back, Bristol",
+    "summary": "Bristol town authorities mobilise local labour to dig a trench diverting the River Frome through the marshlands of St Augustine's Back, creating a deep-water harbour and shifting Bristol's port capacity.",
+    "source": "William of Worcester (1480) topographical survey"
+  },
+  {
+    "id": "tl_1287_shire_ditch",
+    "tier": "I",
+    "year": 1287,
+    "title": "Shire Ditch (Red Earl's Dyke) cut along the Malvern ridge",
+    "summary": "Linear ditch dug along the spine of the Malvern Hills following a boundary dispute over hunting rights between Gilbert de Clare (Earl of Gloucester) and Thomas de Cantilupe (Bishop of Hereford).",
+    "source": "Hereford episcopal boundary registries"
+  },
+  {
+    "id": "tl_1480_worcester_survey",
+    "tier": "I",
+    "year": 1480,
+    "title": "William of Worcester paced topographical survey of Bristol",
+    "summary": "Worcester records street, church, wall and wharf dimensions of medieval Bristol by counting his own paces — one of the earliest detailed urban topographies in England.",
+    "source": "MS Corpus Christi College Cambridge 210; printed editions e.g. James Dallaway (1834)"
+  },
+  {
+    "id": "tl_1549_kett_rebellion",
+    "tier": "I",
+    "year": 1549,
+    "title": "Kett's Rebellion / Mousehold Heath rising",
+    "summary": "Robert Kett leads ~16,000 commoners onto Mousehold Heath outside Norwich, protesting enclosure of common lands. Suppressed by mercenary forces at the Battle of Dussindale; thousands killed.",
+    "source": "Anthony Fletcher and Diarmaid MacCulloch, Tudor Rebellions"
+  },
+  {
+    "id": "tl_1650s_cromwellian_clearances",
+    "tier": "I",
+    "year": 1652,
+    "title": "Cromwellian Act for the Settlement of Ireland",
+    "summary": "Forced transplantation of indigenous Irish landholders westward across the Shannon — the policy paraphrased as 'To Hell or to Connacht' — clearing the eastern provinces for English / Scottish settlers.",
+    "source": "Act for the Settlement of Ireland 1652; Down Survey records"
+  },
+  {
+    "id": "tl_1858_metropolitan_drainage",
+    "tier": "I",
+    "year": 1858,
+    "title": "Metropolitan Main Drainage Act / start of Bazalgette sewer network",
+    "summary": "Following the 'Great Stink', Parliament authorises Joseph Bazalgette's interceptor sewer system. Construction runs 1859-1875 using ~318 million bricks; encloses the Fleet, Tyburn, Walbrook and Effra into underground conduits.",
+    "source": "Stephen Halliday, The Great Stink of London"
+  },
+  {
+    "id": "tl_1897_causeway_access",
+    "tier": "I",
+    "year": 1897,
+    "title": "Giant's Causeway right-of-way ruling",
+    "summary": "Belfast Court of Appeal hears the Antrim Coast Road Trustees / Causeway Co. dispute over public access; gates erected by the private syndicate are removed.",
+    "source": "Belfast Court of Appeal judgments, 1897"
+  },
+  {
+    "id": "tl_1900_penrhyn_strike",
+    "tier": "I",
+    "year": 1900,
+    "title": "Great Penrhyn Quarry Strike begins",
+    "summary": "Slate quarrymen at Penrhyn Quarry, Bethesda, begin a three-year strike against Lord Penrhyn — the longest industrial dispute in British history (1900-1903).",
+    "source": "R. Merfyn Jones, The North Wales Quarrymen 1874-1922"
+  },
+  {
+    "id": "tl_1984_dinorwig",
+    "tier": "I",
+    "year": 1984,
+    "title": "Dinorwig pumped-storage power station commissioned",
+    "summary": "1,728 MW pumped-storage hydroelectric plant inaugurated within the abandoned Dinorwig slate quarry caverns near Llanberis, Gwynedd. Operated by First Hydro Co.",
+    "source": "National Grid / First Hydro corporate records"
+  }
+]

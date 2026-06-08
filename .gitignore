@@ -1,0 +1,19 @@
+.env
+.env.local
+backend/.env
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+env/
+.DS_Store
+
+# Generated indexes / caches
+data/index/*
+!data/index/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+
+# Legacy embeddings cache locations (kept for safety)
+backend/rag/.embeddings_cache.pkl
+backend/app/.embeddings_cache.pkl

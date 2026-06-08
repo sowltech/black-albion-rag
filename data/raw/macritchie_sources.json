@@ -1,0 +1,46 @@
+[
+  {
+    "id": "macritchie_ancient_and_modern_britons_v1",
+    "tier": "I",
+    "author": "David MacRitchie",
+    "title": "Ancient and Modern Britons: A Retrospect (Volume I)",
+    "year": 1884,
+    "endpoint": "https://archive.org/download/ancientandmodernbritons/Ancient_and_Modern_Britons.pdf",
+    "host": "Internet Archive",
+    "license": "public-domain",
+    "summary": "MacRitchie's central work assembling heraldic, surname and municipal evidence for dark-complexioned populations in early Britain."
+  },
+  {
+    "id": "macritchie_testimony_of_tradition",
+    "tier": "I",
+    "author": "David MacRitchie",
+    "title": "The Testimony of Tradition",
+    "year": 1890,
+    "endpoint": "https://archive.org/download/testimonyoftradi00macruoft/testimonyoftradi00macruoft.pdf",
+    "host": "Internet Archive",
+    "license": "public-domain",
+    "summary": "Euhemeristic reading of 'fairy hill' folklore as displaced memory of physical subterranean stone earth-houses."
+  },
+  {
+    "id": "macritchie_gypsies_of_india",
+    "tier": "I",
+    "author": "David MacRitchie",
+    "title": "Accounts of the Gypsies of India",
+    "year": 1886,
+    "endpoint": "https://upload.wikimedia.org/wikipedia/commons/c/c9/Accounts_of_the_Gypsies_of_India_%28IA_cu31924023897634%29.pdf",
+    "host": "Wikimedia Commons",
+    "license": "public-domain",
+    "summary": "Comparative ethnographic mapping of nomadic lineages between India and the British Isles."
+  },
+  {
+    "id": "macritchie_fians_fairies_and_picts",
+    "tier": "I",
+    "author": "David MacRitchie",
+    "title": "Fians, Fairies and Picts",
+    "year": 1893,
+    "endpoint": "https://archive.org/details/fiansfairiesandp17926gut",
+    "host": "Internet Archive (HTML + JPEG; convert locally for PDF)",
+    "license": "public-domain",
+    "summary": "Archaeological review of underground earth-houses, drystone corbelled huts and the technology attributed to the historical Picts."
+  }
+]

@@ -1,0 +1,56 @@
+# Black Albion source-tier classification rules
+#
+# Every record in data/raw/*.json carries a `tier` field. Tier semantics are
+# load-bearing for the API: Tier III content must never be surfaced as
+# established historical fact.
+
+version: 1
+authoritative_source: docs/doctrine.md
+
+tiers:
+  I:
+    label: Archival evidence
+    description: |
+      Primary archival records, archaeological surveys, statutes, court
+      judgments, government inventories, and well-documented geological /
+      topographic baselines. Treat as load-bearing fact and cite the
+      record id whenever it is invoked.
+    examples:
+      - "1086 Domesday Book entries"
+      - "NHLE List Entry numbers"
+      - "Belfast Court of Appeal 1897 judgment"
+      - "British Geological Survey memoirs"
+    promotion_signals:
+      - source_in: ["nationalarchives.gov.uk", "historicengland.org.uk", "cadw.gov.wales", "archaeology.ie", "bgs.ac.uk"]
+      - evidence_type_in: ["primary_archival_record", "archaeological_record", "geographical_baseline"]
+  II:
+    label: Scholarly interpretation
+    description: |
+      Peer-reviewed or otherwise attributable scholarly readings of the
+      Tier I record. Always attribute the scholar / school and frame as
+      interpretation, not fact.
+    examples:
+      - "MacRitchie's 1890 euhemeristic reading of fairy folklore"
+      - "Enclosure historiography (e.g. E. P. Thompson, J. M. Neeson)"
+    promotion_signals:
+      - evidence_type_in: ["scholarly_interpretation"]
+      - confidence_in: ["medium", "attributed"]
+  III:
+    label: Speculative / mythic lens
+    description: |
+      Geomythological, esoteric, alchemical or operator-authored interpretive
+      lenses (e.g. the Bobby Hemmit framework). Surface only with an
+      explicit speculative caveat. Never assert as historical fact and never
+      blend with Tier I claims in the same sentence.
+    examples:
+      - "Pineal-as-bright-fort metaphor"
+      - "Lia Fail as piezo-crystalline transducer"
+    promotion_signals:
+      - evidence_type_in: ["speculative_lens"]
+      - confidence_in: ["speculative", "interpretive"]
+
+answer_guardrails:
+  - "If a query mixes Tier I and Tier III content, the answer must visually separate the two sections."
+  - "Every Tier III sentence in an answer must begin with a caveat such as 'Speculatively,' or 'In the Bobby Hemmit framework,'."
+  - "Never invent geographic coordinates, dates, NHLE numbers or archival record ids that are not present in the ledgers."
+  - "If no Tier I evidence is retrieved, the answer should say so plainly before showing any Tier II or Tier III material."

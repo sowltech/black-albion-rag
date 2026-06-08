@@ -1,0 +1,65 @@
+[
+  {
+    "id": "claim_domesday_audit_mechanics",
+    "tier": "I",
+    "title": "The 1086 Domesday survey records taxable manorial assets across three temporal horizons (TRE, grant, 'now')",
+    "summary": "Commissioners questioned local juries to record taxable hides, plough teams, slaves and mill structures TRE (in the time of Edward the Confessor), at the moment of Norman grant, and at the 1086 survey date. The result was preserved in Great Domesday and Little Domesday, originally known as 'Liber de Wintonia'.",
+    "evidence_type": "primary_archival_record",
+    "confidence": "high",
+    "source_url": "https://www.nationalarchives.gov.uk/domesday/"
+  },
+  {
+    "id": "claim_glevum_origin_of_gloucester",
+    "tier": "I",
+    "title": "Gloucester's urban core derives from Roman Glevum (Colonia Nervia Glevensium, c. 48 CE)",
+    "summary": "Gloucester originates as a fortified legionary fortress on the River Severn established c. 48 CE. The name passes through Brythonic Caerloyw and Old English Gleawanceaster ('bright fort') before becoming medieval Gleucestre.",
+    "evidence_type": "archaeological_record",
+    "confidence": "high",
+    "source_url": "https://historicengland.org.uk/listing/the-list/"
+  },
+  {
+    "id": "claim_avon_tidal_range",
+    "tier": "I",
+    "title": "The Severn Estuary / River Avon has one of the highest tidal ranges on Earth (~15 m)",
+    "summary": "Historical Bristol shipping required vessels to 'take the ground' — settle in the riverbed mud at low water — until dock engineering (notably the Frome Channel diversion, 1240, and the Floating Harbour, 1809) maintained constant water levels.",
+    "evidence_type": "geographical_baseline",
+    "confidence": "high",
+    "source_url": "https://www.bristolport.co.uk/"
+  },
+  {
+    "id": "claim_domesday_enclosure_reading",
+    "tier": "II",
+    "title": "Scholars argue the Domesday Book functions as an early framework of centralised state asset enclosure",
+    "summary": "A defensible scholarly reading frames the 1086 survey as an aggressive fiscal dragnet that legally fixed land tenure to Norman tenants-in-chief and overrode oral / community memory of pre-Conquest landholding. This is interpretation, not a primary claim.",
+    "evidence_type": "scholarly_interpretation",
+    "confidence": "medium",
+    "source_url": "https://www.cambridge.org/core/journals/historical-research"
+  },
+  {
+    "id": "claim_macritchie_euhemerism",
+    "tier": "II",
+    "title": "MacRitchie (1890, 1893) argues British 'fairy' folklore historicises a real subterranean indigenous population",
+    "summary": "David MacRitchie systematically reads sídhe / fairy / mound-dweller folklore as displaced memory of real, flesh-and-blood, dark-complexioned mound-dwelling populations who built corbelled earth-houses. This is an attributed 19th-century scholarly position, not a contemporary archaeological consensus.",
+    "evidence_type": "scholarly_interpretation",
+    "confidence": "attributed",
+    "source_url": "https://archive.org/details/testimonyoftradi00macruoft"
+  },
+  {
+    "id": "claim_bright_fort_pineal",
+    "tier": "III",
+    "title": "Speculative: 'Bright Fort' (Caerloyw / Gleawanceaster) read as a metaphor for the pineal gland",
+    "summary": "Within the Bobby Hemmit interpretive lens, the Brythonic 'Bright Fort' is read symbolically as a pineal-gland metaphor, with the Domesday Book read as a 'systemic spell of inversion' freezing the spirit of the land. This is explicitly speculative and must not be presented as historical or scientific fact.",
+    "evidence_type": "speculative_lens",
+    "confidence": "speculative",
+    "source_url": "research/2026-06-07_gemini_screwworms_to_albion_engine.md"
+  },
+  {
+    "id": "claim_lia_fail_piezo",
+    "tier": "III",
+    "title": "Speculative: the Lia Fáil 'shrieks' under a true king as a piezo-electric resonance event",
+    "summary": "Within the Bobby Hemmit framework, the Lia Fáil ('Stone of Destiny') legend is reinterpreted as a piezo-crystalline coupling between a high-conductivity human body and the Carboniferous mudstone-quartz monolith at Tara. This is interpretive geomythology, not archaeology.",
+    "evidence_type": "speculative_lens",
+    "confidence": "speculative",
+    "source_url": "research/2026-06-07_gemini_screwworms_to_albion_engine.md"
+  }
+]
