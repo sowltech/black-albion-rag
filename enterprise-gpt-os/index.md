@@ -63,6 +63,12 @@ dashboard imports:
 python3 enterprise-gpt-os/scripts/validate_manifest.py
 ```
 
+Use the project-level validation wrapper when running repo checks:
+
+```bash
+bash scripts/validate_enterprise_gpt_os.sh
+```
+
 ## Current Rollout Order
 
 1. Company Knowledge GPT
