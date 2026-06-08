@@ -47,6 +47,14 @@ class HealthTests(unittest.TestCase):
                 self.assertEqual("ok", body["status"])
                 self.assertEqual(1, body["documents"])
                 self.assertIn("raw", body["data_dir"])
+
+                modules_resp = client.get("/modules")
+                self.assertEqual(200, modules_resp.status_code)
+                self.assertEqual([], modules_resp.json())
+
+                sites_resp = client.get("/sites")
+                self.assertEqual(200, sites_resp.status_code)
+                self.assertEqual(1, len(sites_resp.json()))
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
 

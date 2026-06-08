@@ -1,0 +1,1601 @@
+[
+  {
+    "module_id": "UK-RAG-MOD-043",
+    "site_id": "site_southwestern_mercian_border_matrix",
+    "name": "Southwestern Mercian Border Matrix",
+    "chapter": "Expanded Regional Grid",
+    "region": "Severn-Avon-Bath frontier",
+    "nearest_place": "Bristol / Bath",
+    "county": [
+      "Bristol",
+      "Somerset",
+      "Gloucestershire"
+    ],
+    "period": [
+      "Roman",
+      "Early medieval",
+      "Medieval",
+      "Geological"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Carboniferous Limestone around Avon Gorge and Mendip; Bath hydrothermal spring system; geothermal circuit between Mendip and Bath.",
+      "hydrology_metrics": "River Avon, Hotwells, Bath hot springs, tidal and geothermal water systems."
+    },
+    "tier_i_evidence": {
+      "summary": "Avon Gorge, Bristol / Hotwells, Bath hot springs, and the Mendip-to-Bath geothermal circuit are the factual inventory for this module; source records still need item-level verification.",
+      "sites": [
+        "Avon Gorge",
+        "Bristol",
+        "Hotwells",
+        "Bath hydrothermal system",
+        "Mendip-to-Bath geothermal circuit"
+      ],
+      "archaeology": [
+        "Roman and post-Roman Bath material requires source-backed expansion."
+      ],
+      "geology": [
+        "Carboniferous Limestone around Avon Gorge and Mendip; Bath hydrothermal spring system; geothermal circuit between Mendip and Bath."
+      ],
+      "documents": [
+        "Source bibliography needed for Hwicce frontier framing and hydrothermal system detail."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames the Severn-Avon-Bath edge as a southwestern Mercian/Hwicce frontier where limestone, hot springs, river movement, and border politics overlap.",
+      "themes": [
+        "frontier",
+        "hydrothermal",
+        "geothermal",
+        "river-corridor",
+        "Hwicce"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic reading may treat the Avon-Bath-Mendip system as a threshold or thermal gate in the creative landscape grid.",
+      "retrieval_mode": "frontier_hydrology_geothermal",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Keep thermal/symbolic readings separate from Roman, geological, and frontier evidence.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Avon Gorge",
+        "Bristol",
+        "Hotwells",
+        "Bath",
+        "Mendip",
+        "geothermal",
+        "hydrothermal",
+        "Hwicce frontier"
+      ],
+      "places": [
+        "Avon Gorge",
+        "Bristol",
+        "Hotwells",
+        "Bath hydrothermal system",
+        "Mendip-to-Bath geothermal circuit",
+        "Bristol / Bath",
+        "Severn-Avon-Bath frontier"
+      ],
+      "periods": [
+        "Roman",
+        "Early medieval",
+        "Medieval",
+        "Geological"
+      ],
+      "themes": [
+        "frontier",
+        "hydrothermal",
+        "geothermal",
+        "river-corridor",
+        "Hwicce"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-044",
+        "UK-RAG-MOD-045",
+        "UK-RAG-MOD-052"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-044",
+    "site_id": "site_cotswold_way_jurassic_escarpment_ridge_line",
+    "name": "Cotswold Way Jurassic Escarpment Ridge Line",
+    "chapter": "Expanded Regional Grid",
+    "region": "Cotswold escarpment spine",
+    "nearest_place": "Chipping Campden to Bath",
+    "county": [
+      "Gloucestershire",
+      "Somerset",
+      "Worcestershire"
+    ],
+    "period": [
+      "Neolithic",
+      "Roman",
+      "Medieval",
+      "Modern route"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Jurassic oolitic limestone escarpment and ridge-line route system.",
+      "hydrology_metrics": "Escarpment springs and west-facing drainage toward Severn/Avon systems require source-backed detail."
+    },
+    "tier_i_evidence": {
+      "summary": "Cotswold Way, Chipping Campden, Bath terminal, oolitic limestone escarpment, and Belas Knap are the module inventory; item-level source verification remains required.",
+      "sites": [
+        "Chipping Campden",
+        "Cotswold Way",
+        "Oolitic limestone escarpment",
+        "Belas Knap",
+        "Bath terminal"
+      ],
+      "archaeology": [
+        "Belas Knap long barrow is included as a named monument requiring source-backed detail."
+      ],
+      "geology": [
+        "Jurassic oolitic limestone escarpment and ridge-line route system."
+      ],
+      "documents": [
+        "Route and geology sources needed for precise claims."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Treats the 102-mile Cotswold Way as a long ridge-line connector between prehistoric monuments, Jurassic geology, Severn edges, and Bath.",
+      "themes": [
+        "ridgeway",
+        "route",
+        "oolitic-limestone",
+        "escarpment",
+        "long-barrow"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic reading may map the Cotswold Way as a limestone spine linking Severn and Bath systems.",
+      "retrieval_mode": "ridge_line_route",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Do not present spine symbolism as archaeological fact.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Cotswold Way",
+        "Chipping Campden",
+        "Bath terminal",
+        "Belas Knap",
+        "oolitic limestone",
+        "Jurassic escarpment"
+      ],
+      "places": [
+        "Chipping Campden",
+        "Cotswold Way",
+        "Oolitic limestone escarpment",
+        "Belas Knap",
+        "Bath terminal",
+        "Chipping Campden to Bath",
+        "Cotswold escarpment spine"
+      ],
+      "periods": [
+        "Neolithic",
+        "Roman",
+        "Medieval",
+        "Modern route"
+      ],
+      "themes": [
+        "ridgeway",
+        "route",
+        "oolitic-limestone",
+        "escarpment",
+        "long-barrow"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-043",
+        "UK-RAG-MOD-046",
+        "UK-RAG-MOD-052"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-045",
+    "site_id": "site_severn_ham_alluvial_convergence",
+    "name": "Severn Ham Alluvial Convergence",
+    "chapter": "Expanded Regional Grid",
+    "region": "Tewkesbury river confluence",
+    "nearest_place": "Tewkesbury",
+    "county": [
+      "Gloucestershire"
+    ],
+    "period": [
+      "Medieval",
+      "Modern conservation",
+      "Geological"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Alluvial floodplain at Severn/Avon convergence with common land and SSSI logic.",
+      "hydrology_metrics": "River Severn and River Avon confluence, floodplain storage, mills, and river-gate dynamics."
+    },
+    "tier_i_evidence": {
+      "summary": "Tewkesbury Severn Ham, Avon-Severn confluence, Healings Mill, Abbey Mill, SSSI/common land/floodplain logic are inventoried; source verification is required.",
+      "sites": [
+        "Tewkesbury Severn Ham",
+        "Avon-Severn confluence",
+        "Healings Mill",
+        "Abbey Mill"
+      ],
+      "archaeology": [
+        "Mill and floodplain records require archival verification."
+      ],
+      "geology": [
+        "Alluvial floodplain at Severn/Avon convergence with common land and SSSI logic."
+      ],
+      "documents": [
+        "SSSI/common land records and mill history sources required."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames Severn Ham as a floodplain convergence node where common rights, river movement, mills, and conservation status overlap.",
+      "themes": [
+        "confluence",
+        "floodplain",
+        "common-land",
+        "SSSI",
+        "mill"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic reading may treat the Severn-Avon confluence as a river-gate in the wider landscape grid.",
+      "retrieval_mode": "confluence_floodplain",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Keep river-gate symbolism out of Tier I floodplain claims.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Severn Ham",
+        "Tewkesbury",
+        "Avon-Severn confluence",
+        "Healings Mill",
+        "Abbey Mill",
+        "floodplain",
+        "SSSI"
+      ],
+      "places": [
+        "Tewkesbury Severn Ham",
+        "Avon-Severn confluence",
+        "Healings Mill",
+        "Abbey Mill",
+        "Tewkesbury",
+        "Tewkesbury river confluence"
+      ],
+      "periods": [
+        "Medieval",
+        "Modern conservation",
+        "Geological"
+      ],
+      "themes": [
+        "confluence",
+        "floodplain",
+        "common-land",
+        "SSSI",
+        "mill"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-043",
+        "UK-RAG-MOD-053A",
+        "UK-RAG-MOD-056"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-046",
+    "site_id": "site_stroud_frome_valley_radials",
+    "name": "Stroud Frome Valley Radials",
+    "chapter": "Expanded Regional Grid",
+    "region": "Stroud valleys and Cotswold scarp",
+    "nearest_place": "Stroud",
+    "county": [
+      "Gloucestershire"
+    ],
+    "period": [
+      "Neolithic",
+      "Iron Age",
+      "Roman"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Cotswold limestone scarp and Frome valley radial routes.",
+      "hydrology_metrics": "River Frome valley and tributary routes require source-backed hydrology records."
+    },
+    "tier_i_evidence": {
+      "summary": "Woodchester Roman Villa, Orpheus Mosaic, Uley Bury, West Hill Mercury Temple, Hetty Pegler's Tump, Nympsfield Long Barrow, and Painswick Beacon/Kimsbury Camp are inventoried; verification remains required.",
+      "sites": [
+        "Woodchester Roman Villa",
+        "Orpheus Mosaic",
+        "Uley Bury",
+        "West Hill Mercury Temple",
+        "Hetty Pegler's Tump",
+        "Nympsfield Long Barrow",
+        "Painswick Beacon / Kimsbury Camp"
+      ],
+      "archaeology": [
+        "Roman villa, temple, hillfort, and long barrow records require item-level source references."
+      ],
+      "geology": [
+        "Cotswold limestone scarp and Frome valley radial routes."
+      ],
+      "documents": [
+        "Historic England and local archaeological sources required."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Interprets the Stroud/Frome area as a radial node linking Roman villa culture, upland ritual sites, long barrows, and scarp movement corridors.",
+      "themes": [
+        "Roman villa",
+        "temple",
+        "long-barrow",
+        "hillfort",
+        "radial-valley"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic reading may treat the Frome valley radials as linked ritual/route spokes in the creative map.",
+      "retrieval_mode": "villa_temple_valley_radials",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Do not infer ritual continuity without source-backed evidence.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Stroud",
+        "Woodchester Roman Villa",
+        "Orpheus Mosaic",
+        "Uley Bury",
+        "West Hill Mercury Temple",
+        "Hetty Pegler's Tump",
+        "Nympsfield Long Barrow",
+        "Painswick Beacon",
+        "Kimsbury Camp",
+        "Roman villas"
+      ],
+      "places": [
+        "Woodchester Roman Villa",
+        "Orpheus Mosaic",
+        "Uley Bury",
+        "West Hill Mercury Temple",
+        "Hetty Pegler's Tump",
+        "Nympsfield Long Barrow",
+        "Painswick Beacon / Kimsbury Camp",
+        "Stroud",
+        "Stroud valleys and Cotswold scarp"
+      ],
+      "periods": [
+        "Neolithic",
+        "Iron Age",
+        "Roman"
+      ],
+      "themes": [
+        "Roman villa",
+        "temple",
+        "long-barrow",
+        "hillfort",
+        "radial-valley"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-044",
+        "UK-RAG-MOD-052",
+        "UK-RAG-MOD-055"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-047",
+    "site_id": "site_trans_severn_frontier_forest_of_dean_karst_scowles",
+    "name": "Trans-Severn Frontier and Forest of Dean Karst Scowles",
+    "chapter": "Expanded Regional Grid",
+    "region": "Forest of Dean and lower Wye/Severn edge",
+    "nearest_place": "Forest of Dean",
+    "county": [
+      "Gloucestershire",
+      "Herefordshire"
+    ],
+    "period": [
+      "Roman",
+      "Medieval",
+      "Industrial",
+      "Geological"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Karst scowles, limestone caves, ochre, and iron-bearing Forest of Dean geology.",
+      "hydrology_metrics": "Trans-Severn and Wye-edge drainage, cave water movement, and spring sites require verification."
+    },
+    "tier_i_evidence": {
+      "summary": "Lydney Park/Nodens Temple, Clearwell Caves, Puzzlewood Roman coin hoard, Forest of Dean ochre/iron mining, Highnam, Ross-on-Wye, and Hempsted/Lady's Well are inventoried; sources required.",
+      "sites": [
+        "Lydney Park / Nodens Temple",
+        "Clearwell Caves",
+        "Puzzlewood Roman coin hoard",
+        "Forest of Dean ochre / iron mining",
+        "Highnam",
+        "Ross-on-Wye",
+        "Hempsted / Lady's Well"
+      ],
+      "archaeology": [
+        "Temple, coin hoard, mining, and cave records require source-backed entries."
+      ],
+      "geology": [
+        "Karst scowles, limestone caves, ochre, and iron-bearing Forest of Dean geology."
+      ],
+      "documents": [
+        "Mining history, archaeological, and heritage records needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames the Forest of Dean as a trans-Severn frontier where karst cavities, iron/ochre extraction, Roman cult sites, and Wye crossings interact.",
+      "themes": [
+        "karst",
+        "scowles",
+        "iron-mining",
+        "Roman temple",
+        "frontier",
+        "Wye corridor"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Speculative layer may read caves/scowles as underworld or threshold architecture in the symbolic grid.",
+      "retrieval_mode": "karst_frontier_mining",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Do not turn cave symbolism into evidence of ancient intent.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Forest of Dean",
+        "Lydney Park",
+        "Nodens Temple",
+        "Clearwell Caves",
+        "Puzzlewood",
+        "Roman coin hoard",
+        "ochre",
+        "iron mining",
+        "Highnam",
+        "Ross-on-Wye",
+        "Lady's Well",
+        "scowles"
+      ],
+      "places": [
+        "Lydney Park / Nodens Temple",
+        "Clearwell Caves",
+        "Puzzlewood Roman coin hoard",
+        "Forest of Dean ochre / iron mining",
+        "Highnam",
+        "Ross-on-Wye",
+        "Hempsted / Lady's Well",
+        "Forest of Dean",
+        "Forest of Dean and lower Wye/Severn edge"
+      ],
+      "periods": [
+        "Roman",
+        "Medieval",
+        "Industrial",
+        "Geological"
+      ],
+      "themes": [
+        "karst",
+        "scowles",
+        "iron-mining",
+        "Roman temple",
+        "frontier",
+        "Wye corridor"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-045",
+        "UK-RAG-MOD-053B",
+        "UK-RAG-MOD-055"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-048",
+    "site_id": "site_mercian_lattice_central_sandstone_cavity_complex",
+    "name": "Mercian Lattice and Central Sandstone Cavity Complex",
+    "chapter": "Expanded Regional Grid",
+    "region": "West Midlands to central sandstone/cave corridor",
+    "nearest_place": "Birmingham / Wroxeter / Nottingham",
+    "county": [
+      "West Midlands",
+      "Staffordshire",
+      "Shropshire",
+      "Derbyshire",
+      "Nottinghamshire",
+      "Northamptonshire"
+    ],
+    "period": [
+      "Palaeolithic",
+      "Iron Age",
+      "Roman",
+      "Anglo-Saxon",
+      "Medieval"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Sandstone cavities, limestone caves, and central Mercian upland/urban geology.",
+      "hydrology_metrics": "Regional river and spring contexts require source-backed mapping."
+    },
+    "tier_i_evidence": {
+      "summary": "Birmingham/Metchley Roman Fort, Staffordshire Hoard, Wren's Nest, Wolverhampton Cross, Kinver Rock Houses, Lunt Roman Fort, Wroxeter/Viroconium, Old Oswestry, Creswell Crags, Nottingham City of Caves, and Borough Hill are inventoried; verification required.",
+      "sites": [
+        "Birmingham / Metchley Roman Fort",
+        "Staffordshire Hoard",
+        "Wren's Nest",
+        "Wolverhampton Cross",
+        "Kinver Rock Houses",
+        "Lunt Roman Fort",
+        "Wroxeter / Viroconium",
+        "Old Oswestry",
+        "Creswell Crags",
+        "Nottingham City of Caves",
+        "Borough Hill"
+      ],
+      "archaeology": [
+        "Roman forts/cities, hoard, caves, hillforts, and rock houses require source-backed details."
+      ],
+      "geology": [
+        "Sandstone cavities, limestone caves, and central Mercian upland/urban geology."
+      ],
+      "documents": [
+        "Archaeological and geological records needed for each subsite."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Interprets central Mercia as a lattice of Roman forts, Anglo-Saxon material culture, hillforts, sandstone dwellings, and cave/cavity systems.",
+      "themes": [
+        "Mercian",
+        "sandstone",
+        "caves",
+        "Roman fort",
+        "hoard",
+        "hillfort"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Speculative layer may frame the lattice as a central cavity/crossroads network in creative mapping.",
+      "retrieval_mode": "mercian_lattice_cavity",
+      "mapping_priority": "medium",
+      "counter_intelligence_flag": "Avoid collapsing distant sites into one factual system without evidence.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Metchley Roman Fort",
+        "Staffordshire Hoard",
+        "Wren's Nest",
+        "Wolverhampton Cross",
+        "Kinver Rock Houses",
+        "Lunt Roman Fort",
+        "Wroxeter",
+        "Viroconium",
+        "Old Oswestry",
+        "Creswell Crags",
+        "Nottingham City of Caves",
+        "Borough Hill",
+        "sandstone"
+      ],
+      "places": [
+        "Birmingham / Metchley Roman Fort",
+        "Staffordshire Hoard",
+        "Wren's Nest",
+        "Wolverhampton Cross",
+        "Kinver Rock Houses",
+        "Lunt Roman Fort",
+        "Wroxeter / Viroconium",
+        "Old Oswestry",
+        "Creswell Crags",
+        "Nottingham City of Caves",
+        "Borough Hill",
+        "Birmingham / Wroxeter / Nottingham",
+        "West Midlands to central sandstone/cave corridor"
+      ],
+      "periods": [
+        "Palaeolithic",
+        "Iron Age",
+        "Roman",
+        "Anglo-Saxon",
+        "Medieval"
+      ],
+      "themes": [
+        "Mercian",
+        "sandstone",
+        "caves",
+        "Roman fort",
+        "hoard",
+        "hillfort"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-053B",
+        "UK-RAG-MOD-050"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-049",
+    "site_id": "site_tamensis_basin_upper_cretaceous_chalk_corridors",
+    "name": "Tamensis Basin and Upper Cretaceous Chalk Corridors",
+    "chapter": "Expanded Regional Grid",
+    "region": "Thames basin and chalk route corridors",
+    "nearest_place": "London / Oxford",
+    "county": [
+      "Greater London",
+      "Oxfordshire",
+      "Berkshire",
+      "Wiltshire"
+    ],
+    "period": [
+      "Neolithic",
+      "Iron Age",
+      "Roman",
+      "Medieval"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Upper Cretaceous chalk corridors, Thames basin geology, and Ridgeway chalk route system.",
+      "hydrology_metrics": "Thames basin, Walbrook, Port Meadow floodplain, and chalk aquifer corridors."
+    },
+    "tier_i_evidence": {
+      "summary": "Londinium, Walbrook, London Mithraeum, Oxford, Dorchester-on-Thames, Port Meadow, Ridgeway, Wayland's Smithy, and Uffington White Horse are inventoried; source verification is required.",
+      "sites": [
+        "Londinium",
+        "Walbrook",
+        "London Mithraeum",
+        "Oxford",
+        "Dorchester-on-Thames",
+        "Port Meadow",
+        "Ridgeway",
+        "Wayland's Smithy",
+        "Uffington White Horse"
+      ],
+      "archaeology": [
+        "Roman London/Oxford corridor, Mithraeum, long barrow, and hill figure records require sources."
+      ],
+      "geology": [
+        "Upper Cretaceous chalk corridors, Thames basin geology, and Ridgeway chalk route system."
+      ],
+      "documents": [
+        "Geology, hydrology, and site records needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames London-Oxford-Ridgeway as a Thames/chalk corridor joining Roman urban sites, flood meadows, and prehistoric route monuments.",
+      "themes": [
+        "Thames",
+        "chalk",
+        "Ridgeway",
+        "Roman",
+        "Mithraeum",
+        "floodplain"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic reading may map the Tamensis basin as a chalk-water corridor between city, meadow, and ridge monuments.",
+      "retrieval_mode": "thames_chalk_corridor",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Keep symbolic corridor readings separate from sourced Roman/chalk evidence.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Londinium",
+        "Walbrook",
+        "London Mithraeum",
+        "Oxford",
+        "Dorchester-on-Thames",
+        "Port Meadow",
+        "Ridgeway",
+        "Wayland's Smithy",
+        "Uffington White Horse",
+        "London Oxford"
+      ],
+      "places": [
+        "Londinium",
+        "Walbrook",
+        "London Mithraeum",
+        "Oxford",
+        "Dorchester-on-Thames",
+        "Port Meadow",
+        "Ridgeway",
+        "Wayland's Smithy",
+        "Uffington White Horse",
+        "London / Oxford",
+        "Thames basin and chalk route corridors"
+      ],
+      "periods": [
+        "Neolithic",
+        "Iron Age",
+        "Roman",
+        "Medieval"
+      ],
+      "themes": [
+        "Thames",
+        "chalk",
+        "Ridgeway",
+        "Roman",
+        "Mithraeum",
+        "floodplain"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-051",
+        "UK-RAG-MOD-050"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-050",
+    "site_id": "site_fenland_basin_east_anglian_chalk_escarpments",
+    "name": "Fenland Basin and East Anglian Chalk Escarpments",
+    "chapter": "Expanded Regional Grid",
+    "region": "Fenland and East Anglian chalk edge",
+    "nearest_place": "Ely / Peterborough / Cambridge",
+    "county": [
+      "Cambridgeshire",
+      "Norfolk",
+      "Suffolk",
+      "Bedfordshire"
+    ],
+    "period": [
+      "Bronze Age",
+      "Roman",
+      "Medieval",
+      "Early modern enclosure"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Fen basin alluvium/peat and East Anglian chalk escarpments.",
+      "hydrology_metrics": "Fen drainage, Car Dyke, waterlogged timber settlement context, Bedford Level drainage."
+    },
+    "tier_i_evidence": {
+      "summary": "Cambridgeshire, Ely, Peterborough, Car Dyke, Fen-edge villas, Bronze Age waterlogged timber settlements, Devil's Dyke/Fleam Dyke, and Bedford Level/Fen drainage enclosure are inventoried; sources required.",
+      "sites": [
+        "Cambridgeshire",
+        "Ely",
+        "Peterborough",
+        "Car Dyke",
+        "Fen-edge villas",
+        "Bronze Age waterlogged timber settlements",
+        "Devil's Dyke / Fleam Dyke",
+        "Bedford Level / Fen drainage enclosure"
+      ],
+      "archaeology": [
+        "Fen-edge villa, dyke, and waterlogged settlement records require source-backed detail."
+      ],
+      "geology": [
+        "Fen basin alluvium/peat and East Anglian chalk escarpments."
+      ],
+      "documents": [
+        "Drainage/enclosure history and archaeological reports needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Interprets Fenland as a water-management and enclosure basin where Roman engineering, prehistoric wetland archaeology, and early modern drainage overlap.",
+      "themes": [
+        "Fenland",
+        "drainage",
+        "waterlogged-timber",
+        "Roman engineering",
+        "chalk-escarpment",
+        "enclosure"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Speculative layer may treat the Fen basin as a drained memory/water archive in creative interpretation.",
+      "retrieval_mode": "fenland_water_management",
+      "mapping_priority": "medium",
+      "counter_intelligence_flag": "Do not convert drainage symbolism into factual motive claims.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Fenland",
+        "Cambridgeshire",
+        "Ely",
+        "Peterborough",
+        "Car Dyke",
+        "Fen-edge villas",
+        "Bronze Age waterlogged timber settlements",
+        "Devil's Dyke",
+        "Fleam Dyke",
+        "Bedford Level",
+        "Fen drainage"
+      ],
+      "places": [
+        "Cambridgeshire",
+        "Ely",
+        "Peterborough",
+        "Car Dyke",
+        "Fen-edge villas",
+        "Bronze Age waterlogged timber settlements",
+        "Devil's Dyke / Fleam Dyke",
+        "Bedford Level / Fen drainage enclosure",
+        "Ely / Peterborough / Cambridge",
+        "Fenland and East Anglian chalk edge"
+      ],
+      "periods": [
+        "Bronze Age",
+        "Roman",
+        "Medieval",
+        "Early modern enclosure"
+      ],
+      "themes": [
+        "Fenland",
+        "drainage",
+        "waterlogged-timber",
+        "Roman engineering",
+        "chalk-escarpment",
+        "enclosure"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-049",
+        "UK-RAG-MOD-048"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-051",
+    "site_id": "site_north_wessex_chalk_gateway_ridgeway_corridor",
+    "name": "North Wessex Chalk Gateway and Ridgeway Corridor",
+    "chapter": "Expanded Regional Grid",
+    "region": "North Wessex Downs and Ridgeway",
+    "nearest_place": "Swindon",
+    "county": [
+      "Wiltshire",
+      "Oxfordshire"
+    ],
+    "period": [
+      "Neolithic",
+      "Bronze Age",
+      "Iron Age",
+      "Roman",
+      "Modern"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "North Wessex chalk, Ridgeway route, Vale of White Horse edge.",
+      "hydrology_metrics": "Chalk aquifer, Coate Water, and downs-edge drainage require verification."
+    },
+    "tier_i_evidence": {
+      "summary": "Swindon, Barbury Castle, Liddington Castle, Wanborough/Durocornovium, Coate Water, Avebury, Silbury Hill, West Kennet Long Barrow, Ridgeway, and Vale of White Horse are inventoried; sources required.",
+      "sites": [
+        "Swindon",
+        "Barbury Castle",
+        "Liddington Castle",
+        "Wanborough / Durocornovium",
+        "Coate Water",
+        "Avebury",
+        "Silbury Hill",
+        "West Kennet Long Barrow",
+        "Ridgeway / Vale of White Horse"
+      ],
+      "archaeology": [
+        "Hillforts, Roman Wanborough, and Neolithic monument records require source-backed detail."
+      ],
+      "geology": [
+        "North Wessex chalk, Ridgeway route, Vale of White Horse edge."
+      ],
+      "documents": [
+        "Heritage and geology sources needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames Swindon/North Wessex as a chalk gateway connecting Avebury/Silbury, Ridgeway movement, hillforts, and Roman roadside settlement.",
+      "themes": [
+        "chalk",
+        "Ridgeway",
+        "hillfort",
+        "Neolithic",
+        "Roman road",
+        "gateway"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic reading may treat the chalk gateway as an interface between Wessex monuments and Thames/Ridgeway corridors.",
+      "retrieval_mode": "chalk_gateway_ridgeway",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Do not infer designed alignment without sourced evidence.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Swindon",
+        "Barbury Castle",
+        "Liddington Castle",
+        "Wanborough",
+        "Durocornovium",
+        "Coate Water",
+        "Avebury",
+        "Silbury Hill",
+        "West Kennet Long Barrow",
+        "Ridgeway",
+        "Vale of White Horse"
+      ],
+      "places": [
+        "Swindon",
+        "Barbury Castle",
+        "Liddington Castle",
+        "Wanborough / Durocornovium",
+        "Coate Water",
+        "Avebury",
+        "Silbury Hill",
+        "West Kennet Long Barrow",
+        "Ridgeway / Vale of White Horse",
+        "Swindon",
+        "North Wessex Downs and Ridgeway"
+      ],
+      "periods": [
+        "Neolithic",
+        "Bronze Age",
+        "Iron Age",
+        "Roman",
+        "Modern"
+      ],
+      "themes": [
+        "chalk",
+        "Ridgeway",
+        "hillfort",
+        "Neolithic",
+        "Roman road",
+        "gateway"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-049",
+        "UK-RAG-MOD-052"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-052",
+    "site_id": "site_corinium_dobunnorum_palimpsest",
+    "name": "Corinium Dobunnorum Palimpsest",
+    "chapter": "Expanded Regional Grid",
+    "region": "Cirencester and upper Thames/Cotswold basin",
+    "nearest_place": "Cirencester",
+    "county": [
+      "Gloucestershire"
+    ],
+    "period": [
+      "Neolithic",
+      "Iron Age",
+      "Roman",
+      "Medieval"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Cotswold limestone and upper Thames/Cotswold basin context.",
+      "hydrology_metrics": "River Churn/upper Thames drainage requires verification."
+    },
+    "tier_i_evidence": {
+      "summary": "Cirencester/Corinium, Bagendon oppidum, Chedworth Roman Villa, Cirencester Amphitheatre, Roman walls, A417 Roman mutatio, Rodmarton/Windmill Tump, Cirencester Abbey, and St John Baptist Church are inventoried; source verification required.",
+      "sites": [
+        "Cirencester / Corinium",
+        "Bagendon oppidum",
+        "Chedworth Roman Villa",
+        "Cirencester Amphitheatre",
+        "Roman walls",
+        "A417 Roman mutatio",
+        "Rodmarton / Windmill Tump",
+        "Cirencester Abbey",
+        "St John Baptist Church"
+      ],
+      "archaeology": [
+        "Roman urban, villa, oppidum, amphitheatre, mutatio, and long barrow records require sources."
+      ],
+      "geology": [
+        "Cotswold limestone and upper Thames/Cotswold basin context."
+      ],
+      "documents": [
+        "Roman and medieval records needed for direct citation."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Interprets Corinium as a palimpsest where Dobunnic, Roman, prehistoric, route, and medieval ecclesiastical layers stack in one Cotswold basin.",
+      "themes": [
+        "Corinium",
+        "Roman villa",
+        "oppidum",
+        "amphitheatre",
+        "Cotswold basin",
+        "palimpsest"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic layer may frame Corinium as a memory-node where Roman civic order overlays older route/monument strata.",
+      "retrieval_mode": "corinium_palimpsest",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Avoid treating palimpsest metaphor as proof of continuity.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Cirencester",
+        "Corinium",
+        "Bagendon",
+        "Chedworth Roman Villa",
+        "Cirencester Amphitheatre",
+        "Roman walls",
+        "A417 Roman mutatio",
+        "Rodmarton",
+        "Windmill Tump",
+        "Cirencester Abbey",
+        "St John Baptist Church",
+        "Roman villas"
+      ],
+      "places": [
+        "Cirencester / Corinium",
+        "Bagendon oppidum",
+        "Chedworth Roman Villa",
+        "Cirencester Amphitheatre",
+        "Roman walls",
+        "A417 Roman mutatio",
+        "Rodmarton / Windmill Tump",
+        "Cirencester Abbey",
+        "St John Baptist Church",
+        "Cirencester",
+        "Cirencester and upper Thames/Cotswold basin"
+      ],
+      "periods": [
+        "Neolithic",
+        "Iron Age",
+        "Roman",
+        "Medieval"
+      ],
+      "themes": [
+        "Corinium",
+        "Roman villa",
+        "oppidum",
+        "amphitheatre",
+        "Cotswold basin",
+        "palimpsest"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-044",
+        "UK-RAG-MOD-046",
+        "UK-RAG-MOD-051",
+        "UK-RAG-MOD-055"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-053A",
+    "site_id": "site_tewkesbury_severn_avon_river_gate",
+    "name": "Tewkesbury Severn-Avon River-Gate",
+    "chapter": "Expanded Regional Grid",
+    "region": "Tewkesbury and lower Avon-Severn crossing",
+    "nearest_place": "Tewkesbury",
+    "county": [
+      "Gloucestershire",
+      "Worcestershire"
+    ],
+    "period": [
+      "Iron Age",
+      "Roman",
+      "Anglo-Saxon",
+      "Medieval",
+      "Late medieval battlefield"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Severn-Avon floodplain, Bredon Hill edge, Carrant Brook valley context.",
+      "hydrology_metrics": "Severn/Avon river gate, Severn Ham floodplain, Carrant Brook, river crossing and meander logic."
+    },
+    "tier_i_evidence": {
+      "summary": "Tewkesbury, Oldbury Roman settlement, Tewkesbury Abbey, Severn Ham, Bloody Meadow, Battle of Tewkesbury 1471, Deerhurst, Odda's Chapel, Bredon Hill/Kemerton Camp, Ashchurch/Walton Cardiff/Carrant Brook are inventoried; sources required.",
+      "sites": [
+        "Tewkesbury",
+        "Oldbury Roman settlement",
+        "Tewkesbury Abbey",
+        "Severn Ham",
+        "Bloody Meadow",
+        "Battle of Tewkesbury 1471",
+        "Deerhurst",
+        "Odda's Chapel",
+        "Bredon Hill / Kemerton Camp",
+        "Ashchurch / Walton Cardiff / Carrant Brook"
+      ],
+      "archaeology": [
+        "Roman settlement, abbey, battlefield, Anglo-Saxon chapel, hillfort, and river records require source-backed detail."
+      ],
+      "geology": [
+        "Severn-Avon floodplain, Bredon Hill edge, Carrant Brook valley context."
+      ],
+      "documents": [
+        "Battlefield, ecclesiastical, settlement, and floodplain sources needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames Tewkesbury as a Severn-Avon river-gate where confluence, monastic architecture, battlefield landscape, and older settlement routes converge.",
+      "themes": [
+        "river-gate",
+        "confluence",
+        "battlefield",
+        "abbey",
+        "Anglo-Saxon",
+        "Roman settlement"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic layer may read Tewkesbury as a threshold-node between river, blood meadow, abbey, and older settlement strata.",
+      "retrieval_mode": "river_gate_battlefield_monastic",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Node 053 collision resolved as 053A; do not merge with Hereford 053B.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Tewkesbury",
+        "Oldbury Roman settlement",
+        "Tewkesbury Abbey",
+        "Severn Ham",
+        "Bloody Meadow",
+        "Battle of Tewkesbury 1471",
+        "Deerhurst",
+        "Odda's Chapel",
+        "Bredon Hill",
+        "Kemerton Camp",
+        "Ashchurch",
+        "Walton Cardiff",
+        "Carrant Brook"
+      ],
+      "places": [
+        "Tewkesbury",
+        "Oldbury Roman settlement",
+        "Tewkesbury Abbey",
+        "Severn Ham",
+        "Bloody Meadow",
+        "Battle of Tewkesbury 1471",
+        "Deerhurst",
+        "Odda's Chapel",
+        "Bredon Hill / Kemerton Camp",
+        "Ashchurch / Walton Cardiff / Carrant Brook",
+        "Tewkesbury",
+        "Tewkesbury and lower Avon-Severn crossing"
+      ],
+      "periods": [
+        "Iron Age",
+        "Roman",
+        "Anglo-Saxon",
+        "Medieval",
+        "Late medieval battlefield"
+      ],
+      "themes": [
+        "river-gate",
+        "confluence",
+        "battlefield",
+        "abbey",
+        "Anglo-Saxon",
+        "Roman settlement"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-045",
+        "UK-RAG-MOD-053B",
+        "UK-RAG-MOD-056"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-053B",
+    "site_id": "site_hereford_western_marches_corridor",
+    "name": "Hereford Western Marches Corridor",
+    "chapter": "Expanded Regional Grid",
+    "region": "Herefordshire and western marches",
+    "nearest_place": "Hereford",
+    "county": [
+      "Herefordshire"
+    ],
+    "period": [
+      "Neolithic",
+      "Iron Age",
+      "Roman",
+      "Anglo-Saxon",
+      "Medieval"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Wye valley, western marches uplands, Golden Valley, and border geology require verification.",
+      "hydrology_metrics": "River Wye crossing, Golden Valley drainage, and western river corridors."
+    },
+    "tier_i_evidence": {
+      "summary": "Hereford Cathedral, Mappa Mundi, Chained Library, Castle Green, River Wye crossing, Rotherwas Ribbon, Dinedor Camp, Sutton Walls, Kenchester/Magnis, Arthur's Stone, Golden Valley, Leominster, Weobley, Goodrich Castle, Wigmore, Ledbury, and Bromyard are inventoried; source verification required.",
+      "sites": [
+        "Hereford Cathedral",
+        "Mappa Mundi",
+        "Chained Library",
+        "Castle Green",
+        "River Wye crossing",
+        "Rotherwas Ribbon",
+        "Dinedor Camp",
+        "Sutton Walls",
+        "Kenchester / Magnis",
+        "Arthur's Stone",
+        "Golden Valley",
+        "Leominster",
+        "Weobley",
+        "Goodrich Castle",
+        "Wigmore",
+        "Ledbury",
+        "Bromyard"
+      ],
+      "archaeology": [
+        "Cathedral/library, Roman town, prehistoric monument, hillforts, castles, and march settlements require source-backed records."
+      ],
+      "geology": [
+        "Wye valley, western marches uplands, Golden Valley, and border geology require verification."
+      ],
+      "documents": [
+        "Heritage, cathedral, Roman, and landscape sources needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames Hereford as a western marches corridor linking Wye crossing, cathedral archive, Roman Magnis, prehistoric monuments, castles, and border market towns.",
+      "themes": [
+        "western-marches",
+        "Wye",
+        "cathedral",
+        "Roman town",
+        "hillfort",
+        "border-corridor"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic layer may read the Mappa Mundi/cathedral/Wye crossing as a memory-map node in the creative grid.",
+      "retrieval_mode": "western_marches_corridor",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Node 053 collision resolved as 053B; do not overwrite Tewkesbury 053A.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Hereford",
+        "Hereford Cathedral",
+        "Mappa Mundi",
+        "Chained Library",
+        "Castle Green",
+        "River Wye crossing",
+        "Rotherwas Ribbon",
+        "Dinedor Camp",
+        "Sutton Walls",
+        "Kenchester",
+        "Magnis",
+        "Arthur's Stone",
+        "Golden Valley",
+        "Leominster",
+        "Weobley",
+        "Goodrich Castle",
+        "Wigmore",
+        "Ledbury",
+        "Bromyard"
+      ],
+      "places": [
+        "Hereford Cathedral",
+        "Mappa Mundi",
+        "Chained Library",
+        "Castle Green",
+        "River Wye crossing",
+        "Rotherwas Ribbon",
+        "Dinedor Camp",
+        "Sutton Walls",
+        "Kenchester / Magnis",
+        "Arthur's Stone",
+        "Golden Valley",
+        "Leominster",
+        "Weobley",
+        "Goodrich Castle",
+        "Wigmore",
+        "Ledbury",
+        "Bromyard",
+        "Hereford",
+        "Herefordshire and western marches"
+      ],
+      "periods": [
+        "Neolithic",
+        "Iron Age",
+        "Roman",
+        "Anglo-Saxon",
+        "Medieval"
+      ],
+      "themes": [
+        "western-marches",
+        "Wye",
+        "cathedral",
+        "Roman town",
+        "hillfort",
+        "border-corridor"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-047",
+        "UK-RAG-MOD-053A",
+        "UK-RAG-MOD-048"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-055",
+    "site_id": "site_gloucester_southern_radials_witcombe_scarp_intercept",
+    "name": "Gloucester Southern Radials and Witcombe Scarp Intercept",
+    "chapter": "Expanded Regional Grid",
+    "region": "Gloucester southern vale and Cotswold scarp",
+    "nearest_place": "Gloucester / Witcombe",
+    "county": [
+      "Gloucestershire"
+    ],
+    "period": [
+      "Roman",
+      "Medieval",
+      "Modern military",
+      "Geological"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "Severn vale, Cotswold scarp intercept, reservoirs, brook corridors, and limestone edge context.",
+      "hydrology_metrics": "River Frome mouth, Framilode, Horsbere Brook, Witcombe reservoirs, and vale/scarp water routes."
+    },
+    "tier_i_evidence": {
+      "summary": "Hardwicke, Framilode/Frome mouth, Hawkesbury, Brockworth, Cooper's Hill, Witcombe, Great Witcombe Roman Villa, Innsworth, Gloucester southern/scarp-vale arc, Horsbere Brook, Witcombe reservoirs, and NATO/military overlays where relevant are inventoried; sources required.",
+      "sites": [
+        "Hardwicke",
+        "Framilode / Frome mouth",
+        "Hawkesbury",
+        "Brockworth",
+        "Cooper's Hill",
+        "Witcombe",
+        "Great Witcombe Roman Villa",
+        "Innsworth",
+        "Gloucester southern / scarp-vale arc",
+        "Horsbere Brook",
+        "Witcombe reservoirs",
+        "NATO / military overlays"
+      ],
+      "archaeology": [
+        "Roman villa, scarp/vale settlement, hydrology, and military overlay records require source-backed detail."
+      ],
+      "geology": [
+        "Severn vale, Cotswold scarp intercept, reservoirs, brook corridors, and limestone edge context."
+      ],
+      "documents": [
+        "Local archaeology, hydrology, and military/public records needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames Gloucester southern radials as an arc where the Severn vale, Frome mouth, Cotswold scarp, Roman villa landscape, reservoirs, and military overlays intersect.",
+      "themes": [
+        "Gloucester radials",
+        "Roman villa",
+        "scarp-vale",
+        "reservoir",
+        "military-overlay",
+        "hydrology"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Speculative layer may map Witcombe/scarp intercept as a controlled radial gate in the creative landscape model.",
+      "retrieval_mode": "gloucester_radials_scarp",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Treat NATO/military overlays cautiously and only where source-backed.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Gloucester radials",
+        "Hardwicke",
+        "Framilode",
+        "Frome mouth",
+        "Hawkesbury",
+        "Brockworth",
+        "Cooper's Hill",
+        "Witcombe",
+        "Great Witcombe Roman Villa",
+        "Innsworth",
+        "Horsbere Brook",
+        "Witcombe reservoirs",
+        "NATO",
+        "military overlays"
+      ],
+      "places": [
+        "Hardwicke",
+        "Framilode / Frome mouth",
+        "Hawkesbury",
+        "Brockworth",
+        "Cooper's Hill",
+        "Witcombe",
+        "Great Witcombe Roman Villa",
+        "Innsworth",
+        "Gloucester southern / scarp-vale arc",
+        "Horsbere Brook",
+        "Witcombe reservoirs",
+        "NATO / military overlays",
+        "Gloucester / Witcombe",
+        "Gloucester southern vale and Cotswold scarp"
+      ],
+      "periods": [
+        "Roman",
+        "Medieval",
+        "Modern military",
+        "Geological"
+      ],
+      "themes": [
+        "Gloucester radials",
+        "Roman villa",
+        "scarp-vale",
+        "reservoir",
+        "military-overlay",
+        "hydrology"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-046",
+        "UK-RAG-MOD-047",
+        "UK-RAG-MOD-052",
+        "UK-RAG-MOD-056"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  },
+  {
+    "module_id": "UK-RAG-MOD-056",
+    "site_id": "site_deerhurst_apperley_monastic_axis",
+    "name": "Deerhurst / Apperley Monastic Axis",
+    "chapter": "Expanded Regional Grid",
+    "region": "Severn meander north of Gloucester",
+    "nearest_place": "Deerhurst / Apperley",
+    "county": [
+      "Gloucestershire"
+    ],
+    "period": [
+      "Anglo-Saxon",
+      "Medieval",
+      "Domesday",
+      "Geological"
+    ],
+    "coordinates_status": "unknown",
+    "layer_0_geology": {
+      "fault_lines": "unknown; source_status: needs_verification",
+      "mineral_strata": "River terrace, alluvial clay, and Triassic Mercia Mudstone context.",
+      "hydrology_metrics": "Severn river meander landscape and terrace/alluvial hydrology."
+    },
+    "tier_i_evidence": {
+      "summary": "Deerhurst, Apperley, Odda's Chapel, St Mary's Priory Church, Severn river meander landscape, Saxon basilica/pre-Conquest sacred architecture, Domesday/Westminster Abbey estate references, river terrace/alluvial clay/Triassic Mercia Mudstone context are inventoried; sources required.",
+      "sites": [
+        "Deerhurst",
+        "Apperley",
+        "Odda's Chapel",
+        "St Mary's Priory Church",
+        "Severn river meander landscape",
+        "Saxon basilica / pre-Conquest sacred architecture",
+        "Domesday / Westminster Abbey estate references",
+        "River terrace / alluvial clay / Triassic Mercia Mudstone context"
+      ],
+      "archaeology": [
+        "Pre-Conquest architecture, Domesday estate, and river terrace context require source-backed records."
+      ],
+      "geology": [
+        "River terrace, alluvial clay, and Triassic Mercia Mudstone context."
+      ],
+      "documents": [
+        "Domesday, ecclesiastical, and geology sources needed."
+      ],
+      "source_status": "needs_verification"
+    },
+    "tier_ii_interpretation": {
+      "summary": "Frames Deerhurst/Apperley as a monastic axis where pre-Conquest architecture, Severn meander terrain, and estate records overlap.",
+      "themes": [
+        "monastic-axis",
+        "pre-Conquest",
+        "Domesday",
+        "Severn meander",
+        "Mercia Mudstone"
+      ],
+      "source_status": "interpretive"
+    },
+    "tier_iii_speculative_logic": {
+      "summary": "Symbolic layer may treat the monastic axis as a memory anchor on the Severn meander in creative readings.",
+      "retrieval_mode": "monastic_axis_severn_meander",
+      "mapping_priority": "high",
+      "counter_intelligence_flag": "Do not treat symbolic axis language as proof of designed sacred geometry.",
+      "source_status": "speculative"
+    },
+    "routing": {
+      "keywords": [
+        "Deerhurst",
+        "Apperley",
+        "Odda's Chapel",
+        "St Mary's Priory Church",
+        "Saxon basilica",
+        "pre-Conquest",
+        "Domesday",
+        "Westminster Abbey estate",
+        "Severn meander",
+        "alluvial clay",
+        "Triassic Mercia Mudstone"
+      ],
+      "places": [
+        "Deerhurst",
+        "Apperley",
+        "Odda's Chapel",
+        "St Mary's Priory Church",
+        "Severn river meander landscape",
+        "Saxon basilica / pre-Conquest sacred architecture",
+        "Domesday / Westminster Abbey estate references",
+        "River terrace / alluvial clay / Triassic Mercia Mudstone context",
+        "Deerhurst / Apperley",
+        "Severn meander north of Gloucester"
+      ],
+      "periods": [
+        "Anglo-Saxon",
+        "Medieval",
+        "Domesday",
+        "Geological"
+      ],
+      "themes": [
+        "monastic-axis",
+        "pre-Conquest",
+        "Domesday",
+        "Severn meander",
+        "Mercia Mudstone"
+      ],
+      "connected_modules": [
+        "UK-RAG-MOD-045",
+        "UK-RAG-MOD-053A",
+        "UK-RAG-MOD-055"
+      ]
+    },
+    "system_lock": "expanded_module_grid_v1_source_gaps_preserved"
+  }
+]

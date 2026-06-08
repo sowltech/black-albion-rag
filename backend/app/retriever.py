@@ -57,6 +57,72 @@ def _coerce_tier(value: Any) -> str:
     return DEFAULT_TIER
 
 
+def _first_present(record: Dict[str, Any], keys: Sequence[str]) -> str:
+    for key in keys:
+        value = record.get(key)
+        if value not in (None, ""):
+            return str(value)
+    return ""
+
+
+def _field_contains(value: Any, needle: str) -> bool:
+    needle = needle.lower()
+    if isinstance(value, str):
+        return needle in value.lower()
+    if isinstance(value, list):
+        return any(_field_contains(item, needle) for item in value)
+    if isinstance(value, dict):
+        return any(_field_contains(item, needle) for item in value.values())
+    if value is None:
+        return False
+    return needle in str(value).lower()
+
+
+def _module_tier_text(record: Dict[str, Any], tier: str) -> str:
+    if tier == "I":
+        return _record_text(
+            {
+                "name": record.get("name"),
+                "module_id": record.get("module_id"),
+                "site_id": record.get("site_id"),
+                "region": record.get("region"),
+                "nearest_place": record.get("nearest_place"),
+                "county": record.get("county"),
+                "period": record.get("period"),
+                "layer_0_geology": record.get("layer_0_geology"),
+                "tier_i_evidence": record.get("tier_i_evidence"),
+                "routing": record.get("routing"),
+            }
+        )
+    if tier == "II":
+        return _record_text(
+            {
+                "name": record.get("name"),
+                "module_id": record.get("module_id"),
+                "site_id": record.get("site_id"),
+                "region": record.get("region"),
+                "nearest_place": record.get("nearest_place"),
+                "county": record.get("county"),
+                "period": record.get("period"),
+                "tier_ii_interpretation": record.get("tier_ii_interpretation"),
+                "routing": record.get("routing"),
+            }
+        )
+    return _record_text(
+        {
+            "name": record.get("name"),
+            "module_id": record.get("module_id"),
+            "site_id": record.get("site_id"),
+            "region": record.get("region"),
+            "nearest_place": record.get("nearest_place"),
+            "county": record.get("county"),
+            "period": record.get("period"),
+            "tier_iii_speculative_logic": record.get("tier_iii_speculative_logic"),
+            "routing": record.get("routing"),
+        }
+    )
+
+
 def _record_text(record: Dict[str, Any]) -> str:
     """Flatten a record into a single text blob for lexical scoring."""
     pieces: List[str] = []
@@ -78,6 +144,10 @@ def _record_text(record: Dict[str, Any]) -> str:
     for key in (
         "title",
         "name",
+        "module_id",
+        "site_id",
+        "claim_id",
+        "claim_text",
         "summary",
         "description",
         "region",
@@ -86,7 +156,10 @@ def _record_text(record: Dict[str, Any]) -> str:
         "period",
         "themes",
         "claims",
+        "routing",
         "layer_0_geology",
+        "tier_i_evidence",
+        "tier_ii_interpretation",
         "tier_i_enclosure_evidence",
         "tier_iii_speculative",
         "tier_iii_speculative_logic",
@@ -149,6 +222,9 @@ class BlackAlbionRetriever:
             return
 
         for record in records:
+            if record.get("module_id") and record.get("tier_i_evidence"):
+                self._ingest_module_record(source_path, record)
+                continue
             text = _record_text(record)
             if not text:
                 continue
@@ -156,10 +232,27 @@ class BlackAlbionRetriever:
             self.documents.append(
                 {
                     "source_file": str(source_path),
-                    "record_id": str(record.get("id") or ""),
+                    "record_id": _first_present(record, ("id", "claim_id", "module_id", "site_id")),
                     "tier": tier,
                     "text": text,
                     "metadata": record,
+                }
+            )
+
+    def _ingest_module_record(self, source_path: Path, record: Dict[str, Any]) -> None:
+        for tier in ("I", "II", "III"):
+            text = _module_tier_text(record, tier)
+            if not text:
+                continue
+            metadata = dict(record)
+            metadata["retrieved_tier"] = tier
+            self.documents.append(
+                {
+                    "source_file": str(source_path),
+                    "record_id": str(record.get("module_id") or ""),
+                    "tier": tier,
+                    "text": text,
+                    "metadata": metadata,
                 }
             )
 
@@ -197,6 +290,7 @@ class BlackAlbionRetriever:
         query: str,
         k: int = 5,
         include_tiers: Optional[Sequence[str]] = None,
+        filters: Optional[Dict[str, Any]] = None,
     ) -> List[RetrievedEvidence]:
         query = (query or "").strip()
         if not query:
@@ -211,6 +305,8 @@ class BlackAlbionRetriever:
         query_lower = query.lower()
         for doc in self.documents:
             if doc["tier"] not in tier_filter:
+                continue
+            if filters and not self._matches_filters(doc, filters):
                 continue
             text = doc["text"]
             overlap = len(query_tokens & _tokens(text))
@@ -242,3 +338,75 @@ class BlackAlbionRetriever:
 
         scored.sort(key=lambda item: item.score, reverse=True)
         return scored[:k]
+
+    def _matches_filters(self, doc: Dict[str, Any], filters: Dict[str, Any]) -> bool:
+        metadata = doc["metadata"]
+        field_map = {
+            "module_id": metadata.get("module_id"),
+            "site_id": metadata.get("site_id") or metadata.get("id"),
+            "county": metadata.get("county"),
+            "nearest_place": metadata.get("nearest_place"),
+            "period": metadata.get("period"),
+            "tier": doc.get("tier"),
+            "theme": metadata.get("themes") or (metadata.get("routing") or {}).get("themes"),
+            "geology": metadata.get("layer_0_geology"),
+            "hydrology": metadata.get("layer_0_geology", {}).get("hydrology_metrics")
+            or metadata.get("layer_0_geology", {}).get("hydrology"),
+            "route": metadata.get("routing"),
+            "place": metadata.get("routing", {}).get("places")
+            or metadata.get("nearest_place")
+            or metadata.get("name"),
+        }
+        for key, expected in filters.items():
+            if expected in (None, "", []):
+                continue
+            field_value = field_map.get(key)
+            values = expected if isinstance(expected, list) else [expected]
+            if not any(_field_contains(field_value, str(value)) for value in values):
+                return False
+        return True
+
+    def modules(self) -> List[Dict[str, Any]]:
+        seen: set[str] = set()
+        modules: List[Dict[str, Any]] = []
+        for doc in self.documents:
+            metadata = doc["metadata"]
+            module_id = metadata.get("module_id")
+            if not module_id or module_id in seen:
+                continue
+            seen.add(str(module_id))
+            modules.append(metadata)
+        return sorted(modules, key=lambda item: str(item.get("module_id", "")))
+
+    def sites(self) -> List[Dict[str, Any]]:
+        seen: set[str] = set()
+        sites: List[Dict[str, Any]] = []
+        for doc in self.documents:
+            metadata = doc["metadata"]
+            if str(metadata.get("claim_id") or metadata.get("id") or "").startswith("claim_"):
+                continue
+            site_id = metadata.get("site_id") or metadata.get("id")
+            if not site_id or str(site_id) in seen:
+                continue
+            seen.add(str(site_id))
+            sites.append(metadata)
+        return sorted(sites, key=lambda item: str(item.get("site_id") or item.get("id") or ""))
+
+    def claims(self, module_id: Optional[str] = None, tier: Optional[str] = None) -> List[Dict[str, Any]]:
+        claims: List[Dict[str, Any]] = []
+        seen: set[str] = set()
+        tier_filter = tier.upper() if tier else None
+        for doc in self.documents:
+            metadata = doc["metadata"]
+            claim_id = metadata.get("claim_id") or metadata.get("id")
+            if not claim_id or not str(claim_id).startswith("claim_"):
+                continue
+            if str(claim_id) in seen:
+                continue
+            if module_id and metadata.get("module_id") != module_id:
+                continue
+            if tier_filter and _coerce_tier(metadata.get("tier")) != tier_filter:
+                continue
+            seen.add(str(claim_id))
+            claims.append(metadata)
+        return sorted(claims, key=lambda item: str(item.get("claim_id") or item.get("id") or ""))

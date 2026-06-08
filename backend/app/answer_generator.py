@@ -28,7 +28,15 @@ def generate_answer(question: str, evidence: Sequence[RetrievedEvidence]) -> str
             "answer is safe. See data/raw/ and the source-tier doctrine in README.md."
         )
 
-    lines = [f"Question: {question}", ""]
+    lines = [
+        "EVIDENCE MODE:",
+        "- Tier I: verified / source-backed evidence",
+        "- Tier II: interpretation / analysis",
+        "- Tier III: speculative / mythic / creative layer",
+        "",
+        f"Question: {question}",
+        "",
+    ]
     by_tier: dict[str, list[RetrievedEvidence]] = {"I": [], "II": [], "III": []}
     for item in evidence:
         by_tier.setdefault(item.tier, []).append(item)

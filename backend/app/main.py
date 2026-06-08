@@ -11,9 +11,9 @@ from __future__ import annotations
 
 import os
 from pathlib import Path
-from typing import List
+from typing import Any, Dict, List, Optional
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Query
 
 from .answer_generator import generate_answer
 from .models import (
@@ -73,6 +73,120 @@ def create_app() -> FastAPI:
             data_dir=os.pathsep.join(str(d) for d in data_dirs),
             cache_path=str(cache_path),
         )
+
+    @app.get("/modules")
+    def modules() -> List[Dict[str, Any]]:
+        return retriever.modules()
+
+    @app.get("/modules/{module_id}")
+    def module(module_id: str) -> Dict[str, Any]:
+        for item in retriever.modules():
+            if item.get("module_id") == module_id:
+                return item
+        return {"module_id": module_id, "status": "not_found"}
+
+    @app.get("/sites")
+    def sites() -> List[Dict[str, Any]]:
+        return retriever.sites()
+
+    @app.get("/search")
+    def search(
+        q: str = Query(..., min_length=1),
+        module_id: Optional[str] = None,
+        site_id: Optional[str] = None,
+        county: Optional[str] = None,
+        nearest_place: Optional[str] = None,
+        period: Optional[str] = None,
+        tier: Optional[str] = None,
+        theme: Optional[str] = None,
+        geology: Optional[str] = None,
+        hydrology: Optional[str] = None,
+        route: Optional[str] = None,
+        place: Optional[str] = None,
+        k: int = Query(default=10, ge=1, le=50),
+    ) -> Dict[str, Any]:
+        include_tiers = [tier] if tier else None
+        filters = {
+            "module_id": module_id,
+            "site_id": site_id,
+            "county": county,
+            "nearest_place": nearest_place,
+            "period": period,
+            "theme": theme,
+            "geology": geology,
+            "hydrology": hydrology,
+            "route": route,
+            "place": place,
+        }
+        evidence = retriever.search(q, k=k, include_tiers=include_tiers, filters=filters)
+        return {
+            "query": q,
+            "count": len(evidence),
+            "results": [
+                {
+                    "source_file": item.source_file,
+                    "record_id": item.record_id,
+                    "title": item.title,
+                    "tier": item.tier,
+                    "score": item.score,
+                    "excerpt": item.excerpt,
+                    "metadata": item.metadata,
+                }
+                for item in evidence
+            ],
+        }
+
+    @app.get("/claims")
+    def claims(module_id: Optional[str] = None, tier: Optional[str] = None) -> List[Dict[str, Any]]:
+        return retriever.claims(module_id=module_id, tier=tier)
+
+    @app.get("/map/layers")
+    def map_layers() -> Dict[str, Any]:
+        modules_payload = retriever.modules()
+        return {
+            "layers": {
+                "geology": [
+                    {
+                        "module_id": item.get("module_id"),
+                        "name": item.get("name"),
+                        "layer_0_geology": item.get("layer_0_geology"),
+                    }
+                    for item in modules_payload
+                ],
+                "tier_i_evidence": [
+                    {
+                        "module_id": item.get("module_id"),
+                        "name": item.get("name"),
+                        "tier_i_evidence": item.get("tier_i_evidence"),
+                    }
+                    for item in modules_payload
+                ],
+                "tier_ii_interpretation": [
+                    {
+                        "module_id": item.get("module_id"),
+                        "name": item.get("name"),
+                        "tier_ii_interpretation": item.get("tier_ii_interpretation"),
+                    }
+                    for item in modules_payload
+                ],
+                "tier_iii_speculative_logic": [
+                    {
+                        "module_id": item.get("module_id"),
+                        "name": item.get("name"),
+                        "tier_iii_speculative_logic": item.get("tier_iii_speculative_logic"),
+                    }
+                    for item in modules_payload
+                ],
+            }
+        }
+
+    @app.get("/export/modules.json")
+    def export_modules() -> List[Dict[str, Any]]:
+        return retriever.modules()
+
+    @app.get("/export/claims.json")
+    def export_claims() -> List[Dict[str, Any]]:
+        return retriever.claims()
 
     @app.post("/query", response_model=QueryResponse)
     def query(payload: QueryRequest) -> QueryResponse:

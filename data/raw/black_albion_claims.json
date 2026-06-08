@@ -6,7 +6,13 @@
     "summary": "Commissioners questioned local juries to record taxable hides, plough teams, slaves and mill structures TRE (in the time of Edward the Confessor), at the moment of Norman grant, and at the 1086 survey date. The result was preserved in Great Domesday and Little Domesday, originally known as 'Liber de Wintonia'.",
     "evidence_type": "primary_archival_record",
     "confidence": "high",
-    "source_url": "https://www.nationalarchives.gov.uk/domesday/"
+    "source_url": "https://www.nationalarchives.gov.uk/domesday/",
+    "claim_id": "claim_domesday_audit_mechanics",
+    "claim_text": "The 1086 Domesday survey records taxable manorial assets across three temporal horizons (TRE, grant, 'now')",
+    "claim_type": "settlement",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Tier I claim; use only with attached source context."
   },
   {
     "id": "claim_glevum_origin_of_gloucester",
@@ -15,7 +21,13 @@
     "summary": "Gloucester originates as a fortified legionary fortress on the River Severn established c. 48 CE. The name passes through Brythonic Caerloyw and Old English Gleawanceaster ('bright fort') before becoming medieval Gleucestre.",
     "evidence_type": "archaeological_record",
     "confidence": "high",
-    "source_url": "https://historicengland.org.uk/listing/the-list/"
+    "source_url": "https://historicengland.org.uk/listing/the-list/",
+    "claim_id": "claim_glevum_origin_of_gloucester",
+    "claim_text": "Gloucester's urban core derives from Roman Glevum (Colonia Nervia Glevensium, c. 48 CE)",
+    "claim_type": "archaeology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Tier I claim; use only with attached source context."
   },
   {
     "id": "claim_avon_tidal_range",
@@ -24,7 +36,13 @@
     "summary": "Historical Bristol shipping required vessels to 'take the ground' — settle in the riverbed mud at low water — until dock engineering (notably the Frome Channel diversion, 1240, and the Floating Harbour, 1809) maintained constant water levels.",
     "evidence_type": "geographical_baseline",
     "confidence": "high",
-    "source_url": "https://www.bristolport.co.uk/"
+    "source_url": "https://www.bristolport.co.uk/",
+    "claim_id": "claim_avon_tidal_range",
+    "claim_text": "The Severn Estuary / River Avon has one of the highest tidal ranges on Earth (~15 m)",
+    "claim_type": "hydrology",
+    "source_status": "verified",
+    "required_sources": [],
+    "notes": "Tier I claim; use only with attached source context."
   },
   {
     "id": "claim_domesday_enclosure_reading",
@@ -33,7 +51,15 @@
     "summary": "A defensible scholarly reading frames the 1086 survey as an aggressive fiscal dragnet that legally fixed land tenure to Norman tenants-in-chief and overrode oral / community memory of pre-Conquest landholding. This is interpretation, not a primary claim.",
     "evidence_type": "scholarly_interpretation",
     "confidence": "medium",
-    "source_url": "https://www.cambridge.org/core/journals/historical-research"
+    "source_url": "https://www.cambridge.org/core/journals/historical-research",
+    "claim_id": "claim_domesday_enclosure_reading",
+    "claim_text": "Scholars argue the Domesday Book functions as an early framework of centralised state asset enclosure",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach direct source records for this claim."
+    ],
+    "notes": "Interpretive claim; do not present as direct evidence."
   },
   {
     "id": "claim_macritchie_euhemerism",
@@ -42,7 +68,15 @@
     "summary": "David MacRitchie systematically reads sídhe / fairy / mound-dweller folklore as displaced memory of real, flesh-and-blood, dark-complexioned mound-dwelling populations who built corbelled earth-houses. This is an attributed 19th-century scholarly position, not a contemporary archaeological consensus.",
     "evidence_type": "scholarly_interpretation",
     "confidence": "attributed",
-    "source_url": "https://archive.org/details/testimonyoftradi00macruoft"
+    "source_url": "https://archive.org/details/testimonyoftradi00macruoft",
+    "claim_id": "claim_macritchie_euhemerism",
+    "claim_text": "MacRitchie (1890, 1893) argues British 'fairy' folklore historicises a real subterranean indigenous population",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Attach direct source records for this claim."
+    ],
+    "notes": "Interpretive claim; do not present as direct evidence."
   },
   {
     "id": "claim_bright_fort_pineal",
@@ -51,7 +85,15 @@
     "summary": "Within the Bobby Hemmit interpretive lens, the Brythonic 'Bright Fort' is read symbolically as a pineal-gland metaphor, with the Domesday Book read as a 'systemic spell of inversion' freezing the spirit of the land. This is explicitly speculative and must not be presented as historical or scientific fact.",
     "evidence_type": "speculative_lens",
     "confidence": "speculative",
-    "source_url": "research/2026-06-07_gemini_screwworms_to_albion_engine.md"
+    "source_url": "research/2026-06-07_gemini_screwworms_to_albion_engine.md",
+    "claim_id": "claim_bright_fort_pineal",
+    "claim_text": "Speculative: 'Bright Fort' (Caerloyw / Gleawanceaster) read as a metaphor for the pineal gland",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [
+      "Attach direct source records for this claim."
+    ],
+    "notes": "Speculative layer only; never present as factual history."
   },
   {
     "id": "claim_lia_fail_piezo",
@@ -60,6 +102,616 @@
     "summary": "Within the Bobby Hemmit framework, the Lia Fáil ('Stone of Destiny') legend is reinterpreted as a piezo-crystalline coupling between a high-conductivity human body and the Carboniferous mudstone-quartz monolith at Tara. This is interpretive geomythology, not archaeology.",
     "evidence_type": "speculative_lens",
     "confidence": "speculative",
-    "source_url": "research/2026-06-07_gemini_screwworms_to_albion_engine.md"
+    "source_url": "research/2026-06-07_gemini_screwworms_to_albion_engine.md",
+    "claim_id": "claim_lia_fail_piezo",
+    "claim_text": "Speculative: the Lia Fáil 'shrieks' under a true king as a piezo-electric resonance event",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [
+      "Attach direct source records for this claim."
+    ],
+    "notes": "Speculative layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_043_inventory",
+    "id": "claim_043_inventory",
+    "module_id": "UK-RAG-MOD-043",
+    "claim_text": "Avon Gorge, Bristol / Hotwells, Bath hot springs, and the Mendip-to-Bath geothermal circuit are the factual inventory for this module; source records still need item-level verification.",
+    "title": "Avon Gorge, Bristol / Hotwells, Bath hot springs, and the Mendip-to-Bath geothermal circuit are the factual inventory for this module; source records still need item-level verification.",
+    "summary": "Avon Gorge, Bristol / Hotwells, Bath hot springs, and the Mendip-to-Bath geothermal circuit are the factual inventory for this module; source records still need item-level verification.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_043_interpretation",
+    "id": "claim_043_interpretation",
+    "module_id": "UK-RAG-MOD-043",
+    "claim_text": "Frames the Severn-Avon-Bath edge as a southwestern Mercian/Hwicce frontier where limestone, hot springs, river movement, and border politics overlap.",
+    "title": "Frames the Severn-Avon-Bath edge as a southwestern Mercian/Hwicce frontier where limestone, hot springs, river movement, and border politics overlap.",
+    "summary": "Frames the Severn-Avon-Bath edge as a southwestern Mercian/Hwicce frontier where limestone, hot springs, river movement, and border politics overlap.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_043_speculative",
+    "id": "claim_043_speculative",
+    "module_id": "UK-RAG-MOD-043",
+    "claim_text": "Symbolic reading may treat the Avon-Bath-Mendip system as a threshold or thermal gate in the creative landscape grid.",
+    "title": "Symbolic reading may treat the Avon-Bath-Mendip system as a threshold or thermal gate in the creative landscape grid.",
+    "summary": "Symbolic reading may treat the Avon-Bath-Mendip system as a threshold or thermal gate in the creative landscape grid.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_044_inventory",
+    "id": "claim_044_inventory",
+    "module_id": "UK-RAG-MOD-044",
+    "claim_text": "Cotswold Way, Chipping Campden, Bath terminal, oolitic limestone escarpment, and Belas Knap are the module inventory; item-level source verification remains required.",
+    "title": "Cotswold Way, Chipping Campden, Bath terminal, oolitic limestone escarpment, and Belas Knap are the module inventory; item-level source verification remains required.",
+    "summary": "Cotswold Way, Chipping Campden, Bath terminal, oolitic limestone escarpment, and Belas Knap are the module inventory; item-level source verification remains required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_044_interpretation",
+    "id": "claim_044_interpretation",
+    "module_id": "UK-RAG-MOD-044",
+    "claim_text": "Treats the 102-mile Cotswold Way as a long ridge-line connector between prehistoric monuments, Jurassic geology, Severn edges, and Bath.",
+    "title": "Treats the 102-mile Cotswold Way as a long ridge-line connector between prehistoric monuments, Jurassic geology, Severn edges, and Bath.",
+    "summary": "Treats the 102-mile Cotswold Way as a long ridge-line connector between prehistoric monuments, Jurassic geology, Severn edges, and Bath.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_044_speculative",
+    "id": "claim_044_speculative",
+    "module_id": "UK-RAG-MOD-044",
+    "claim_text": "Symbolic reading may map the Cotswold Way as a limestone spine linking Severn and Bath systems.",
+    "title": "Symbolic reading may map the Cotswold Way as a limestone spine linking Severn and Bath systems.",
+    "summary": "Symbolic reading may map the Cotswold Way as a limestone spine linking Severn and Bath systems.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_045_inventory",
+    "id": "claim_045_inventory",
+    "module_id": "UK-RAG-MOD-045",
+    "claim_text": "Tewkesbury Severn Ham, Avon-Severn confluence, Healings Mill, Abbey Mill, SSSI/common land/floodplain logic are inventoried; source verification is required.",
+    "title": "Tewkesbury Severn Ham, Avon-Severn confluence, Healings Mill, Abbey Mill, SSSI/common land/floodplain logic are inventoried; source verification is required.",
+    "summary": "Tewkesbury Severn Ham, Avon-Severn confluence, Healings Mill, Abbey Mill, SSSI/common land/floodplain logic are inventoried; source verification is required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_045_interpretation",
+    "id": "claim_045_interpretation",
+    "module_id": "UK-RAG-MOD-045",
+    "claim_text": "Frames Severn Ham as a floodplain convergence node where common rights, river movement, mills, and conservation status overlap.",
+    "title": "Frames Severn Ham as a floodplain convergence node where common rights, river movement, mills, and conservation status overlap.",
+    "summary": "Frames Severn Ham as a floodplain convergence node where common rights, river movement, mills, and conservation status overlap.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_045_speculative",
+    "id": "claim_045_speculative",
+    "module_id": "UK-RAG-MOD-045",
+    "claim_text": "Symbolic reading may treat the Severn-Avon confluence as a river-gate in the wider landscape grid.",
+    "title": "Symbolic reading may treat the Severn-Avon confluence as a river-gate in the wider landscape grid.",
+    "summary": "Symbolic reading may treat the Severn-Avon confluence as a river-gate in the wider landscape grid.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_046_inventory",
+    "id": "claim_046_inventory",
+    "module_id": "UK-RAG-MOD-046",
+    "claim_text": "Woodchester Roman Villa, Orpheus Mosaic, Uley Bury, West Hill Mercury Temple, Hetty Pegler's Tump, Nympsfield Long Barrow, and Painswick Beacon/Kimsbury Camp are inventoried; verification remains required.",
+    "title": "Woodchester Roman Villa, Orpheus Mosaic, Uley Bury, West Hill Mercury Temple, Hetty Pegler's Tump, Nympsfield Long Barrow, and Painswick Beacon/Kimsbury Camp are inventoried; verification remains required.",
+    "summary": "Woodchester Roman Villa, Orpheus Mosaic, Uley Bury, West Hill Mercury Temple, Hetty Pegler's Tump, Nympsfield Long Barrow, and Painswick Beacon/Kimsbury Camp are inventoried; verification remains required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_046_interpretation",
+    "id": "claim_046_interpretation",
+    "module_id": "UK-RAG-MOD-046",
+    "claim_text": "Interprets the Stroud/Frome area as a radial node linking Roman villa culture, upland ritual sites, long barrows, and scarp movement corridors.",
+    "title": "Interprets the Stroud/Frome area as a radial node linking Roman villa culture, upland ritual sites, long barrows, and scarp movement corridors.",
+    "summary": "Interprets the Stroud/Frome area as a radial node linking Roman villa culture, upland ritual sites, long barrows, and scarp movement corridors.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_046_speculative",
+    "id": "claim_046_speculative",
+    "module_id": "UK-RAG-MOD-046",
+    "claim_text": "Symbolic reading may treat the Frome valley radials as linked ritual/route spokes in the creative map.",
+    "title": "Symbolic reading may treat the Frome valley radials as linked ritual/route spokes in the creative map.",
+    "summary": "Symbolic reading may treat the Frome valley radials as linked ritual/route spokes in the creative map.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_047_inventory",
+    "id": "claim_047_inventory",
+    "module_id": "UK-RAG-MOD-047",
+    "claim_text": "Lydney Park/Nodens Temple, Clearwell Caves, Puzzlewood Roman coin hoard, Forest of Dean ochre/iron mining, Highnam, Ross-on-Wye, and Hempsted/Lady's Well are inventoried; sources required.",
+    "title": "Lydney Park/Nodens Temple, Clearwell Caves, Puzzlewood Roman coin hoard, Forest of Dean ochre/iron mining, Highnam, Ross-on-Wye, and Hempsted/Lady's Well are inventoried; sources required.",
+    "summary": "Lydney Park/Nodens Temple, Clearwell Caves, Puzzlewood Roman coin hoard, Forest of Dean ochre/iron mining, Highnam, Ross-on-Wye, and Hempsted/Lady's Well are inventoried; sources required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_047_interpretation",
+    "id": "claim_047_interpretation",
+    "module_id": "UK-RAG-MOD-047",
+    "claim_text": "Frames the Forest of Dean as a trans-Severn frontier where karst cavities, iron/ochre extraction, Roman cult sites, and Wye crossings interact.",
+    "title": "Frames the Forest of Dean as a trans-Severn frontier where karst cavities, iron/ochre extraction, Roman cult sites, and Wye crossings interact.",
+    "summary": "Frames the Forest of Dean as a trans-Severn frontier where karst cavities, iron/ochre extraction, Roman cult sites, and Wye crossings interact.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_047_speculative",
+    "id": "claim_047_speculative",
+    "module_id": "UK-RAG-MOD-047",
+    "claim_text": "Speculative layer may read caves/scowles as underworld or threshold architecture in the symbolic grid.",
+    "title": "Speculative layer may read caves/scowles as underworld or threshold architecture in the symbolic grid.",
+    "summary": "Speculative layer may read caves/scowles as underworld or threshold architecture in the symbolic grid.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_048_inventory",
+    "id": "claim_048_inventory",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Birmingham/Metchley Roman Fort, Staffordshire Hoard, Wren's Nest, Wolverhampton Cross, Kinver Rock Houses, Lunt Roman Fort, Wroxeter/Viroconium, Old Oswestry, Creswell Crags, Nottingham City of Caves, and Borough Hill are inventoried; verification required.",
+    "title": "Birmingham/Metchley Roman Fort, Staffordshire Hoard, Wren's Nest, Wolverhampton Cross, Kinver Rock Houses, Lunt Roman Fort, Wroxeter/Viroconium, Old Oswestry, Creswell Crags, Nottingham City of Caves, and Borough Hill are inventoried; verification required.",
+    "summary": "Birmingham/Metchley Roman Fort, Staffordshire Hoard, Wren's Nest, Wolverhampton Cross, Kinver Rock Houses, Lunt Roman Fort, Wroxeter/Viroconium, Old Oswestry, Creswell Crags, Nottingham City of Caves, and Borough Hill are inventoried; verification required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_048_interpretation",
+    "id": "claim_048_interpretation",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Interprets central Mercia as a lattice of Roman forts, Anglo-Saxon material culture, hillforts, sandstone dwellings, and cave/cavity systems.",
+    "title": "Interprets central Mercia as a lattice of Roman forts, Anglo-Saxon material culture, hillforts, sandstone dwellings, and cave/cavity systems.",
+    "summary": "Interprets central Mercia as a lattice of Roman forts, Anglo-Saxon material culture, hillforts, sandstone dwellings, and cave/cavity systems.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_048_speculative",
+    "id": "claim_048_speculative",
+    "module_id": "UK-RAG-MOD-048",
+    "claim_text": "Speculative layer may frame the lattice as a central cavity/crossroads network in creative mapping.",
+    "title": "Speculative layer may frame the lattice as a central cavity/crossroads network in creative mapping.",
+    "summary": "Speculative layer may frame the lattice as a central cavity/crossroads network in creative mapping.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_049_inventory",
+    "id": "claim_049_inventory",
+    "module_id": "UK-RAG-MOD-049",
+    "claim_text": "Londinium, Walbrook, London Mithraeum, Oxford, Dorchester-on-Thames, Port Meadow, Ridgeway, Wayland's Smithy, and Uffington White Horse are inventoried; source verification is required.",
+    "title": "Londinium, Walbrook, London Mithraeum, Oxford, Dorchester-on-Thames, Port Meadow, Ridgeway, Wayland's Smithy, and Uffington White Horse are inventoried; source verification is required.",
+    "summary": "Londinium, Walbrook, London Mithraeum, Oxford, Dorchester-on-Thames, Port Meadow, Ridgeway, Wayland's Smithy, and Uffington White Horse are inventoried; source verification is required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_049_interpretation",
+    "id": "claim_049_interpretation",
+    "module_id": "UK-RAG-MOD-049",
+    "claim_text": "Frames London-Oxford-Ridgeway as a Thames/chalk corridor joining Roman urban sites, flood meadows, and prehistoric route monuments.",
+    "title": "Frames London-Oxford-Ridgeway as a Thames/chalk corridor joining Roman urban sites, flood meadows, and prehistoric route monuments.",
+    "summary": "Frames London-Oxford-Ridgeway as a Thames/chalk corridor joining Roman urban sites, flood meadows, and prehistoric route monuments.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_049_speculative",
+    "id": "claim_049_speculative",
+    "module_id": "UK-RAG-MOD-049",
+    "claim_text": "Symbolic reading may map the Tamensis basin as a chalk-water corridor between city, meadow, and ridge monuments.",
+    "title": "Symbolic reading may map the Tamensis basin as a chalk-water corridor between city, meadow, and ridge monuments.",
+    "summary": "Symbolic reading may map the Tamensis basin as a chalk-water corridor between city, meadow, and ridge monuments.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_050_inventory",
+    "id": "claim_050_inventory",
+    "module_id": "UK-RAG-MOD-050",
+    "claim_text": "Cambridgeshire, Ely, Peterborough, Car Dyke, Fen-edge villas, Bronze Age waterlogged timber settlements, Devil's Dyke/Fleam Dyke, and Bedford Level/Fen drainage enclosure are inventoried; sources required.",
+    "title": "Cambridgeshire, Ely, Peterborough, Car Dyke, Fen-edge villas, Bronze Age waterlogged timber settlements, Devil's Dyke/Fleam Dyke, and Bedford Level/Fen drainage enclosure are inventoried; sources required.",
+    "summary": "Cambridgeshire, Ely, Peterborough, Car Dyke, Fen-edge villas, Bronze Age waterlogged timber settlements, Devil's Dyke/Fleam Dyke, and Bedford Level/Fen drainage enclosure are inventoried; sources required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_050_interpretation",
+    "id": "claim_050_interpretation",
+    "module_id": "UK-RAG-MOD-050",
+    "claim_text": "Interprets Fenland as a water-management and enclosure basin where Roman engineering, prehistoric wetland archaeology, and early modern drainage overlap.",
+    "title": "Interprets Fenland as a water-management and enclosure basin where Roman engineering, prehistoric wetland archaeology, and early modern drainage overlap.",
+    "summary": "Interprets Fenland as a water-management and enclosure basin where Roman engineering, prehistoric wetland archaeology, and early modern drainage overlap.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_050_speculative",
+    "id": "claim_050_speculative",
+    "module_id": "UK-RAG-MOD-050",
+    "claim_text": "Speculative layer may treat the Fen basin as a drained memory/water archive in creative interpretation.",
+    "title": "Speculative layer may treat the Fen basin as a drained memory/water archive in creative interpretation.",
+    "summary": "Speculative layer may treat the Fen basin as a drained memory/water archive in creative interpretation.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_051_inventory",
+    "id": "claim_051_inventory",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Swindon, Barbury Castle, Liddington Castle, Wanborough/Durocornovium, Coate Water, Avebury, Silbury Hill, West Kennet Long Barrow, Ridgeway, and Vale of White Horse are inventoried; sources required.",
+    "title": "Swindon, Barbury Castle, Liddington Castle, Wanborough/Durocornovium, Coate Water, Avebury, Silbury Hill, West Kennet Long Barrow, Ridgeway, and Vale of White Horse are inventoried; sources required.",
+    "summary": "Swindon, Barbury Castle, Liddington Castle, Wanborough/Durocornovium, Coate Water, Avebury, Silbury Hill, West Kennet Long Barrow, Ridgeway, and Vale of White Horse are inventoried; sources required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_051_interpretation",
+    "id": "claim_051_interpretation",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Frames Swindon/North Wessex as a chalk gateway connecting Avebury/Silbury, Ridgeway movement, hillforts, and Roman roadside settlement.",
+    "title": "Frames Swindon/North Wessex as a chalk gateway connecting Avebury/Silbury, Ridgeway movement, hillforts, and Roman roadside settlement.",
+    "summary": "Frames Swindon/North Wessex as a chalk gateway connecting Avebury/Silbury, Ridgeway movement, hillforts, and Roman roadside settlement.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_051_speculative",
+    "id": "claim_051_speculative",
+    "module_id": "UK-RAG-MOD-051",
+    "claim_text": "Symbolic reading may treat the chalk gateway as an interface between Wessex monuments and Thames/Ridgeway corridors.",
+    "title": "Symbolic reading may treat the chalk gateway as an interface between Wessex monuments and Thames/Ridgeway corridors.",
+    "summary": "Symbolic reading may treat the chalk gateway as an interface between Wessex monuments and Thames/Ridgeway corridors.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_052_inventory",
+    "id": "claim_052_inventory",
+    "module_id": "UK-RAG-MOD-052",
+    "claim_text": "Cirencester/Corinium, Bagendon oppidum, Chedworth Roman Villa, Cirencester Amphitheatre, Roman walls, A417 Roman mutatio, Rodmarton/Windmill Tump, Cirencester Abbey, and St John Baptist Church are inventoried; source verification required.",
+    "title": "Cirencester/Corinium, Bagendon oppidum, Chedworth Roman Villa, Cirencester Amphitheatre, Roman walls, A417 Roman mutatio, Rodmarton/Windmill Tump, Cirencester Abbey, and St John Baptist Church are inventoried; source verification required.",
+    "summary": "Cirencester/Corinium, Bagendon oppidum, Chedworth Roman Villa, Cirencester Amphitheatre, Roman walls, A417 Roman mutatio, Rodmarton/Windmill Tump, Cirencester Abbey, and St John Baptist Church are inventoried; source verification required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_052_interpretation",
+    "id": "claim_052_interpretation",
+    "module_id": "UK-RAG-MOD-052",
+    "claim_text": "Interprets Corinium as a palimpsest where Dobunnic, Roman, prehistoric, route, and medieval ecclesiastical layers stack in one Cotswold basin.",
+    "title": "Interprets Corinium as a palimpsest where Dobunnic, Roman, prehistoric, route, and medieval ecclesiastical layers stack in one Cotswold basin.",
+    "summary": "Interprets Corinium as a palimpsest where Dobunnic, Roman, prehistoric, route, and medieval ecclesiastical layers stack in one Cotswold basin.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_052_speculative",
+    "id": "claim_052_speculative",
+    "module_id": "UK-RAG-MOD-052",
+    "claim_text": "Symbolic layer may frame Corinium as a memory-node where Roman civic order overlays older route/monument strata.",
+    "title": "Symbolic layer may frame Corinium as a memory-node where Roman civic order overlays older route/monument strata.",
+    "summary": "Symbolic layer may frame Corinium as a memory-node where Roman civic order overlays older route/monument strata.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_053a_inventory",
+    "id": "claim_053a_inventory",
+    "module_id": "UK-RAG-MOD-053A",
+    "claim_text": "Tewkesbury, Oldbury Roman settlement, Tewkesbury Abbey, Severn Ham, Bloody Meadow, Battle of Tewkesbury 1471, Deerhurst, Odda's Chapel, Bredon Hill/Kemerton Camp, Ashchurch/Walton Cardiff/Carrant Brook are inventoried; sources required.",
+    "title": "Tewkesbury, Oldbury Roman settlement, Tewkesbury Abbey, Severn Ham, Bloody Meadow, Battle of Tewkesbury 1471, Deerhurst, Odda's Chapel, Bredon Hill/Kemerton Camp, Ashchurch/Walton Cardiff/Carrant Brook are inventoried; sources required.",
+    "summary": "Tewkesbury, Oldbury Roman settlement, Tewkesbury Abbey, Severn Ham, Bloody Meadow, Battle of Tewkesbury 1471, Deerhurst, Odda's Chapel, Bredon Hill/Kemerton Camp, Ashchurch/Walton Cardiff/Carrant Brook are inventoried; sources required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_053a_interpretation",
+    "id": "claim_053a_interpretation",
+    "module_id": "UK-RAG-MOD-053A",
+    "claim_text": "Frames Tewkesbury as a Severn-Avon river-gate where confluence, monastic architecture, battlefield landscape, and older settlement routes converge.",
+    "title": "Frames Tewkesbury as a Severn-Avon river-gate where confluence, monastic architecture, battlefield landscape, and older settlement routes converge.",
+    "summary": "Frames Tewkesbury as a Severn-Avon river-gate where confluence, monastic architecture, battlefield landscape, and older settlement routes converge.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_053a_speculative",
+    "id": "claim_053a_speculative",
+    "module_id": "UK-RAG-MOD-053A",
+    "claim_text": "Symbolic layer may read Tewkesbury as a threshold-node between river, blood meadow, abbey, and older settlement strata.",
+    "title": "Symbolic layer may read Tewkesbury as a threshold-node between river, blood meadow, abbey, and older settlement strata.",
+    "summary": "Symbolic layer may read Tewkesbury as a threshold-node between river, blood meadow, abbey, and older settlement strata.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_053b_inventory",
+    "id": "claim_053b_inventory",
+    "module_id": "UK-RAG-MOD-053B",
+    "claim_text": "Hereford Cathedral, Mappa Mundi, Chained Library, Castle Green, River Wye crossing, Rotherwas Ribbon, Dinedor Camp, Sutton Walls, Kenchester/Magnis, Arthur's Stone, Golden Valley, Leominster, Weobley, Goodrich Castle, Wigmore, Ledbury, and Bromyard are inventoried; source verification required.",
+    "title": "Hereford Cathedral, Mappa Mundi, Chained Library, Castle Green, River Wye crossing, Rotherwas Ribbon, Dinedor Camp, Sutton Walls, Kenchester/Magnis, Arthur's Stone, Golden Valley, Leominster, Weobley, Goodrich Castle, Wigmore, Ledbury, and Bromyard are inventoried; source verification required.",
+    "summary": "Hereford Cathedral, Mappa Mundi, Chained Library, Castle Green, River Wye crossing, Rotherwas Ribbon, Dinedor Camp, Sutton Walls, Kenchester/Magnis, Arthur's Stone, Golden Valley, Leominster, Weobley, Goodrich Castle, Wigmore, Ledbury, and Bromyard are inventoried; source verification required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_053b_interpretation",
+    "id": "claim_053b_interpretation",
+    "module_id": "UK-RAG-MOD-053B",
+    "claim_text": "Frames Hereford as a western marches corridor linking Wye crossing, cathedral archive, Roman Magnis, prehistoric monuments, castles, and border market towns.",
+    "title": "Frames Hereford as a western marches corridor linking Wye crossing, cathedral archive, Roman Magnis, prehistoric monuments, castles, and border market towns.",
+    "summary": "Frames Hereford as a western marches corridor linking Wye crossing, cathedral archive, Roman Magnis, prehistoric monuments, castles, and border market towns.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_053b_speculative",
+    "id": "claim_053b_speculative",
+    "module_id": "UK-RAG-MOD-053B",
+    "claim_text": "Symbolic layer may read the Mappa Mundi/cathedral/Wye crossing as a memory-map node in the creative grid.",
+    "title": "Symbolic layer may read the Mappa Mundi/cathedral/Wye crossing as a memory-map node in the creative grid.",
+    "summary": "Symbolic layer may read the Mappa Mundi/cathedral/Wye crossing as a memory-map node in the creative grid.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_055_inventory",
+    "id": "claim_055_inventory",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Hardwicke, Framilode/Frome mouth, Hawkesbury, Brockworth, Cooper's Hill, Witcombe, Great Witcombe Roman Villa, Innsworth, Gloucester southern/scarp-vale arc, Horsbere Brook, Witcombe reservoirs, and NATO/military overlays where relevant are inventoried; sources required.",
+    "title": "Hardwicke, Framilode/Frome mouth, Hawkesbury, Brockworth, Cooper's Hill, Witcombe, Great Witcombe Roman Villa, Innsworth, Gloucester southern/scarp-vale arc, Horsbere Brook, Witcombe reservoirs, and NATO/military overlays where relevant are inventoried; sources required.",
+    "summary": "Hardwicke, Framilode/Frome mouth, Hawkesbury, Brockworth, Cooper's Hill, Witcombe, Great Witcombe Roman Villa, Innsworth, Gloucester southern/scarp-vale arc, Horsbere Brook, Witcombe reservoirs, and NATO/military overlays where relevant are inventoried; sources required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_055_interpretation",
+    "id": "claim_055_interpretation",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Frames Gloucester southern radials as an arc where the Severn vale, Frome mouth, Cotswold scarp, Roman villa landscape, reservoirs, and military overlays intersect.",
+    "title": "Frames Gloucester southern radials as an arc where the Severn vale, Frome mouth, Cotswold scarp, Roman villa landscape, reservoirs, and military overlays intersect.",
+    "summary": "Frames Gloucester southern radials as an arc where the Severn vale, Frome mouth, Cotswold scarp, Roman villa landscape, reservoirs, and military overlays intersect.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_055_speculative",
+    "id": "claim_055_speculative",
+    "module_id": "UK-RAG-MOD-055",
+    "claim_text": "Speculative layer may map Witcombe/scarp intercept as a controlled radial gate in the creative landscape model.",
+    "title": "Speculative layer may map Witcombe/scarp intercept as a controlled radial gate in the creative landscape model.",
+    "summary": "Speculative layer may map Witcombe/scarp intercept as a controlled radial gate in the creative landscape model.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
+  },
+  {
+    "claim_id": "claim_056_inventory",
+    "id": "claim_056_inventory",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Deerhurst, Apperley, Odda's Chapel, St Mary's Priory Church, Severn river meander landscape, Saxon basilica/pre-Conquest sacred architecture, Domesday/Westminster Abbey estate references, river terrace/alluvial clay/Triassic Mercia Mudstone context are inventoried; sources required.",
+    "title": "Deerhurst, Apperley, Odda's Chapel, St Mary's Priory Church, Severn river meander landscape, Saxon basilica/pre-Conquest sacred architecture, Domesday/Westminster Abbey estate references, river terrace/alluvial clay/Triassic Mercia Mudstone context are inventoried; sources required.",
+    "summary": "Deerhurst, Apperley, Odda's Chapel, St Mary's Priory Church, Severn river meander landscape, Saxon basilica/pre-Conquest sacred architecture, Domesday/Westminster Abbey estate references, river terrace/alluvial clay/Triassic Mercia Mudstone context are inventoried; sources required.",
+    "tier": "I",
+    "claim_type": "settlement",
+    "source_status": "needs_verification",
+    "required_sources": [
+      "Item-level public heritage, archaeology, geology, and local history sources for named sites."
+    ],
+    "notes": "Tier I inventory retained but not treated as fully verified until sources are attached."
+  },
+  {
+    "claim_id": "claim_056_interpretation",
+    "id": "claim_056_interpretation",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Frames Deerhurst/Apperley as a monastic axis where pre-Conquest architecture, Severn meander terrain, and estate records overlap.",
+    "title": "Frames Deerhurst/Apperley as a monastic axis where pre-Conquest architecture, Severn meander terrain, and estate records overlap.",
+    "summary": "Frames Deerhurst/Apperley as a monastic axis where pre-Conquest architecture, Severn meander terrain, and estate records overlap.",
+    "tier": "II",
+    "claim_type": "settlement",
+    "source_status": "partial",
+    "required_sources": [
+      "Source-backed landscape analysis or scholarly interpretation for the module region."
+    ],
+    "notes": "Interpretive synthesis; not direct evidence."
+  },
+  {
+    "claim_id": "claim_056_speculative",
+    "id": "claim_056_speculative",
+    "module_id": "UK-RAG-MOD-056",
+    "claim_text": "Symbolic layer may treat the monastic axis as a memory anchor on the Severn meander in creative readings.",
+    "title": "Symbolic layer may treat the monastic axis as a memory anchor on the Severn meander in creative readings.",
+    "summary": "Symbolic layer may treat the monastic axis as a memory anchor on the Severn meander in creative readings.",
+    "tier": "III",
+    "claim_type": "speculative",
+    "source_status": "speculative",
+    "required_sources": [],
+    "notes": "Creative/symbolic layer only; never present as factual history."
   }
 ]
