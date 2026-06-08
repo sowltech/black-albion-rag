@@ -294,6 +294,24 @@ git diff --cached --check
 scripts/smoke_test.sh
 ```
 
+## Gemini Share 002 Quarantine Intake
+
+Source URL: https://gemini.google.com/share/b5d32b5e9257
+
+Status: `failed_auth_walled`.
+
+The share was attempted as quarantine intake only. The available fetch returned
+the Gemini application shell rather than extractable share content, so no raw
+conversation content was promoted.
+
+No Tier I promotion occurred. No claims were updated. No modules were updated.
+No source records were added.
+
+Quarantine files:
+
+- `research/intake/gemini_share_002_raw.md`
+- `research/intake/gemini_share_002_review.md`
+
 ## Item-Level Tier I Source Pass 002
 
 This pass reviewed only the remaining documented item-level gaps:
