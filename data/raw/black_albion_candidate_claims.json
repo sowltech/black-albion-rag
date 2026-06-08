@@ -1,0 +1,28 @@
+[
+  {
+    "candidate_id": "cand_gemini_share_002",
+    "source_artifact": "research/intake/gemini_share_002_raw.md",
+    "review_note": "research/intake/gemini_share_002_review.md",
+    "origin_type": "gemini_share",
+    "origin_url": "https://gemini.google.com/share/b5d32b5e9257",
+    "fetch_status": "failed_auth_walled",
+    "review_status": "quarantined",
+    "risk_level": "high",
+    "allowed_use": [
+      "Tier II inspiration",
+      "research lead generation",
+      "candidate source hunting"
+    ],
+    "forbidden_use": [
+      "Tier I sourcing",
+      "verified claim creation",
+      "claim promotion without independent sources"
+    ],
+    "related_modules": [],
+    "candidate_claims": [],
+    "required_action": "manual_raw_content_needed_or_independent_source_hunting",
+    "operator_approval_required": true,
+    "created_at": "2026-06-08",
+    "notes": "Gemini share was auth-walled/unavailable for extraction. No historical facts were promoted."
+  }
+]
