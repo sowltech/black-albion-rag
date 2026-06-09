@@ -2,6 +2,7 @@
 
 Endpoints:
     GET  /health  -> service status + document count
+    GET  /dashboard -> read-only operator dashboard
     POST /query   -> grounded, tier-aware retrieval + answer
 
 Local-first: reads only ``data/raw/*.json`` from the repo (overridable via
@@ -9,11 +10,13 @@ Local-first: reads only ``data/raw/*.json`` from the repo (overridable via
 """
 from __future__ import annotations
 
+from html import escape
 import os
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, Query
+from fastapi.responses import HTMLResponse
 
 from .answer_generator import generate_answer
 from .models import (
@@ -73,6 +76,144 @@ def create_app() -> FastAPI:
             data_dir=os.pathsep.join(str(d) for d in data_dirs),
             cache_path=str(cache_path),
         )
+
+    @app.get("/dashboard", response_class=HTMLResponse)
+    def dashboard() -> str:
+        modules_payload = retriever.modules()
+        sites_payload = retriever.sites()
+        claims_payload = retriever.claims()
+        health_payload = {
+            "service": "black-albion-rag",
+            "status": "ok",
+            "documents": len(retriever.documents),
+        }
+        links = [
+            ("/health", "Health"),
+            ("/modules", "Modules"),
+            ("/sites", "Sites"),
+            ("/claims", "Claims"),
+            ("/map/layers", "Map Layers"),
+            ("/openapi.json", "OpenAPI JSON"),
+            ("/docs", "Swagger Docs"),
+        ]
+        link_items = "\n".join(
+            f'<li><a href="{escape(href)}">{escape(label)}</a></li>'
+            for href, label in links
+        )
+        status = escape(str(health_payload["status"]))
+        service = escape(str(health_payload["service"]))
+        documents = escape(str(health_payload["documents"]))
+        data_dir = escape(os.pathsep.join(str(d) for d in data_dirs))
+        return f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLACK ALBION RAG — Operator Dashboard</title>
+  <style>
+    body {{
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f6f4ef;
+      color: #1f2933;
+    }}
+    main {{
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 32px 20px 48px;
+    }}
+    h1 {{
+      margin: 0 0 8px;
+      font-size: 30px;
+    }}
+    .subtitle {{
+      margin: 0 0 28px;
+      color: #52606d;
+    }}
+    .grid {{
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }}
+    .panel {{
+      background: #ffffff;
+      border: 1px solid #d9e2ec;
+      border-radius: 8px;
+      padding: 18px;
+    }}
+    .metric {{
+      font-size: 32px;
+      font-weight: 700;
+    }}
+    .label {{
+      color: #52606d;
+      font-size: 14px;
+    }}
+    .ok {{
+      color: #146c43;
+      font-weight: 700;
+    }}
+    ul {{
+      margin: 10px 0 0;
+      padding-left: 20px;
+    }}
+    a {{
+      color: #1d4ed8;
+    }}
+  </style>
+</head>
+<body>
+  <main>
+    <h1>BLACK ALBION RAG — Operator Dashboard</h1>
+    <p class="subtitle">Read-only runtime view for local evidence retrieval operations.</p>
+
+    <section class="grid" aria-label="Runtime summary">
+      <div class="panel">
+        <div class="label">Health</div>
+        <div class="metric ok">{status}</div>
+        <p>{service}</p>
+      </div>
+      <div class="panel">
+        <div class="label">Modules</div>
+        <div class="metric">{len(modules_payload)}</div>
+      </div>
+      <div class="panel">
+        <div class="label">Sites</div>
+        <div class="metric">{len(sites_payload)}</div>
+      </div>
+      <div class="panel">
+        <div class="label">Claims</div>
+        <div class="metric">{len(claims_payload)}</div>
+      </div>
+    </section>
+
+    <section class="grid" aria-label="Operator links">
+      <div class="panel">
+        <h2>API Links</h2>
+        <ul>
+          {link_items}
+        </ul>
+      </div>
+      <div class="panel">
+        <h2>Enterprise GPT OS</h2>
+        <p>Status summary: manifest validator and eval runner are enforced by local validation and GitHub Actions.</p>
+        <p>Validation wrapper: <code>bash scripts/validate_enterprise_gpt_os.sh</code></p>
+      </div>
+      <div class="panel">
+        <h2>Release</h2>
+        <p>Current dashboard milestone: <strong>v0.3.0-planned</strong></p>
+        <p>Repo estate status: <code>REPO_ESTATE_AUDIT.md</code></p>
+      </div>
+      <div class="panel">
+        <h2>Data</h2>
+        <p>Documents indexed: <strong>{documents}</strong></p>
+        <p>Data directory: <code>{data_dir}</code></p>
+      </div>
+    </section>
+  </main>
+</body>
+</html>"""
 
     @app.get("/modules")
     def modules() -> List[Dict[str, Any]]:

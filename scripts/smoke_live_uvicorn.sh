@@ -153,6 +153,7 @@ probe_get  "export_modules" "/export/modules.json" 200
 probe_get  "export_claims" "/export/claims.json" 200
 probe_get  "search" "/search?q=Winchcombe" 200
 probe_get  "openapi" "/openapi.json" 200
+probe_get_body "dashboard" "/dashboard" 200 "Operator Dashboard"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

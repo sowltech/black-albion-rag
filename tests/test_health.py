@@ -58,6 +58,54 @@ class HealthTests(unittest.TestCase):
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
 
+    def test_dashboard_returns_read_only_operator_html(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_dir = Path(tmpdir) / "raw"
+            raw_dir.mkdir()
+            (raw_dir / "seed.json").write_text(
+                json.dumps(
+                    [
+                        {
+                            "module_id": "UK-RAG-MOD-DASH",
+                            "site_id": "dashboard_site",
+                            "name": "Dashboard Module",
+                            "title": "Dashboard Module",
+                            "tier": "I",
+                            "claim_id": "claim_dashboard_001",
+                            "claim_text": "Dashboard test claim.",
+                            "summary": "Dashboard test record.",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            os.environ["BLACK_ALBION_DATA_DIR"] = str(raw_dir)
+            try:
+                from backend.app.main import create_app
+
+                app = create_app()
+                client = TestClient(app)
+                resp = client.get("/dashboard")
+                self.assertEqual(200, resp.status_code)
+                self.assertIn("text/html", resp.headers["content-type"])
+                body = resp.text
+                self.assertIn("Operator Dashboard", body)
+                for path in (
+                    "/health",
+                    "/modules",
+                    "/sites",
+                    "/claims",
+                    "/map/layers",
+                    "/openapi.json",
+                    "/docs",
+                ):
+                    self.assertIn(f'href="{path}"', body)
+                self.assertIn("v0.3.0-planned", body)
+                self.assertIn("scripts/validate_enterprise_gpt_os.sh", body)
+            finally:
+                os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
