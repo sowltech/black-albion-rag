@@ -102,6 +102,9 @@ class HealthTests(unittest.TestCase):
                 ):
                     self.assertIn(f'href="{path}"', body)
                 self.assertIn("v0.3.0-planned", body)
+                self.assertIn("Latest release", body)
+                self.assertIn("v0.2 — Governed Runtime Proof", body)
+                self.assertIn("CHANGELOG.md", body)
                 self.assertIn("scripts/validate_enterprise_gpt_os.sh", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)

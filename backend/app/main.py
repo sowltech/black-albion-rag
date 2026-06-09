@@ -13,6 +13,7 @@ from __future__ import annotations
 from html import escape
 import os
 from pathlib import Path
+import re
 from typing import Any, Dict, List, Optional
 
 from fastapi import FastAPI, Query
@@ -33,6 +34,7 @@ from .retriever import BlackAlbionRetriever
 REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATA_DIR = REPO_ROOT / "data" / "raw"
 DEFAULT_INDEX_DIR = REPO_ROOT / "data" / "index"
+CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 
 
 def _resolve_data_dirs() -> List[Path]:
@@ -50,6 +52,34 @@ def _resolve_data_dirs() -> List[Path]:
             path = REPO_ROOT / piece
         dirs.append(path)
     return dirs or [DEFAULT_DATA_DIR]
+
+
+def _latest_release_metadata() -> Dict[str, str]:
+    """Return the latest local release metadata from CHANGELOG.md."""
+    fallback = {
+        "title": "v0.3.0-planned",
+        "date": "unreleased",
+        "source": "dashboard fallback",
+    }
+    if not CHANGELOG_PATH.exists():
+        return fallback
+
+    text = CHANGELOG_PATH.read_text(encoding="utf-8")
+    heading = re.search(r"^##\s+(.+)$", text, flags=re.MULTILINE)
+    if not heading:
+        return fallback
+
+    release_block = text[heading.end():]
+    next_heading = re.search(r"^##\s+", release_block, flags=re.MULTILINE)
+    if next_heading:
+        release_block = release_block[:next_heading.start()]
+
+    date_match = re.search(r"^Release date:\s*(.+)$", release_block, flags=re.MULTILINE)
+    return {
+        "title": heading.group(1).strip(),
+        "date": date_match.group(1).strip() if date_match else "unknown",
+        "source": "CHANGELOG.md",
+    }
 
 
 def create_app() -> FastAPI:
@@ -143,6 +173,7 @@ def create_app() -> FastAPI:
             "status": "ok",
             "documents": len(retriever.documents),
         }
+        release_metadata = _latest_release_metadata()
         links = [
             ("/health", "Health"),
             ("/modules", "Modules"),
@@ -160,6 +191,9 @@ def create_app() -> FastAPI:
         service = escape(str(health_payload["service"]))
         documents = escape(str(health_payload["documents"]))
         data_dir = escape(os.pathsep.join(str(d) for d in data_dirs))
+        release_title = escape(release_metadata["title"])
+        release_date = escape(release_metadata["date"])
+        release_source = escape(release_metadata["source"])
         escaped_query = escape(search_query, quote=True)
         escaped_question = escape(dashboard_question, quote=True)
         if search_query:
@@ -381,6 +415,9 @@ def create_app() -> FastAPI:
       </div>
       <div class="panel">
         <h2>Release</h2>
+        <p>Latest release: <strong>{release_title}</strong></p>
+        <p>Release date: <strong>{release_date}</strong></p>
+        <p>Release source: <code>{release_source}</code></p>
         <p>Current dashboard milestone: <strong>v0.3.0-planned</strong></p>
         <p>Repo estate status: <code>REPO_ESTATE_AUDIT.md</code></p>
       </div>
