@@ -117,6 +117,12 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("gemini_share_002_raw.md", body)
                 self.assertIn("Latest Intake Commit", body)
                 self.assertIn("Next Review Action", body)
+                self.assertIn("System Checks", body)
+                self.assertIn("Enterprise GPT OS Validation", body)
+                self.assertIn("Live Uvicorn Smoke", body)
+                self.assertIn("Manifest Validator", body)
+                self.assertIn("Eval Runner", body)
+                self.assertIn("Confirm latest CI on GitHub Actions", body)
                 self.assertIn("scripts/validate_enterprise_gpt_os.sh", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)

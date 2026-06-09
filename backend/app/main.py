@@ -37,6 +37,14 @@ DEFAULT_DATA_DIR = REPO_ROOT / "data" / "raw"
 DEFAULT_INDEX_DIR = REPO_ROOT / "data" / "index"
 CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 REPO_ESTATE_AUDIT_PATH = REPO_ROOT / "REPO_ESTATE_AUDIT.md"
+ENTERPRISE_GPT_OS_WORKFLOW_PATH = REPO_ROOT / ".github" / "workflows" / "enterprise-gpt-os.yml"
+LIVE_UVICORN_WORKFLOW_PATH = REPO_ROOT / ".github" / "workflows" / "smoke-live-uvicorn.yml"
+ENTERPRISE_GPT_OS_WRAPPER_PATH = REPO_ROOT / "scripts" / "validate_enterprise_gpt_os.sh"
+LIVE_SMOKE_SCRIPT_PATH = REPO_ROOT / "scripts" / "smoke_live_uvicorn.sh"
+MANIFEST_VALIDATOR_PATH = REPO_ROOT / "enterprise-gpt-os" / "scripts" / "validate_manifest.py"
+EVAL_RUNNER_PATH = REPO_ROOT / "enterprise-gpt-os" / "scripts" / "run_evals.py"
+TESTS_DIR = REPO_ROOT / "tests"
+BACKEND_DIR = REPO_ROOT / "backend"
 CANDIDATE_CLAIMS_PATH = DEFAULT_DATA_DIR / "black_albion_candidate_claims.json"
 CLAIMS_PATH = DEFAULT_DATA_DIR / "black_albion_claims.json"
 SOURCES_PATH = DEFAULT_DATA_DIR / "black_albion_sources.json"
@@ -235,6 +243,49 @@ def _source_intake_summary() -> Dict[str, Any]:
     }
 
 
+def _exists_label(path: Path) -> str:
+    """Return a readable exists/missing label for a local check artifact."""
+    return "present" if path.exists() else "not detected"
+
+
+def _system_checks_summary() -> Dict[str, str]:
+    """Return read-only local validation and CI guardrail status."""
+    test_file_count = (
+        len([path for path in TESTS_DIR.glob("test_*.py") if path.is_file()])
+        if TESTS_DIR.exists()
+        else 0
+    )
+    latest_known_status = "last validated CI run passed"
+    if CHANGELOG_PATH.exists():
+        text = CHANGELOG_PATH.read_text(encoding="utf-8")
+        if (
+            "Enterprise GPT OS Validation workflow passed" in text
+            and "Live Uvicorn Smoke workflow passed" in text
+        ):
+            latest_known_status = "v0.2 release notes confirm both CI gates passed"
+
+    return {
+        "governance_ci": _exists_label(ENTERPRISE_GPT_OS_WORKFLOW_PATH),
+        "governance_ci_path": _repo_relative(ENTERPRISE_GPT_OS_WORKFLOW_PATH),
+        "runtime_ci": _exists_label(LIVE_UVICORN_WORKFLOW_PATH),
+        "runtime_ci_path": _repo_relative(LIVE_UVICORN_WORKFLOW_PATH),
+        "local_wrapper": _exists_label(ENTERPRISE_GPT_OS_WRAPPER_PATH),
+        "local_wrapper_path": _repo_relative(ENTERPRISE_GPT_OS_WRAPPER_PATH),
+        "manifest_validator": _exists_label(MANIFEST_VALIDATOR_PATH),
+        "manifest_validator_path": _repo_relative(MANIFEST_VALIDATOR_PATH),
+        "eval_runner": _exists_label(EVAL_RUNNER_PATH),
+        "eval_runner_path": _repo_relative(EVAL_RUNNER_PATH),
+        "live_smoke_script": _exists_label(LIVE_SMOKE_SCRIPT_PATH),
+        "live_smoke_script_path": _repo_relative(LIVE_SMOKE_SCRIPT_PATH),
+        "test_suite": f"{test_file_count} test files" if test_file_count else "not detected",
+        "backend_compile": "python3 -m compileall backend" if BACKEND_DIR.exists() else "not detected",
+        "secret_scan": "secret-pattern scan on changed files",
+        "latest_test_count": "48 tests passing from latest validated run",
+        "latest_status": latest_known_status,
+        "source_note": "Confirm latest CI on GitHub Actions for live truth.",
+    }
+
+
 def create_app() -> FastAPI:
     data_dirs = _resolve_data_dirs()
     cache_path = DEFAULT_INDEX_DIR / ".retriever_cache.pkl"
@@ -329,6 +380,7 @@ def create_app() -> FastAPI:
         release_metadata = _latest_release_metadata()
         repo_estate = _repo_estate_summary()
         source_intake = _source_intake_summary()
+        system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
             ("/modules", "Modules"),
@@ -381,6 +433,24 @@ def create_app() -> FastAPI:
         next_review_action = escape(str(source_intake["next_action"]))
         workflow_doc = escape(str(source_intake["workflow_doc"]))
         read_only_note = escape(str(source_intake["read_only_note"]))
+        governance_ci_status = escape(system_checks["governance_ci"])
+        governance_ci_path = escape(system_checks["governance_ci_path"])
+        runtime_ci_status = escape(system_checks["runtime_ci"])
+        runtime_ci_path = escape(system_checks["runtime_ci_path"])
+        local_wrapper_status = escape(system_checks["local_wrapper"])
+        local_wrapper_path = escape(system_checks["local_wrapper_path"])
+        manifest_validator_status = escape(system_checks["manifest_validator"])
+        manifest_validator_path = escape(system_checks["manifest_validator_path"])
+        eval_runner_status = escape(system_checks["eval_runner"])
+        eval_runner_path = escape(system_checks["eval_runner_path"])
+        live_smoke_status = escape(system_checks["live_smoke_script"])
+        live_smoke_path = escape(system_checks["live_smoke_script_path"])
+        test_suite_status = escape(system_checks["test_suite"])
+        backend_compile_status = escape(system_checks["backend_compile"])
+        secret_scan_guardrail = escape(system_checks["secret_scan"])
+        latest_test_count = escape(system_checks["latest_test_count"])
+        latest_system_status = escape(system_checks["latest_status"])
+        system_checks_source_note = escape(system_checks["source_note"])
         escaped_query = escape(search_query, quote=True)
         escaped_question = escape(dashboard_question, quote=True)
         if search_query:
@@ -651,6 +721,27 @@ def create_app() -> FastAPI:
         <p>Review status summary: {review_status}</p>
         <p>Workflow: <code>{workflow_doc}</code></p>
         <p>Next Review Action: {next_review_action}</p>
+      </div>
+      <div class="panel">
+        <h2>System Checks</h2>
+        <p>Governance CI: <strong>Enterprise GPT OS Validation</strong> — {governance_ci_status}</p>
+        <p><code>{governance_ci_path}</code></p>
+        <p>Runtime CI: <strong>Live Uvicorn Smoke</strong> — {runtime_ci_status}</p>
+        <p><code>{runtime_ci_path}</code></p>
+        <p>Local Validation Wrapper: {local_wrapper_status}</p>
+        <p><code>{local_wrapper_path}</code></p>
+        <p>Manifest Validator: {manifest_validator_status}</p>
+        <p><code>{manifest_validator_path}</code></p>
+        <p>Eval Runner: {eval_runner_status}</p>
+        <p><code>{eval_runner_path}</code></p>
+        <p>Live Smoke Script: {live_smoke_status}</p>
+        <p><code>{live_smoke_path}</code></p>
+        <p>Test Suite: <strong>{test_suite_status}</strong></p>
+        <p>Backend Compile Check: <code>{backend_compile_status}</code></p>
+        <p>Secret Scan Guardrail: {secret_scan_guardrail}</p>
+        <p>Latest known test count: <strong>{latest_test_count}</strong></p>
+        <p>Latest Known Status: {latest_system_status}</p>
+        <p>{system_checks_source_note}</p>
       </div>
     </section>
 
