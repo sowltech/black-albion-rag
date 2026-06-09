@@ -1,14 +1,21 @@
 ---
 title: Gloucestershire Egyptian Intercept Intake Review
-status: quarantine_review
+status: source_hunting
 review_required: true
 canonical_ingestion_allowed: false
 raw_content_artifact: research/intake/gloucestershire_egypt_intercept_raw.md
+source_review_file: research/intake/gloucestershire_egypt_source_review.md
 proposed_target_file: backend/data/black_albion_sites.json
 date_reviewed: 2026-06-09
 risk_level: high_for_tier_i
 reason: high-claim mixed historical/speculative entry requires source verification before canonical data insertion
 ---
+
+> Source review in progress. See
+> [`gloucestershire_egypt_source_review.md`](gloucestershire_egypt_source_review.md)
+> for per-claim findings, candidate sources, factual corrections required
+> before promotion, and the standing promotion gate. No canonical ledger
+> has been modified.
 
 # Gloucestershire Egyptian Intercept Intake Review
 
