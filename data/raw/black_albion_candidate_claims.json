@@ -24,5 +24,101 @@
     "operator_approval_required": true,
     "created_at": "2026-06-08",
     "notes": "Gemini share was auth-walled/unavailable for extraction. No historical facts were promoted."
+  },
+  {
+    "candidate_id": "cand_gloucestershire_egypt_058",
+    "source_artifact": "research/intake/gloucestershire_egypt_intercept_raw.md",
+    "review_note": "research/intake/gloucestershire_egypt_intercept_review.md",
+    "origin_type": "manual_paste",
+    "origin_url": "",
+    "fetch_status": "manual",
+    "review_status": "quarantined",
+    "risk_level": "high",
+    "canonical_ingestion_allowed": false,
+    "proposed_target_file": "backend/data/black_albion_sites.json",
+    "reason": "high-claim mixed historical/speculative entry requires source verification before canonical data insertion",
+    "allowed_use": [
+      "Tier II inspiration",
+      "research lead generation",
+      "candidate source hunting"
+    ],
+    "forbidden_use": [
+      "Tier I sourcing",
+      "verified claim creation",
+      "claim promotion without independent sources",
+      "writing to data/raw/black_albion_sites.json"
+    ],
+    "related_modules": [],
+    "candidate_claims": [
+      {
+        "candidate_claim_id": "cand_claim_glos_egypt_001",
+        "claim_text": "A Gloucestershire-raised unit took part in the 1801 British campaign against Napoleonic forces in Egypt.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "required_sources": [
+          "TNA WO series despatches",
+          "regimental history of the relevant Gloucestershire formation"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_glos_egypt_002",
+        "claim_text": "Percival Marling received a Victoria Cross announced in the London Gazette in connection with the 1880s Sudan / Mahdist War.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "required_sources": [
+          "London Gazette issue, date, and page",
+          "campaign / theatre confirmation"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_glos_egypt_003",
+        "claim_text": "The 21st Royal Gloucestershire Hussars existed as a named formation with WWI mounted yeomanry and WWII Western Desert mechanised operational history.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "required_sources": [
+          "TNA WO war diaries",
+          "regimental history"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_glos_egypt_004",
+        "claim_text": "Gloucester Docks, Alexandria, and the Suez corridor were used by named Gloucestershire formations on dated operations.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "required_sources": [
+          "Gloucestershire Archives catalogue references",
+          "war diary entries naming the locations"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_glos_egypt_005",
+        "claim_text": "Memorial banners associated with a Gloucestershire regiment are stored in a cathedral vault.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "required_sources": [
+          "Gloucester Cathedral records",
+          "Soldiers of Gloucestershire Museum catalogue"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_glos_egypt_006",
+        "claim_text": "Symbolic framing of a 'Back-Badge Sensory Vector', 'Amenta Subsurface Core Extraction', and 'Trans-Continental Grid' counter-intelligence narrative.",
+        "tier_candidate": "III",
+        "source_status": "speculative_lens_only",
+        "required_sources": []
+      }
+    ],
+    "source_review_checklist": [
+      "verify 1801 Gloucestershire/Egypt campaign connection",
+      "verify 1884 Percival Marling London Gazette VC citation",
+      "verify 21st Royal Gloucestershire Hussars Western Desert / WWII references",
+      "verify Gloucester Docks / Alexandria / Suez connection",
+      "verify museum/archive/cathedral banner claims",
+      "separate documented military history from symbolic/speculative mapping"
+    ],
+    "required_action": "source_hunting",
+    "operator_approval_required": true,
+    "created_at": "2026-06-09",
+    "notes": "Manual paste proposed for `backend/data/black_albion_sites.json` (a path that does not exist in this repo). The live equivalent is `data/raw/black_albion_sites.json` which is the curated Tier I ledger. No canonical ledger was modified. Pasted record mixes Tier I-shaped military-history claims with Tier III speculative framing; both tiers preserved in the quarantined raw artifact, separated in the review note, and held behind the promotion gate in `docs/intake-review-workflow.md`."
   }
 ]
