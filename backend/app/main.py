@@ -35,6 +35,7 @@ REPO_ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_DATA_DIR = REPO_ROOT / "data" / "raw"
 DEFAULT_INDEX_DIR = REPO_ROOT / "data" / "index"
 CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
+REPO_ESTATE_AUDIT_PATH = REPO_ROOT / "REPO_ESTATE_AUDIT.md"
 
 
 def _resolve_data_dirs() -> List[Path]:
@@ -79,6 +80,69 @@ def _latest_release_metadata() -> Dict[str, str]:
         "title": heading.group(1).strip(),
         "date": date_match.group(1).strip() if date_match else "unknown",
         "source": "CHANGELOG.md",
+    }
+
+
+def _repo_estate_summary() -> Dict[str, Any]:
+    """Return repo estate summary values from REPO_ESTATE_AUDIT.md."""
+    fallback: Dict[str, Any] = {
+        "counts": {
+            "Total repos found": "46",
+            "COMPLETE / WORKING": "1",
+            "MOSTLY WORKING": "19",
+            "PARTIAL": "21",
+            "STALE": "1",
+            "BROKEN / NEEDS ATTENTION": "3",
+            "UNKNOWN": "1",
+        },
+        "gold_standard": "black-albion-rag",
+        "strongest": [
+            "black-albion-rag",
+            "sowltech-shinobi-orca",
+            "loopguard-engine",
+            "assetsourced",
+            "gcde-repo-v1",
+        ],
+        "attention": [
+            "OMNI-CORE",
+            "stepc-purchasegate",
+            "phoenix-voice-agent-engine.archived-2026-05-17",
+            "Sirius Nexus vault",
+            "claude-skills",
+        ],
+        "source": "dashboard fallback",
+    }
+    if not REPO_ESTATE_AUDIT_PATH.exists():
+        return fallback
+
+    text = REPO_ESTATE_AUDIT_PATH.read_text(encoding="utf-8")
+    counts = dict(fallback["counts"])
+    for key in counts:
+        match = re.search(rf"^- {re.escape(key)}:\s*(.+)$", text, flags=re.MULTILINE)
+        if match:
+            counts[key] = match.group(1).strip()
+
+    def section_items(section: str) -> List[str]:
+        heading = re.search(rf"^## {re.escape(section)}$", text, flags=re.MULTILINE)
+        if not heading:
+            return []
+        block = text[heading.end():]
+        next_heading = re.search(r"^##\s+", block, flags=re.MULTILINE)
+        if next_heading:
+            block = block[:next_heading.start()]
+        return [
+            match.group(1).strip()
+            for match in re.finditer(r"^\d+\.\s+`([^`]+)`", block, flags=re.MULTILINE)
+        ][:5]
+
+    strongest = section_items("Top 5 Strongest Repos") or fallback["strongest"]
+    attention = section_items("Top 5 Repos Needing Attention") or fallback["attention"]
+    return {
+        "counts": counts,
+        "gold_standard": "black-albion-rag",
+        "strongest": strongest,
+        "attention": attention,
+        "source": "REPO_ESTATE_AUDIT.md",
     }
 
 
@@ -174,6 +238,7 @@ def create_app() -> FastAPI:
             "documents": len(retriever.documents),
         }
         release_metadata = _latest_release_metadata()
+        repo_estate = _repo_estate_summary()
         links = [
             ("/health", "Health"),
             ("/modules", "Modules"),
@@ -194,6 +259,19 @@ def create_app() -> FastAPI:
         release_title = escape(release_metadata["title"])
         release_date = escape(release_metadata["date"])
         release_source = escape(release_metadata["source"])
+        repo_estate_counts = repo_estate["counts"]
+        repo_estate_rows = "\n".join(
+            f"<li>{escape(label)}: <strong>{escape(str(value))}</strong></li>"
+            for label, value in repo_estate_counts.items()
+        )
+        strongest_repos = "\n".join(
+            f"<li>{escape(repo)}</li>" for repo in repo_estate["strongest"]
+        )
+        attention_repos = "\n".join(
+            f"<li>{escape(repo)}</li>" for repo in repo_estate["attention"]
+        )
+        gold_standard_repo = escape(str(repo_estate["gold_standard"]))
+        repo_estate_source = escape(str(repo_estate["source"]))
         escaped_query = escape(search_query, quote=True)
         escaped_question = escape(dashboard_question, quote=True)
         if search_query:
@@ -425,6 +503,22 @@ def create_app() -> FastAPI:
         <h2>Data</h2>
         <p>Documents indexed: <strong>{documents}</strong></p>
         <p>Data directory: <code>{data_dir}</code></p>
+      </div>
+      <div class="panel">
+        <h2>Repo Estate</h2>
+        <p>Gold standard repo: <strong>{gold_standard_repo}</strong></p>
+        <ul>
+          {repo_estate_rows}
+        </ul>
+        <h3>Top 5 Strongest</h3>
+        <ol>
+          {strongest_repos}
+        </ol>
+        <h3>Top 5 Needing Attention</h3>
+        <ol>
+          {attention_repos}
+        </ol>
+        <p>Source: <code>{repo_estate_source}</code></p>
       </div>
     </section>
 

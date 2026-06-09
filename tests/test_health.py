@@ -105,6 +105,12 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("Latest release", body)
                 self.assertIn("v0.2 — Governed Runtime Proof", body)
                 self.assertIn("CHANGELOG.md", body)
+                self.assertIn("Repo Estate", body)
+                self.assertIn("Total repos found", body)
+                self.assertIn("black-albion-rag", body)
+                self.assertIn("sowltech-shinobi-orca", body)
+                self.assertIn("OMNI-CORE", body)
+                self.assertIn("REPO_ESTATE_AUDIT.md", body)
                 self.assertIn("scripts/validate_enterprise_gpt_os.sh", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)

@@ -155,6 +155,8 @@ probe_get  "search" "/search?q=Winchcombe" 200
 probe_get  "openapi" "/openapi.json" 200
 probe_get_body "dashboard" "/dashboard" 200 "Operator Dashboard"
 probe_get_body "dashboard_release" "/dashboard" 200 "Governed Runtime Proof"
+probe_get_body "dashboard_repo_estate" "/dashboard" 200 "Repo Estate"
+probe_get_body "dashboard_repo_gold" "/dashboard" 200 "black-albion-rag"
 probe_get_body "dashboard_search" "/dashboard?q=Winchcombe" 200 "Search Results"
 probe_get_body "dashboard_query" "/dashboard?query=What%20is%20Winchcombe" 200 "Query Result"
 probe_post "query" "/query" '{
