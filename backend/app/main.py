@@ -78,10 +78,16 @@ def create_app() -> FastAPI:
         )
 
     @app.get("/dashboard", response_class=HTMLResponse)
-    def dashboard() -> str:
+    def dashboard(q: Optional[str] = None) -> str:
         modules_payload = retriever.modules()
         sites_payload = retriever.sites()
         claims_payload = retriever.claims()
+        search_query = (q or "").strip()
+        search_results = (
+            retriever.search(search_query, k=10)
+            if search_query
+            else []
+        )
         health_payload = {
             "service": "black-albion-rag",
             "status": "ok",
@@ -104,6 +110,39 @@ def create_app() -> FastAPI:
         service = escape(str(health_payload["service"]))
         documents = escape(str(health_payload["documents"]))
         data_dir = escape(os.pathsep.join(str(d) for d in data_dirs))
+        escaped_query = escape(search_query, quote=True)
+        if search_query:
+            if search_results:
+                result_items = "\n".join(
+                    "<li>"
+                    f"<strong>{escape(item.title)}</strong> "
+                    f"<span>({escape(item.tier)})</span>"
+                    f"<p>{escape(item.excerpt)}</p>"
+                    "</li>"
+                    for item in search_results
+                )
+                search_section = f"""
+      <section class="panel">
+        <h2>Search Results</h2>
+        <p>Query: <strong>{escaped_query}</strong></p>
+        <p>Result count: <strong>{len(search_results)}</strong></p>
+        <ol class="results">
+          {result_items}
+        </ol>
+      </section>"""
+            else:
+                search_section = f"""
+      <section class="panel">
+        <h2>Search Results</h2>
+        <p>Query: <strong>{escaped_query}</strong></p>
+        <p>No results found.</p>
+      </section>"""
+        else:
+            search_section = """
+      <section class="panel">
+        <h2>Search</h2>
+        <p>Enter a search term to query sites, claims, and modules.</p>
+      </section>"""
         return f"""<!doctype html>
 <html lang="en">
 <head>
@@ -161,12 +200,51 @@ def create_app() -> FastAPI:
     a {{
       color: #1d4ed8;
     }}
+    form {{
+      display: flex;
+      gap: 10px;
+      margin: 18px 0 24px;
+    }}
+    input[type="search"] {{
+      flex: 1;
+      min-width: 0;
+      padding: 10px 12px;
+      border: 1px solid #bcccdc;
+      border-radius: 6px;
+      font: inherit;
+    }}
+    button {{
+      padding: 10px 14px;
+      border: 1px solid #1d4ed8;
+      border-radius: 6px;
+      background: #1d4ed8;
+      color: #ffffff;
+      font: inherit;
+      cursor: pointer;
+    }}
+    .results li {{
+      margin-bottom: 12px;
+    }}
+    .results p {{
+      margin: 4px 0 0;
+      color: #52606d;
+    }}
   </style>
 </head>
 <body>
   <main>
     <h1>BLACK ALBION RAG — Operator Dashboard</h1>
     <p class="subtitle">Read-only runtime view for local evidence retrieval operations.</p>
+
+    <form method="get" action="/dashboard" role="search">
+      <input
+        type="search"
+        name="q"
+        value="{escaped_query}"
+        placeholder="Search sites, claims, modules..."
+        aria-label="Search sites, claims, modules">
+      <button type="submit">Search</button>
+    </form>
 
     <section class="grid" aria-label="Runtime summary">
       <div class="panel">
@@ -211,6 +289,8 @@ def create_app() -> FastAPI:
         <p>Data directory: <code>{data_dir}</code></p>
       </div>
     </section>
+
+    {search_section}
   </main>
 </body>
 </html>"""

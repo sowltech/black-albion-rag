@@ -106,6 +106,49 @@ class HealthTests(unittest.TestCase):
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
 
+    def test_dashboard_search_renders_results(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_dir = Path(tmpdir) / "raw"
+            raw_dir.mkdir()
+            (raw_dir / "seed.json").write_text(
+                json.dumps(
+                    [
+                        {
+                            "id": "winchcombe_site_001",
+                            "tier": "I",
+                            "title": "Winchcombe Corridor",
+                            "summary": "Winchcombe appears in a dashboard search test record.",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+
+            os.environ["BLACK_ALBION_DATA_DIR"] = str(raw_dir)
+            try:
+                from backend.app.main import create_app
+
+                app = create_app()
+                client = TestClient(app)
+                resp = client.get("/dashboard?q=Winchcombe")
+                self.assertEqual(200, resp.status_code)
+                body = resp.text
+                self.assertIn("Search Results", body)
+                self.assertIn("Winchcombe", body)
+                self.assertIn("Result count", body)
+                for path in (
+                    "/health",
+                    "/modules",
+                    "/sites",
+                    "/claims",
+                    "/map/layers",
+                    "/openapi.json",
+                    "/docs",
+                ):
+                    self.assertIn(f'href="{path}"', body)
+            finally:
+                os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
 
 if __name__ == "__main__":  # pragma: no cover
     unittest.main()
