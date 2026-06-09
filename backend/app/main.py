@@ -11,6 +11,7 @@ Local-first: reads only ``data/raw/*.json`` from the repo (overridable via
 from __future__ import annotations
 
 from html import escape
+import json
 import os
 from pathlib import Path
 import re
@@ -36,6 +37,15 @@ DEFAULT_DATA_DIR = REPO_ROOT / "data" / "raw"
 DEFAULT_INDEX_DIR = REPO_ROOT / "data" / "index"
 CHANGELOG_PATH = REPO_ROOT / "CHANGELOG.md"
 REPO_ESTATE_AUDIT_PATH = REPO_ROOT / "REPO_ESTATE_AUDIT.md"
+CANDIDATE_CLAIMS_PATH = DEFAULT_DATA_DIR / "black_albion_candidate_claims.json"
+CLAIMS_PATH = DEFAULT_DATA_DIR / "black_albion_claims.json"
+SOURCES_PATH = DEFAULT_DATA_DIR / "black_albion_sources.json"
+MODULE_EXPANSION_DOC_PATH = REPO_ROOT / "docs" / "black-albion-module-expansion.md"
+INTAKE_REVIEW_WORKFLOW_PATH = REPO_ROOT / "docs" / "intake-review-workflow.md"
+RESEARCH_INTAKE_DIR = REPO_ROOT / "research" / "intake"
+RESEARCH_REVIEW_QUEUE_DIR = REPO_ROOT / "research" / "review_queue"
+RESEARCH_REVIEWED_DIR = REPO_ROOT / "research" / "reviewed"
+RESEARCH_REJECTED_DIR = REPO_ROOT / "research" / "rejected"
 
 
 def _resolve_data_dirs() -> List[Path]:
@@ -146,6 +156,85 @@ def _repo_estate_summary() -> Dict[str, Any]:
     }
 
 
+def _repo_relative(path: Path) -> str:
+    """Return a stable repo-relative display path."""
+    try:
+        return str(path.relative_to(REPO_ROOT))
+    except ValueError:
+        return str(path)
+
+
+def _visible_files(path: Path) -> List[str]:
+    """Return visible file paths from a local folder without mutating it."""
+    if not path.exists() or not path.is_dir():
+        return []
+    return sorted(
+        _repo_relative(item)
+        for item in path.iterdir()
+        if item.is_file() and not item.name.startswith(".")
+    )
+
+
+def _json_array_count(path: Path) -> str:
+    """Return a safe count for a JSON array ledger."""
+    if not path.exists():
+        return "not detected"
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return "manual review required"
+    if not isinstance(payload, list):
+        return "manual review required"
+    return str(len(payload))
+
+
+def _source_intake_summary() -> Dict[str, Any]:
+    """Return a read-only source/intake review summary for the dashboard."""
+    quarantine_files = _visible_files(RESEARCH_INTAKE_DIR)
+    review_queue_files = _visible_files(RESEARCH_REVIEW_QUEUE_DIR)
+    reviewed_files = _visible_files(RESEARCH_REVIEWED_DIR)
+    rejected_files = _visible_files(RESEARCH_REJECTED_DIR)
+    claims_sources = [
+        _repo_relative(path)
+        for path in (CLAIMS_PATH, SOURCES_PATH, CANDIDATE_CLAIMS_PATH)
+        if path.exists()
+    ]
+    tier_one_files = [
+        _repo_relative(path)
+        for path in (SOURCES_PATH, MODULE_EXPANSION_DOC_PATH)
+        if path.exists()
+    ]
+    total_items = _json_array_count(CANDIDATE_CLAIMS_PATH)
+    review_status = (
+        "Candidate ledger present; Gemini Share 002 remains quarantined; "
+        "live claims/modules/sources require independent Tier I sources before promotion."
+        if CANDIDATE_CLAIMS_PATH.exists()
+        else "Candidate ledger not detected; manual review required."
+    )
+    return {
+        "intake_queue_path": _repo_relative(CANDIDATE_CLAIMS_PATH),
+        "total_items": total_items,
+        "quarantine_files": quarantine_files,
+        "review_queue_count": len(review_queue_files),
+        "reviewed_count": len(reviewed_files),
+        "rejected_count": len(rejected_files),
+        "tier_one_files": tier_one_files,
+        "claims_sources": claims_sources,
+        "latest_intake_commit": "0442d86 feat: add black albion intake review queue",
+        "review_status": review_status,
+        "workflow_doc": (
+            _repo_relative(INTAKE_REVIEW_WORKFLOW_PATH)
+            if INTAKE_REVIEW_WORKFLOW_PATH.exists()
+            else "not detected"
+        ),
+        "next_action": (
+            "Review quarantined intake manually, split any candidate material into "
+            "item-level statements, and source independently before promotion."
+        ),
+        "read_only_note": "read-only status panel; no intake files are modified.",
+    }
+
+
 def create_app() -> FastAPI:
     data_dirs = _resolve_data_dirs()
     cache_path = DEFAULT_INDEX_DIR / ".retriever_cache.pkl"
@@ -239,6 +328,7 @@ def create_app() -> FastAPI:
         }
         release_metadata = _latest_release_metadata()
         repo_estate = _repo_estate_summary()
+        source_intake = _source_intake_summary()
         links = [
             ("/health", "Health"),
             ("/modules", "Modules"),
@@ -272,6 +362,25 @@ def create_app() -> FastAPI:
         )
         gold_standard_repo = escape(str(repo_estate["gold_standard"]))
         repo_estate_source = escape(str(repo_estate["source"]))
+        quarantine_items = "\n".join(
+            f"<li>{escape(item)}</li>" for item in source_intake["quarantine_files"]
+        ) or "<li>not detected</li>"
+        tier_one_source_items = "\n".join(
+            f"<li>{escape(item)}</li>" for item in source_intake["tier_one_files"]
+        ) or "<li>not detected</li>"
+        claims_source_items = "\n".join(
+            f"<li>{escape(item)}</li>" for item in source_intake["claims_sources"]
+        ) or "<li>not detected</li>"
+        intake_queue_path = escape(str(source_intake["intake_queue_path"]))
+        intake_total_items = escape(str(source_intake["total_items"]))
+        review_queue_count = escape(str(source_intake["review_queue_count"]))
+        reviewed_count = escape(str(source_intake["reviewed_count"]))
+        rejected_count = escape(str(source_intake["rejected_count"]))
+        latest_intake_commit = escape(str(source_intake["latest_intake_commit"]))
+        review_status = escape(str(source_intake["review_status"]))
+        next_review_action = escape(str(source_intake["next_action"]))
+        workflow_doc = escape(str(source_intake["workflow_doc"]))
+        read_only_note = escape(str(source_intake["read_only_note"]))
         escaped_query = escape(search_query, quote=True)
         escaped_question = escape(dashboard_question, quote=True)
         if search_query:
@@ -519,6 +628,29 @@ def create_app() -> FastAPI:
           {attention_repos}
         </ol>
         <p>Source: <code>{repo_estate_source}</code></p>
+      </div>
+      <div class="panel">
+        <h2>Source / Intake Review</h2>
+        <p><strong>{read_only_note}</strong></p>
+        <p>Intake Queue: <code>{intake_queue_path}</code></p>
+        <p>Total intake/review items: <strong>{intake_total_items}</strong></p>
+        <p>Review queue: <strong>{review_queue_count}</strong> pending, <strong>{reviewed_count}</strong> reviewed, <strong>{rejected_count}</strong> rejected.</p>
+        <h3>Quarantine</h3>
+        <ul>
+          {quarantine_items}
+        </ul>
+        <h3>Tier One Sources</h3>
+        <ul>
+          {tier_one_source_items}
+        </ul>
+        <h3>Claims / Sources</h3>
+        <ul>
+          {claims_source_items}
+        </ul>
+        <p>Latest Intake Commit: <code>{latest_intake_commit}</code></p>
+        <p>Review status summary: {review_status}</p>
+        <p>Workflow: <code>{workflow_doc}</code></p>
+        <p>Next Review Action: {next_review_action}</p>
       </div>
     </section>
 

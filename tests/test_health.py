@@ -111,6 +111,12 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("sowltech-shinobi-orca", body)
                 self.assertIn("OMNI-CORE", body)
                 self.assertIn("REPO_ESTATE_AUDIT.md", body)
+                self.assertIn("Source / Intake Review", body)
+                self.assertIn("read-only", body)
+                self.assertIn("black_albion_candidate_claims.json", body)
+                self.assertIn("gemini_share_002_raw.md", body)
+                self.assertIn("Latest Intake Commit", body)
+                self.assertIn("Next Review Action", body)
                 self.assertIn("scripts/validate_enterprise_gpt_os.sh", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
