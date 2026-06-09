@@ -67,6 +67,46 @@ def create_app() -> FastAPI:
         ),
     )
 
+    def _run_query(payload: QueryRequest) -> QueryResponse:
+        evidence = retriever.search(
+            payload.question,
+            k=payload.k,
+            include_tiers=payload.include_tiers,
+        )
+        prompts = build_prompt(payload.question, evidence)
+        answer = (
+            generate_answer(payload.question, evidence)
+            if payload.generate_answer
+            else ""
+        )
+
+        breakdown = TierBreakdown(
+            tier_i=sum(1 for e in evidence if e.tier == "I"),
+            tier_ii=sum(1 for e in evidence if e.tier == "II"),
+            tier_iii=sum(1 for e in evidence if e.tier == "III"),
+        )
+
+        return QueryResponse(
+            question=payload.question,
+            document_count=len(retriever.documents),
+            evidence_count=len(evidence),
+            tier_breakdown=breakdown,
+            evidence=[
+                EvidenceItem(
+                    source_file=item.source_file,
+                    record_id=item.record_id,
+                    title=item.title,
+                    tier=item.tier,  # type: ignore[arg-type]
+                    score=item.score,
+                    excerpt=item.excerpt,
+                    metadata=item.metadata,
+                )
+                for item in evidence
+            ],
+            prompts=prompts,
+            answer=answer,
+        )
+
     @app.get("/health", response_model=HealthResponse)
     def health() -> HealthResponse:
         return HealthResponse(
@@ -78,7 +118,11 @@ def create_app() -> FastAPI:
         )
 
     @app.get("/dashboard", response_class=HTMLResponse)
-    def dashboard(q: Optional[str] = None) -> str:
+    def dashboard(
+        q: Optional[str] = None,
+        query: Optional[str] = None,
+        question: Optional[str] = None,
+    ) -> str:
         modules_payload = retriever.modules()
         sites_payload = retriever.sites()
         claims_payload = retriever.claims()
@@ -87,6 +131,12 @@ def create_app() -> FastAPI:
             retriever.search(search_query, k=10)
             if search_query
             else []
+        )
+        dashboard_question = (query or question or "").strip()
+        query_result = (
+            _run_query(QueryRequest(question=dashboard_question))
+            if len(dashboard_question) >= 3
+            else None
         )
         health_payload = {
             "service": "black-albion-rag",
@@ -111,6 +161,7 @@ def create_app() -> FastAPI:
         documents = escape(str(health_payload["documents"]))
         data_dir = escape(os.pathsep.join(str(d) for d in data_dirs))
         escaped_query = escape(search_query, quote=True)
+        escaped_question = escape(dashboard_question, quote=True)
         if search_query:
             if search_results:
                 result_items = "\n".join(
@@ -142,6 +193,46 @@ def create_app() -> FastAPI:
       <section class="panel">
         <h2>Search</h2>
         <p>Enter a search term to query sites, claims, and modules.</p>
+      </section>"""
+        if dashboard_question:
+            if query_result and query_result.answer:
+                source_items = "\n".join(
+                    "<li>"
+                    f"<strong>{escape(item.title)}</strong> "
+                    f"<span>({escape(item.tier)})</span>"
+                    f"<p>{escape(item.excerpt)}</p>"
+                    "</li>"
+                    for item in query_result.evidence[:5]
+                )
+                sources_html = (
+                    f"""
+        <h3>Supporting Matches</h3>
+        <ol class="results">
+          {source_items}
+        </ol>"""
+                    if source_items
+                    else "<p>No supporting matches returned.</p>"
+                )
+                query_section = f"""
+      <section class="panel">
+        <h2>Query Result</h2>
+        <p>Question: <strong>{escaped_question}</strong></p>
+        <p>{escape(query_result.answer)}</p>
+        <p>Supporting matches: <strong>{query_result.evidence_count}</strong></p>
+        {sources_html}
+      </section>"""
+            else:
+                query_section = f"""
+      <section class="panel">
+        <h2>Query Result</h2>
+        <p>Question: <strong>{escaped_question}</strong></p>
+        <p>No answer generated.</p>
+      </section>"""
+        else:
+            query_section = """
+      <section class="panel">
+        <h2>Ask</h2>
+        <p>Submit a question to run the existing read-only query workflow.</p>
       </section>"""
         return f"""<!doctype html>
 <html lang="en">
@@ -246,6 +337,16 @@ def create_app() -> FastAPI:
       <button type="submit">Search</button>
     </form>
 
+    <form method="get" action="/dashboard">
+      <input
+        type="search"
+        name="query"
+        value="{escaped_question}"
+        placeholder="Ask Black Albion RAG..."
+        aria-label="Ask Black Albion RAG">
+      <button type="submit">Ask</button>
+    </form>
+
     <section class="grid" aria-label="Runtime summary">
       <div class="panel">
         <div class="label">Health</div>
@@ -291,6 +392,7 @@ def create_app() -> FastAPI:
     </section>
 
     {search_section}
+    {query_section}
   </main>
 </body>
 </html>"""
@@ -411,44 +513,7 @@ def create_app() -> FastAPI:
 
     @app.post("/query", response_model=QueryResponse)
     def query(payload: QueryRequest) -> QueryResponse:
-        evidence = retriever.search(
-            payload.question,
-            k=payload.k,
-            include_tiers=payload.include_tiers,
-        )
-        prompts = build_prompt(payload.question, evidence)
-        answer = (
-            generate_answer(payload.question, evidence)
-            if payload.generate_answer
-            else ""
-        )
-
-        breakdown = TierBreakdown(
-            tier_i=sum(1 for e in evidence if e.tier == "I"),
-            tier_ii=sum(1 for e in evidence if e.tier == "II"),
-            tier_iii=sum(1 for e in evidence if e.tier == "III"),
-        )
-
-        return QueryResponse(
-            question=payload.question,
-            document_count=len(retriever.documents),
-            evidence_count=len(evidence),
-            tier_breakdown=breakdown,
-            evidence=[
-                EvidenceItem(
-                    source_file=item.source_file,
-                    record_id=item.record_id,
-                    title=item.title,
-                    tier=item.tier,  # type: ignore[arg-type]
-                    score=item.score,
-                    excerpt=item.excerpt,
-                    metadata=item.metadata,
-                )
-                for item in evidence
-            ],
-            prompts=prompts,
-            answer=answer,
-        )
+        return _run_query(payload)
 
     return app
 
