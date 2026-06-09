@@ -198,6 +198,114 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   and held a Gloucestershire baronetcy. Conflating those into a single
   "Gloucestershire regimental VC" statement would be a Tier I error.
 
+#### Claim 2 — Source attachment pass (2026-06-09)
+
+- **source_attachments**:
+  - **The London Gazette — Issue `25356`, page `2278`, published
+    21 May 1884**
+    (<https://www.thegazette.co.uk/London/issue/25356/page/2278>).
+    Primary state-published record. Confirmed by direct The Gazette
+    notice-search lookup against the 21 May 1884 publication date.
+    The Gazette notice-search excerpt for this page returns text
+    matching the recognised Marling VC citation, including the
+    fragment "Morley, Royal Sussex Regiment, who, having been shot,
+    was lifted and placed in front of Lieutenant Marling on his
+    horse." The full notice body sits in The Gazette's PDF/image
+    layer rather than the HTML; operator approval is recommended
+    before quoting the full citation text in any canonical ledger.
+  - **britishempire.co.uk — Lieutenant Percival S Marling VC, King's
+    Royal Rifle Corps**
+    (<https://www.britishempire.co.uk/forces/armyunits/britishinfantry/krrcmarling.htm>).
+    Reputable secondary regimental-history source. Quoted phrasing:
+    VC action "13th March 1884" at "the battle of Tamai in the
+    Sudan"; regiment "3rd Battalion King's Royal Rifle Corps"; life
+    dates born "6th Mar 1861", died "29th May 1936"; Gloucestershire
+    connection: born "at King's Stanley, Stroud in Gloucestershire",
+    later "appointed High Sheriff of The County of Gloucester in
+    1928", died "at Stanley Park, Stroud".
+  - **victoriacross.org.uk — KRRC Victoria Cross page**
+    (<http://www.victoriacross.org.uk/cckrrc.htm>). Reputable VC roll
+    source. Records Marling as "Colonel Sir Percival Scrope Marling
+    Bt, VC CB", regiment "60th Rifles (King's Royal Rifle Corps)",
+    and identifies the medal as held at the "Lord Ashcroft Gallery,
+    Imperial War Museum".
+  - **Victoria Cross and George Cross Association — Percival Scrope
+    Marling profile**
+    (<https://vcgca.org/our-people/profile/1264/Percival-Scrope-MARLING>).
+    Institutional VC association roll entry confirming identity and
+    VC status; biographical fields not extracted in this pass.
+- **source_quality**: one primary record (The London Gazette issue
+  `25356`, page `2278`, 21 May 1884), one reputable regimental-history
+  page (britishempire.co.uk) with the dated action and regiment, one
+  VC-roll source (victoriacross.org.uk) corroborating the KRRC
+  affiliation under its historical "60th Rifles" name, and one
+  institutional VC-association entry. Together these are sufficient to
+  pin: date of action (13 March 1884), place (Battle of Tamai, Sudan),
+  Marling's regiment (King's Royal Rifle Corps / 3rd Battalion / "60th
+  Rifles"), Gazette issue and page (25356 / 2278 / 21 May 1884), and
+  the saved soldier (Private Morley, Royal Sussex Regiment).
+- **correction_notes**:
+  - The pasted record framed the Marling VC as a Gloucestershire
+    regimental honour. **The corrected position is that Marling was a
+    King's Royal Rifle Corps officer at the time of the VC act.**
+    Any Gloucestershire connection is **familial / territorial** —
+    Marling baronetcy of Stanley Park and Sedbury Park in the County
+    of Gloucester, plus Deputy Lieutenant / High Sheriff roles for
+    the county — not regimental.
+  - The pasted record dated the event as "1884 CE Mahdist War Phase"
+    in a broad way. The dated action is **13 March 1884 at the Battle
+    of Tamai, Sudan**, with the **London Gazette citation published
+    21 May 1884 (Issue 25356, page 2278)**.
+  - The soldier saved by Marling was **Private Morley, Royal Sussex
+    Regiment**, not a Gloucestershire soldier.
+- **citation_notes**:
+  - Cite The London Gazette **issue 25356, page 2278, 21 May 1884**
+    as the primary record. Direct quotation of the citation text into
+    any canonical ledger should be confirmed against the Gazette PDF
+    image rather than the HTML notice excerpt.
+  - Cite the britishempire.co.uk page as a reputable regimental-history
+    secondary source for the dated action, place, regiment, and life
+    dates.
+  - Cite victoriacross.org.uk as the VC-roll source identifying the
+    regiment as "60th Rifles (King's Royal Rifle Corps)".
+  - Cite the VCGCA institutional roll entry for VC status confirmation.
+  - **Do not** cite Wikipedia as primary.
+  - **Do not** treat the pasted record's framing as historical
+    authority — it must be rewritten before any Tier I promotion.
+- **remaining_gaps**:
+  - The full verbatim VC citation text is in The Gazette page
+    `25356/2278` PDF/image layer; only a search-snippet fragment was
+    confirmable in this pass. Operator approval should follow a fetch
+    of the PDF if the verbatim citation is to be quoted in any
+    canonical ledger.
+  - A minor sub-fact discrepancy on the date of Marling's High
+    Sheriff appointment for Gloucestershire was surfaced across
+    sources: the British Empire page gives "1928" while an earlier
+    Wikipedia-derived summary surfaced in the prior review pass gave
+    "1923". This sub-fact is not load-bearing for the VC claim but
+    must be resolved against a primary source (e.g. London Gazette
+    appointment notice) before any Gloucestershire-county Tier I
+    statement quotes a specific year.
+  - The exact battalion identifier ("3rd Battalion King's Royal Rifle
+    Corps") is confirmed only by the britishempire.co.uk page; cross
+    confirmation from a regimental archive (Royal Green Jackets
+    Museum or equivalent) would tighten the case.
+  - No National Archives WO-series catalogue reference attached.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "Lieutenant Percival Scrope Marling, 3rd Battalion King's Royal
+  > Rifle Corps, was awarded the Victoria Cross for an act on
+  > 13 March 1884 at the Battle of Tamai (Sudan) during the Mahdist
+  > War. The award was gazetted in The London Gazette of 21 May 1884
+  > (Issue 25356, page 2278). The Gloucestershire connection is
+  > territorial / familial (Marling baronetcy of Stanley Park and
+  > Sedbury Park in the County of Gloucester; later Deputy Lieutenant
+  > and High Sheriff of Gloucestershire), not regimental."
+- **promotion_readiness**: nearly_ready (subject to operator-approved
+  rewrite of the original claim text to the corrected version above
+  and operator-led confirmation of the Gazette PDF citation text).
+
 ---
 
 ### Claim 3 — Royal Gloucestershire Hussars WWI/WWII war diary references
@@ -449,6 +557,41 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   precise location of the laid-up Colours (chapel / ambulatory).
 - Claims 2, 3, 4, 6 — not touched in this attachment pass; their
   statuses remain as set in the original review pass above.
+- Canonical ledgers (`data/raw/black_albion_sites.json`,
+  `data/raw/black_albion_claims.json`,
+  `data/raw/black_albion_modules.json`,
+  `data/raw/black_albion_sources.json`) — unchanged.
+
+## Source Attachment Pass — 2026-06-09 (Claim 2)
+
+- Targeted attachment pass on Claim 2 (Percival Marling VC / London
+  Gazette citation) per operator instruction.
+- Primary state-published record attached: **The London Gazette,
+  Issue `25356`, page `2278`, published 21 May 1884**, identified by
+  direct The Gazette notice-search lookup against the 21 May 1884
+  publication date. The Gazette HTML notice excerpt contains the
+  recognised Marling VC citation fragment matching the historical
+  record. Verbatim citation text sits in the Gazette PDF/image layer
+  and is not auto-quoted into the worksheet; operator approval is
+  recommended before any verbatim Tier I quotation.
+- Three reputable secondary sources attached for regiment, date,
+  place, life dates, and territorial / familial Gloucestershire
+  connection (britishempire.co.uk KRRC page, victoriacross.org.uk
+  KRRC roll, VCGCA roll profile).
+- **Correction confirmed**: Marling was a King's Royal Rifle Corps
+  officer at the time of the VC act (3rd Battalion KRRC / historical
+  "60th Rifles"). The Gloucestershire connection is **territorial /
+  familial** (Marling baronetcy of Stanley Park and Sedbury Park in
+  the County of Gloucester; later Deputy Lieutenant and High Sheriff
+  of Gloucestershire), not regimental.
+- **original_claim_status**: requires_correction. A
+  `corrected_claim_text` draft has been recorded in the Claim 2
+  section above as operator-review material only.
+- Promotion readiness: **nearly_ready** (subject to operator-approved
+  rewrite of the original claim text to the corrected version and a
+  Gazette PDF confirmation of the verbatim citation text).
+- Claims 1, 3, 4, 5, 6 — not touched in this pass; their statuses
+  remain as set in the previous passes above.
 - Canonical ledgers (`data/raw/black_albion_sites.json`,
   `data/raw/black_albion_claims.json`,
   `data/raw/black_albion_modules.json`,
