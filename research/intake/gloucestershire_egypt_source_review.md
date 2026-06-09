@@ -82,6 +82,69 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   the specific antecedent regiment (28th (North Gloucestershire) Regiment of
   Foot, later Gloucestershire Regiment) and the dated engagement.
 
+#### Claim 1 — Source attachment pass (2026-06-09)
+
+- **source_attachments**:
+  - **National Army Museum — 28th (North Gloucestershire) Regiment of Foot**
+    (<https://www.nam.ac.uk/explore/28th-north-gloucestershire-regiment-foot>).
+    Institutional page. Quoted phrasing: the regiment "landed in Egypt in
+    1801"; explicit reference to "The Battle of Alexandria, 1801" with the
+    dated framing "Battle of Alexandria, 21 March 1801"; tactical
+    description that the regiment "simultaneously beat off cavalry attacks
+    on both sides of its line at Alexandria"; back-badge origin stated as
+    "This feat earned the unit the distinction of wearing a cap badge on
+    the front and the Egyptian sphinx on the back of its headdress". Page
+    also records regimental lineage: raised 1694, designated 28th
+    Regiment of Foot 1751, territorial association granted 1782, merged
+    with the 61st (South Gloucestershire) Regiment of Foot in 1881 to
+    form The Gloucestershire Regiment.
+  - **Imperial War Museums — Gloucestershire Regiment back badge object
+    record, IWM accession `INS 5713`**
+    (<https://www.iwm.org.uk/collections/item/object/30076245>).
+    Institutional object record. Quoted phrasing: badge commemorates
+    "the Battle of Alexandria, 21 March 1801"; both parent regiments
+    "had been awarded the Sphinx distinction for their service in Egypt
+    in 1801-2"; inscriptions on the badge are "Egypt" and
+    "Gloucestershire".
+  - **Soldiers of Gloucestershire Museum — The Gloucestershire Regiment
+    page** (<https://soldiersofglos.com/the-gloucestershire-regiment/>).
+    Institutional museum page. Quoted phrasing: "an honour won by the
+    28th Regiment when it fought in two ranks back to back at the Battle
+    of Alexandria in 1801"; back-badge "unique privilege in the British
+    Army of wearing a badge on the back of its headdress as well as the
+    front"; tradition passed to The Rifles in 2007.
+- **source_quality**: three independent institutional sources (NAM, IWM,
+  Soldiers of Gloucestershire Museum). All three agree on the unit
+  (28th (North Gloucestershire) Regiment of Foot), the date and place
+  (Battle of Alexandria, 21 March 1801), and the back-badge origin. IWM
+  object record provides a citeable accession number (`INS 5713`).
+- **citation_notes**:
+  - Cite the NAM page as the regimental-history overview.
+  - Cite the IWM object record with the accession `INS 5713` for the
+    badge artefact and the "Egypt" / "Gloucestershire" inscription.
+  - Cite the Soldiers of Gloucestershire Museum page for the back-to-back
+    formation phrasing and the back-badge inheritance through Glos Regt
+    → RGBW → The Rifles.
+  - Do not cite Wikipedia or the GCCC (cricket-club) Heritage Trust page
+    as primary; the cricket-club page describes 2006 club adoption of
+    the symbol, not the military origin.
+- **remaining_gaps**:
+  - No primary archival despatch or general-order has been attached
+    (e.g. The National Archives WO 1 / WO 28 series or General Orders
+    of 1801) — institutional sources are sufficient for the candidate
+    claim but the operator may want a TNA reference before any Tier I
+    promotion.
+  - The formal-approval year for the back-badge as a War Office
+    distinction is not fixed by a single sourced statement here; the
+    institutional consensus is that the distinction post-dates Alexandria
+    and was later regularised, but a precise War Office order reference
+    is still required if that level of detail is promoted.
+- **promotion_readiness**: nearly_ready. Three institutional sources
+  align on the core facts (unit, date, place, back-badge origin) and
+  one provides a citeable artefact accession. Operator approval still
+  required, and a TNA primary-source citation would tighten the case
+  before any Tier I write.
+
 ---
 
 ### Claim 2 — Percival Marling VC / London Gazette citation
@@ -269,6 +332,63 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
 - **notes**: This is the most cleanly supported Tier I-candidate item, but
   language fidelity matters before promotion.
 
+#### Claim 5 — Source attachment pass (2026-06-09)
+
+- **source_attachments**:
+  - **Soldiers of Gloucestershire Museum — Presentation of New Colours
+    1976 announcement**
+    (<https://soldiersofglos.com/announcement/presentation-of-new-colours-1976/>).
+    Institutional museum source. Records that on Sunday 25 April 1976
+    the old Colours of the 1st Battalion The Gloucestershire Regiment
+    were "laid up in Gloucester Cathedral" and placed "on the Altar",
+    and that the new Colours were presented on 26 April 1976 in
+    Gloucester Park. Quoted phrasing: "These consecrated Colours,
+    formerly carried on the service of the Queen and Commonwealth, I
+    now deliver into your hands for safe custody". Confirms the
+    institutional vocabulary "laid up" rather than "stored in a vault".
+  - **National Army Museum — 28th (North Gloucestershire) Regiment of
+    Foot** (<https://www.nam.ac.uk/explore/28th-north-gloucestershire-regiment-foot>)
+    and **Imperial War Museums — Gloucestershire Regiment back badge,
+    accession `INS 5713`**
+    (<https://www.iwm.org.uk/collections/item/object/30076245>).
+    Institutional context for the regiments (28th and 61st of Foot,
+    later Gloucestershire Regiment) whose Colours are laid up at
+    Gloucester Cathedral.
+- **source_quality**: one direct institutional source (Soldiers of
+  Gloucestershire Museum) provides the "laid up" language and a dated
+  1976 ceremony at Gloucester Cathedral; supporting institutional
+  context from NAM and IWM. A Gloucester Cathedral page or Cathedral
+  guidebook describing the precise location of the laid-up Colours
+  (e.g. North Ambulatory / St Edmund's Chapel) was not directly
+  attached in this pass and remains a remaining gap.
+- **citation_notes**:
+  - Cite the Soldiers of Gloucestershire Museum 1976 announcement as
+    the institutional source for the "laid up" language and a dated
+    cathedral ceremony.
+  - When the cathedral page can be attached, cite Gloucester Cathedral
+    directly for the location within the building (the precise chapel
+    / ambulatory) rather than relying on a paraphrase.
+  - Do not cite Wikipedia as primary.
+  - Do not cite the pasted record's "stored in a vault" language; use
+    the institutional "laid up" wording.
+- **remaining_gaps**:
+  - No directly attached Gloucester Cathedral institutional page for
+    the precise location of the laid-up Colours within the cathedral
+    (e.g. North Ambulatory / St Edmund's Chapel / County War Memorial
+    Chapel). One previously surfaced URL (Gloucester BID) returned
+    HTTP 404 on direct fetch in this pass and is therefore not
+    attached.
+  - No directly attached primary source for the claim that the
+    Gloucester Cathedral concentration is "the largest single
+    concentration anywhere"; that phrasing was paraphrased in earlier
+    discovery and is excluded from this pass until a direct
+    institutional source is attached.
+- **promotion_readiness**: nearly_ready. The "laid up" language is now
+  source-backed against an institutional museum announcement with a
+  dated ceremony. Cathedral-side location precision (chapel /
+  ambulatory) is still missing. Operator approval still required, and
+  the Cathedral institutional source is the recommended next attach.
+
 ---
 
 ### Claim 6 — Tier III speculative lens separation
@@ -310,6 +430,29 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
 - 0 claims promoted. 0 canonical ledgers modified.
 - Tier III speculative material remains explicitly Tier III; no Tier I
   promotion under any circumstance.
+
+## Source Attachment Pass — 2026-06-09
+
+- Targeted attachment pass on the two cleanest candidates per operator
+  instruction: Claim 1 and Claim 5.
+- Claim 1 — three institutional sources attached (NAM regimental page,
+  IWM object record `INS 5713`, Soldiers of Gloucestershire Museum
+  regimental page). Promotion readiness: **nearly_ready**. Remaining
+  gap: a TNA primary-source despatch / general-order reference would
+  tighten the case if the operator chooses to demand primary-source
+  citation before any Tier I write.
+- Claim 5 — one direct institutional source attached (Soldiers of
+  Gloucestershire Museum 1976 New Colours announcement) confirming
+  the institutional "laid up" vocabulary and a dated cathedral
+  ceremony (25 April 1976). Promotion readiness: **nearly_ready**.
+  Remaining gap: a Gloucester Cathedral institutional page giving the
+  precise location of the laid-up Colours (chapel / ambulatory).
+- Claims 2, 3, 4, 6 — not touched in this attachment pass; their
+  statuses remain as set in the original review pass above.
+- Canonical ledgers (`data/raw/black_albion_sites.json`,
+  `data/raw/black_albion_claims.json`,
+  `data/raw/black_albion_modules.json`,
+  `data/raw/black_albion_sources.json`) — unchanged.
 
 ## Operator Approval Required For
 
