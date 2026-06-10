@@ -1,8 +1,10 @@
 # Changelog
 
-## Unreleased — v0.3.0 Operator Dashboard
+## v0.3.0 — Operator Dashboard
 
-v0.3.0 is adding a read-only browser-accessible operator dashboard on top of
+Release date: 2026-06-10
+
+v0.3.0 adds a read-only browser-accessible operator dashboard on top of
 the existing Black Albion RAG FastAPI backend.
 
 ### Added
