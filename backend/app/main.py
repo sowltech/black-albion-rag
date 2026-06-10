@@ -246,6 +246,41 @@ def _source_intake_summary() -> Dict[str, Any]:
     }
 
 
+APPROVAL_QUEUE_EMPTY_MESSAGE = (
+    "No candidates currently require operator approval."
+)
+
+# Lower number sorts earlier. "high" first, then "medium", "low", and
+# finally any unknown / empty value. Keep this map stable so the sort
+# contract is deterministic.
+_APPROVAL_QUEUE_RISK_RANK: Dict[str, int] = {
+    "high": 0,
+    "medium": 1,
+    "low": 2,
+    "": 3,
+    "unknown": 3,
+}
+
+
+def _approval_queue_sort_key(item: Dict[str, Any]) -> tuple:
+    """Deterministic sort key for the read-only approval queue.
+
+    Order:
+      1. highest `risk_level` first (high -> medium -> low -> unknown)
+      2. `operator_review_ready` true before false
+      3. `candidate_id` alphabetically (case-insensitive)
+
+    Python's `sorted` is stable, so equal keys preserve input order.
+    The third tuple element guarantees total ordering on any well-formed
+    input.
+    """
+    risk = str(item.get("risk_level") or "").strip().lower()
+    risk_rank = _APPROVAL_QUEUE_RISK_RANK.get(risk, 3)
+    review_ready_rank = 0 if bool(item.get("operator_review_ready")) else 1
+    candidate_id = str(item.get("candidate_id") or "").lower()
+    return (risk_rank, review_ready_rank, candidate_id)
+
+
 def _approval_queue_summary() -> Dict[str, Any]:
     """Return a read-only operator approval queue derived from the candidate
     claims ledger.
@@ -303,6 +338,7 @@ def _approval_queue_summary() -> Dict[str, Any]:
                         "risk_level": str(row.get("risk_level") or ""),
                     }
                 )
+    pending.sort(key=_approval_queue_sort_key)
     return {
         "title": "Approval Queue",
         "intro": "Read-only approval queue",
@@ -311,6 +347,9 @@ def _approval_queue_summary() -> Dict[str, Any]:
         ),
         "no_promotion_note": "No promotion occurs from this dashboard",
         "items": pending,
+        "item_count": len(pending),
+        "item_count_label": f"Approval queue items: {len(pending)}",
+        "empty_message": APPROVAL_QUEUE_EMPTY_MESSAGE,
         "skipped_cleared": skipped,
         "intake_queue_path": _repo_relative(CANDIDATE_CLAIMS_PATH),
         "workflow_doc": (
@@ -523,6 +562,8 @@ def create_app() -> FastAPI:
         approval_queue_workflow = escape(str(approval_queue["workflow_doc"]))
         approval_queue_template = escape(str(approval_queue["approval_template_path"]))
         approval_queue_source = escape(str(approval_queue["intake_queue_path"]))
+        approval_queue_count_label = escape(str(approval_queue["item_count_label"]))
+        approval_queue_empty_message = escape(str(approval_queue["empty_message"]))
         if approval_queue["items"]:
             approval_queue_items_html = "\n".join(
                 "<li>"
@@ -560,7 +601,9 @@ def create_app() -> FastAPI:
                 for item in approval_queue["items"]
             )
         else:
-            approval_queue_items_html = "<li>no candidates currently in approval queue</li>"
+            approval_queue_items_html = (
+                f"<li>{approval_queue_empty_message}</li>"
+            )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -856,6 +899,7 @@ def create_app() -> FastAPI:
         <p><strong>{approval_queue_intro}</strong></p>
         <p>{approval_queue_no_promotion_note}.</p>
         <p>{approval_queue_promotion_note}.</p>
+        <p><strong>{approval_queue_count_label}</strong></p>
         <p>Source: <code>{approval_queue_source}</code></p>
         <p>Workflow: <code>{approval_queue_workflow}</code></p>
         <p>Approval template: <code>{approval_queue_template}</code></p>

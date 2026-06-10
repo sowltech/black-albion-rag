@@ -142,8 +142,74 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("canonical_ingestion_allowed", body)
                 self.assertIn("promotion_commit_allowed", body)
                 self.assertIn("tier_iii_contamination_check", body)
+                # v0.4.0 Approval Queue display contract: count label
+                self.assertIn("Approval queue items:", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
+    def test_approval_queue_sort_key_is_deterministic(self) -> None:
+        from backend.app.main import _approval_queue_sort_key
+
+        items = [
+            {"candidate_id": "cand_bravo", "risk_level": "low", "operator_review_ready": True},
+            {"candidate_id": "cand_alpha", "risk_level": "high", "operator_review_ready": False},
+            {"candidate_id": "cand_charlie", "risk_level": "high", "operator_review_ready": True},
+            {"candidate_id": "cand_delta", "risk_level": "medium", "operator_review_ready": False},
+            {"candidate_id": "cand_echo", "risk_level": "", "operator_review_ready": True},
+        ]
+        ordered = sorted(items, key=_approval_queue_sort_key)
+        order = [item["candidate_id"] for item in ordered]
+        # high (review_ready true) -> high (review_ready false)
+        # -> medium -> low -> unknown
+        self.assertEqual(
+            order,
+            [
+                "cand_charlie",  # high, review_ready true
+                "cand_alpha",    # high, review_ready false
+                "cand_delta",    # medium
+                "cand_bravo",    # low
+                "cand_echo",     # unknown risk
+            ],
+        )
+        # Stable on equal keys: re-sorting same input yields same output.
+        again = sorted(items, key=_approval_queue_sort_key)
+        self.assertEqual(
+            [item["candidate_id"] for item in again], order
+        )
+
+    def test_approval_queue_empty_message_is_canonical(self) -> None:
+        from backend.app.main import APPROVAL_QUEUE_EMPTY_MESSAGE
+
+        self.assertEqual(
+            APPROVAL_QUEUE_EMPTY_MESSAGE,
+            "No candidates currently require operator approval.",
+        )
+
+    def test_approval_queue_summary_carries_count_and_empty_message(self) -> None:
+        from backend.app.main import (
+            APPROVAL_QUEUE_EMPTY_MESSAGE,
+            _approval_queue_summary,
+        )
+
+        summary = _approval_queue_summary()
+        self.assertIn("item_count", summary)
+        self.assertEqual(summary["item_count"], len(summary["items"]))
+        self.assertEqual(
+            summary["item_count_label"],
+            f"Approval queue items: {summary['item_count']}",
+        )
+        self.assertEqual(summary["empty_message"], APPROVAL_QUEUE_EMPTY_MESSAGE)
+        self.assertEqual(
+            summary["promotion_note"],
+            "Promotion requires a separate operator-approved commit",
+        )
+        # Items are emitted in the deterministic sort order.
+        from backend.app.main import _approval_queue_sort_key
+
+        self.assertEqual(
+            summary["items"],
+            sorted(summary["items"], key=_approval_queue_sort_key),
+        )
 
     def test_dashboard_search_renders_results(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:

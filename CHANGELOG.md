@@ -25,9 +25,17 @@ operator approval gate.
   - "Promotion requires a separate operator-approved commit"
 - New live smoke probes: `dashboard_approval_queue`,
   `dashboard_approval_queue_candidate`,
-  `dashboard_approval_queue_separate_commit`.
+  `dashboard_approval_queue_separate_commit`,
+  `dashboard_approval_queue_count`.
 - New `tests/test_health.py` assertions covering the Approval Queue panel
   contract.
+- Added deterministic approval queue ordering: highest `risk_level` first
+  (`high` → `medium` → `low` → `unknown`), then `operator_review_ready`
+  true before false, then `candidate_id` alphabetically; sort is stable.
+- Added approval queue item count rendered as `Approval queue items: N`.
+- Added empty-state messaging for no pending approvals:
+  `No candidates currently require operator approval.` The panel stays
+  visible when the queue is empty.
 
 ### Verified
 

@@ -167,6 +167,7 @@ probe_get_body "dashboard_query" "/dashboard?query=What%20is%20Winchcombe" 200 "
 probe_get_body "dashboard_approval_queue" "/dashboard" 200 "Approval Queue"
 probe_get_body "dashboard_approval_queue_candidate" "/dashboard" 200 "cand_gloucestershire_egypt_058"
 probe_get_body "dashboard_approval_queue_separate_commit" "/dashboard" 200 "Promotion requires a separate operator-approved commit"
+probe_get_body "dashboard_approval_queue_count" "/dashboard" 200 "Approval queue items:"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,
