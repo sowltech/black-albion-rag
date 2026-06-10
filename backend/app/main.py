@@ -584,6 +584,15 @@ SOURCE_VERIFICATION_LOCK_STATEMENTS = (
     "Promotion still requires a separate operator-approved commit",
 )
 
+PER_CLAIM_SOURCE_VERIFICATION_EMPTY_MESSAGE = (
+    "No per-claim verification records available."
+)
+PER_CLAIM_SOURCE_VERIFICATION_LOCK_STATEMENTS = (
+    "Read-only per-claim verification",
+    "Per-claim scoring does not approve promotion",
+    "Promotion still requires a separate operator-approved commit",
+)
+
 _URL_RE = re.compile(r"https?://[^\s<>)\"']+")
 _REQUIRES_CORRECTION_RE = re.compile(r"requires_correction", re.IGNORECASE)
 
@@ -647,6 +656,105 @@ def _count_requires_correction(row: Dict[str, Any]) -> int:
                 text = ""
             total += len(_REQUIRES_CORRECTION_RE.findall(text))
     return total
+
+
+def _per_claim_source_verification_summary() -> Dict[str, Any]:
+    """Return per-claim source verification for every candidate that has a
+    ``source_review_file`` worksheet on disk.
+
+    Walks the candidate ledger, reads each row's worksheet markdown, splits
+    it into ``### Claim N`` sections, and runs the engine on each section.
+    Output is sorted by ``candidate_id`` alphabetically then ``claim_number``
+    ascending.
+    """
+    from .source_verification import summarize_per_claim_verification
+
+    items: List[Dict[str, Any]] = []
+    if CANDIDATE_CLAIMS_PATH.exists():
+        try:
+            payload = json.loads(CANDIDATE_CLAIMS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            payload = []
+        if isinstance(payload, list):
+            for row in payload:
+                if not isinstance(row, dict):
+                    continue
+                review_file = row.get("source_review_file")
+                if not review_file:
+                    continue
+                path = REPO_ROOT / str(review_file)
+                if not path.exists():
+                    continue
+                try:
+                    text = path.read_text(encoding="utf-8")
+                except OSError:
+                    continue
+                claim6_blocked = row.get("claim_6_tier_i_allowed") is False
+                summaries = summarize_per_claim_verification(
+                    text, claim6_blocked=claim6_blocked
+                )
+                candidate_id = str(row.get("candidate_id") or "(missing id)")
+                review_status = str(row.get("review_status") or "unknown")
+                canonical_ingestion_allowed = bool(
+                    row.get("canonical_ingestion_allowed", False)
+                )
+                promotion_commit_allowed = bool(
+                    row.get("promotion_commit_allowed", False)
+                )
+                for summary in summaries:
+                    items.append(
+                        {
+                            "candidate_id": candidate_id,
+                            "review_status": review_status,
+                            "claim_number": summary["claim_number"],
+                            "claim_title": summary["claim_title"],
+                            "verification_status": summary["verification_status"],
+                            "strongest_source_tier": summary[
+                                "strongest_source_tier"
+                            ],
+                            "source_count": summary["source_count"],
+                            "primary_source_count": summary["primary_source_count"],
+                            "institutional_source_count": summary[
+                                "institutional_source_count"
+                            ],
+                            "reputable_secondary_count": summary[
+                                "reputable_secondary_count"
+                            ],
+                            "weak_source_count": summary["weak_source_count"],
+                            "orientation_only_count": summary[
+                                "orientation_only_count"
+                            ],
+                            "speculative_only_count": summary[
+                                "speculative_only_count"
+                            ],
+                            "no_source_count": summary["no_source_count"],
+                            "requires_correction": bool(
+                                summary["requires_correction"]
+                            ),
+                            "canonical_ingestion_allowed": canonical_ingestion_allowed,
+                            "promotion_commit_allowed": promotion_commit_allowed,
+                        }
+                    )
+
+    items.sort(
+        key=lambda it: (
+            str(it.get("candidate_id") or "").lower(),
+            int(it.get("claim_number") or 0),
+        )
+    )
+    return {
+        "title": "Per-Claim Source Verification",
+        "intro": "Read-only per-claim verification",
+        "no_approve_note": "Per-claim scoring does not approve promotion",
+        "separate_commit_note": (
+            "Promotion still requires a separate operator-approved commit"
+        ),
+        "items": items,
+        "item_count": len(items),
+        "item_count_label": f"Per-claim rows: {len(items)}",
+        "empty_message": PER_CLAIM_SOURCE_VERIFICATION_EMPTY_MESSAGE,
+        "lock_statements": list(PER_CLAIM_SOURCE_VERIFICATION_LOCK_STATEMENTS),
+    }
 
 
 def _source_verification_summary() -> Dict[str, Any]:
@@ -995,6 +1103,7 @@ def create_app() -> FastAPI:
             approval_evidence_count=approval_evidence["item_count"],
         )
         source_verification = _source_verification_summary()
+        per_claim_source_verification = _per_claim_source_verification_summary()
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -1260,6 +1369,46 @@ def create_app() -> FastAPI:
             source_verification_items_html = (
                 f"<li>{source_verification_empty_message}</li>"
             )
+        per_claim_title = escape(per_claim_source_verification["title"])
+        per_claim_intro = escape(per_claim_source_verification["intro"])
+        per_claim_no_approve_note = escape(
+            per_claim_source_verification["no_approve_note"]
+        )
+        per_claim_separate_commit_note = escape(
+            per_claim_source_verification["separate_commit_note"]
+        )
+        per_claim_count_label = escape(
+            str(per_claim_source_verification["item_count_label"])
+        )
+        per_claim_empty_message = escape(
+            str(per_claim_source_verification["empty_message"])
+        )
+        if per_claim_source_verification["items"]:
+            per_claim_items_html = "\n".join(
+                "<li>"
+                f"<strong>{escape(item['candidate_id'])}</strong>"
+                f" — Claim {escape(str(item['claim_number']))}: "
+                f"<em>{escape(item.get('claim_title') or '')}</em>"
+                "<ul>"
+                f"<li>review_status: <code>{escape(item['review_status'])}</code></li>"
+                f"<li>verification_status: <code>{escape(item['verification_status'])}</code></li>"
+                f"<li>strongest_source_tier: <code>{escape(item['strongest_source_tier'])}</code></li>"
+                f"<li>source_count: <strong>{escape(str(item['source_count']))}</strong></li>"
+                f"<li>primary_source_count: <strong>{escape(str(item['primary_source_count']))}</strong></li>"
+                f"<li>institutional_source_count: <strong>{escape(str(item['institutional_source_count']))}</strong></li>"
+                f"<li>reputable_secondary_count: <strong>{escape(str(item['reputable_secondary_count']))}</strong></li>"
+                f"<li>orientation_only_count: <strong>{escape(str(item['orientation_only_count']))}</strong></li>"
+                f"<li>speculative_only_count: <strong>{escape(str(item['speculative_only_count']))}</strong></li>"
+                f"<li>no_source_count: <strong>{escape(str(item['no_source_count']))}</strong></li>"
+                f"<li>requires_correction: <code>{escape(str(item['requires_correction']).lower())}</code></li>"
+                f"<li>canonical_ingestion_allowed: <code>{escape(str(item['canonical_ingestion_allowed']).lower())}</code></li>"
+                f"<li>promotion_commit_allowed: <code>{escape(str(item['promotion_commit_allowed']).lower())}</code></li>"
+                "</ul>"
+                "</li>"
+                for item in per_claim_source_verification["items"]
+            )
+        else:
+            per_claim_items_html = f"<li>{per_claim_empty_message}</li>"
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -1596,6 +1745,16 @@ def create_app() -> FastAPI:
         <p><strong>{source_verification_count_label}</strong></p>
         <ol>
           {source_verification_items_html}
+        </ol>
+      </div>
+      <div class="panel">
+        <h2>{per_claim_title}</h2>
+        <p><strong>{per_claim_intro}</strong></p>
+        <p>{per_claim_no_approve_note}.</p>
+        <p>{per_claim_separate_commit_note}.</p>
+        <p><strong>{per_claim_count_label}</strong></p>
+        <ol>
+          {per_claim_items_html}
         </ol>
       </div>
       <div class="panel">

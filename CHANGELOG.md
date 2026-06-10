@@ -51,6 +51,31 @@ ledgers.
   `dashboard_source_verification_intro`,
   `dashboard_source_verification_no_approve`,
   `dashboard_source_verification_candidate`.
+- Added read-only Per-Claim Source Verification dashboard panel.
+- Breaks candidate verification into per-claim source strength summaries.
+- Surfaces primary, institutional, secondary, orientation-only,
+  speculative-only, and no-source counts per claim.
+- Keeps per-claim scoring separate from promotion approval.
+- Adds CI/smoke coverage for per-claim verification visibility.
+- `backend/app/source_verification.py` extended with
+  `extract_claim_sections_from_review()` (splits a worksheet
+  markdown by `### Claim N` headings) and
+  `summarize_per_claim_verification()` (runs the engine on each
+  section's URLs; injects a speculative_only source when Tier III
+  tokens appear in the section text; flips Claim 6 to
+  `verification_status: blocked` when the row carries
+  `claim_6_tier_i_allowed: false`).
+- `_per_claim_source_verification_summary()` in `backend/app/main.py`
+  walks every candidate row with a `source_review_file`, runs the
+  per-claim engine, and emits one dashboard row per claim sorted by
+  `candidate_id` then `claim_number`. Empty-state message:
+  `No per-claim verification records available.`
+- New live smoke probes for the Per-Claim Source Verification panel:
+  `dashboard_per_claim_verification`,
+  `dashboard_per_claim_verification_intro`,
+  `dashboard_per_claim_verification_claim2`,
+  `dashboard_per_claim_verification_primary`,
+  `dashboard_per_claim_verification_speculative`.
 
 ### Verified
 

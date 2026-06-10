@@ -185,6 +185,11 @@ probe_get_body "dashboard_source_verification" "/dashboard" 200 "Source Verifica
 probe_get_body "dashboard_source_verification_intro" "/dashboard" 200 "Read-only source verification"
 probe_get_body "dashboard_source_verification_no_approve" "/dashboard" 200 "Source scoring does not approve promotion"
 probe_get_body "dashboard_source_verification_candidate" "/dashboard" 200 "cand_gloucestershire_egypt_058"
+probe_get_body "dashboard_per_claim_verification" "/dashboard" 200 "Per-Claim Source Verification"
+probe_get_body "dashboard_per_claim_verification_intro" "/dashboard" 200 "Read-only per-claim verification"
+probe_get_body "dashboard_per_claim_verification_claim2" "/dashboard" 200 "Claim 2"
+probe_get_body "dashboard_per_claim_verification_primary" "/dashboard" 200 "primary_source"
+probe_get_body "dashboard_per_claim_verification_speculative" "/dashboard" 200 "speculative_only"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

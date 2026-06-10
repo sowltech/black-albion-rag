@@ -1,5 +1,16 @@
 """Deterministic source verification engine for Black Albion RAG.
 
+Also exposes per-claim helpers for the v0.5.0 Per-Claim Source Verification
+dashboard panel:
+
+- ``extract_claim_sections_from_review(text)`` — splits the worksheet
+  markdown into one section per ``### Claim N — …`` heading.
+- ``summarize_per_claim_verification(candidate_row, review_text)`` —
+  classifies each section's sources via the engine and returns one summary
+  per claim.
+
+These helpers stay read-only and never write canonical ledgers.
+
 Classifies individual source references into the seven evidence tiers used by
 the v0.5.0 Source Verification dashboard panel, and aggregates per-claim
 verification summaries from a list of source references. This module is
@@ -20,7 +31,8 @@ Public surface:
 """
 from __future__ import annotations
 
-from typing import Any, Dict, List, Tuple
+import re
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.parse import urlparse
 
 # Tier names in ascending order of "strength". The promotion_weight is the
@@ -455,3 +467,115 @@ def summarize_claim_verification(
         "verification_status": status,
         "classifications": classifications,
     }
+
+
+# ----------------------------------------------------------------------
+# Per-claim helpers (v0.5.0 Per-Claim Source Verification panel)
+# ----------------------------------------------------------------------
+
+# Top-level claim heading like:
+#   "### Claim 2 — Percival Marling VC / London Gazette citation"
+_CLAIM_HEADING_RE = re.compile(
+    r"^###\s+Claim\s+(?P<number>\d+)\s*(?:[—\-:]\s*(?P<title>.+))?$",
+    re.MULTILINE,
+)
+
+# Sub-heading patterns like "#### Claim 2 — Source attachment pass (2026-06-09)"
+# stay inside the parent section: they do not start a new top-level claim.
+
+# In-section URL extractor — kept here so the worksheet text never has to be
+# re-loaded by main.py.
+_PER_CLAIM_URL_RE = re.compile(r"https?://[^\s<>)\"']+")
+
+
+def extract_claim_sections_from_review(text: str) -> List[Dict[str, Any]]:
+    """Split a worksheet markdown into one section per ``### Claim N`` heading.
+
+    Returns a list of dicts with:
+        claim_number: int
+        claim_title: str
+        section_text: str   (the full text of the claim section)
+    """
+    if not text:
+        return []
+    matches = list(_CLAIM_HEADING_RE.finditer(text))
+    if not matches:
+        return []
+    sections: List[Dict[str, Any]] = []
+    for idx, match in enumerate(matches):
+        number = int(match.group("number"))
+        title = (match.group("title") or "").strip()
+        start = match.end()
+        end = matches[idx + 1].start() if idx + 1 < len(matches) else len(text)
+        section_text = text[start:end].strip()
+        sections.append(
+            {
+                "claim_number": number,
+                "claim_title": title,
+                "section_text": section_text,
+            }
+        )
+    # Deduplicate while keeping the first (top-level) occurrence per number.
+    seen: Dict[int, Dict[str, Any]] = {}
+    for section in sections:
+        seen.setdefault(section["claim_number"], section)
+    return sorted(seen.values(), key=lambda s: s["claim_number"])
+
+
+def _extract_section_urls(section_text: str) -> List[str]:
+    seen: Dict[str, None] = {}
+    for match in _PER_CLAIM_URL_RE.finditer(section_text):
+        url = match.group(0).rstrip(".,;:)]>")
+        if url not in seen:
+            seen[url] = None
+    return list(seen.keys())
+
+
+def summarize_per_claim_verification(
+    review_text: Optional[str],
+    *,
+    claim6_blocked: bool = False,
+) -> List[Dict[str, Any]]:
+    """Run the engine on each ``### Claim N`` section in a worksheet.
+
+    For each section:
+      - URLs are extracted and classified.
+      - If the section text contains Tier III speculative tokens, a
+        ``speculative_only`` source is added so the per-claim counters
+        reflect the lens.
+      - ``requires_correction`` is detected via the literal substring
+        ``requires_correction`` (case-insensitive) inside the section.
+      - For Claim 6 specifically, ``blocked=True`` is forced when
+        ``claim6_blocked`` is set (e.g. when the candidate row carries
+        ``claim_6_tier_i_allowed: false``).
+
+    Returns one summary dict per claim, sorted by ``claim_number`` ascending.
+    """
+    sections = extract_claim_sections_from_review(review_text or "")
+    summaries: List[Dict[str, Any]] = []
+    for section in sections:
+        urls = _extract_section_urls(section["section_text"])
+        sources: List[Dict[str, str]] = [
+            {"name": "", "url": url, "notes": ""} for url in urls
+        ]
+        section_lower = section["section_text"].lower()
+        if any(token in section_lower for token in _SPECULATIVE_TOKENS):
+            sources.append(
+                {
+                    "name": f"Claim {section['claim_number']} speculative lens",
+                    "url": "",
+                    "notes": "Tier III speculative_lens_only",
+                }
+            )
+        requires_correction = "requires_correction" in section_lower
+        is_blocked = bool(claim6_blocked) and section["claim_number"] == 6
+        summary = summarize_claim_verification(
+            sources,
+            blocked=is_blocked,
+            requires_correction=requires_correction and not is_blocked,
+        )
+        summary["claim_number"] = section["claim_number"]
+        summary["claim_title"] = section["claim_title"]
+        summary["requires_correction"] = requires_correction
+        summaries.append(summary)
+    return summaries

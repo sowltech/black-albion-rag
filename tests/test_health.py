@@ -329,6 +329,96 @@ class HealthTests(unittest.TestCase):
         self.assertFalse(glos["canonical_ingestion_allowed"])
         self.assertFalse(glos["promotion_commit_allowed"])
 
+    def test_extract_claim_sections_from_gloucestershire_review(self) -> None:
+        from backend.app.source_verification import extract_claim_sections_from_review
+
+        path = Path(__file__).resolve().parents[1] / (
+            "research/intake/gloucestershire_egypt_source_review.md"
+        )
+        text = path.read_text(encoding="utf-8")
+        sections = extract_claim_sections_from_review(text)
+        numbers = [section["claim_number"] for section in sections]
+        self.assertEqual(numbers, [1, 2, 3, 4, 5, 6])
+        titles = {
+            section["claim_number"]: section["claim_title"]
+            for section in sections
+        }
+        self.assertIn("1801", titles[1])
+        self.assertIn("Marling", titles[2])
+        self.assertIn("Royal Gloucestershire Hussars", titles[3])
+        self.assertIn("Cathedral", titles[5])
+        self.assertIn("Tier III speculative lens", titles[6])
+
+    def test_per_claim_panel_surfaces_gloucestershire_claims(self) -> None:
+        from backend.app.main import _per_claim_source_verification_summary
+
+        summary = _per_claim_source_verification_summary()
+        glos_rows = [
+            item
+            for item in summary["items"]
+            if item["candidate_id"] == "cand_gloucestershire_egypt_058"
+        ]
+        self.assertEqual(len(glos_rows), 6)
+        by_claim = {row["claim_number"]: row for row in glos_rows}
+
+        # Claim 2 — Marling VC: London Gazette primary URL is in the worksheet
+        # so strongest tier must be primary_source and the requires_correction
+        # flag must be true because the worksheet records the correction.
+        claim2 = by_claim[2]
+        self.assertEqual(claim2["strongest_source_tier"], "primary_source")
+        self.assertGreaterEqual(claim2["primary_source_count"], 1)
+        self.assertTrue(claim2["requires_correction"])
+
+        # Claim 6 — Tier III speculative lens: must be blocked / speculative.
+        claim6 = by_claim[6]
+        self.assertEqual(claim6["strongest_source_tier"], "speculative_only")
+        self.assertEqual(claim6["verification_status"], "blocked")
+        self.assertGreaterEqual(claim6["speculative_only_count"], 1)
+
+        # No claim is promoted from the dashboard view.
+        for row in glos_rows:
+            self.assertFalse(row["canonical_ingestion_allowed"])
+            self.assertFalse(row["promotion_commit_allowed"])
+
+    def test_dashboard_renders_per_claim_panel(self) -> None:
+        with tempfile.TemporaryDirectory() as tmpdir:
+            raw_dir = Path(tmpdir) / "raw"
+            raw_dir.mkdir()
+            (raw_dir / "seed.json").write_text(
+                json.dumps(
+                    [
+                        {
+                            "id": "seed_site_001",
+                            "tier": "I",
+                            "title": "Seed Site",
+                            "summary": "Tier I baseline.",
+                        }
+                    ]
+                ),
+                encoding="utf-8",
+            )
+            os.environ["BLACK_ALBION_DATA_DIR"] = str(raw_dir)
+            try:
+                from backend.app.main import create_app
+
+                app = create_app()
+                client = TestClient(app)
+                body = client.get("/dashboard").text
+                self.assertIn("Per-Claim Source Verification", body)
+                self.assertIn("Read-only per-claim verification", body)
+                self.assertIn(
+                    "Per-claim scoring does not approve promotion", body
+                )
+                self.assertIn("cand_gloucestershire_egypt_058", body)
+                self.assertIn("Claim 1", body)
+                self.assertIn("Claim 2", body)
+                self.assertIn("Claim 6", body)
+                self.assertIn("primary_source", body)
+                self.assertIn("speculative_only", body)
+                self.assertIn("requires_correction", body)
+            finally:
+                os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
     def test_canonical_ledger_integrity_lock_statements_are_canonical(self) -> None:
         from backend.app.main import CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS
 
