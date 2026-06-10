@@ -361,6 +361,154 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   prefix is the most likely Tier I error in this batch. The RGH yeomanry
   designation should be used in any future promoted claim.
 
+#### Claim 3 — Source attachment pass (2026-06-10)
+
+- **source_attachments**:
+  - **Soldiers of Gloucestershire Museum — From Saddles to Steel:
+    The Legacy of the Royal Gloucestershire Hussars**
+    (<https://soldiersofglos.com/from-saddles-to-steel-the-legacy-of-the-royal-gloucestershire-hussars/>).
+    Institutional museum page. Uses the title **"Royal Gloucestershire
+    Hussars (RGH)"** consistently; no "21st" prefix anywhere on the
+    page. Formation year **1795**. WWI: "deployed to Egypt"; Sinai and
+    Palestine campaigns including "Gaza", "Beersheba", "Jerusalem".
+    WWII: regiment served under "the 8th Army" in the "Western Desert
+    Campaign"; tank types named — "Crusader tanks" and "Sherman tanks";
+    "Operation Crusader" and "El Alamein" referenced. Post-war: "In
+    1967, they became part of the Royal Wessex Yeomanry". Museum
+    location: "Soldiers of Gloucestershire Museum" in "Gloucester
+    Docks"; "Crusader tank 'Gypsy'" described as "striking centrepiece".
+  - **Royal Wessex Yeomanry — Gloucestershire Yeomanry / RGH page**
+    (<https://www.wessexyeomanry.org/index.php/gloucestershire-yeomanry-2/>).
+    Institutional parent-regiment page. Uses the title **"Royal
+    Gloucestershire Hussars"** with no "21st" prefix; records that
+    "Queen Victoria granted the Regiment the title of 'Royal' in 1841"
+    and the unit "was restyled the Royal Gloucestershire Hussars in
+    1847". Formation: the "first Troop ... was raised in Cheltenham" in
+    1795; troops amalgamated 1834. WWI: "mobilised in August 1914",
+    deployed to "Alexandria in 1915", landed at "Gallipoli to operate
+    as Infantry"; "suffered losses at Katia in the Sinai Desert" and
+    fought at the "Battle of Romani"; subsequently a "key element in
+    the subsequent advance on Jerusalem, Damascus and Aleppo";
+    returned to UK August 1919. WWII: "2RGH deployed to Libya in 1941
+    as part of the 7th Armoured Division"; crewed "Crusader tanks" at
+    Bir El Gubi (November 1941); "re-equipped with Grant and Stuart
+    tanks in early 1942" and fought at the "Battle of Gazala" and
+    "Battle of El Alamein". Modern role: continues today as "C (RGH)
+    Squadron" within the Royal Wessex Yeomanry (formed 1971 per this
+    page).
+  - **The Long, Long Trail — Gloucestershire Yeomanry (Royal
+    Gloucestershire Hussars)**
+    (<https://www.longlongtrail.co.uk/army/regiments-and-corps/the-british-yeomanry-regiments-of-1914-1918/gloucestershire-yeomanry-royal-gloucestershire-hussars/>).
+    Reputable WWI orbat reference. Uses the title **"Gloucestershire
+    Yeomanry (Royal Gloucestershire Hussars)"** with no "21st" prefix.
+    Records the 1/1st Battalion formation moves through "1st South
+    Midland Mounted Brigade", "1st Mounted Division", "5th Mounted
+    Brigade" (January 1916), "Imperial Mounted Division" (February
+    1917), "Australian Mounted Division" (June 1917), and "13th Cavalry
+    Brigade" within "5th Cavalry Division" (August 1918). Deployment
+    chronology: "moved to Egypt, arriving Alexandria 24 April" (1915);
+    "landed at Gallipoli ... on 18 August" (1915); named WWI
+    engagement quoted is the "attack on Chocolate Hill and Hill 112 on
+    21 August".
+  - **The National Archives — Discovery catalogue entry: Papers
+    relating to the Royal Goucestershire Hussars**
+    (<https://discovery.nationalarchives.gov.uk/details/r/7cb82d6b-edd8-4298-94c7-2aec01eb12f5>).
+    Listed as a candidate primary-source pointer. Page body was not
+    extractable on direct fetch in this pass; attached here as a
+    candidate TNA reference for a later operator-led primary-source
+    confirmation, not as a quoted source.
+- **source_quality**: three institutional or reputable sources (Soldiers
+  of Gloucestershire Museum, Royal Wessex Yeomanry, The Long Long Trail)
+  all use the title **"Royal Gloucestershire Hussars"** (or
+  "Gloucestershire Yeomanry (Royal Gloucestershire Hussars)") with no
+  "21st" prefix. Together they corroborate WWI deployment to Egypt and
+  Gallipoli (1915), Sinai/Palestine operations including Katia, Romani,
+  Gaza, Beersheba, and the advance on Jerusalem, Damascus and Aleppo;
+  WWII service in the Western Desert / Libya as part of the 7th
+  Armoured Division, with named engagements at Bir El Gubi, Gazala and
+  El Alamein, and named tank types Crusader, Grant, Stuart, Sherman.
+  TNA Discovery candidate reference attached for later primary-source
+  confirmation.
+- **correction_notes**:
+  - **"21st" prefix is unsupported** by any of the three institutional
+    or reputable sources surfaced in this pass. The pasted record's
+    "21st Royal Gloucestershire Hussars" wording must be dropped before
+    any Tier I promotion.
+  - The institutional title is **Royal Gloucestershire Hussars** (RGH),
+    and the WWI-era orbat name is **Gloucestershire Yeomanry (Royal
+    Gloucestershire Hussars)**. The The Long Long Trail page records the
+    unit number as the **1/1st Battalion** (with separate 2/1st and 3/1st
+    second-line battalions), which is the only numbering that any source
+    attached here uses for the WWI regiment.
+  - Sub-fact discrepancy: the Soldiers of Gloucestershire Museum page
+    gives **1967** for the merger into the Royal Wessex Yeomanry, while
+    the RWY page gives **1971** for the formation of the RWY. Both years
+    can be true (the RGH may have first amalgamated into a predecessor
+    unit in 1967 and then into the RWY in 1971), but the year(s)
+    surfaced here are not load-bearing for the WWI/WWII campaign claims
+    and must be resolved against an institutional source before any
+    post-war year is promoted.
+- **citation_notes**:
+  - Cite the Soldiers of Gloucestershire Museum RGH page as the
+    institutional museum source for the consistent title, formation
+    year, and the named WWII tank types / campaign anchors.
+  - Cite the Royal Wessex Yeomanry RGH page as the institutional
+    parent-regiment source for the title-grant chronology (1841, 1847),
+    the WWI Sinai/Palestine engagement names (Katia, Romani, advance on
+    Jerusalem/Damascus/Aleppo), and the WWII 7th Armoured Division /
+    Bir El Gubi / Crusader / Grant / Stuart / Gazala / El Alamein
+    chronology.
+  - Cite The Long Long Trail RGH page as the WWI orbat / brigade and
+    division assignments reference, and for the dated arrival at
+    Alexandria (24 April 1915) and Gallipoli (18 August 1915).
+  - Add The National Archives Discovery catalogue entry as a candidate
+    primary-source pointer; do not quote text from it until the page
+    body is confirmable on a later fetch.
+  - Do not cite Wikipedia as primary.
+- **remaining_gaps**:
+  - No directly attached National Archives WO-series war-diary catalogue
+    reference number; the TNA Discovery entry is attached as a candidate
+    pointer but the page body was not extractable on direct fetch in
+    this pass.
+  - The post-war merger year (RGH into a Royal Wessex Yeomanry
+    predecessor / the RWY itself) shows a 1967 vs 1971 discrepancy
+    across the two institutional sources surfaced here and would need
+    a precise institutional date before being promoted.
+  - The Imperial War Museums collection has not been queried directly
+    for an RGH war-diary or photograph object record in this pass; a
+    later pass could attach an IWM accession for a specific item
+    (similar to the IWM `INS 5713` reference attached for Claim 1).
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "The Royal Gloucestershire Hussars (RGH), a Gloucestershire-raised
+  > yeomanry regiment formed in 1795 and granted the 'Royal' title in
+  > 1841, served in the First World War as the 1/1st Battalion
+  > Gloucestershire Yeomanry (Royal Gloucestershire Hussars), arriving
+  > at Alexandria on 24 April 1915, landing at Gallipoli on 18 August
+  > 1915 to operate as infantry, and subsequently fighting in the
+  > Sinai and Palestine campaigns at named engagements including
+  > Katia, Romani, Gaza, Beersheba, and the advance on Jerusalem,
+  > Damascus and Aleppo, before returning to the UK in August 1919.
+  > In the Second World War, the 2nd Royal Gloucestershire Hussars
+  > deployed to Libya in 1941 as part of the 7th Armoured Division
+  > and fought in the Western Desert campaign at Bir El Gubi in
+  > November 1941, the Battle of Gazala in 1942, and the Battle of
+  > El Alamein, crewing Crusader, M3 Grant, M3 Stuart and Sherman
+  > tanks. The regiment continues today as C (RGH) Squadron within
+  > the Royal Wessex Yeomanry. There is no contemporary or
+  > institutional source for a '21st Royal Gloucestershire Hussars'
+  > designation; that prefix from the original intake must be
+  > dropped."
+- **promotion_readiness**: nearly_ready for the **WWI deployment dates
+  and Gallipoli/Sinai/Palestine campaign chronology** and for the
+  **WWII Western Desert / 7th Armoured Division / Bir El Gubi /
+  Gazala / El Alamein / Crusader-Grant-Stuart-Sherman** chronology
+  (subject to operator-approved rewrite to the corrected version above).
+  not_ready for any statement that relies on the "21st" prefix or on
+  a specific TNA war-diary catalogue reference until a primary TNA
+  reference is attached.
+
 ---
 
 ### Claim 4 — Gloucester Docks / Alexandria / Suez operational connection
@@ -591,6 +739,52 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   rewrite of the original claim text to the corrected version and a
   Gazette PDF confirmation of the verbatim citation text).
 - Claims 1, 3, 4, 5, 6 — not touched in this pass; their statuses
+  remain as set in the previous passes above.
+- Canonical ledgers (`data/raw/black_albion_sites.json`,
+  `data/raw/black_albion_claims.json`,
+  `data/raw/black_albion_modules.json`,
+  `data/raw/black_albion_sources.json`) — unchanged.
+
+## Source Attachment Pass — 2026-06-10 (Claim 3)
+
+- Targeted attachment pass on Claim 3 (Royal Gloucestershire Hussars
+  WWI / WWII references) per operator instruction.
+- Three institutional or reputable sources attached: Soldiers of
+  Gloucestershire Museum RGH page (museum, Gloucester Docks); Royal
+  Wessex Yeomanry RGH page (parent regiment); The Long Long Trail RGH
+  WWI orbat page. The National Archives Discovery RGH papers entry
+  attached as a candidate primary-source pointer only.
+- **Correction confirmed**: the "21st" prefix in the pasted record
+  is **not corroborated by any institutional or reputable source**
+  surfaced in this pass. The institutional title is **Royal
+  Gloucestershire Hussars** (RGH); the WWI orbat name is
+  **Gloucestershire Yeomanry (Royal Gloucestershire Hussars)**, with
+  the unit recorded as the **1/1st Battalion** (alongside 2/1st and
+  3/1st second-line battalions).
+- WWI service supported: Alexandria 24 April 1915; Gallipoli landing
+  18 August 1915; Sinai (Katia); Palestine (Romani, Gaza, Beersheba,
+  advance on Jerusalem / Damascus / Aleppo); return to UK August 1919.
+- WWII service supported: 2RGH in Libya 1941 as part of the 7th
+  Armoured Division; Bir El Gubi November 1941; re-equipped with M3
+  Grant and M3 Stuart tanks in early 1942; Battle of Gazala (1942);
+  Battle of El Alamein; Crusader and Sherman tanks named.
+- **original_claim_status**: requires_correction. A
+  `corrected_claim_text` draft has been recorded in the Claim 3
+  section above as operator-review material only and explicitly
+  drops the "21st" prefix.
+- Promotion readiness: **nearly_ready** for the WWI deployment dates,
+  Sinai/Palestine campaign chronology and WWII Western Desert /
+  Bir El Gubi / Gazala / El Alamein / Crusader-Grant-Stuart-Sherman
+  chronology (subject to operator-approved rewrite to the corrected
+  version and operator approval). **not_ready** for any statement
+  that relies on the "21st" prefix or on a specific TNA war-diary
+  catalogue reference until a primary TNA reference is attached.
+- Sub-fact note: the post-war merger year of the RGH into the Royal
+  Wessex Yeomanry shows a 1967 vs 1971 discrepancy across the two
+  institutional sources surfaced; not load-bearing for the WWI/WWII
+  campaign claims but must be resolved against an institutional
+  source before any post-war year is promoted.
+- Claims 1, 2, 4, 5, 6 — not touched in this pass; their statuses
   remain as set in the previous passes above.
 - Canonical ledgers (`data/raw/black_albion_sites.json`,
   `data/raw/black_albion_claims.json`,
