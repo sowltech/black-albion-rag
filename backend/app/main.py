@@ -593,6 +593,38 @@ PER_CLAIM_SOURCE_VERIFICATION_LOCK_STATEMENTS = (
     "Promotion still requires a separate operator-approved commit",
 )
 
+SOURCE_STRENGTH_SUMMARY_EMPTY_MESSAGE = "No source strength records available."
+SOURCE_STRENGTH_SUMMARY_LOCK_STATEMENTS = (
+    "Read-only source strength summary",
+    "Evidence scoring does not approve promotion",
+    "Promotion still requires a separate operator-approved commit",
+)
+
+
+def _source_strength_summary(
+    per_candidate_items: List[Dict[str, Any]],
+    per_claim_items: List[Dict[str, Any]],
+) -> Dict[str, Any]:
+    """Roll up the per-candidate + per-claim source verification panels into
+    a single read-only Source Strength Summary payload for the dashboard.
+    """
+    from .source_verification import summarize_source_strength_queue
+
+    queue = summarize_source_strength_queue(per_candidate_items, per_claim_items)
+    queue.update(
+        {
+            "title": "Source Strength Summary",
+            "intro": "Read-only source strength summary",
+            "no_approve_note": "Evidence scoring does not approve promotion",
+            "separate_commit_note": (
+                "Promotion still requires a separate operator-approved commit"
+            ),
+            "empty_message": SOURCE_STRENGTH_SUMMARY_EMPTY_MESSAGE,
+            "lock_statements": list(SOURCE_STRENGTH_SUMMARY_LOCK_STATEMENTS),
+        }
+    )
+    return queue
+
 _URL_RE = re.compile(r"https?://[^\s<>)\"']+")
 _REQUIRES_CORRECTION_RE = re.compile(r"requires_correction", re.IGNORECASE)
 
@@ -1104,6 +1136,10 @@ def create_app() -> FastAPI:
         )
         source_verification = _source_verification_summary()
         per_claim_source_verification = _per_claim_source_verification_summary()
+        source_strength = _source_strength_summary(
+            source_verification["items"],
+            per_claim_source_verification["items"],
+        )
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -1409,6 +1445,41 @@ def create_app() -> FastAPI:
             )
         else:
             per_claim_items_html = f"<li>{per_claim_empty_message}</li>"
+        source_strength_title = escape(source_strength["title"])
+        source_strength_intro = escape(source_strength["intro"])
+        source_strength_no_approve_note = escape(source_strength["no_approve_note"])
+        source_strength_separate_commit_note = escape(
+            source_strength["separate_commit_note"]
+        )
+        source_strength_empty_message = escape(
+            str(source_strength["empty_message"])
+        )
+        source_strength_totals_html = (
+            f"<li>total candidates reviewed: <strong>{escape(str(source_strength['total_candidates_reviewed']))}</strong></li>"
+            f"<li>total claims reviewed: <strong>{escape(str(source_strength['total_claims_reviewed']))}</strong></li>"
+            f"<li>primary_source: <strong>{escape(str(source_strength['primary_source_count']))}</strong></li>"
+            f"<li>institutional_source: <strong>{escape(str(source_strength['institutional_source_count']))}</strong></li>"
+            f"<li>reputable_secondary: <strong>{escape(str(source_strength['reputable_secondary_count']))}</strong></li>"
+            f"<li>weak_secondary: <strong>{escape(str(source_strength['weak_secondary_count']))}</strong></li>"
+            f"<li>orientation_only: <strong>{escape(str(source_strength['orientation_only_count']))}</strong></li>"
+            f"<li>speculative_only: <strong>{escape(str(source_strength['speculative_only_count']))}</strong></li>"
+            f"<li>no_source: <strong>{escape(str(source_strength['no_source_count']))}</strong></li>"
+            f"<li>requires_correction: <strong>{escape(str(source_strength['requires_correction_count']))}</strong></li>"
+            f"<li>blocked: <strong>{escape(str(source_strength['blocked_count']))}</strong></li>"
+        )
+        source_strength_health_html = (
+            f"<li>strongest_available_tier: <code>{escape(str(source_strength['strongest_available_tier']))}</code></li>"
+            f"<li>weakest_detected_tier: <code>{escape(str(source_strength['weakest_detected_tier']))}</code></li>"
+            f"<li>candidates_with_primary_sources: <strong>{escape(str(source_strength['candidates_with_primary_sources']))}</strong></li>"
+            f"<li>candidates_with_no_sources: <strong>{escape(str(source_strength['candidates_with_no_sources']))}</strong></li>"
+            f"<li>candidates_with_speculative_only_material: <strong>{escape(str(source_strength['candidates_with_speculative_only_material']))}</strong></li>"
+            f"<li>candidates_blocked_from_promotion: <strong>{escape(str(source_strength['candidates_blocked_from_promotion']))}</strong></li>"
+        )
+        source_strength_empty_html = (
+            f"<li>{source_strength_empty_message}</li>"
+            if source_strength["total_candidates_reviewed"] == 0
+            else ""
+        )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -1756,6 +1827,23 @@ def create_app() -> FastAPI:
         <ol>
           {per_claim_items_html}
         </ol>
+      </div>
+      <div class="panel">
+        <h2>{source_strength_title}</h2>
+        <p><strong>{source_strength_intro}</strong></p>
+        <p>{source_strength_no_approve_note}.</p>
+        <p>{source_strength_separate_commit_note}.</p>
+        <h3>Totals</h3>
+        <ul>
+          {source_strength_totals_html}
+        </ul>
+        <h3>Health Summary</h3>
+        <ul>
+          {source_strength_health_html}
+        </ul>
+        <ul>
+          {source_strength_empty_html}
+        </ul>
       </div>
       <div class="panel">
         <h2>{canonical_integrity_title}</h2>

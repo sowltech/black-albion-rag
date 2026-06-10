@@ -190,6 +190,10 @@ probe_get_body "dashboard_per_claim_verification_intro" "/dashboard" 200 "Read-o
 probe_get_body "dashboard_per_claim_verification_claim2" "/dashboard" 200 "Claim 2"
 probe_get_body "dashboard_per_claim_verification_primary" "/dashboard" 200 "primary_source"
 probe_get_body "dashboard_per_claim_verification_speculative" "/dashboard" 200 "speculative_only"
+probe_get_body "dashboard_source_strength_summary" "/dashboard" 200 "Source Strength Summary"
+probe_get_body "dashboard_source_strength_intro" "/dashboard" 200 "Read-only source strength summary"
+probe_get_body "dashboard_source_strength_primary" "/dashboard" 200 "primary_source"
+probe_get_body "dashboard_source_strength_correction" "/dashboard" 200 "requires_correction"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

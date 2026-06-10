@@ -531,6 +531,94 @@ def _extract_section_urls(section_text: str) -> List[str]:
     return list(seen.keys())
 
 
+def summarize_source_strength_queue(
+    per_candidate_items: List[Dict[str, Any]],
+    per_claim_items: List[Dict[str, Any]],
+) -> Dict[str, Any]:
+    """Aggregate per-candidate + per-claim source verification rows.
+
+    Used by the v0.5.0 Source Strength Summary dashboard panel. Per-tier
+    counts are summed across the per-claim view (richer signal); the health
+    summary fields are derived from the per-candidate view. The aggregator
+    is pure and stateless: it never reads files, never approves, never
+    promotes.
+    """
+    counts = {tier: 0 for tier in SOURCE_TIERS}
+    requires_correction_count = 0
+    blocked_count = 0
+    blocked_candidate_ids: set = set()
+
+    for claim in per_claim_items or []:
+        counts["primary_source"] += int(claim.get("primary_source_count") or 0)
+        counts["institutional_source"] += int(
+            claim.get("institutional_source_count") or 0
+        )
+        counts["reputable_secondary_source"] += int(
+            claim.get("reputable_secondary_count") or 0
+        )
+        counts["weak_secondary_source"] += int(claim.get("weak_source_count") or 0)
+        counts["orientation_only"] += int(claim.get("orientation_only_count") or 0)
+        counts["speculative_only"] += int(claim.get("speculative_only_count") or 0)
+        counts["no_source"] += int(claim.get("no_source_count") or 0)
+        if claim.get("requires_correction"):
+            requires_correction_count += 1
+        if str(claim.get("verification_status") or "").lower() == "blocked":
+            blocked_count += 1
+            blocked_candidate_ids.add(str(claim.get("candidate_id") or ""))
+
+    candidates_with_primary = 0
+    candidates_with_no_sources = 0
+    candidates_with_speculative = 0
+    for cand in per_candidate_items or []:
+        if int(cand.get("primary_source_count") or 0) >= 1:
+            candidates_with_primary += 1
+        if str(cand.get("verification_status") or "").lower() == "unsourced":
+            candidates_with_no_sources += 1
+        elif (
+            int(cand.get("source_count") or 0) == 0
+            and str(cand.get("strongest_source_tier") or "") == "no_source"
+        ):
+            candidates_with_no_sources += 1
+        if int(cand.get("speculative_only_count") or 0) >= 1:
+            candidates_with_speculative += 1
+
+    # Strongest available tier across the queue: walk SOURCE_TIERS from
+    # strongest (primary_source) downward and pick the first tier with a
+    # non-zero count.
+    strongest_available = "no_source"
+    for tier in reversed(SOURCE_TIERS):
+        if counts.get(tier, 0) >= 1:
+            strongest_available = tier
+            break
+    # Weakest detected tier: walk SOURCE_TIERS from weakest (no_source) up
+    # and pick the first tier with a non-zero count.
+    weakest_detected = "no_source"
+    for tier in SOURCE_TIERS:
+        if counts.get(tier, 0) >= 1:
+            weakest_detected = tier
+            break
+
+    return {
+        "total_candidates_reviewed": len(per_candidate_items or []),
+        "total_claims_reviewed": len(per_claim_items or []),
+        "primary_source_count": counts["primary_source"],
+        "institutional_source_count": counts["institutional_source"],
+        "reputable_secondary_count": counts["reputable_secondary_source"],
+        "weak_secondary_count": counts["weak_secondary_source"],
+        "orientation_only_count": counts["orientation_only"],
+        "speculative_only_count": counts["speculative_only"],
+        "no_source_count": counts["no_source"],
+        "requires_correction_count": requires_correction_count,
+        "blocked_count": blocked_count,
+        "strongest_available_tier": strongest_available,
+        "weakest_detected_tier": weakest_detected,
+        "candidates_with_primary_sources": candidates_with_primary,
+        "candidates_with_no_sources": candidates_with_no_sources,
+        "candidates_with_speculative_only_material": candidates_with_speculative,
+        "candidates_blocked_from_promotion": len(blocked_candidate_ids),
+    }
+
+
 def summarize_per_claim_verification(
     review_text: Optional[str],
     *,

@@ -416,8 +416,119 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("primary_source", body)
                 self.assertIn("speculative_only", body)
                 self.assertIn("requires_correction", body)
+                # v0.5.0 Source Strength Summary panel contract.
+                self.assertIn("Source Strength Summary", body)
+                self.assertIn("Read-only source strength summary", body)
+                self.assertIn(
+                    "Evidence scoring does not approve promotion", body
+                )
+                self.assertIn("total candidates reviewed", body)
+                self.assertIn("total claims reviewed", body)
+                self.assertIn("institutional_source", body)
+                self.assertIn("blocked", body)
+                self.assertIn("strongest_available_tier", body)
+                self.assertIn("weakest_detected_tier", body)
+                self.assertIn("candidates_with_primary_sources", body)
+                self.assertIn("candidates_blocked_from_promotion", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
+    def test_summarize_source_strength_queue_aggregates_counts(self) -> None:
+        from backend.app.source_verification import (
+            summarize_source_strength_queue,
+        )
+
+        per_candidate = [
+            {
+                "candidate_id": "cand_a",
+                "verification_status": "verified_primary",
+                "strongest_source_tier": "primary_source",
+                "source_count": 3,
+                "primary_source_count": 1,
+                "institutional_source_count": 1,
+                "speculative_only_count": 1,
+            },
+            {
+                "candidate_id": "cand_b",
+                "verification_status": "unsourced",
+                "strongest_source_tier": "no_source",
+                "source_count": 0,
+                "primary_source_count": 0,
+                "institutional_source_count": 0,
+                "speculative_only_count": 0,
+            },
+        ]
+        per_claim = [
+            {
+                "candidate_id": "cand_a",
+                "verification_status": "verified_primary",
+                "primary_source_count": 1,
+                "institutional_source_count": 2,
+                "reputable_secondary_count": 0,
+                "weak_source_count": 0,
+                "orientation_only_count": 0,
+                "speculative_only_count": 0,
+                "no_source_count": 0,
+                "requires_correction": False,
+            },
+            {
+                "candidate_id": "cand_a",
+                "verification_status": "requires_correction",
+                "primary_source_count": 0,
+                "institutional_source_count": 1,
+                "reputable_secondary_count": 1,
+                "weak_source_count": 0,
+                "orientation_only_count": 1,
+                "speculative_only_count": 0,
+                "no_source_count": 0,
+                "requires_correction": True,
+            },
+            {
+                "candidate_id": "cand_a",
+                "verification_status": "blocked",
+                "primary_source_count": 0,
+                "institutional_source_count": 0,
+                "reputable_secondary_count": 0,
+                "weak_source_count": 0,
+                "orientation_only_count": 0,
+                "speculative_only_count": 1,
+                "no_source_count": 0,
+                "requires_correction": True,
+            },
+        ]
+        summary = summarize_source_strength_queue(per_candidate, per_claim)
+        self.assertEqual(summary["total_candidates_reviewed"], 2)
+        self.assertEqual(summary["total_claims_reviewed"], 3)
+        self.assertEqual(summary["primary_source_count"], 1)
+        self.assertEqual(summary["institutional_source_count"], 3)
+        self.assertEqual(summary["reputable_secondary_count"], 1)
+        self.assertEqual(summary["orientation_only_count"], 1)
+        self.assertEqual(summary["speculative_only_count"], 1)
+        self.assertEqual(summary["requires_correction_count"], 2)
+        self.assertEqual(summary["blocked_count"], 1)
+        self.assertEqual(summary["strongest_available_tier"], "primary_source")
+        self.assertEqual(
+            summary["weakest_detected_tier"], "speculative_only"
+        )
+        self.assertEqual(summary["candidates_with_primary_sources"], 1)
+        self.assertEqual(summary["candidates_with_no_sources"], 1)
+        self.assertEqual(
+            summary["candidates_with_speculative_only_material"], 1
+        )
+        self.assertEqual(summary["candidates_blocked_from_promotion"], 1)
+
+    def test_summarize_source_strength_queue_empty_inputs(self) -> None:
+        from backend.app.source_verification import (
+            summarize_source_strength_queue,
+        )
+
+        summary = summarize_source_strength_queue([], [])
+        self.assertEqual(summary["total_candidates_reviewed"], 0)
+        self.assertEqual(summary["total_claims_reviewed"], 0)
+        self.assertEqual(summary["primary_source_count"], 0)
+        self.assertEqual(summary["strongest_available_tier"], "no_source")
+        self.assertEqual(summary["weakest_detected_tier"], "no_source")
+        self.assertEqual(summary["candidates_blocked_from_promotion"], 0)
 
     def test_canonical_ledger_integrity_lock_statements_are_canonical(self) -> None:
         from backend.app.main import CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS

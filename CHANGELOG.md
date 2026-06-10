@@ -76,6 +76,37 @@ ledgers.
   `dashboard_per_claim_verification_claim2`,
   `dashboard_per_claim_verification_primary`,
   `dashboard_per_claim_verification_speculative`.
+- Added read-only Source Strength Summary dashboard panel.
+- Summarises evidence-tier counts across candidate and claim review records.
+- Surfaces primary, institutional, secondary, orientation-only,
+  speculative-only, no-source, correction, and blocked totals.
+- Keeps source scoring separate from promotion approval.
+- Adds CI/smoke coverage for source strength visibility.
+- New `summarize_source_strength_queue()` aggregator in
+  `backend/app/source_verification.py` that rolls up per-candidate
+  and per-claim items into total counts (`total_candidates_reviewed`,
+  `total_claims_reviewed`, the seven per-tier counts,
+  `requires_correction_count`, `blocked_count`) plus a health
+  summary (`strongest_available_tier`, `weakest_detected_tier`,
+  `candidates_with_primary_sources`, `candidates_with_no_sources`,
+  `candidates_with_speculative_only_material`,
+  `candidates_blocked_from_promotion`). Pure / stateless / reads no
+  files.
+- New `_source_strength_summary()` wiring helper in
+  `backend/app/main.py` that feeds the existing Source Verification
+  and Per-Claim Source Verification item lists into the aggregator
+  without re-walking the candidate ledger.
+- Source Strength Summary panel rendered inside `/dashboard` with
+  the three explicit lock statements ("Read-only source strength
+  summary", "Evidence scoring does not approve promotion",
+  "Promotion still requires a separate operator-approved commit")
+  and two subsections: **Totals** and **Health Summary**. Empty
+  state message: `No source strength records available.`
+- New live smoke probes for the Source Strength Summary panel:
+  `dashboard_source_strength_summary`,
+  `dashboard_source_strength_intro`,
+  `dashboard_source_strength_primary`,
+  `dashboard_source_strength_correction`.
 
 ### Verified
 
