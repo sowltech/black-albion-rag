@@ -103,7 +103,7 @@ class HealthTests(unittest.TestCase):
                     self.assertIn(f'href="{path}"', body)
                 self.assertIn("v0.3.0-planned", body)
                 self.assertIn("Latest release", body)
-                self.assertIn("v0.4.0 Approval Queue", body)
+                self.assertIn("v0.4.0 — Approval Queue", body)
                 self.assertIn("CHANGELOG.md", body)
                 self.assertIn("Repo Estate", body)
                 self.assertIn("Total repos found", body)

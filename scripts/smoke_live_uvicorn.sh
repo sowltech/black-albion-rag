@@ -154,7 +154,7 @@ probe_get  "export_claims" "/export/claims.json" 200
 probe_get  "search" "/search?q=Winchcombe" 200
 probe_get  "openapi" "/openapi.json" 200
 probe_get_body "dashboard" "/dashboard" 200 "Operator Dashboard"
-probe_get_body "dashboard_release" "/dashboard" 200 "v0.4.0 Approval Queue"
+probe_get_body "dashboard_release" "/dashboard" 200 "v0.4.0 — Approval Queue"
 probe_get_body "dashboard_repo_estate" "/dashboard" 200 "Repo Estate"
 probe_get_body "dashboard_repo_gold" "/dashboard" 200 "black-albion-rag"
 probe_get_body "dashboard_source_intake" "/dashboard" 200 "Source / Intake Review"

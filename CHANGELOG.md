@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — v0.4.0 Approval Queue
+## v0.4.0 — Approval Queue
+
+Release date: 2026-06-10
 
 v0.4.0 extends the v0.3.0 Operator Dashboard with a read-only Approval Queue
 panel that surfaces every candidate intake row currently held behind the
