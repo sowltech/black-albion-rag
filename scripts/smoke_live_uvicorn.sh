@@ -154,7 +154,7 @@ probe_get  "export_claims" "/export/claims.json" 200
 probe_get  "search" "/search?q=Winchcombe" 200
 probe_get  "openapi" "/openapi.json" 200
 probe_get_body "dashboard" "/dashboard" 200 "Operator Dashboard"
-probe_get_body "dashboard_release" "/dashboard" 200 "v0.4.0 — Approval Queue"
+probe_get_body "dashboard_release" "/dashboard" 200 "v0.5.0 Source Verification Engine"
 probe_get_body "dashboard_repo_estate" "/dashboard" 200 "Repo Estate"
 probe_get_body "dashboard_repo_gold" "/dashboard" 200 "black-albion-rag"
 probe_get_body "dashboard_source_intake" "/dashboard" 200 "Source / Intake Review"
@@ -181,6 +181,10 @@ probe_get_body "dashboard_canonical_integrity_intro" "/dashboard" 200 "Read-only
 probe_get_body "dashboard_canonical_integrity_write_lock" "/dashboard" 200 "Dashboard write access: disabled"
 probe_get_body "dashboard_canonical_integrity_promotion_lock" "/dashboard" 200 "Canonical promotion from dashboard: disabled"
 probe_get_body "dashboard_canonical_integrity_sites_path" "/dashboard" 200 "data/raw/black_albion_sites.json"
+probe_get_body "dashboard_source_verification" "/dashboard" 200 "Source Verification"
+probe_get_body "dashboard_source_verification_intro" "/dashboard" 200 "Read-only source verification"
+probe_get_body "dashboard_source_verification_no_approve" "/dashboard" 200 "Source scoring does not approve promotion"
+probe_get_body "dashboard_source_verification_candidate" "/dashboard" 200 "cand_gloucestershire_egypt_058"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

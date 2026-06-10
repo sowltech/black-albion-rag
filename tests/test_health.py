@@ -103,7 +103,7 @@ class HealthTests(unittest.TestCase):
                     self.assertIn(f'href="{path}"', body)
                 self.assertIn("v0.3.0-planned", body)
                 self.assertIn("Latest release", body)
-                self.assertIn("v0.4.0 — Approval Queue", body)
+                self.assertIn("v0.5.0 Source Verification Engine", body)
                 self.assertIn("CHANGELOG.md", body)
                 self.assertIn("Repo Estate", body)
                 self.assertIn("Total repos found", body)
@@ -192,8 +192,142 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("claims: <strong>90</strong>", body)
                 self.assertIn("modules: <strong>14</strong>", body)
                 self.assertIn("sources: <strong>71</strong>", body)
+                # v0.5.0 Source Verification panel
+                self.assertIn("Source Verification", body)
+                self.assertIn("Read-only source verification", body)
+                self.assertIn(
+                    "Source scoring does not approve promotion", body
+                )
+                # cand_gloucestershire_egypt_058 surfaces in the panel and at
+                # least one of the expected tier names must be present.
+                self.assertIn("cand_gloucestershire_egypt_058", body)
+                self.assertTrue(
+                    any(
+                        tier in body
+                        for tier in (
+                            "primary_source",
+                            "institutional_source",
+                            "speculative_only",
+                            "no_source",
+                        )
+                    ),
+                    "Source Verification panel must surface at least one tier name",
+                )
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
+    def test_classify_source_london_gazette_url_is_primary(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength(
+            source_name="The London Gazette",
+            source_url="https://www.thegazette.co.uk/London/issue/25356/page/2278",
+        )
+        self.assertEqual(result["source_tier"], "primary_source")
+
+    def test_classify_source_national_army_museum_is_institutional(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength(
+            source_url="https://www.nam.ac.uk/explore/28th-north-gloucestershire-regiment-foot",
+        )
+        self.assertEqual(result["source_tier"], "institutional_source")
+
+    def test_classify_source_imperial_war_museums_is_institutional(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength(
+            source_url="https://www.iwm.org.uk/collections/item/object/30076245",
+        )
+        self.assertEqual(result["source_tier"], "institutional_source")
+
+    def test_classify_source_soldiers_of_gloucestershire_is_institutional(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength(
+            source_url="https://soldiersofglos.com/visit-us/",
+        )
+        self.assertEqual(result["source_tier"], "institutional_source")
+
+    def test_classify_source_long_long_trail_is_reputable_secondary(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength(
+            source_url=(
+                "https://www.longlongtrail.co.uk/army/regiments-and-corps/"
+                "the-british-yeomanry-regiments-of-1914-1918/"
+                "gloucestershire-yeomanry-royal-gloucestershire-hussars/"
+            ),
+        )
+        self.assertEqual(result["source_tier"], "reputable_secondary_source")
+
+    def test_classify_source_wikipedia_is_orientation_only(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength(
+            source_url="https://en.wikipedia.org/wiki/Percival_Marling",
+        )
+        self.assertEqual(result["source_tier"], "orientation_only")
+
+    def test_classify_source_tier_iii_text_is_speculative_only(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength(
+            source_name="Back-Badge Sensory Vector / Amenta Subsurface Core Extraction",
+            source_url="",
+            source_notes="Tier III speculative_lens_only",
+        )
+        self.assertEqual(result["source_tier"], "speculative_only")
+        self.assertTrue(result["requires_operator_review"])
+
+    def test_classify_source_missing_returns_no_source(self) -> None:
+        from backend.app.source_verification import classify_source_strength
+
+        result = classify_source_strength("", "", "")
+        self.assertEqual(result["source_tier"], "no_source")
+        self.assertTrue(result["requires_operator_review"])
+
+    def test_summarize_claim_verification_prefers_primary_when_present(self) -> None:
+        from backend.app.source_verification import summarize_claim_verification
+
+        summary = summarize_claim_verification(
+            [
+                {"name": "London Gazette"},
+                {"url": "https://www.nam.ac.uk/explore/test"},
+                {"url": "https://en.wikipedia.org/wiki/X"},
+            ]
+        )
+        self.assertEqual(summary["strongest_source_tier"], "primary_source")
+        self.assertEqual(summary["verification_status"], "verified_primary")
+        self.assertEqual(summary["primary_source_count"], 1)
+        self.assertEqual(summary["institutional_source_count"], 1)
+        self.assertEqual(summary["orientation_only_count"], 1)
+
+    def test_summarize_claim_verification_empty_returns_unsourced(self) -> None:
+        from backend.app.source_verification import summarize_claim_verification
+
+        summary = summarize_claim_verification([])
+        self.assertEqual(summary["verification_status"], "unsourced")
+        self.assertEqual(summary["strongest_source_tier"], "no_source")
+
+    def test_source_verification_panel_surfaces_gloucestershire(self) -> None:
+        from backend.app.main import _source_verification_summary
+
+        summary = _source_verification_summary()
+        ids = [item["candidate_id"] for item in summary["items"]]
+        self.assertIn("cand_gloucestershire_egypt_058", ids)
+        glos = next(
+            item
+            for item in summary["items"]
+            if item["candidate_id"] == "cand_gloucestershire_egypt_058"
+        )
+        self.assertEqual(glos["strongest_source_tier"], "primary_source")
+        self.assertEqual(glos["verification_status"], "verified_primary")
+        self.assertGreaterEqual(glos["primary_source_count"], 1)
+        self.assertGreaterEqual(glos["institutional_source_count"], 1)
+        self.assertGreaterEqual(glos["speculative_only_count"], 1)
+        self.assertFalse(glos["canonical_ingestion_allowed"])
+        self.assertFalse(glos["promotion_commit_allowed"])
 
     def test_canonical_ledger_integrity_lock_statements_are_canonical(self) -> None:
         from backend.app.main import CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS

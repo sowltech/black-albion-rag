@@ -577,6 +577,174 @@ CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS = (
     "Promotion requires a separate operator-approved commit",
 )
 
+SOURCE_VERIFICATION_EMPTY_MESSAGE = "No source verification records available."
+SOURCE_VERIFICATION_LOCK_STATEMENTS = (
+    "Read-only source verification",
+    "Source scoring does not approve promotion",
+    "Promotion still requires a separate operator-approved commit",
+)
+
+_URL_RE = re.compile(r"https?://[^\s<>)\"']+")
+_REQUIRES_CORRECTION_RE = re.compile(r"requires_correction", re.IGNORECASE)
+
+
+def _extract_urls(text: str) -> List[str]:
+    """Return de-duplicated URLs found in ``text``, trimmed of trailing punct."""
+    seen: Dict[str, None] = {}
+    for match in _URL_RE.finditer(text):
+        url = match.group(0).rstrip(".,;:)]>")
+        if url not in seen:
+            seen[url] = None
+    return list(seen.keys())
+
+
+def _collect_candidate_sources(row: Dict[str, Any]) -> List[Dict[str, str]]:
+    """Collect ``{name, url, notes}`` source references from a candidate row.
+
+    Sources are read from:
+      1. URLs in the candidate's referenced ``source_review_file`` markdown.
+      2. Any ``candidate_claims[*]`` entry whose ``source_status`` is
+         ``speculative_lens_only`` — surfaced as a Tier III speculative entry.
+    """
+    sources: List[Dict[str, str]] = []
+    review_file = row.get("source_review_file")
+    if review_file:
+        path = REPO_ROOT / str(review_file)
+        if path.exists():
+            try:
+                text = path.read_text(encoding="utf-8")
+            except OSError:
+                text = ""
+            for url in _extract_urls(text):
+                sources.append({"name": "", "url": url, "notes": ""})
+    for claim in row.get("candidate_claims", []) or []:
+        if not isinstance(claim, dict):
+            continue
+        if str(claim.get("source_status") or "").lower() == "speculative_lens_only":
+            sources.append(
+                {
+                    "name": str(claim.get("claim_text") or ""),
+                    "url": "",
+                    "notes": "Tier III speculative_lens_only",
+                }
+            )
+    return sources
+
+
+def _count_requires_correction(row: Dict[str, Any]) -> int:
+    """Count occurrences of ``requires_correction`` across the row and the
+    referenced worksheet, used as a coarse "how many claims need rewriting"
+    signal for the dashboard panel.
+    """
+    total = 0
+    review_file = row.get("source_review_file")
+    if review_file:
+        path = REPO_ROOT / str(review_file)
+        if path.exists():
+            try:
+                text = path.read_text(encoding="utf-8")
+            except OSError:
+                text = ""
+            total += len(_REQUIRES_CORRECTION_RE.findall(text))
+    return total
+
+
+def _source_verification_summary() -> Dict[str, Any]:
+    """Return a read-only source verification summary for the dashboard.
+
+    Walks every candidate row in the candidate ledger, collects source URLs
+    from the candidate's referenced worksheet, classifies each via the
+    deterministic source verification engine, and aggregates per-row counts.
+    """
+    from .source_verification import summarize_claim_verification
+
+    items: List[Dict[str, Any]] = []
+    if CANDIDATE_CLAIMS_PATH.exists():
+        try:
+            payload = json.loads(CANDIDATE_CLAIMS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            payload = []
+        if isinstance(payload, list):
+            for row in payload:
+                if not isinstance(row, dict):
+                    continue
+                if not (
+                    row.get("operator_approval_required")
+                    or row.get("source_review_file")
+                    or row.get("operator_packet_file")
+                ):
+                    continue
+                sources = _collect_candidate_sources(row)
+                blocked = row.get("claim_6_tier_i_allowed") is False
+                requires_correction_count = _count_requires_correction(row)
+                summary = summarize_claim_verification(
+                    sources,
+                    blocked=blocked and not sources,
+                    requires_correction=False,
+                )
+                items.append(
+                    {
+                        "candidate_id": str(
+                            row.get("candidate_id") or "(missing id)"
+                        ),
+                        "review_status": str(
+                            row.get("review_status") or "unknown"
+                        ),
+                        "strongest_source_tier": summary["strongest_source_tier"],
+                        "strongest_source_weight": summary[
+                            "strongest_source_weight"
+                        ],
+                        "verification_status": summary["verification_status"],
+                        "source_count": summary["source_count"],
+                        "primary_source_count": summary["primary_source_count"],
+                        "institutional_source_count": summary[
+                            "institutional_source_count"
+                        ],
+                        "reputable_secondary_count": summary[
+                            "reputable_secondary_count"
+                        ],
+                        "weak_source_count": summary["weak_source_count"],
+                        "orientation_only_count": summary[
+                            "orientation_only_count"
+                        ],
+                        "speculative_only_count": summary[
+                            "speculative_only_count"
+                        ],
+                        "no_source_count": summary["no_source_count"],
+                        "requires_correction_count": requires_correction_count,
+                        "canonical_ingestion_allowed": bool(
+                            row.get("canonical_ingestion_allowed", False)
+                        ),
+                        "promotion_commit_allowed": bool(
+                            row.get("promotion_commit_allowed", False)
+                        ),
+                        "claim_6_tier_i_allowed": row.get(
+                            "claim_6_tier_i_allowed"
+                        ),
+                    }
+                )
+
+    # Deterministic sort: highest verification strength first, then candidate_id.
+    items.sort(
+        key=lambda item: (
+            -int(item.get("strongest_source_weight") or 0),
+            str(item.get("candidate_id") or "").lower(),
+        )
+    )
+    return {
+        "title": "Source Verification",
+        "intro": "Read-only source verification",
+        "no_approve_note": "Source scoring does not approve promotion",
+        "separate_commit_note": (
+            "Promotion still requires a separate operator-approved commit"
+        ),
+        "items": items,
+        "item_count": len(items),
+        "item_count_label": f"Verified candidates: {len(items)}",
+        "empty_message": SOURCE_VERIFICATION_EMPTY_MESSAGE,
+        "lock_statements": list(SOURCE_VERIFICATION_LOCK_STATEMENTS),
+    }
+
 
 def _canonical_ledger_status(path: Path) -> Dict[str, Any]:
     """Read a canonical ledger and report (count, status).
@@ -826,6 +994,7 @@ def create_app() -> FastAPI:
             promotion_blockers_count=promotion_blockers["item_count"],
             approval_evidence_count=approval_evidence["item_count"],
         )
+        source_verification = _source_verification_summary()
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -1050,6 +1219,47 @@ def create_app() -> FastAPI:
             f"<li>Blocked candidates: <strong>{escape(str(canonical_ledger_integrity['promotion_blockers_count']))}</strong></li>"
             f"<li>Evidence-bearing candidates: <strong>{escape(str(canonical_ledger_integrity['approval_evidence_count']))}</strong></li>"
         )
+        source_verification_title = escape(source_verification["title"])
+        source_verification_intro = escape(source_verification["intro"])
+        source_verification_no_approve_note = escape(
+            source_verification["no_approve_note"]
+        )
+        source_verification_separate_commit_note = escape(
+            source_verification["separate_commit_note"]
+        )
+        source_verification_count_label = escape(
+            str(source_verification["item_count_label"])
+        )
+        source_verification_empty_message = escape(
+            str(source_verification["empty_message"])
+        )
+        if source_verification["items"]:
+            source_verification_items_html = "\n".join(
+                "<li>"
+                f"<strong>{escape(item['candidate_id'])}</strong>"
+                f" — review_status: <code>{escape(item['review_status'])}</code>"
+                f" — verification_status: <code>{escape(item['verification_status'])}</code>"
+                f" — strongest_source_tier: <code>{escape(item['strongest_source_tier'])}</code>"
+                "<ul>"
+                f"<li>source_count: <strong>{escape(str(item['source_count']))}</strong></li>"
+                f"<li>primary_source_count: <strong>{escape(str(item['primary_source_count']))}</strong></li>"
+                f"<li>institutional_source_count: <strong>{escape(str(item['institutional_source_count']))}</strong></li>"
+                f"<li>reputable_secondary_count: <strong>{escape(str(item['reputable_secondary_count']))}</strong></li>"
+                f"<li>weak_source_count: <strong>{escape(str(item['weak_source_count']))}</strong></li>"
+                f"<li>orientation_only_count: <strong>{escape(str(item['orientation_only_count']))}</strong></li>"
+                f"<li>speculative_only_count: <strong>{escape(str(item['speculative_only_count']))}</strong></li>"
+                f"<li>no_source_count: <strong>{escape(str(item['no_source_count']))}</strong></li>"
+                f"<li>requires_correction_count: <strong>{escape(str(item['requires_correction_count']))}</strong></li>"
+                f"<li>canonical_ingestion_allowed: <code>{escape(str(item['canonical_ingestion_allowed']).lower())}</code></li>"
+                f"<li>promotion_commit_allowed: <code>{escape(str(item['promotion_commit_allowed']).lower())}</code></li>"
+                "</ul>"
+                "</li>"
+                for item in source_verification["items"]
+            )
+        else:
+            source_verification_items_html = (
+                f"<li>{source_verification_empty_message}</li>"
+            )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -1376,6 +1586,16 @@ def create_app() -> FastAPI:
         <p>Approval template: <code>{approval_evidence_template}</code></p>
         <ol>
           {approval_evidence_items_html}
+        </ol>
+      </div>
+      <div class="panel">
+        <h2>{source_verification_title}</h2>
+        <p><strong>{source_verification_intro}</strong></p>
+        <p>{source_verification_no_approve_note}.</p>
+        <p>{source_verification_separate_commit_note}.</p>
+        <p><strong>{source_verification_count_label}</strong></p>
+        <ol>
+          {source_verification_items_html}
         </ol>
       </div>
       <div class="panel">

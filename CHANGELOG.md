@@ -1,5 +1,77 @@
 # Changelog
 
+## Unreleased — v0.5.0 Source Verification Engine
+
+v0.5.0 adds a deterministic source verification engine and a new read-only
+Source Verification dashboard panel. The engine classifies candidate-claim
+evidence references into seven tiers and aggregates per-row verification
+status without ever approving or promoting anything into the canonical
+ledgers.
+
+### Added
+
+- Added deterministic source-strength classification.
+- Added read-only Source Verification dashboard panel.
+- Added source-tier visibility for candidate review items.
+- Maintains no-promotion/no-canonical-write guarantees.
+- Added unit and smoke coverage for source verification.
+- New `backend/app/source_verification.py` module exposing
+  `SOURCE_TIERS`, `SOURCE_TIER_WEIGHT`, `classify_source_strength()`,
+  and `summarize_claim_verification()`. The seven evidence tiers are
+  `primary_source`, `institutional_source`,
+  `reputable_secondary_source`, `weak_secondary_source`,
+  `orientation_only`, `speculative_only`, and `no_source`.
+- `classify_source_strength()` returns `source_tier`, `confidence`,
+  `reason`, `promotion_weight`, and `requires_operator_review`. Examples:
+  The London Gazette → `primary_source`; National Archives Discovery →
+  `institutional_source`; National Army Museum / Imperial War Museums /
+  Soldiers of Gloucestershire Museum / Royal Wessex Yeomanry / Army
+  Museums Ogilby Trust → `institutional_source`; The Long, Long Trail
+  → `reputable_secondary_source`; Wikipedia → `orientation_only`;
+  Tier III / "Amenta" / "Back-Badge Sensory Vector" / "Trans-Continental
+  Grid" / "counter-intelligence" → `speculative_only`; missing URL +
+  missing name → `no_source`.
+- `summarize_claim_verification()` returns `strongest_source_tier`,
+  `source_count`, per-tier counts, and a `verification_status` of
+  `verified_primary`, `institutionally_supported`,
+  `partially_supported`, `orientation_only`, `speculative_only`,
+  `unsourced`, `requires_correction`, or `blocked`.
+- Source Verification panel in `/dashboard` rendering the explicit
+  lock statements "Read-only source verification", "Source scoring
+  does not approve promotion", and "Promotion still requires a
+  separate operator-approved commit". Per-candidate rows show
+  `candidate_id`, `review_status`, `verification_status`,
+  `strongest_source_tier`, the eight per-tier counts,
+  `requires_correction_count`, `canonical_ingestion_allowed`,
+  and `promotion_commit_allowed`. Items are ordered highest
+  verification strength first, then `candidate_id`. Empty-state
+  message: `No source verification records available.`
+- New live smoke probes for the Source Verification panel:
+  `dashboard_source_verification`,
+  `dashboard_source_verification_intro`,
+  `dashboard_source_verification_no_approve`,
+  `dashboard_source_verification_candidate`.
+
+### Verified
+
+- `cand_gloucestershire_egypt_058` surfaces with
+  `verification_status: verified_primary`,
+  `strongest_source_tier: primary_source` (London Gazette URL
+  attached for Claim 2), `primary_source_count >= 1`,
+  `institutional_source_count >= 1` (NAM / IWM / Soldiers of
+  Gloucestershire Museum / RWY / AMOT), and
+  `speculative_only_count >= 1` (Claim 6 Tier III lens). The row
+  remains `canonical_ingestion_allowed: false` and
+  `promotion_commit_allowed: false`.
+- Canonical ledgers unchanged (sites 8 / claims 90 / modules 14 /
+  sources 71).
+- `bash scripts/smoke_live_uvicorn.sh` 43 probes pass.
+- `bash scripts/validate_enterprise_gpt_os.sh` PASS.
+- `python3 -m pytest -q` 73 passed (+11 new source-verification tests).
+- `python3 -m compileall -q backend` exit 0.
+- `git diff --check` / `git diff --cached --check` clean.
+- Secret-pattern scan clean.
+
 ## v0.4.0 — Approval Queue
 
 Release date: 2026-06-10
