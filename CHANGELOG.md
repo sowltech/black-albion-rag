@@ -36,6 +36,23 @@ operator approval gate.
 - Added empty-state messaging for no pending approvals:
   `No candidates currently require operator approval.` The panel stays
   visible when the queue is empty.
+- Added read-only Promotion Blockers panel.
+- Surfaces why candidate items cannot yet be promoted.
+- Keeps promotion blocked from the dashboard.
+- Adds CI/smoke coverage for blocker visibility.
+- Promotion Blockers panel surfaces per-candidate blocker bullets such
+  as `canonical ingestion blocked`, `promotion commit blocked`,
+  `operator approval required`, `promotion requires separate commit`,
+  `final_decision: …`, `more sources required`,
+  `tier_iii_contamination_check: …`, `claim 6 blocked from Tier I`,
+  and `claim 6 Tier I promotion path: none`. Items are ordered by
+  highest `blocker_count` first, then `candidate_id`. Empty-state
+  message: `No promotion blockers detected.`
+- New live smoke probes for the Promotion Blockers panel:
+  `dashboard_promotion_blockers`,
+  `dashboard_promotion_blockers_intro`,
+  `dashboard_promotion_blockers_canonical`,
+  `dashboard_promotion_blockers_commit`.
 
 ### Verified
 

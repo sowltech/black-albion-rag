@@ -365,6 +365,121 @@ def _approval_queue_summary() -> Dict[str, Any]:
     }
 
 
+PROMOTION_BLOCKERS_EMPTY_MESSAGE = "No promotion blockers detected."
+PROMOTION_BLOCKERS_BLOCKED_DECISIONS = frozenset(
+    {
+        "more_sources_required",
+        "not_approved",
+        "rejected",
+        "preserve_as_speculative_only",
+        "archive_as_speculative_only",
+        "do_not_promote_to_tier_i",
+    }
+)
+
+
+def _promotion_blockers_for_row(row: Dict[str, Any]) -> List[str]:
+    """Return the list of promotion blockers visible on a single candidate row.
+
+    Conservative: each blocker is only added when its triggering field has a
+    value that explicitly indicates the candidate cannot yet be promoted.
+    The strings are short and lower-case so the dashboard and the smoke
+    probes can match them stably.
+    """
+    blockers: List[str] = []
+    if row.get("canonical_ingestion_allowed") is False:
+        blockers.append("canonical ingestion blocked")
+    if row.get("promotion_commit_allowed") is False:
+        blockers.append("promotion commit blocked")
+    if bool(row.get("operator_approval_required")) and not bool(
+        row.get("operator_approval_granted")
+    ):
+        blockers.append("operator approval required")
+    if bool(row.get("promotion_requires_separate_commit")):
+        blockers.append("promotion requires separate commit")
+    final_decision = str(row.get("final_decision") or "").strip().lower()
+    if final_decision and final_decision in PROMOTION_BLOCKERS_BLOCKED_DECISIONS:
+        blockers.append(f"final_decision: {final_decision}")
+    required_action = str(row.get("required_action") or "").strip().lower()
+    if required_action == "source_hunting":
+        blockers.append("more sources required")
+    elif required_action == "manual_raw_content_needed_or_independent_source_hunting":
+        blockers.append("manual raw content or independent source hunting required")
+    tier_iii_check = row.get("tier_iii_contamination_check")
+    if tier_iii_check is not None:
+        blockers.append(
+            f"tier_iii_contamination_check: {str(tier_iii_check).strip().lower()}"
+        )
+    if row.get("claim_6_tier_i_allowed") is False:
+        blockers.append("claim 6 blocked from Tier I")
+    claim_6_path = str(row.get("claim_6_promotion_path") or "").strip().lower()
+    if claim_6_path == "none":
+        blockers.append("claim 6 Tier I promotion path: none")
+    return blockers
+
+
+def _promotion_blockers_sort_key(item: Dict[str, Any]) -> tuple:
+    """Deterministic sort key: highest blocker_count first, then candidate_id."""
+    blocker_count = int(item.get("blocker_count") or 0)
+    candidate_id = str(item.get("candidate_id") or "").lower()
+    # Negate the count so a higher count sorts earlier under ascending sort.
+    return (-blocker_count, candidate_id)
+
+
+def _promotion_blockers_summary() -> Dict[str, Any]:
+    """Return a read-only blocker summary derived from the candidate ledger.
+
+    The dashboard only surfaces the blockers. It cannot approve or promote.
+    Promotion requires a separate operator-approved commit per
+    `docs/intake-review-workflow.md` and
+    `docs/templates/operator_promotion_approval_template.md`.
+    """
+    blocked: List[Dict[str, Any]] = []
+    if CANDIDATE_CLAIMS_PATH.exists():
+        try:
+            payload = json.loads(CANDIDATE_CLAIMS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            payload = []
+        if isinstance(payload, list):
+            for row in payload:
+                if not isinstance(row, dict):
+                    continue
+                blockers = _promotion_blockers_for_row(row)
+                if not blockers:
+                    continue
+                blocked.append(
+                    {
+                        "candidate_id": str(row.get("candidate_id") or "(missing id)"),
+                        "review_status": str(row.get("review_status") or "unknown"),
+                        "blocker_count": len(blockers),
+                        "blockers": blockers,
+                        "operator_packet_file": str(
+                            row.get("operator_packet_file") or ""
+                        ),
+                        "operator_approval_draft": str(
+                            row.get("operator_approval_draft") or ""
+                        ),
+                    }
+                )
+    blocked.sort(key=_promotion_blockers_sort_key)
+    return {
+        "title": "Promotion Blockers",
+        "intro": "Read-only blocker summary",
+        "explanation": "This panel explains why promotion is blocked",
+        "no_promotion_note": "No promotion occurs from this dashboard",
+        "items": blocked,
+        "item_count": len(blocked),
+        "item_count_label": f"Blocked candidates: {len(blocked)}",
+        "empty_message": PROMOTION_BLOCKERS_EMPTY_MESSAGE,
+        "intake_queue_path": _repo_relative(CANDIDATE_CLAIMS_PATH),
+        "workflow_doc": (
+            _repo_relative(INTAKE_REVIEW_WORKFLOW_PATH)
+            if INTAKE_REVIEW_WORKFLOW_PATH.exists()
+            else "not detected"
+        ),
+    }
+
+
 def _exists_label(path: Path) -> str:
     """Return a readable exists/missing label for a local check artifact."""
     return "present" if path.exists() else "not detected"
@@ -503,6 +618,7 @@ def create_app() -> FastAPI:
         repo_estate = _repo_estate_summary()
         source_intake = _source_intake_summary()
         approval_queue = _approval_queue_summary()
+        promotion_blockers = _promotion_blockers_summary()
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -603,6 +719,48 @@ def create_app() -> FastAPI:
         else:
             approval_queue_items_html = (
                 f"<li>{approval_queue_empty_message}</li>"
+            )
+        promotion_blockers_title = escape(promotion_blockers["title"])
+        promotion_blockers_intro = escape(promotion_blockers["intro"])
+        promotion_blockers_explanation = escape(promotion_blockers["explanation"])
+        promotion_blockers_no_promotion_note = escape(
+            promotion_blockers["no_promotion_note"]
+        )
+        promotion_blockers_count_label = escape(
+            str(promotion_blockers["item_count_label"])
+        )
+        promotion_blockers_empty_message = escape(
+            str(promotion_blockers["empty_message"])
+        )
+        promotion_blockers_source = escape(str(promotion_blockers["intake_queue_path"]))
+        promotion_blockers_workflow = escape(str(promotion_blockers["workflow_doc"]))
+        if promotion_blockers["items"]:
+            promotion_blockers_items_html = "\n".join(
+                "<li>"
+                f"<strong>{escape(item['candidate_id'])}</strong>"
+                f" — review_status: <code>{escape(item['review_status'])}</code>"
+                f" — blocker_count: <strong>{escape(str(item['blocker_count']))}</strong>"
+                "<ul>"
+                + "".join(
+                    f"<li>{escape(b)}</li>" for b in item["blockers"]
+                )
+                + (
+                    f"<li>operator_packet_file: <code>{escape(item['operator_packet_file'])}</code></li>"
+                    if item["operator_packet_file"]
+                    else ""
+                )
+                + (
+                    f"<li>operator_approval_draft: <code>{escape(item['operator_approval_draft'])}</code></li>"
+                    if item["operator_approval_draft"]
+                    else ""
+                )
+                + "</ul>"
+                "</li>"
+                for item in promotion_blockers["items"]
+            )
+        else:
+            promotion_blockers_items_html = (
+                f"<li>{promotion_blockers_empty_message}</li>"
             )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
@@ -905,6 +1063,18 @@ def create_app() -> FastAPI:
         <p>Approval template: <code>{approval_queue_template}</code></p>
         <ol>
           {approval_queue_items_html}
+        </ol>
+      </div>
+      <div class="panel">
+        <h2>{promotion_blockers_title}</h2>
+        <p><strong>{promotion_blockers_intro}</strong></p>
+        <p>{promotion_blockers_explanation}.</p>
+        <p>{promotion_blockers_no_promotion_note}.</p>
+        <p><strong>{promotion_blockers_count_label}</strong></p>
+        <p>Source: <code>{promotion_blockers_source}</code></p>
+        <p>Workflow: <code>{promotion_blockers_workflow}</code></p>
+        <ol>
+          {promotion_blockers_items_html}
         </ol>
       </div>
       <div class="panel">

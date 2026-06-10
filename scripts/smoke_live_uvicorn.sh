@@ -168,6 +168,10 @@ probe_get_body "dashboard_approval_queue" "/dashboard" 200 "Approval Queue"
 probe_get_body "dashboard_approval_queue_candidate" "/dashboard" 200 "cand_gloucestershire_egypt_058"
 probe_get_body "dashboard_approval_queue_separate_commit" "/dashboard" 200 "Promotion requires a separate operator-approved commit"
 probe_get_body "dashboard_approval_queue_count" "/dashboard" 200 "Approval queue items:"
+probe_get_body "dashboard_promotion_blockers" "/dashboard" 200 "Promotion Blockers"
+probe_get_body "dashboard_promotion_blockers_intro" "/dashboard" 200 "Read-only blocker summary"
+probe_get_body "dashboard_promotion_blockers_canonical" "/dashboard" 200 "canonical ingestion blocked"
+probe_get_body "dashboard_promotion_blockers_commit" "/dashboard" 200 "promotion commit blocked"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

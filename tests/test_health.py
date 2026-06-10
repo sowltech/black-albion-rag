@@ -144,8 +144,102 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("tier_iii_contamination_check", body)
                 # v0.4.0 Approval Queue display contract: count label
                 self.assertIn("Approval queue items:", body)
+                # v0.4.0 Promotion Blockers panel contract
+                self.assertIn("Promotion Blockers", body)
+                self.assertIn("Read-only blocker summary", body)
+                self.assertIn(
+                    "This panel explains why promotion is blocked", body
+                )
+                self.assertIn("Blocked candidates:", body)
+                self.assertIn("canonical ingestion blocked", body)
+                self.assertIn("promotion commit blocked", body)
+                self.assertIn("operator approval required", body)
+                self.assertIn("claim 6", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
+    def test_promotion_blockers_for_row_detects_each_blocker(self) -> None:
+        from backend.app.main import _promotion_blockers_for_row
+
+        row = {
+            "candidate_id": "cand_x",
+            "canonical_ingestion_allowed": False,
+            "promotion_commit_allowed": False,
+            "operator_approval_required": True,
+            "promotion_requires_separate_commit": True,
+            "final_decision": "more_sources_required",
+            "required_action": "source_hunting",
+            "tier_iii_contamination_check": "passed",
+            "claim_6_tier_i_allowed": False,
+            "claim_6_promotion_path": "none",
+        }
+        blockers = _promotion_blockers_for_row(row)
+        self.assertIn("canonical ingestion blocked", blockers)
+        self.assertIn("promotion commit blocked", blockers)
+        self.assertIn("operator approval required", blockers)
+        self.assertIn("promotion requires separate commit", blockers)
+        self.assertIn("final_decision: more_sources_required", blockers)
+        self.assertIn("more sources required", blockers)
+        self.assertIn("tier_iii_contamination_check: passed", blockers)
+        self.assertIn("claim 6 blocked from Tier I", blockers)
+        self.assertIn("claim 6 Tier I promotion path: none", blockers)
+
+    def test_promotion_blockers_for_row_clean_row_returns_empty(self) -> None:
+        from backend.app.main import _promotion_blockers_for_row
+
+        row = {
+            "candidate_id": "cand_clear",
+            "canonical_ingestion_allowed": True,
+            "promotion_commit_allowed": True,
+            "operator_approval_required": False,
+            "promotion_requires_separate_commit": False,
+        }
+        self.assertEqual(_promotion_blockers_for_row(row), [])
+
+    def test_promotion_blockers_sort_key_is_deterministic(self) -> None:
+        from backend.app.main import _promotion_blockers_sort_key
+
+        items = [
+            {"candidate_id": "cand_charlie", "blocker_count": 1},
+            {"candidate_id": "cand_alpha", "blocker_count": 4},
+            {"candidate_id": "cand_bravo", "blocker_count": 4},
+            {"candidate_id": "cand_delta", "blocker_count": 2},
+        ]
+        ordered = sorted(items, key=_promotion_blockers_sort_key)
+        self.assertEqual(
+            [item["candidate_id"] for item in ordered],
+            ["cand_alpha", "cand_bravo", "cand_delta", "cand_charlie"],
+        )
+
+    def test_promotion_blockers_empty_message_is_canonical(self) -> None:
+        from backend.app.main import PROMOTION_BLOCKERS_EMPTY_MESSAGE
+
+        self.assertEqual(
+            PROMOTION_BLOCKERS_EMPTY_MESSAGE,
+            "No promotion blockers detected.",
+        )
+
+    def test_promotion_blockers_summary_includes_gloucestershire(self) -> None:
+        from backend.app.main import _promotion_blockers_summary
+
+        summary = _promotion_blockers_summary()
+        self.assertIn("items", summary)
+        ids = [item["candidate_id"] for item in summary["items"]]
+        self.assertIn("cand_gloucestershire_egypt_058", ids)
+        glos = next(
+            item
+            for item in summary["items"]
+            if item["candidate_id"] == "cand_gloucestershire_egypt_058"
+        )
+        self.assertIn("canonical ingestion blocked", glos["blockers"])
+        self.assertIn("promotion commit blocked", glos["blockers"])
+        self.assertIn("operator approval required", glos["blockers"])
+        self.assertIn("claim 6 blocked from Tier I", glos["blockers"])
+        self.assertIn("claim 6 Tier I promotion path: none", glos["blockers"])
+        self.assertEqual(
+            summary["item_count_label"],
+            f"Blocked candidates: {summary['item_count']}",
+        )
 
     def test_approval_queue_sort_key_is_deterministic(self) -> None:
         from backend.app.main import _approval_queue_sort_key
