@@ -278,6 +278,27 @@ Tier III speculative material. It must not enter Tier I canonical ledgers,
 must not be described as source-backed history, and must not be used to promote
 or verify Claims 1 to 5.
 
+### Claim 6 containment confirmation (2026-06-10)
+
+**Claim 6 containment confirmed. No source pass required. No Tier I
+promotion path.**
+
+Containment fields enforced in the source review worksheet:
+
+- `classification`: Tier III speculative lens only
+- `canonical_data_allowed`: false
+- `tier_i_promotion_allowed`: false
+- `source_attachment_required`: false
+- `source_attachment_allowed`: false
+- `promotion_recommendation`: do_not_promote_to_Tier_I
+- `allowed_location`: `research/intake/` notes only
+- `blocked_locations`: `data/raw/black_albion_sites.json`,
+  `data/raw/black_albion_claims.json`,
+  `data/raw/black_albion_modules.json`,
+  `data/raw/black_albion_sources.json`
+- `operator_override_allowed`: false unless a future separate
+  governance rule explicitly permits symbolic-only collections.
+
 ## Operator decision options
 
 ### Option A — Keep in source_hunting

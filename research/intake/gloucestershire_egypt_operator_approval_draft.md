@@ -166,11 +166,27 @@ Unsupported original phrases remain blocked:
 - source_status: speculative_lens_only
 - promotion_readiness: do_not_promote_to_Tier_I
 - promotion_decision: archive_as_speculative_only
+- final_decision: preserve_as_speculative_only
+- canonical_ingestion_allowed: false
+- promotion_commit_allowed: false
 - rationale: Claim 6 is Tier III speculative-only and cannot enter Tier I
   canonical data.
 - required_sources_attached: not applicable
+- source_attachment_required: false
+- source_attachment_allowed: false
+- containment_pass_complete: true
+- containment_pass_date: 2026-06-10
 - remaining_gaps: none for Tier I because Tier I promotion is forbidden
-- Tier III contamination check: must remain outside Tier I canonical ledgers
+- Tier III contamination check: passed (no Tier III language is being
+  promoted into Tier I canonical data; speculative wording remains
+  walled off in `research/intake/` only)
+- allowed_location: `research/intake/` notes only
+- blocked_locations: `data/raw/black_albion_sites.json`,
+  `data/raw/black_albion_claims.json`,
+  `data/raw/black_albion_modules.json`,
+  `data/raw/black_albion_sources.json`
+- operator_override_allowed: false unless a future separate governance
+  rule explicitly permits symbolic-only collections
 - operator_initials:
 
 ## Safety gates

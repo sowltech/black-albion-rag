@@ -827,6 +827,66 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   bundling itself must not be carried into the canonical ledger; the Tier I
   block, if a record is ever created, must contain only sourced material.
 
+#### Claim 6 — Containment pass (2026-06-10)
+
+- **claim_id**: `cand_claim_glos_egypt_006`
+- **claim_number**: 6
+- **classification**: Tier III speculative lens only
+- **canonical_data_allowed**: false
+- **tier_i_promotion_allowed**: false
+- **source_attachment_required**: false
+- **source_attachment_allowed**: false
+- **promotion_recommendation**: do_not_promote_to_Tier_I
+- **allowed_location**: `research/intake/` notes only (this worksheet,
+  the intercept raw and review artifacts, the operator packet, and the
+  operator approval draft). No live ledger.
+- **blocked_locations**:
+  - `data/raw/black_albion_sites.json`
+  - `data/raw/black_albion_claims.json`
+  - `data/raw/black_albion_modules.json`
+  - `data/raw/black_albion_sources.json`
+- **containment_reason**: Claim 6 is interpretive / mythic / esoteric
+  framing using language such as "Back-Badge Sensory Vector",
+  "Amenta Subsurface Core Extraction", "Trans-Continental Grid", and
+  a "counter-intelligence" narrative. None of this is a historical,
+  archaeological, geological, geographical, institutional, or
+  archival claim. Per `docs/intake-review-workflow.md` and
+  `docs/doctrine.md`, Tier III material must never enter Tier I
+  canonical ledgers and must never be treated as source-backed fact.
+  Attempting to source-attach it would be a category error.
+- **safe_usage_notes**:
+  - May be quoted inside an explicitly labelled Tier III block of a
+    research artefact in `research/intake/` as interpretive /
+    thematic material only.
+  - May be referenced as the Bobby Hemmit / operator-framework
+    speculative lens that originally motivated the intake item.
+  - May inform creative or thematic discussion in research notes,
+    clearly framed as a lens, not as fact.
+- **unsafe_usage_notes**:
+  - Must not be presented as verified history, military history,
+    archaeology, geography, institutional evidence, or canonical
+    RAG fact.
+  - Must not be cited as a source for any Tier I-candidate claim
+    (Claims 1–5).
+  - Must not be paraphrased into a Tier I sentence by stripping the
+    speculative caveats.
+  - Must not be mixed into the same record block as Tier I evidence
+    in any live ledger.
+  - Must not be auto-ingested by any retriever, prompt builder, or
+    answer generator path that surfaces material as fact.
+- **operator_override_allowed**: false — unless a future separate
+  governance rule explicitly permits a symbolic-only collection
+  outside the current Tier I / II / III doctrine. Such a rule, if
+  ever adopted, would have to be a separate doctrine document with
+  its own change-control process; it does **not** exist today.
+
+**Permanent containment statement:**
+
+> Claim 6 may be preserved as interpretive / thematic material only.
+> It must not be represented as verified history, military history,
+> archaeology, geography, institutional evidence, or canonical RAG
+> fact.
+
 ---
 
 ## Summary Of This Pass

@@ -43,6 +43,22 @@
     "canonical_ingestion_allowed": false,
     "promotion_commit_allowed": false,
     "promotion_requires_separate_commit": true,
+    "claim_6_containment_pass_complete": true,
+    "claim_6_containment_pass_date": "2026-06-10",
+    "claim_6_tier_i_allowed": false,
+    "claim_6_source_attachment_required": false,
+    "claim_6_source_attachment_allowed": false,
+    "claim_6_promotion_path": "none",
+    "claim_6_classification": "Tier III speculative lens only",
+    "claim_6_allowed_location": "research/intake/ notes only",
+    "claim_6_blocked_locations": [
+      "data/raw/black_albion_sites.json",
+      "data/raw/black_albion_claims.json",
+      "data/raw/black_albion_modules.json",
+      "data/raw/black_albion_sources.json"
+    ],
+    "claim_6_operator_override_allowed": false,
+    "tier_iii_contamination_check": "passed",
     "proposed_target_file": "backend/data/black_albion_sites.json",
     "reason": "high-claim mixed historical/speculative entry requires source verification before canonical data insertion",
     "allowed_use": [
