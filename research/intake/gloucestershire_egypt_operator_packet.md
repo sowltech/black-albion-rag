@@ -24,6 +24,11 @@ The following canonical ledgers remain untouched by this packet:
 This packet is review documentation only. It does not promote any candidate
 claim into a canonical ledger.
 
+Approval draft:
+`research/intake/gloucestershire_egypt_operator_approval_draft.md`.
+That draft does not approve promotion; it keeps canonical ingestion blocked
+and marks the current decision as `more_sources_required`.
+
 ## Claim readiness table
 
 | claim_number | original_claim_problem | corrected_claim_available | source_status | promotion_readiness | promotion_allowed_now | operator_action_required |
