@@ -69,6 +69,28 @@ operator approval gate.
   `dashboard_evidence_links`, `dashboard_evidence_links_intro`,
   `dashboard_evidence_links_packet`,
   `dashboard_evidence_links_draft`.
+- Added read-only Canonical Ledger Integrity panel.
+- Surfaces canonical ledger counts for sites, claims, modules, and sources.
+- Confirms dashboard write access and canonical promotion are disabled.
+- Adds CI/smoke coverage for ledger-integrity visibility.
+- Canonical Ledger Integrity panel renders the four canonical ledger
+  paths and counts (`sites: 8`, `claims: 90`, `modules: 14`,
+  `sources: 71`), each with a `status` of `ok` / `missing` /
+  `invalid_json` / `unexpected_shape`. Lock statements rendered:
+  "Read-only canonical ledger integrity",
+  "Dashboard write access: disabled",
+  "Canonical promotion from dashboard: disabled",
+  "Promotion requires a separate operator-approved commit",
+  and "Operator approval required before promotion: true". Cross-
+  reference governance counts (`Approval queue items`, `Blocked
+  candidates`, `Evidence-bearing candidates`) are surfaced verbatim
+  from the sibling panels for traceability.
+- New live smoke probes for the Canonical Ledger Integrity panel:
+  `dashboard_canonical_integrity`,
+  `dashboard_canonical_integrity_intro`,
+  `dashboard_canonical_integrity_write_lock`,
+  `dashboard_canonical_integrity_promotion_lock`,
+  `dashboard_canonical_integrity_sites_path`.
 
 ### Verified
 

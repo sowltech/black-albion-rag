@@ -46,7 +46,9 @@ EVAL_RUNNER_PATH = REPO_ROOT / "enterprise-gpt-os" / "scripts" / "run_evals.py"
 TESTS_DIR = REPO_ROOT / "tests"
 BACKEND_DIR = REPO_ROOT / "backend"
 CANDIDATE_CLAIMS_PATH = DEFAULT_DATA_DIR / "black_albion_candidate_claims.json"
+SITES_PATH = DEFAULT_DATA_DIR / "black_albion_sites.json"
 CLAIMS_PATH = DEFAULT_DATA_DIR / "black_albion_claims.json"
+MODULES_PATH = DEFAULT_DATA_DIR / "black_albion_modules.json"
 SOURCES_PATH = DEFAULT_DATA_DIR / "black_albion_sources.json"
 MODULE_EXPANSION_DOC_PATH = REPO_ROOT / "docs" / "black-albion-module-expansion.md"
 INTAKE_REVIEW_WORKFLOW_PATH = REPO_ROOT / "docs" / "intake-review-workflow.md"
@@ -568,6 +570,117 @@ def _approval_evidence_links_summary() -> Dict[str, Any]:
     }
 
 
+CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS = (
+    "Read-only canonical ledger integrity",
+    "Dashboard write access: disabled",
+    "Canonical promotion from dashboard: disabled",
+    "Promotion requires a separate operator-approved commit",
+)
+
+
+def _canonical_ledger_status(path: Path) -> Dict[str, Any]:
+    """Read a canonical ledger and report (count, status).
+
+    Status semantics (per the v0.4.0 Canonical Ledger Integrity panel):
+      - `ok` if file loads and the root shape is a list/dict.
+      - `missing` if the file is absent.
+      - `invalid_json` if JSON cannot be parsed.
+      - `unexpected_shape` if root is neither list nor dict.
+    """
+    label = path.name
+    if not path.exists():
+        return {
+            "label": label,
+            "path": _repo_relative(path),
+            "count": 0,
+            "status": "missing",
+        }
+    try:
+        payload = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return {
+            "label": label,
+            "path": _repo_relative(path),
+            "count": 0,
+            "status": "invalid_json",
+        }
+    if isinstance(payload, list):
+        count = len(payload)
+        return {
+            "label": label,
+            "path": _repo_relative(path),
+            "count": count,
+            "status": "ok",
+        }
+    if isinstance(payload, dict):
+        # Pick the first list-shaped value (e.g. {"records": [...]}) for the
+        # count; otherwise fall back to the number of top-level keys.
+        for key in ("records", "sites", "claims", "modules", "sources", "items"):
+            inner = payload.get(key)
+            if isinstance(inner, list):
+                return {
+                    "label": label,
+                    "path": _repo_relative(path),
+                    "count": len(inner),
+                    "status": "ok",
+                }
+        return {
+            "label": label,
+            "path": _repo_relative(path),
+            "count": len(payload),
+            "status": "ok",
+        }
+    return {
+        "label": label,
+        "path": _repo_relative(path),
+        "count": 0,
+        "status": "unexpected_shape",
+    }
+
+
+def _canonical_ledger_integrity_summary(
+    approval_queue_count: Optional[int] = None,
+    promotion_blockers_count: Optional[int] = None,
+    approval_evidence_count: Optional[int] = None,
+) -> Dict[str, Any]:
+    """Return a read-only canonical ledger integrity summary for the dashboard.
+
+    The dashboard reads the four canonical ledger files for counts only and
+    confirms the dashboard cannot mutate canonical data. Optional governance
+    counts from sibling panels are surfaced verbatim for cross-reference.
+    """
+    ledgers = [
+        {"key": "sites", "path_obj": SITES_PATH},
+        {"key": "claims", "path_obj": CLAIMS_PATH},
+        {"key": "modules", "path_obj": MODULES_PATH},
+        {"key": "sources", "path_obj": SOURCES_PATH},
+    ]
+    rows: List[Dict[str, Any]] = []
+    for spec in ledgers:
+        status = _canonical_ledger_status(spec["path_obj"])
+        status["key"] = spec["key"]
+        rows.append(status)
+    return {
+        "title": "Canonical Ledger Integrity",
+        "intro": "Read-only canonical ledger integrity",
+        "lock_statements": list(CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS),
+        "write_access_note": "Dashboard write access: disabled",
+        "canonical_promotion_note": (
+            "Canonical promotion from dashboard: disabled"
+        ),
+        "separate_commit_note": (
+            "Promotion requires a separate operator-approved commit"
+        ),
+        "operator_approval_note": (
+            "Operator approval required before promotion: true"
+        ),
+        "rows": rows,
+        "approval_queue_count": approval_queue_count,
+        "promotion_blockers_count": promotion_blockers_count,
+        "approval_evidence_count": approval_evidence_count,
+    }
+
+
 def _exists_label(path: Path) -> str:
     """Return a readable exists/missing label for a local check artifact."""
     return "present" if path.exists() else "not detected"
@@ -708,6 +821,11 @@ def create_app() -> FastAPI:
         approval_queue = _approval_queue_summary()
         promotion_blockers = _promotion_blockers_summary()
         approval_evidence = _approval_evidence_links_summary()
+        canonical_ledger_integrity = _canonical_ledger_integrity_summary(
+            approval_queue_count=approval_queue["item_count"],
+            promotion_blockers_count=promotion_blockers["item_count"],
+            approval_evidence_count=approval_evidence["item_count"],
+        )
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -905,6 +1023,33 @@ def create_app() -> FastAPI:
             approval_evidence_items_html = (
                 f"<li>{approval_evidence_empty_message}</li>"
             )
+        canonical_integrity_title = escape(canonical_ledger_integrity["title"])
+        canonical_integrity_intro = escape(canonical_ledger_integrity["intro"])
+        canonical_integrity_write_access = escape(
+            canonical_ledger_integrity["write_access_note"]
+        )
+        canonical_integrity_canonical_promotion = escape(
+            canonical_ledger_integrity["canonical_promotion_note"]
+        )
+        canonical_integrity_separate_commit = escape(
+            canonical_ledger_integrity["separate_commit_note"]
+        )
+        canonical_integrity_operator_approval = escape(
+            canonical_ledger_integrity["operator_approval_note"]
+        )
+        canonical_integrity_rows_html = "\n".join(
+            "<li>"
+            f"{escape(row['key'])}: <strong>{escape(str(row['count']))}</strong>"
+            f" (<code>{escape(row['path'])}</code>,"
+            f" status: <code>{escape(row['status'])}</code>)"
+            "</li>"
+            for row in canonical_ledger_integrity["rows"]
+        )
+        canonical_integrity_governance_html = (
+            f"<li>Approval queue items: <strong>{escape(str(canonical_ledger_integrity['approval_queue_count']))}</strong></li>"
+            f"<li>Blocked candidates: <strong>{escape(str(canonical_ledger_integrity['promotion_blockers_count']))}</strong></li>"
+            f"<li>Evidence-bearing candidates: <strong>{escape(str(canonical_ledger_integrity['approval_evidence_count']))}</strong></li>"
+        )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -1232,6 +1377,22 @@ def create_app() -> FastAPI:
         <ol>
           {approval_evidence_items_html}
         </ol>
+      </div>
+      <div class="panel">
+        <h2>{canonical_integrity_title}</h2>
+        <p><strong>{canonical_integrity_intro}</strong></p>
+        <p>{canonical_integrity_write_access}.</p>
+        <p>{canonical_integrity_canonical_promotion}.</p>
+        <p>{canonical_integrity_separate_commit}.</p>
+        <p>{canonical_integrity_operator_approval}.</p>
+        <h3>Canonical ledgers</h3>
+        <ul>
+          {canonical_integrity_rows_html}
+        </ul>
+        <h3>Governance cross-reference</h3>
+        <ul>
+          {canonical_integrity_governance_html}
+        </ul>
       </div>
       <div class="panel">
         <h2>System Checks</h2>

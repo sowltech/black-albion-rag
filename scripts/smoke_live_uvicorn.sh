@@ -176,6 +176,11 @@ probe_get_body "dashboard_evidence_links" "/dashboard" 200 "Approval Evidence Li
 probe_get_body "dashboard_evidence_links_intro" "/dashboard" 200 "Read-only evidence trail"
 probe_get_body "dashboard_evidence_links_packet" "/dashboard" 200 "gloucestershire_egypt_operator_packet.md"
 probe_get_body "dashboard_evidence_links_draft" "/dashboard" 200 "gloucestershire_egypt_operator_approval_draft.md"
+probe_get_body "dashboard_canonical_integrity" "/dashboard" 200 "Canonical Ledger Integrity"
+probe_get_body "dashboard_canonical_integrity_intro" "/dashboard" 200 "Read-only canonical ledger integrity"
+probe_get_body "dashboard_canonical_integrity_write_lock" "/dashboard" 200 "Dashboard write access: disabled"
+probe_get_body "dashboard_canonical_integrity_promotion_lock" "/dashboard" 200 "Canonical promotion from dashboard: disabled"
+probe_get_body "dashboard_canonical_integrity_sites_path" "/dashboard" 200 "data/raw/black_albion_sites.json"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

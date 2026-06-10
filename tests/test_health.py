@@ -174,8 +174,105 @@ class HealthTests(unittest.TestCase):
                 )
                 self.assertIn("operator_promotion_approval_template.md", body)
                 self.assertIn("docs/intake-review-workflow.md", body)
+                # v0.4.0 Canonical Ledger Integrity panel
+                self.assertIn("Canonical Ledger Integrity", body)
+                self.assertIn("Read-only canonical ledger integrity", body)
+                self.assertIn("Dashboard write access: disabled", body)
+                self.assertIn(
+                    "Canonical promotion from dashboard: disabled", body
+                )
+                self.assertIn(
+                    "Operator approval required before promotion: true", body
+                )
+                self.assertIn("data/raw/black_albion_sites.json", body)
+                self.assertIn("data/raw/black_albion_claims.json", body)
+                self.assertIn("data/raw/black_albion_modules.json", body)
+                self.assertIn("data/raw/black_albion_sources.json", body)
+                self.assertIn("sites: <strong>8</strong>", body)
+                self.assertIn("claims: <strong>90</strong>", body)
+                self.assertIn("modules: <strong>14</strong>", body)
+                self.assertIn("sources: <strong>71</strong>", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
+    def test_canonical_ledger_integrity_lock_statements_are_canonical(self) -> None:
+        from backend.app.main import CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS
+
+        self.assertEqual(
+            CANONICAL_LEDGER_INTEGRITY_LOCK_STATEMENTS,
+            (
+                "Read-only canonical ledger integrity",
+                "Dashboard write access: disabled",
+                "Canonical promotion from dashboard: disabled",
+                "Promotion requires a separate operator-approved commit",
+            ),
+        )
+
+    def test_canonical_ledger_status_classifies_each_state(self) -> None:
+        from backend.app.main import _canonical_ledger_status
+
+        with tempfile.TemporaryDirectory() as tmpdir:
+            base = Path(tmpdir)
+
+            # missing
+            missing_path = base / "missing.json"
+            missing = _canonical_ledger_status(missing_path)
+            self.assertEqual(missing["status"], "missing")
+            self.assertEqual(missing["count"], 0)
+
+            # invalid_json
+            bad_path = base / "bad.json"
+            bad_path.write_text("{not-json", encoding="utf-8")
+            bad = _canonical_ledger_status(bad_path)
+            self.assertEqual(bad["status"], "invalid_json")
+            self.assertEqual(bad["count"], 0)
+
+            # ok (list)
+            good_path = base / "good.json"
+            good_path.write_text(json.dumps([1, 2, 3]), encoding="utf-8")
+            good = _canonical_ledger_status(good_path)
+            self.assertEqual(good["status"], "ok")
+            self.assertEqual(good["count"], 3)
+
+            # ok (dict with records list)
+            envelope_path = base / "envelope.json"
+            envelope_path.write_text(
+                json.dumps({"records": [{}, {}, {}, {}]}),
+                encoding="utf-8",
+            )
+            envelope = _canonical_ledger_status(envelope_path)
+            self.assertEqual(envelope["status"], "ok")
+            self.assertEqual(envelope["count"], 4)
+
+            # unexpected_shape
+            wrong_path = base / "wrong.json"
+            wrong_path.write_text("42", encoding="utf-8")
+            wrong = _canonical_ledger_status(wrong_path)
+            self.assertEqual(wrong["status"], "unexpected_shape")
+            self.assertEqual(wrong["count"], 0)
+
+    def test_canonical_ledger_integrity_summary_carries_expected_counts(self) -> None:
+        from backend.app.main import _canonical_ledger_integrity_summary
+
+        summary = _canonical_ledger_integrity_summary(
+            approval_queue_count=2,
+            promotion_blockers_count=2,
+            approval_evidence_count=2,
+        )
+        rows = {row["key"]: row for row in summary["rows"]}
+        self.assertEqual(rows["sites"]["count"], 8)
+        self.assertEqual(rows["claims"]["count"], 90)
+        self.assertEqual(rows["modules"]["count"], 14)
+        self.assertEqual(rows["sources"]["count"], 71)
+        for key in ("sites", "claims", "modules", "sources"):
+            self.assertEqual(rows[key]["status"], "ok")
+        self.assertEqual(summary["approval_queue_count"], 2)
+        self.assertEqual(summary["promotion_blockers_count"], 2)
+        self.assertEqual(summary["approval_evidence_count"], 2)
+        self.assertIn(
+            "Promotion requires a separate operator-approved commit",
+            summary["lock_statements"],
+        )
 
     def test_approval_evidence_links_sort_key_is_deterministic(self) -> None:
         from backend.app.main import _approval_evidence_links_sort_key
