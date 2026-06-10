@@ -53,6 +53,22 @@ operator approval gate.
   `dashboard_promotion_blockers_intro`,
   `dashboard_promotion_blockers_canonical`,
   `dashboard_promotion_blockers_commit`.
+- Added read-only Approval Evidence Links panel.
+- Surfaces intake, source review, operator packet, and approval draft paths.
+- Keeps evidence navigation separate from approval/promote actions.
+- Adds CI/smoke coverage for evidence-trail visibility.
+- Approval Evidence Links panel surfaces, per candidate, the
+  `raw_artifact`, `review_note`, `source_review_file`,
+  `operator_packet_file`, `operator_approval_draft`,
+  `operator_approval_template`, `intake_workflow`,
+  `canonical_ingestion_allowed`, and `promotion_commit_allowed`
+  paths/values. Items are ordered candidates-with-packet first,
+  then candidates-with-source-review, then `candidate_id`.
+  Empty-state message: `No approval evidence links available.`
+- New live smoke probes for the Approval Evidence Links panel:
+  `dashboard_evidence_links`, `dashboard_evidence_links_intro`,
+  `dashboard_evidence_links_packet`,
+  `dashboard_evidence_links_draft`.
 
 ### Verified
 

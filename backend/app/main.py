@@ -480,6 +480,94 @@ def _promotion_blockers_summary() -> Dict[str, Any]:
     }
 
 
+APPROVAL_EVIDENCE_LINKS_EMPTY_MESSAGE = "No approval evidence links available."
+
+
+def _approval_evidence_links_sort_key(item: Dict[str, Any]) -> tuple:
+    """Deterministic sort key for the read-only approval evidence panel.
+
+    Order:
+      1. candidates with `operator_packet_file` first
+      2. then candidates with `source_review_file`
+      3. then `candidate_id` alphabetically (case-insensitive)
+    """
+    has_packet = 0 if item.get("operator_packet_file") else 1
+    has_review = 0 if item.get("source_review_file") else 1
+    candidate_id = str(item.get("candidate_id") or "").lower()
+    return (has_packet, has_review, candidate_id)
+
+
+def _approval_evidence_links_summary() -> Dict[str, Any]:
+    """Return a read-only evidence-trail summary for operator review.
+
+    Surfaces the per-candidate file paths the operator needs to navigate from
+    "approval required / promotion blocked" to the exact review documents.
+    This panel does not approve anything and does not promote anything.
+    """
+    intake_workflow = (
+        _repo_relative(INTAKE_REVIEW_WORKFLOW_PATH)
+        if INTAKE_REVIEW_WORKFLOW_PATH.exists()
+        else "not detected"
+    )
+    approval_template = (
+        _repo_relative(OPERATOR_APPROVAL_TEMPLATE_PATH)
+        if OPERATOR_APPROVAL_TEMPLATE_PATH.exists()
+        else "not detected"
+    )
+    items: List[Dict[str, Any]] = []
+    if CANDIDATE_CLAIMS_PATH.exists():
+        try:
+            payload = json.loads(CANDIDATE_CLAIMS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            payload = []
+        if isinstance(payload, list):
+            for row in payload:
+                if not isinstance(row, dict):
+                    continue
+                approval_required = bool(row.get("operator_approval_required"))
+                packet = str(row.get("operator_packet_file") or "")
+                draft = str(row.get("operator_approval_draft") or "")
+                if not approval_required and not packet and not draft:
+                    continue
+                items.append(
+                    {
+                        "candidate_id": str(
+                            row.get("candidate_id") or "(missing id)"
+                        ),
+                        "review_status": str(row.get("review_status") or "unknown"),
+                        "raw_artifact": str(row.get("source_artifact") or ""),
+                        "review_note": str(row.get("review_note") or ""),
+                        "source_review_file": str(
+                            row.get("source_review_file") or ""
+                        ),
+                        "operator_packet_file": packet,
+                        "operator_approval_draft": draft,
+                        "canonical_ingestion_allowed": bool(
+                            row.get("canonical_ingestion_allowed", False)
+                        ),
+                        "promotion_commit_allowed": bool(
+                            row.get("promotion_commit_allowed", False)
+                        ),
+                    }
+                )
+    items.sort(key=_approval_evidence_links_sort_key)
+    return {
+        "title": "Approval Evidence Links",
+        "intro": "Read-only evidence trail",
+        "no_approve_note": "Evidence links do not approve promotion",
+        "separate_commit_note": (
+            "Promotion still requires a separate operator-approved commit"
+        ),
+        "items": items,
+        "item_count": len(items),
+        "item_count_label": f"Evidence-bearing candidates: {len(items)}",
+        "empty_message": APPROVAL_EVIDENCE_LINKS_EMPTY_MESSAGE,
+        "intake_queue_path": _repo_relative(CANDIDATE_CLAIMS_PATH),
+        "workflow_doc": intake_workflow,
+        "approval_template_path": approval_template,
+    }
+
+
 def _exists_label(path: Path) -> str:
     """Return a readable exists/missing label for a local check artifact."""
     return "present" if path.exists() else "not detected"
@@ -619,6 +707,7 @@ def create_app() -> FastAPI:
         source_intake = _source_intake_summary()
         approval_queue = _approval_queue_summary()
         promotion_blockers = _promotion_blockers_summary()
+        approval_evidence = _approval_evidence_links_summary()
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -761,6 +850,60 @@ def create_app() -> FastAPI:
         else:
             promotion_blockers_items_html = (
                 f"<li>{promotion_blockers_empty_message}</li>"
+            )
+        approval_evidence_title = escape(approval_evidence["title"])
+        approval_evidence_intro = escape(approval_evidence["intro"])
+        approval_evidence_no_approve_note = escape(
+            approval_evidence["no_approve_note"]
+        )
+        approval_evidence_separate_commit_note = escape(
+            approval_evidence["separate_commit_note"]
+        )
+        approval_evidence_count_label = escape(
+            str(approval_evidence["item_count_label"])
+        )
+        approval_evidence_empty_message = escape(
+            str(approval_evidence["empty_message"])
+        )
+        approval_evidence_source = escape(str(approval_evidence["intake_queue_path"]))
+        approval_evidence_workflow = escape(str(approval_evidence["workflow_doc"]))
+        approval_evidence_template = escape(
+            str(approval_evidence["approval_template_path"])
+        )
+
+        def _evidence_link_line(label: str, path: str) -> str:
+            if not path:
+                return ""
+            return f"<li>{label}: <code>{escape(path)}</code></li>"
+
+        if approval_evidence["items"]:
+            approval_evidence_items_html = "\n".join(
+                "<li>"
+                f"<strong>{escape(item['candidate_id'])}</strong>"
+                f" — review_status: <code>{escape(item['review_status'])}</code>"
+                "<ul>"
+                + _evidence_link_line("raw_artifact", item["raw_artifact"])
+                + _evidence_link_line("review_note", item["review_note"])
+                + _evidence_link_line(
+                    "source_review_file", item["source_review_file"]
+                )
+                + _evidence_link_line(
+                    "operator_packet_file", item["operator_packet_file"]
+                )
+                + _evidence_link_line(
+                    "operator_approval_draft", item["operator_approval_draft"]
+                )
+                + f"<li>operator_approval_template: <code>{approval_evidence_template}</code></li>"
+                + f"<li>intake_workflow: <code>{approval_evidence_workflow}</code></li>"
+                + f"<li>canonical_ingestion_allowed: <code>{escape(str(item['canonical_ingestion_allowed']).lower())}</code></li>"
+                + f"<li>promotion_commit_allowed: <code>{escape(str(item['promotion_commit_allowed']).lower())}</code></li>"
+                + "</ul>"
+                "</li>"
+                for item in approval_evidence["items"]
+            )
+        else:
+            approval_evidence_items_html = (
+                f"<li>{approval_evidence_empty_message}</li>"
             )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
@@ -1075,6 +1218,19 @@ def create_app() -> FastAPI:
         <p>Workflow: <code>{promotion_blockers_workflow}</code></p>
         <ol>
           {promotion_blockers_items_html}
+        </ol>
+      </div>
+      <div class="panel">
+        <h2>{approval_evidence_title}</h2>
+        <p><strong>{approval_evidence_intro}</strong></p>
+        <p>{approval_evidence_no_approve_note}.</p>
+        <p>{approval_evidence_separate_commit_note}.</p>
+        <p><strong>{approval_evidence_count_label}</strong></p>
+        <p>Source: <code>{approval_evidence_source}</code></p>
+        <p>Workflow: <code>{approval_evidence_workflow}</code></p>
+        <p>Approval template: <code>{approval_evidence_template}</code></p>
+        <ol>
+          {approval_evidence_items_html}
         </ol>
       </div>
       <div class="panel">

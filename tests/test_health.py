@@ -155,8 +155,93 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("promotion commit blocked", body)
                 self.assertIn("operator approval required", body)
                 self.assertIn("claim 6", body)
+                # v0.4.0 Approval Evidence Links panel
+                self.assertIn("Approval Evidence Links", body)
+                self.assertIn("Read-only evidence trail", body)
+                self.assertIn(
+                    "Evidence links do not approve promotion", body
+                )
+                self.assertIn(
+                    "Promotion still requires a separate operator-approved commit",
+                    body,
+                )
+                self.assertIn("Evidence-bearing candidates:", body)
+                self.assertIn("gloucestershire_egypt_intercept_raw.md", body)
+                self.assertIn("gloucestershire_egypt_source_review.md", body)
+                self.assertIn("gloucestershire_egypt_operator_packet.md", body)
+                self.assertIn(
+                    "gloucestershire_egypt_operator_approval_draft.md", body
+                )
+                self.assertIn("operator_promotion_approval_template.md", body)
+                self.assertIn("docs/intake-review-workflow.md", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
+    def test_approval_evidence_links_sort_key_is_deterministic(self) -> None:
+        from backend.app.main import _approval_evidence_links_sort_key
+
+        items = [
+            {"candidate_id": "cand_d", "operator_packet_file": "", "source_review_file": ""},
+            {"candidate_id": "cand_a", "operator_packet_file": "packet.md", "source_review_file": "sr.md"},
+            {"candidate_id": "cand_c", "operator_packet_file": "", "source_review_file": "sr.md"},
+            {"candidate_id": "cand_b", "operator_packet_file": "packet.md", "source_review_file": ""},
+        ]
+        ordered = sorted(items, key=_approval_evidence_links_sort_key)
+        self.assertEqual(
+            [item["candidate_id"] for item in ordered],
+            # candidates with packet first (a, b), then with source_review
+            # only (c), then candidates with neither (d).
+            ["cand_a", "cand_b", "cand_c", "cand_d"],
+        )
+
+    def test_approval_evidence_links_empty_message_is_canonical(self) -> None:
+        from backend.app.main import APPROVAL_EVIDENCE_LINKS_EMPTY_MESSAGE
+
+        self.assertEqual(
+            APPROVAL_EVIDENCE_LINKS_EMPTY_MESSAGE,
+            "No approval evidence links available.",
+        )
+
+    def test_approval_evidence_links_summary_surfaces_gloucestershire(self) -> None:
+        from backend.app.main import _approval_evidence_links_summary
+
+        summary = _approval_evidence_links_summary()
+        ids = [item["candidate_id"] for item in summary["items"]]
+        self.assertIn("cand_gloucestershire_egypt_058", ids)
+        glos = next(
+            item
+            for item in summary["items"]
+            if item["candidate_id"] == "cand_gloucestershire_egypt_058"
+        )
+        self.assertEqual(
+            glos["operator_packet_file"],
+            "research/intake/gloucestershire_egypt_operator_packet.md",
+        )
+        self.assertEqual(
+            glos["operator_approval_draft"],
+            "research/intake/gloucestershire_egypt_operator_approval_draft.md",
+        )
+        self.assertEqual(
+            glos["source_review_file"],
+            "research/intake/gloucestershire_egypt_source_review.md",
+        )
+        self.assertEqual(
+            glos["raw_artifact"],
+            "research/intake/gloucestershire_egypt_intercept_raw.md",
+        )
+        self.assertFalse(glos["canonical_ingestion_allowed"])
+        self.assertFalse(glos["promotion_commit_allowed"])
+        self.assertEqual(
+            summary["approval_template_path"],
+            "docs/templates/operator_promotion_approval_template.md",
+        )
+        self.assertEqual(
+            summary["workflow_doc"], "docs/intake-review-workflow.md"
+        )
+        self.assertEqual(
+            summary["item_count_label"],
+            f"Evidence-bearing candidates: {summary['item_count']}",
+        )
 
     def test_promotion_blockers_for_row_detects_each_blocker(self) -> None:
         from backend.app.main import _promotion_blockers_for_row

@@ -172,6 +172,10 @@ probe_get_body "dashboard_promotion_blockers" "/dashboard" 200 "Promotion Blocke
 probe_get_body "dashboard_promotion_blockers_intro" "/dashboard" 200 "Read-only blocker summary"
 probe_get_body "dashboard_promotion_blockers_canonical" "/dashboard" 200 "canonical ingestion blocked"
 probe_get_body "dashboard_promotion_blockers_commit" "/dashboard" 200 "promotion commit blocked"
+probe_get_body "dashboard_evidence_links" "/dashboard" 200 "Approval Evidence Links"
+probe_get_body "dashboard_evidence_links_intro" "/dashboard" 200 "Read-only evidence trail"
+probe_get_body "dashboard_evidence_links_packet" "/dashboard" 200 "gloucestershire_egypt_operator_packet.md"
+probe_get_body "dashboard_evidence_links_draft" "/dashboard" 200 "gloucestershire_egypt_operator_approval_draft.md"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,
