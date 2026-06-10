@@ -553,6 +553,165 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   plausible at the level of regimental history but must be sourced
   per-operation, not aggregated.
 
+#### Claim 4 — Source attachment pass (2026-06-10)
+
+- **source_attachments**:
+  - **Soldiers of Gloucestershire Museum — Visit Us page**
+    (<https://soldiersofglos.com/visit-us/>). Institutional museum
+    source. Verbatim address: "Custom House, 31 Commercial Rd,
+    The Docks, Gloucester GL1 2HE"; "entry to the museum is on the
+    Dock side of the building"; the museum is "Located in
+    Gloucester's Historic Docks"; charity registration number
+    "1095077".
+  - **Soldiers of Gloucestershire Museum — homepage**
+    (<https://soldiersofglos.com/>). Institutional museum source.
+    Records the museum's collecting scope including officer records,
+    enlistment records, photographs, newspapers, regimental journals,
+    and "a comprehensive WWI database with over 40,000 soldier
+    records"; regimental coverage of "The Gloucestershire Regiment"
+    and "The Royal Gloucestershire Regiment Hussars".
+  - **Army Museums Ogilby Trust — Soldiers of Gloucestershire Museum
+    listing**
+    (<https://www.armymuseums.org.uk/listing/soldiers-of-gloucestershire-museum/>).
+    Sector-body institutional listing. Confirms the museum address as
+    "Custom House the Docks, 31 Commercial Rd, The Docks, Gloucester
+    GL1 2HE"; covers "Gloucestershire soldiers from the last 300
+    years" spanning 1694 through modern conflicts; explicitly
+    references the Royal Gloucestershire Hussars "fighting in the
+    desert".
+  - **National Army Museum — 28th (North Gloucestershire) Regiment of
+    Foot** (re-cited from the Claim 1 attachment pass at
+    <https://www.nam.ac.uk/explore/28th-north-gloucestershire-regiment-foot>).
+    Used here only as the institutional source for the operational
+    Alexandria connection: the regiment "landed in Egypt in 1801" and
+    the Battle of Alexandria is dated "21 March 1801".
+  - **Royal Wessex Yeomanry — Gloucestershire Yeomanry / RGH** and
+    **The Long Long Trail — Gloucestershire Yeomanry (Royal
+    Gloucestershire Hussars)** (re-cited from the Claim 3 attachment
+    pass at <https://www.wessexyeomanry.org/index.php/gloucestershire-yeomanry-2/>
+    and <https://www.longlongtrail.co.uk/army/regiments-and-corps/the-british-yeomanry-regiments-of-1914-1918/gloucestershire-yeomanry-royal-gloucestershire-hussars/>).
+    Used here only as institutional sources for the operational
+    Alexandria connection in 1915 ("arriving Alexandria 24 April"
+    1915) and for Sinai-theatre operations ("losses at Katia in the
+    Sinai Desert").
+- **source_quality**: three direct institutional sources for the
+  museum at Gloucester Docks / Custom House (Soldiers of
+  Gloucestershire Museum's own homepage and Visit Us page; Army
+  Museums Ogilby Trust sector listing); two institutional sources for
+  Alexandria operational use by named Gloucestershire formations
+  (NAM 28th Foot page for 1801; RWY RGH and The Long Long Trail RGH
+  pages for 1915); one institutional reference to Sinai-theatre
+  operations (RWY RGH page). No institutional source surfaced in
+  this pass uses the verbatim phrase "Gloucester Docks Repository",
+  and no institutional source surfaced in this pass directly cites a
+  named Gloucestershire formation operating in the **Suez Canal**
+  specifically as opposed to the Sinai theatre.
+- **correction_notes**:
+  - **"Gloucester Docks Repository"** is **not an institutional
+    phrase** used by any source surfaced in this pass. The actual
+    institution at Gloucester Docks is the **Soldiers of
+    Gloucestershire Museum**, housed in the **Custom House**,
+    **31 Commercial Road, The Docks, Gloucester GL1 2HE**. The
+    pasted record's wording must be replaced with the institutional
+    naming before any Tier I promotion.
+  - **Alexandria operational connection** is supported via the
+    regiments covered by the museum, not by the museum building
+    itself: the 28th (North Gloucestershire) Regiment of Foot fought
+    at the Battle of Alexandria on 21 March 1801, and the Royal
+    Gloucestershire Hussars arrived at Alexandria on 24 April 1915.
+  - **Suez Canal operational connection** is **only partially
+    supported** by the institutional sources attached: RGH service
+    in the **Sinai Desert** (Katia) and in the broader
+    Sinai/Palestine theatre is institutionally attested, but no
+    institutional source attached in this pass explicitly cites a
+    named Gloucestershire formation operating in the **Suez Canal**
+    specifically. Any Tier I claim that names the Suez Canal must
+    wait for a primary or direct institutional source.
+  - **Gloucester Docks as the location of operations by
+    Gloucestershire regiments** is not supported. The Docks are the
+    **location of the regimental museum** (since 1980), not of
+    operational military activity by the regiments themselves. The
+    pasted record's framing must be narrowed before any Tier I write.
+- **citation_notes**:
+  - Cite the Soldiers of Gloucestershire Museum Visit Us page for the
+    verbatim address (Custom House, 31 Commercial Rd, The Docks,
+    Gloucester GL1 2HE) and for the "Located in Gloucester's Historic
+    Docks" framing.
+  - Cite the Army Museums Ogilby Trust listing for the sector-body
+    confirmation of the address and the regimental coverage.
+  - Cite the Soldiers of Gloucestershire Museum homepage for the
+    museum's collecting scope (officer records, enlistment records,
+    photographs, regimental journals, WWI database).
+  - For the **Alexandria 1801** operational connection, re-cite the
+    NAM 28th (North Gloucestershire) Regiment of Foot page already
+    attached in the Claim 1 pass.
+  - For the **Alexandria 1915** and **Sinai-theatre** operational
+    connections, re-cite the RWY RGH page and The Long Long Trail
+    RGH page already attached in the Claim 3 pass.
+  - **Do not** cite Wikipedia as primary — used here only for
+    orientation against the institutional sources.
+  - **Do not** cite the pasted record's "Gloucester Docks Repository"
+    phrase; use the institutional name "Soldiers of Gloucestershire
+    Museum" or "Custom House at Gloucester Docks".
+- **remaining_gaps**:
+  - No institutional source explicitly cites a named Gloucestershire
+    formation operating in the **Suez Canal** specifically. The Sinai
+    Desert (Katia) and the broader Sinai/Palestine theatre are
+    attested but the Suez Canal itself is not, on the sources
+    attached.
+  - No National Archives WO-series war-diary catalogue reference is
+    directly attached for any of the named operations (1801 Egypt,
+    1915 Alexandria, 1916 Katia/Romani, 1917–18 Palestine, 1941–42
+    Western Desert) — institutional secondary sources are sufficient
+    for the candidate claim but operator may want TNA references
+    before any Tier I write that names a specific war diary.
+  - The museum's own collection-level documentation of Egypt /
+    Alexandria / Suez material is not directly attached here; the
+    museum is institutionally tied to the regiments that operated in
+    those theatres, but a Soldiers of Gloucestershire Museum
+    collection-search hit naming a specific Egypt or Alexandria item
+    (similar to the IWM accession `INS 5713` attached in Claim 1)
+    would tighten the case.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "The Soldiers of Gloucestershire Museum, located in the Custom
+  > House at 31 Commercial Road, The Docks, Gloucester GL1 2HE,
+  > holds the regimental collections of the Gloucestershire Regiment
+  > (including its antecedents the 28th and 61st Regiments of Foot)
+  > and the Royal Gloucestershire Hussars. Named Gloucestershire
+  > formations had operational connections to Alexandria on two
+  > separate occasions: the 28th (North Gloucestershire) Regiment of
+  > Foot fought at the Battle of Alexandria on 21 March 1801 (per
+  > the National Army Museum regimental page), and the Royal
+  > Gloucestershire Hussars arrived at Alexandria on 24 April 1915
+  > (per The Long Long Trail and the Royal Wessex Yeomanry RGH
+  > page) before serving in the Sinai/Palestine campaign with
+  > documented engagements including Katia in the Sinai Desert. A
+  > direct operational connection to the Suez Canal specifically is
+  > not attested by the institutional sources attached here and
+  > requires a primary or direct institutional source before any
+  > Suez-specific claim is promoted. The phrase 'Gloucester Docks
+  > Repository' is not an institutional term and is dropped."
+- **promotion_readiness**:
+  - **Museum at Gloucester Docks / Custom House**: nearly_ready
+    (subject to operator-approved rewrite to the institutional naming
+    above).
+  - **Alexandria 1801 operational connection** (via 28th Foot):
+    nearly_ready (re-uses the institutional source already attached
+    for Claim 1; subject to operator approval).
+  - **Alexandria 1915 operational connection** (via RGH):
+    nearly_ready (re-uses the institutional sources already attached
+    for Claim 3; subject to operator approval).
+  - **Sinai-theatre operational connection** (via RGH): nearly_ready
+    for Katia / Sinai Desert framing.
+  - **Suez Canal-specific operational connection**: not_ready — no
+    institutional source surfaced in this pass directly cites a
+    named Gloucestershire formation in the Suez Canal specifically.
+  - **"Gloucester Docks Repository" phrasing**: not_ready — must be
+    dropped from any promoted claim and replaced with the
+    institutional museum name.
+
 ---
 
 ### Claim 5 — Cathedral memorial banners / museum archive references
@@ -785,6 +944,62 @@ No Tier III material is eligible for Tier I promotion under any circumstance.
   campaign claims but must be resolved against an institutional
   source before any post-war year is promoted.
 - Claims 1, 2, 4, 5, 6 — not touched in this pass; their statuses
+  remain as set in the previous passes above.
+- Canonical ledgers (`data/raw/black_albion_sites.json`,
+  `data/raw/black_albion_claims.json`,
+  `data/raw/black_albion_modules.json`,
+  `data/raw/black_albion_sources.json`) — unchanged.
+
+## Source Attachment Pass — 2026-06-10 (Claim 4)
+
+- Targeted attachment pass on Claim 4 (Gloucester Docks / Alexandria
+  / Suez operational connection) per operator instruction.
+- Three direct institutional sources attached for the museum at
+  Gloucester Docks: Soldiers of Gloucestershire Museum's own Visit Us
+  page (verbatim address "Custom House, 31 Commercial Rd, The Docks,
+  Gloucester GL1 2HE"), the museum's homepage (collecting scope), and
+  the Army Museums Ogilby Trust sector-body listing (address +
+  regimental coverage confirmed).
+- Two institutional sources re-cited from prior passes to support
+  Alexandria operational use by named Gloucestershire formations:
+  the National Army Museum 28th (North Gloucestershire) Regiment of
+  Foot page for 1801 (Claim 1), and the Royal Wessex Yeomanry RGH
+  page plus The Long Long Trail RGH page for 1915 (Claim 3).
+- **Correction confirmed**: the phrase "Gloucester Docks Repository"
+  is **not used by any institutional source**. The institutional
+  naming is the **Soldiers of Gloucestershire Museum**, housed in
+  the **Custom House at 31 Commercial Road, The Docks, Gloucester
+  GL1 2HE**. The pasted record's framing of "Gloucester Docks" as a
+  location of operational military activity by Gloucestershire
+  regiments is also **not supported**; the Docks are the location of
+  the regimental museum since 1980, not of regimental operations.
+- Sub-part status:
+  - Museum at Gloucester Docks / Custom House — **supported**.
+  - Alexandria 1801 operational connection (via 28th Foot) —
+    **supported** (re-uses Claim 1 institutional source).
+  - Alexandria 1915 operational connection (via RGH) — **supported**
+    (re-uses Claim 3 institutional sources).
+  - Sinai-theatre operational connection (via RGH at Katia) —
+    **supported** (re-uses Claim 3 institutional sources).
+  - Suez Canal specifically — **not supported** by any institutional
+    source surfaced in this pass.
+  - "Gloucester Docks Repository" phrasing — **unsupported** and
+    must be dropped before any Tier I write.
+- **original_claim_status**: requires_correction. A
+  `corrected_claim_text` draft has been recorded in the Claim 4
+  section above as operator-review material only; it explicitly
+  drops "Gloucester Docks Repository", names the museum, separates
+  Alexandria-1801 from Alexandria-1915, and holds back the Suez
+  Canal-specific framing until a primary or direct institutional
+  source can be attached.
+- Promotion readiness:
+  - **nearly_ready** for the museum-at-Custom-House framing, the
+    Alexandria 1801 connection, the Alexandria 1915 connection, and
+    the Sinai-theatre framing — all subject to operator-approved
+    rewrite to the corrected version.
+  - **not_ready** for any Suez Canal-specific framing and for any
+    promoted use of the "Gloucester Docks Repository" phrase.
+- Claims 1, 2, 3, 5, 6 — not touched in this pass; their statuses
   remain as set in the previous passes above.
 - Canonical ledgers (`data/raw/black_albion_sites.json`,
   `data/raw/black_albion_claims.json`,
