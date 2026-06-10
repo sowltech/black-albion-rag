@@ -154,7 +154,7 @@ probe_get  "export_claims" "/export/claims.json" 200
 probe_get  "search" "/search?q=Winchcombe" 200
 probe_get  "openapi" "/openapi.json" 200
 probe_get_body "dashboard" "/dashboard" 200 "Operator Dashboard"
-probe_get_body "dashboard_release" "/dashboard" 200 "v0.3.0 — Operator Dashboard"
+probe_get_body "dashboard_release" "/dashboard" 200 "v0.4.0 Approval Queue"
 probe_get_body "dashboard_repo_estate" "/dashboard" 200 "Repo Estate"
 probe_get_body "dashboard_repo_gold" "/dashboard" 200 "black-albion-rag"
 probe_get_body "dashboard_source_intake" "/dashboard" 200 "Source / Intake Review"
@@ -164,6 +164,9 @@ probe_get_body "dashboard_governance_ci" "/dashboard" 200 "Enterprise GPT OS Val
 probe_get_body "dashboard_runtime_ci" "/dashboard" 200 "Live Uvicorn Smoke"
 probe_get_body "dashboard_search" "/dashboard?q=Winchcombe" 200 "Search Results"
 probe_get_body "dashboard_query" "/dashboard?query=What%20is%20Winchcombe" 200 "Query Result"
+probe_get_body "dashboard_approval_queue" "/dashboard" 200 "Approval Queue"
+probe_get_body "dashboard_approval_queue_candidate" "/dashboard" 200 "cand_gloucestershire_egypt_058"
+probe_get_body "dashboard_approval_queue_separate_commit" "/dashboard" 200 "Promotion requires a separate operator-approved commit"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

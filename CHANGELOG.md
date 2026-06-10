@@ -1,5 +1,48 @@
 # Changelog
 
+## Unreleased — v0.4.0 Approval Queue
+
+v0.4.0 extends the v0.3.0 Operator Dashboard with a read-only Approval Queue
+panel that surfaces every candidate intake row currently held behind the
+operator approval gate.
+
+### Added
+
+- Added read-only approval queue dashboard panel.
+- Surfaces candidates requiring operator approval.
+- Keeps promotions blocked from dashboard.
+- Maintains canonical ledger protection.
+- Surfaces, per candidate:
+  - `candidate_id`, `review_status`
+  - `operator_approval_required`, `operator_review_ready`
+  - `canonical_ingestion_allowed`, `promotion_commit_allowed`
+  - `operator_packet_file`, `operator_approval_draft`
+  - `tier_iii_contamination_check`, `claim_6_promotion_path`
+  - `risk_level`, `promotion_blocked_reason`
+- Renders the explicit panel statements:
+  - "Read-only approval queue"
+  - "No promotion occurs from this dashboard"
+  - "Promotion requires a separate operator-approved commit"
+- New live smoke probes: `dashboard_approval_queue`,
+  `dashboard_approval_queue_candidate`,
+  `dashboard_approval_queue_separate_commit`.
+- New `tests/test_health.py` assertions covering the Approval Queue panel
+  contract.
+
+### Verified
+
+- `cand_gloucestershire_egypt_058` appears in the panel with all required
+  read-only fields and no promotion action surface.
+- Canonical ledgers untouched (sites 8 / claims 90 / modules 14 / sources
+  71).
+- `python3 -m json.tool data/raw/black_albion_candidate_claims.json` clean.
+- `bash scripts/smoke_live_uvicorn.sh` 25 probes pass.
+- `bash scripts/validate_enterprise_gpt_os.sh` PASS.
+- `python3 -m pytest -q` 48 passed.
+- `python3 -m compileall -q backend` exit 0.
+- `git diff --check` / `git diff --cached --check` clean.
+- Secret-pattern scan clean.
+
 ## v0.3.0 — Operator Dashboard
 
 Release date: 2026-06-10

@@ -50,6 +50,9 @@ CLAIMS_PATH = DEFAULT_DATA_DIR / "black_albion_claims.json"
 SOURCES_PATH = DEFAULT_DATA_DIR / "black_albion_sources.json"
 MODULE_EXPANSION_DOC_PATH = REPO_ROOT / "docs" / "black-albion-module-expansion.md"
 INTAKE_REVIEW_WORKFLOW_PATH = REPO_ROOT / "docs" / "intake-review-workflow.md"
+OPERATOR_APPROVAL_TEMPLATE_PATH = (
+    REPO_ROOT / "docs" / "templates" / "operator_promotion_approval_template.md"
+)
 RESEARCH_INTAKE_DIR = REPO_ROOT / "research" / "intake"
 RESEARCH_REVIEW_QUEUE_DIR = REPO_ROOT / "research" / "review_queue"
 RESEARCH_REVIEWED_DIR = REPO_ROOT / "research" / "reviewed"
@@ -243,6 +246,86 @@ def _source_intake_summary() -> Dict[str, Any]:
     }
 
 
+def _approval_queue_summary() -> Dict[str, Any]:
+    """Return a read-only operator approval queue derived from the candidate
+    claims ledger.
+
+    The dashboard only surfaces the queue. It cannot approve or promote.
+    Promotion requires a separate operator-approved commit per
+    `docs/intake-review-workflow.md` and `docs/templates/operator_promotion_approval_template.md`.
+    """
+    pending: List[Dict[str, Any]] = []
+    skipped: List[str] = []
+    if CANDIDATE_CLAIMS_PATH.exists():
+        try:
+            payload = json.loads(CANDIDATE_CLAIMS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            payload = []
+        if isinstance(payload, list):
+            for row in payload:
+                if not isinstance(row, dict):
+                    continue
+                candidate_id = str(row.get("candidate_id") or "")
+                approval_required = bool(row.get("operator_approval_required"))
+                review_ready = bool(row.get("operator_review_ready"))
+                canonical_allowed = row.get("canonical_ingestion_allowed", False)
+                promotion_allowed = row.get("promotion_commit_allowed", False)
+                if not approval_required and not review_ready:
+                    if canonical_allowed is True or promotion_allowed is True:
+                        # already cleared and outside the read-only queue
+                        skipped.append(candidate_id)
+                        continue
+                    if review_ready is False and approval_required is False:
+                        # nothing pending and nothing cleared — still surface so
+                        # the operator can see a quarantined-only row.
+                        pass
+                tier_iii_check = row.get("tier_iii_contamination_check")
+                claim_6_path = row.get("claim_6_promotion_path")
+                pending.append(
+                    {
+                        "candidate_id": candidate_id or "(missing id)",
+                        "review_status": str(row.get("review_status") or "unknown"),
+                        "operator_approval_required": approval_required,
+                        "operator_review_ready": review_ready,
+                        "canonical_ingestion_allowed": bool(canonical_allowed),
+                        "promotion_commit_allowed": bool(promotion_allowed),
+                        "operator_packet_file": str(row.get("operator_packet_file") or ""),
+                        "operator_approval_draft": str(
+                            row.get("operator_approval_draft") or ""
+                        ),
+                        "tier_iii_contamination_check": (
+                            str(tier_iii_check) if tier_iii_check is not None else ""
+                        ),
+                        "claim_6_promotion_path": (
+                            str(claim_6_path) if claim_6_path is not None else ""
+                        ),
+                        "promotion_blocked_reason": str(row.get("reason") or ""),
+                        "risk_level": str(row.get("risk_level") or ""),
+                    }
+                )
+    return {
+        "title": "Approval Queue",
+        "intro": "Read-only approval queue",
+        "promotion_note": (
+            "Promotion requires a separate operator-approved commit"
+        ),
+        "no_promotion_note": "No promotion occurs from this dashboard",
+        "items": pending,
+        "skipped_cleared": skipped,
+        "intake_queue_path": _repo_relative(CANDIDATE_CLAIMS_PATH),
+        "workflow_doc": (
+            _repo_relative(INTAKE_REVIEW_WORKFLOW_PATH)
+            if INTAKE_REVIEW_WORKFLOW_PATH.exists()
+            else "not detected"
+        ),
+        "approval_template_path": (
+            _repo_relative(OPERATOR_APPROVAL_TEMPLATE_PATH)
+            if OPERATOR_APPROVAL_TEMPLATE_PATH.exists()
+            else "not detected"
+        ),
+    }
+
+
 def _exists_label(path: Path) -> str:
     """Return a readable exists/missing label for a local check artifact."""
     return "present" if path.exists() else "not detected"
@@ -380,6 +463,7 @@ def create_app() -> FastAPI:
         release_metadata = _latest_release_metadata()
         repo_estate = _repo_estate_summary()
         source_intake = _source_intake_summary()
+        approval_queue = _approval_queue_summary()
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -432,6 +516,51 @@ def create_app() -> FastAPI:
         review_status = escape(str(source_intake["review_status"]))
         next_review_action = escape(str(source_intake["next_action"]))
         workflow_doc = escape(str(source_intake["workflow_doc"]))
+        approval_queue_title = escape(approval_queue["title"])
+        approval_queue_intro = escape(approval_queue["intro"])
+        approval_queue_promotion_note = escape(approval_queue["promotion_note"])
+        approval_queue_no_promotion_note = escape(approval_queue["no_promotion_note"])
+        approval_queue_workflow = escape(str(approval_queue["workflow_doc"]))
+        approval_queue_template = escape(str(approval_queue["approval_template_path"]))
+        approval_queue_source = escape(str(approval_queue["intake_queue_path"]))
+        if approval_queue["items"]:
+            approval_queue_items_html = "\n".join(
+                "<li>"
+                f"<strong>{escape(item['candidate_id'])}</strong>"
+                f" — review_status: <code>{escape(item['review_status'])}</code>"
+                "<ul>"
+                f"<li>operator_approval_required: <code>{escape(str(item['operator_approval_required']).lower())}</code></li>"
+                f"<li>operator_review_ready: <code>{escape(str(item['operator_review_ready']).lower())}</code></li>"
+                f"<li>canonical_ingestion_allowed: <code>{escape(str(item['canonical_ingestion_allowed']).lower())}</code></li>"
+                f"<li>promotion_commit_allowed: <code>{escape(str(item['promotion_commit_allowed']).lower())}</code></li>"
+                f"<li>operator_packet_file: <code>{escape(item['operator_packet_file']) or 'not detected'}</code></li>"
+                f"<li>operator_approval_draft: <code>{escape(item['operator_approval_draft']) or 'not detected'}</code></li>"
+                + (
+                    f"<li>tier_iii_contamination_check: <code>{escape(item['tier_iii_contamination_check'])}</code></li>"
+                    if item["tier_iii_contamination_check"]
+                    else ""
+                )
+                + (
+                    f"<li>claim_6_promotion_path: <code>{escape(item['claim_6_promotion_path'])}</code></li>"
+                    if item["claim_6_promotion_path"]
+                    else ""
+                )
+                + (
+                    f"<li>risk_level: <code>{escape(item['risk_level'])}</code></li>"
+                    if item["risk_level"]
+                    else ""
+                )
+                + (
+                    f"<li>promotion_blocked_reason: {escape(item['promotion_blocked_reason'])}</li>"
+                    if item["promotion_blocked_reason"]
+                    else ""
+                )
+                + "</ul>"
+                "</li>"
+                for item in approval_queue["items"]
+            )
+        else:
+            approval_queue_items_html = "<li>no candidates currently in approval queue</li>"
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -721,6 +850,18 @@ def create_app() -> FastAPI:
         <p>Review status summary: {review_status}</p>
         <p>Workflow: <code>{workflow_doc}</code></p>
         <p>Next Review Action: {next_review_action}</p>
+      </div>
+      <div class="panel">
+        <h2>{approval_queue_title}</h2>
+        <p><strong>{approval_queue_intro}</strong></p>
+        <p>{approval_queue_no_promotion_note}.</p>
+        <p>{approval_queue_promotion_note}.</p>
+        <p>Source: <code>{approval_queue_source}</code></p>
+        <p>Workflow: <code>{approval_queue_workflow}</code></p>
+        <p>Approval template: <code>{approval_queue_template}</code></p>
+        <ol>
+          {approval_queue_items_html}
+        </ol>
       </div>
       <div class="panel">
         <h2>System Checks</h2>

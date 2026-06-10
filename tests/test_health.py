@@ -103,7 +103,7 @@ class HealthTests(unittest.TestCase):
                     self.assertIn(f'href="{path}"', body)
                 self.assertIn("v0.3.0-planned", body)
                 self.assertIn("Latest release", body)
-                self.assertIn("v0.3.0 — Operator Dashboard", body)
+                self.assertIn("v0.4.0 Approval Queue", body)
                 self.assertIn("CHANGELOG.md", body)
                 self.assertIn("Repo Estate", body)
                 self.assertIn("Total repos found", body)
@@ -124,6 +124,24 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("Eval Runner", body)
                 self.assertIn("Confirm latest CI on GitHub Actions", body)
                 self.assertIn("scripts/validate_enterprise_gpt_os.sh", body)
+                # v0.4.0 Approval Queue panel — read-only, no promotion path
+                self.assertIn("Approval Queue", body)
+                self.assertIn("Read-only approval queue", body)
+                self.assertIn("No promotion occurs from this dashboard", body)
+                self.assertIn(
+                    "Promotion requires a separate operator-approved commit",
+                    body,
+                )
+                self.assertIn("cand_gloucestershire_egypt_058", body)
+                self.assertIn(
+                    "gloucestershire_egypt_operator_packet.md", body
+                )
+                self.assertIn(
+                    "gloucestershire_egypt_operator_approval_draft.md", body
+                )
+                self.assertIn("canonical_ingestion_allowed", body)
+                self.assertIn("promotion_commit_allowed", body)
+                self.assertIn("tier_iii_contamination_check", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
 
