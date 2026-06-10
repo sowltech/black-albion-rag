@@ -16,6 +16,11 @@ reason: high-claim mixed historical/speculative entry requires source verificati
 > for per-claim findings, candidate sources, factual corrections required
 > before promotion, and the standing promotion gate. No canonical ledger
 > has been modified.
+>
+> Operator promotion readiness packet:
+> [`gloucestershire_egypt_operator_packet.md`](gloucestershire_egypt_operator_packet.md).
+> This packet summarises corrected Claim 1-5 wording for operator review and
+> confirms that Claim 6 remains Tier III speculative-only.
 
 # Gloucestershire Egyptian Intercept Intake Review
 
