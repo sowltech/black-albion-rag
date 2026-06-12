@@ -279,10 +279,17 @@
         "candidate_claim_id": "cand_claim_york_eburacum_006",
         "claim_text": "A 'Vivas in Deo' Christian inscription / inscribed object claim requires source verification.",
         "tier_candidate": "I",
-        "source_status": "needs_independent_sources",
+        "source_status": "partial_sources_attached",
         "canonical_data_allowed": false,
         "promotion_readiness": "not_ready",
         "operator_approval_required": true,
+        "source_attachment_pass": "2026-06-12",
+        "attached_source_names": [
+          "Yorkshire Museum / York Museums Trust — Ivory Bangle Lady",
+          "Our Migration Story — Roman Britain: the Ivory Bangle Lady"
+        ],
+        "inscription_text_status": "English rendering supported; exact Latin text and RIB id unresolved",
+        "object_identification_status": "rectangular openwork bone mount / possible box or casket context partially supported; object accession unresolved",
         "required_sources": [
           "Roman Inscriptions of Britain (RIB) record for the inscribed object",
           "Museum object record confirming the inscription wording and associated burial assemblage"

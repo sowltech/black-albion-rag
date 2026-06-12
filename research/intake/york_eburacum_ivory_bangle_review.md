@@ -49,6 +49,13 @@ reason: high-claim mixed archaeological/geological/speculative item requires sou
 > unverified after catalogue-search checks. The claim remains not ready
 > for accession-identifier promotion and canonical ingestion remains
 > blocked.
+>
+> Claim 6 source attachment pass started 2026-06-12. The worksheet now
+> records Yorkshire Museum and Our Migration Story support for the
+> English inscription rendering and broad bone-mount / possible
+> box-or-casket context. Exact Latin text, RIB id, object accession, and
+> object-level catalogue evidence remain unresolved. Canonical ingestion
+> remains blocked.
 
 # York / Eburacum Ivory Bangle Matrix Intake Review
 

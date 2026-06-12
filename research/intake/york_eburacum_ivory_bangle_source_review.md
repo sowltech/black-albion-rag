@@ -655,6 +655,99 @@ circumstance.
 - **notes**: quote the inscription in the canonical Latin form
   ("Vivas in Deo") and cite the RIB id or museum accession verbatim.
 
+#### Claim 6 — Source attachment pass (2026-06-12)
+
+- **source_attachments**:
+  - **Yorkshire Museum / York Museums Trust — Ivory Bangle Lady**
+    (<https://www.yorkshiremuseum.org.uk/collections/collections-highlights/ivory-bangle-lady/>).
+    Institutional museum page. Supports: the most famous object from
+    the burial is a rectangular openwork mount of bone, possibly from
+    an unrecorded wooden casket; the page gives the English rendering
+    "Hail, sister, may you live in God" and states that this indicates
+    she may have had Christian beliefs. It also states that the
+    skeleton and grave goods are on display in the Yorkshire Museum.
+  - **Our Migration Story — Roman Britain: the Ivory Bangle Lady**
+    (<https://www.ourmigrationstory.org.uk/oms/roman-britain-the-ivory-bangle-lady>).
+    Educational public-history resource written by Dr Hella Eckardt,
+    Associate Professor of Archaeology, University of Reading. Supports:
+    a short inscription on a bone mount, probably once decorating a
+    box, with the wording "Hail, sister, may you live in God"; the
+    article interprets this as suggesting that the high-status young
+    woman was Christian.
+  - **Roman Inscriptions of Britain online search target**
+    (<https://romaninscriptionsofbritain.org/>). RIB remains the
+    preferred epigraphic source, but no stable RIB record or RIB id for
+    this object was attached in this pass.
+- **source_quality**:
+  - The Yorkshire Museum page is the strongest institutional evidence
+    attached in this pass because it identifies the object as part of
+    the displayed burial/grave-goods context and describes the object
+    form and English inscription wording.
+  - Our Migration Story is useful supporting interpretation from a
+    named academic specialist, but it is not an object-level catalogue
+    or epigraphic record.
+  - No Roman Inscriptions of Britain entry, York Museums Trust
+    object-level catalogue record, ADS record, or peer-reviewed object
+    table was attached.
+- **citation_notes**:
+  - Cite Yorkshire Museum / York Museums Trust for the object form,
+    possible casket-mount identification, English rendering, and
+    museum display context.
+  - Cite Our Migration Story for the "bone mount, probably once
+    decorating a box" wording and the Christian interpretation.
+  - Do not cite Wikipedia as evidence for the Latin text, object
+    association, or Christian interpretation.
+  - Do not use the intake phrase "Vivas in Deo" as source authority.
+- **inscription_text_status**:
+  - English rendering "Hail, sister, may you live in God": supported by
+    Yorkshire Museum and Our Migration Story.
+  - Exact Latin "SOROR AVE VIVAS IN DEO" / "Vivas in Deo": not directly
+    verified from RIB, York Museums Trust object catalogue, or
+    peer-reviewed full text in this pass.
+- **object_identification_status**:
+  - Rectangular openwork bone mount: supported by Yorkshire Museum.
+  - Bone mount probably once decorating a box: supported by Our
+    Migration Story.
+  - Unrecorded wooden casket: Yorkshire Museum uses cautious
+    "possibly" language; do not promote as certain.
+  - Museum accession / object id: unresolved.
+  - Direct RIB id: unresolved.
+- **correction_notes**:
+  - Replace the original exact-Latin framing with a narrower sourced
+    formulation unless a RIB or object-level catalogue record is later
+    attached.
+  - Use "English rendering" or "translated as" for the wording
+    supported by the attached sources.
+  - Keep Christian interpretation cautious: "indicates she may have
+    had Christian beliefs" or "suggests Christian association", not
+    "proves she was Christian".
+  - Do not assert the object type beyond "rectangular openwork mount of
+    bone" and "possibly/probably from a box/casket" unless an
+    object-level record confirms it.
+- **remaining_gaps**:
+  - RIB id and epigraphic record for the inscription.
+  - Direct York Museums Trust object catalogue entry.
+  - Exact Latin text from an institutional or academic source.
+  - Accession number / archive identifier for the inscribed object.
+  - Peer-reviewed object table or Leach et al. full-text passage
+    connecting the object, inscription, and burial assemblage.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "Yorkshire Museum identifies the most famous object from the Ivory
+  > Bangle Lady burial as a rectangular openwork mount of bone,
+  > possibly from an unrecorded wooden casket, and gives the English
+  > rendering 'Hail, sister, may you live in God', indicating she may
+  > have had Christian beliefs. Our Migration Story, written by Dr
+  > Hella Eckardt, similarly describes a short inscription on a bone
+  > mount, probably once decorating a box, with the same English
+  > wording. The exact Latin text and any RIB or accession identifier
+  > remain unverified."
+- **promotion_readiness**: not_ready for exact Latin, RIB, accession, or
+  object-identifier promotion. Partial institutional support exists
+  for the English inscription rendering, broad object form, and cautious
+  Christian interpretation.
+
 ---
 
 ### Claim 7 — Vale of York / Ouse–Foss / glacial terraces / alluvium
