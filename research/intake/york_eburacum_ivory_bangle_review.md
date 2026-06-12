@@ -29,6 +29,12 @@ reason: high-claim mixed archaeological/geological/speculative item requires sou
 > evidence for the ivory / jet bracelets, wider grave-goods list, and
 > high-status burial interpretation. The claim remains unpromoted and
 > canonical ingestion remains blocked.
+>
+> Claim 3 source attachment pass started 2026-06-12. The worksheet now
+> attaches the Leach et al. Antiquity citation target plus York Museums
+> Trust / Yorkshire Museum and Our Migration Story summaries for the
+> strontium / oxygen isotope-testing frame. The claim remains unpromoted
+> and canonical ingestion remains blocked.
 
 # York / Eburacum Ivory Bangle Matrix Intake Review
 

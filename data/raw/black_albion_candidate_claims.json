@@ -222,10 +222,16 @@
         "candidate_claim_id": "cand_claim_york_eburacum_003",
         "claim_text": "The individual has been discussed in relation to bioarchaeological isotope testing, including strontium / oxygen evidence.",
         "tier_candidate": "I",
-        "source_status": "needs_independent_sources",
+        "source_status": "partial_sources_attached",
         "canonical_data_allowed": false,
-        "promotion_readiness": "not_ready",
+        "promotion_readiness": "nearly_ready",
         "operator_approval_required": true,
+        "source_attachment_pass": "2026-06-12",
+        "attached_source_names": [
+          "Leach et al. — A Lady of York: migration, ethnicity and identity in Roman Britain",
+          "Our Migration Story — Roman Britain: the Ivory Bangle Lady",
+          "Yorkshire Museum / York Museums Trust — Ivory Bangle Lady"
+        ],
         "required_sources": [
           "Leach et al. 2009/2010 'A Lady of York' (Antiquity) peer-reviewed citation with verbatim methodology",
           "Subsequent peer-reviewed isotope-method commentary"

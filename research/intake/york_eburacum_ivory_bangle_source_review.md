@@ -291,6 +291,96 @@ circumstance.
   interpretation must be cited separately — the second is downstream
   of the first.
 
+#### Claim 3 — Source attachment pass (2026-06-12)
+
+- **source_attachments**:
+  - **Leach, S., Eckardt, H., Chenery, C., Muldner, G., & Lewis, M.,
+    "A Lady of York: migration, ethnicity and identity in Roman
+    Britain", *Antiquity* 84(323), 2010**. Peer-reviewed academic
+    citation target for the isotope and bioarchaeological analysis.
+    This pass attaches the bibliographic source identity but does not
+    attach a full-text extract, DOI, or page-level quotation. Treat as
+    the primary academic source to verify directly before any canonical
+    promotion.
+  - **Our Migration Story — Roman Britain: the Ivory Bangle Lady**
+    (<https://www.ourmigrationstory.org.uk/oms/roman-britain-the-ivory-bangle-lady>).
+    Public-history educational resource authored by Dr Hella Eckardt,
+    Associate Professor of Archaeology, University of Reading, with
+    university / AHRC project partners. Supports: skull and teeth were
+    examined by scientists at the University of Reading; chemical
+    signatures in human teeth can preserve oxygen, carbon, nitrogen
+    and strontium isotope evidence; oxygen and strontium signatures
+    vary with climate and underlying geology; isotope analysis is
+    better at excluding local origin than pinpointing a specific area
+    of origin; studies of the Ivory Bangle Lady suggest childhood in
+    the south of Britain or the continent rather than Africa.
+  - **Yorkshire Museum / York Museums Trust — Ivory Bangle Lady**
+    (<https://www.yorkshiremuseum.org.uk/collections/collections-highlights/ivory-bangle-lady/>).
+    Institutional museum page. Supports: University of Reading
+    research analysed facial features, the chemical signature of food
+    and drink, and evidence from the burial site; the museum frames
+    the result as pointing to a high-status incomer to Roman York.
+- **source_quality**:
+  - The Leach et al. *Antiquity* paper is the strongest source
+    target for Claim 3, but full text / DOI / page-level isotope
+    methodology has not been attached in this pass.
+  - Our Migration Story is a strong supporting interpretation because
+    it is authored by Hella Eckardt and explains the isotope logic in
+    plain language, including the important limitation that isotope
+    evidence is better at excluding local origin than pinpointing a
+    precise origin.
+  - Yorkshire Museum is an institutional summary that confirms the
+    University of Reading research and "chemical signature" analysis
+    but does not itself provide technical isotope values.
+- **citation_notes**:
+  - Cite Leach et al. first for any future technical statement about
+    strontium / oxygen isotope methodology, sampled tissue, values,
+    or interpretation.
+  - Cite Our Migration Story for the accessible explanation of what
+    oxygen and strontium isotope signatures can and cannot support.
+  - Cite Yorkshire Museum for the display-facing institutional
+    summary that chemical signatures were part of the research.
+  - Do not cite Wikipedia as evidence.
+  - Do not cite any Tier III wording from the intake in a Claim 3
+    context.
+- **correction_notes**:
+  - Separate **isotope chemistry** from **ancestry / ethnicity /
+    identity interpretation**. Claim 3 should only state that the
+    individual has been discussed in relation to bioarchaeological
+    isotope testing, including strontium and oxygen evidence.
+  - Do not use isotope evidence alone to claim race, ethnicity,
+    exact birthplace, or North African origin. That interpretive
+    material belongs in Claim 4 and must mirror the peer-reviewed
+    source wording.
+  - Use "childhood origin / mobility analysis" rather than exact
+    birthplace unless a technical source gives narrower wording.
+- **remaining_gaps**:
+  - Full-text Leach et al. *Antiquity* article not attached.
+  - DOI, exact page range, sample identifiers, measured strontium /
+    oxygen isotope values, and quoted methodology are not attached.
+  - No Archaeology Data Service or university repository record was
+    attached in this pass.
+  - No subsequent peer-reviewed isotope-method review or replication
+    was attached.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "The individual known as the Ivory Bangle Lady has been discussed
+  > in relation to bioarchaeological isotope testing. The Leach et al.
+  > *Antiquity* paper is the academic source target for the strontium
+  > and oxygen isotope analysis. Our Migration Story explains that
+  > oxygen and strontium isotope signatures in teeth can support
+  > childhood origin / mobility analysis because they vary with climate
+  > and underlying geology, while also warning that isotope evidence is
+  > better at excluding local origin than identifying a precise place
+  > of origin."
+- **promotion_readiness**: nearly_ready for the broad statement that
+  the Ivory Bangle Lady has been discussed in relation to isotope
+  testing, including strontium and oxygen evidence. not_ready for
+  technical isotope values, exact methodology, or any ancestry /
+  ethnicity / birthplace conclusion until the full Leach et al. paper
+  is attached and quoted precisely.
+
 ---
 
 ### Claim 4 — North-African / Mediterranean ancestry interpretation ("A Lady of York")
