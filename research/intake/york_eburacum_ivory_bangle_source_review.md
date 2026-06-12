@@ -412,6 +412,104 @@ circumstance.
 - **notes**: avoid promoted phrasing such as "from North Africa"
   unless the peer-reviewed source uses that exact framing.
 
+#### Claim 4 — Source attachment pass (2026-06-12)
+
+- **source_attachments**:
+  - **Leach et al. — "A Lady of York: migration, ethnicity and
+    identity in Roman Britain", Antiquity**. Peer-reviewed citation
+    target for the original ancestry / origin interpretation. The
+    full paper text, DOI, page range, and verbatim ancestry paragraph
+    were not attached in this pass, so this remains a citation-level
+    academic target rather than full-text evidence.
+  - **Yorkshire Museum / York Museums Trust — Ivory Bangle Lady**
+    (<https://www.yorkshiremuseum.org.uk/collections/collections-highlights/ivory-bangle-lady/>).
+    Institutional museum page. Supports: University of Reading
+    research analysed facial features, chemical signatures from food
+    and drink, and burial-site evidence; the museum states that the
+    research points to a high-status incomer to Roman York who was
+    likely of North African descent.
+  - **Our Migration Story — Roman Britain: the Ivory Bangle Lady**
+    (<https://www.ourmigrationstory.org.uk/oms/roman-britain-the-ivory-bangle-lady>).
+    Educational public-history resource written by Dr Hella Eckardt,
+    Associate Professor of Archaeology, University of Reading. Supports:
+    the article describes the buried remains as those of a woman with
+    African ancestry from Roman York; explains that skull shape has
+    been interpreted as suggesting North African ancestry; and clearly
+    cautions that isotope evidence is better at excluding local origin
+    than identifying a precise place of origin.
+- **source_quality**:
+  - The Leach et al. Antiquity article remains the required primary
+    academic anchor for any later canonical wording. Because no
+    full-text extract or DOI was attached here, it cannot yet support
+    a page-level canonical claim by itself.
+  - The Yorkshire Museum page is the strongest accessible
+    institutional summary attached in this pass because it comes from
+    the museum displaying the skeleton and grave goods and explicitly
+    connects the University of Reading research to the North African
+    descent interpretation.
+  - Our Migration Story is useful supporting interpretation because it
+    is written by a named academic specialist and includes explicit
+    caution about the limits of isotope evidence. It should not be
+    treated as a replacement for the peer-reviewed article.
+- **citation_notes**:
+  - Cite Leach et al. first once the exact publication metadata and
+    relevant wording are attached.
+  - Cite Yorkshire Museum / York Museums Trust for the museum display
+    framing and the accessible institutional summary of the University
+    of Reading research.
+  - Cite Our Migration Story for the careful distinction between skull
+    shape, isotope evidence, migration / mobility, and possible
+    ancestry interpretation.
+  - Do not cite Wikipedia, newspaper retellings, or intake prose as
+    evidence for Claim 4.
+- **correction_notes**:
+  - The original claim should not be promoted as a direct statement of
+    proven race, ethnicity, exact birthplace, or exact North African
+    origin.
+  - Use "discussion of African or North African ancestry / origin
+    possibilities" rather than "proved she was North African" or
+    "proved she was Black".
+  - Keep isotope evidence in Claim 3 and ancestry / origin
+    interpretation in Claim 4, while explaining that the published
+    interpretation combines multiple lines of evidence.
+- **interpretation_limits**:
+  - Isotope evidence is relevant to childhood origin / mobility and
+    local-versus-nonlocal signatures; it does not, by itself, prove
+    ancestry, ethnicity, race, or exact birthplace.
+  - Skull-shape / craniometric interpretation is historically used in
+    the published discussion but should be handled cautiously and
+    mirrored closely to the scholarly wording.
+  - "African", "North African", "Mediterranean", "ethnicity",
+    "ancestry", and "geographic origin" are not interchangeable terms.
+    Any promoted wording must preserve those distinctions.
+- **remaining_gaps**:
+  - Full-text Leach et al. wording has not yet been attached.
+  - DOI, page range, and page-level quote for the ancestry / origin
+    paragraph remain unresolved.
+  - No follow-up academic critique or reassessment of the craniometric
+    / ancestry method was attached in this pass.
+  - No DNA result or exact birthplace evidence is attached; such claims
+    must remain blocked.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "The published and institutional interpretation of the Ivory
+  > Bangle Lady / A Lady of York discusses African or North African
+  > ancestry / origin possibilities. Yorkshire Museum summarises
+  > University of Reading research as combining facial-feature,
+  > chemical-signature, and burial evidence, and states that the
+  > research points to a high-status incomer to Roman York likely of
+  > North African descent. Our Migration Story, written by Dr Hella
+  > Eckardt, presents the ancestry interpretation while cautioning
+  > that isotope evidence is better at excluding local origin than
+  > pinpointing a precise place of origin."
+- **promotion_readiness**: nearly_ready for an operator-reviewed,
+  carefully worded interpretation claim. Not ready for canonical
+  promotion until the exact Leach et al. full-text wording, DOI/page
+  metadata, and any needed methodological caution are attached. No
+  claim about exact birthplace, exact ethnicity, or proved modern race
+  category is promotion-ready.
+
 ---
 
 ### Claim 5 — Yorkshire Museum accession YORYM : 1996.115

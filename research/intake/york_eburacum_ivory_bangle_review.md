@@ -35,6 +35,13 @@ reason: high-claim mixed archaeological/geological/speculative item requires sou
 > Trust / Yorkshire Museum and Our Migration Story summaries for the
 > strontium / oxygen isotope-testing frame. The claim remains unpromoted
 > and canonical ingestion remains blocked.
+>
+> Claim 4 source attachment pass started 2026-06-12. The worksheet now
+> attaches the Leach et al. Antiquity citation target plus York Museums
+> Trust / Yorkshire Museum and Our Migration Story summaries for the
+> careful African / North African ancestry-or-origin interpretation. The
+> claim remains unpromoted, requires corrected wording, and canonical
+> ingestion remains blocked.
 
 # York / Eburacum Ivory Bangle Matrix Intake Review
 

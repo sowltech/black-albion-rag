@@ -241,10 +241,16 @@
         "candidate_claim_id": "cand_claim_york_eburacum_004",
         "claim_text": "The 'Ivory Bangle Lady' / 'A Lady of York' interpretation includes discussion of African or North African ancestry/origin, where supported by the source record.",
         "tier_candidate": "I",
-        "source_status": "needs_independent_sources",
+        "source_status": "partial_sources_attached",
         "canonical_data_allowed": false,
-        "promotion_readiness": "not_ready",
+        "promotion_readiness": "nearly_ready",
         "operator_approval_required": true,
+        "source_attachment_pass": "2026-06-12",
+        "attached_source_names": [
+          "Leach et al. — A Lady of York: migration, ethnicity and identity in Roman Britain",
+          "Yorkshire Museum / York Museums Trust — Ivory Bangle Lady",
+          "Our Migration Story — Roman Britain: the Ivory Bangle Lady"
+        ],
         "required_sources": [
           "Verbatim ancestry/origin wording from the peer-reviewed Leach et al. paper",
           "Institutional public-facing interpretive material from York Museums Trust"
