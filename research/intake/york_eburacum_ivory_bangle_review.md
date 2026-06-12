@@ -42,6 +42,13 @@ reason: high-claim mixed archaeological/geological/speculative item requires sou
 > careful African / North African ancestry-or-origin interpretation. The
 > claim remains unpromoted, requires corrected wording, and canonical
 > ingestion remains blocked.
+>
+> Claim 5 source attachment pass started 2026-06-12. The worksheet now
+> records York Museums Trust / Yorkshire Museum support for the museum
+> display and grave-goods context, but `YORYM : 1996.115` remains
+> unverified after catalogue-search checks. The claim remains not ready
+> for accession-identifier promotion and canonical ingestion remains
+> blocked.
 
 # York / Eburacum Ivory Bangle Matrix Intake Review
 

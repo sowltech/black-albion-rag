@@ -541,6 +541,88 @@ circumstance.
 - **notes**: museum reference formats are strict; quote them
   verbatim.
 
+#### Claim 5 — Source attachment pass (2026-06-12)
+
+- **source_attachments**:
+  - **Yorkshire Museum / York Museums Trust — Ivory Bangle Lady**
+    (<https://www.yorkshiremuseum.org.uk/collections/collections-highlights/ivory-bangle-lady/>).
+    Institutional museum page. Supports: the skeleton and grave goods
+    are held/displayed by Yorkshire Museum; the page identifies the
+    skeleton as the Ivory Bangle Lady, gives the 1901 near-Sycamore
+    Terrace discovery context, and lists the associated grave goods.
+    It does **not** provide an accession or archive identifier for the
+    skeleton, assemblage, or individual objects.
+  - **York Museums Trust Collections Search — search for `YORYM
+    1996.115`**
+    (<https://www.yorkmuseumstrust.org.uk/collections/search/?search_query=YORYM%201996.115>).
+    Institutional catalogue search page checked in this pass. The
+    filtered page output did not expose `YORYM : 1996.115`; the visible
+    results were unrelated records such as `YORYM : 1947.200.4`,
+    `YORYM : 1947.200.5`, and other `YORYM : 1947...` objects.
+  - **York Museums Trust Collections Search — searches for "Ivory
+    Bangle Lady" and "Sycamore Terrace"**. These catalogue searches
+    did not expose a direct object page or accession identifier for
+    the Ivory Bangle Lady / Sycamore Terrace assemblage in the
+    lightweight checks used in this pass.
+- **source_quality**:
+  - The Yorkshire Museum highlight page is a strong institutional
+    source for museum custody/display and broad object context, but it
+    is not an object-level catalogue record.
+  - The York Museums Trust catalogue search pages are institutional,
+    but the searched output is negative or inconclusive for the exact
+    claimed identifier. Negative search output is useful as a warning,
+    not as proof that the identifier is wrong.
+  - No ADS archive record, York Archaeology record, or peer-reviewed
+    table confirming `YORYM : 1996.115` was attached.
+- **citation_notes**:
+  - Cite the Yorkshire Museum page only for the public museum context,
+    display/custody framing, and broad grave-goods summary.
+  - Do not cite the Yorkshire Museum highlight page as evidence for
+    `YORYM : 1996.115`; that identifier is absent from the page.
+  - Record the York Museums Trust collection search checks as
+    inconclusive catalogue verification attempts, not as successful
+    accession evidence.
+  - Do not cite Wikipedia as evidence. It was used only as orientation.
+- **accession_identifier_status**:
+  - `YORYM : 1996.115`: unverified. Not found in the accessible York
+    Museums Trust collection-search output checked in this pass.
+  - Ivory Bangle Lady skeleton / assemblage object identifier:
+    unresolved. No direct object-level catalogue page was attached.
+  - Sycamore Terrace archive / ADS identifier: unresolved. No linked
+    ADS or York Archaeology archive identifier was attached.
+- **correction_notes**:
+  - Treat `YORYM : 1996.115` as an operator-supplied candidate
+    identifier only.
+  - Do not use the identifier in any Tier I canonical claim unless a
+    direct York Museums Trust catalogue record, ADS record, journal
+    table, or equivalent institutional source confirms it.
+  - If a later source shows a different accession identifier for the
+    skeleton, grave assemblage, or individual grave goods, record the
+    correction separately before replacing the candidate identifier.
+- **remaining_gaps**:
+  - Direct York Museums Trust object page for `YORYM : 1996.115`.
+  - Direct object-level catalogue entry for the skeleton, ivory
+    bracelet, jet bracelet, glass vessel, mirror, inscription mount,
+    or the full Sycamore Terrace grave assemblage.
+  - ADS or York Archaeology archive identifier for the Sycamore
+    Terrace burial group.
+  - Leach et al. / Antiquity table or appendix listing museum
+    accession identifiers.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "The Yorkshire Museum page confirms that the Ivory Bangle Lady
+  > skeleton and associated grave goods are held/displayed by
+  > Yorkshire Museum and identifies the burial context, but no
+  > accession identifier is provided there. The candidate identifier
+  > `YORYM : 1996.115` remains unverified and must not be promoted
+  > unless confirmed by a direct York Museums Trust catalogue record,
+  > ADS record, or peer-reviewed object table."
+- **promotion_readiness**: not_ready for accession / archive identifier
+  promotion. Partial institutional support exists for the museum
+  context, but the specific `YORYM : 1996.115` identifier and any
+  linked archive identifier remain unresolved.
+
 ---
 
 ### Claim 6 — "Vivas in Deo" Christian inscription / box mount

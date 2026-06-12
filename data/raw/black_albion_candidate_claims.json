@@ -260,10 +260,16 @@
         "candidate_claim_id": "cand_claim_york_eburacum_005",
         "claim_text": "Museum accession / archive identifiers, including YORYM : 1996.115, require verification.",
         "tier_candidate": "I",
-        "source_status": "needs_independent_sources",
+        "source_status": "partial_sources_attached",
         "canonical_data_allowed": false,
         "promotion_readiness": "not_ready",
         "operator_approval_required": true,
+        "source_attachment_pass": "2026-06-12",
+        "attached_source_names": [
+          "Yorkshire Museum / York Museums Trust — Ivory Bangle Lady",
+          "York Museums Trust Collections Search — YORYM 1996.115 check"
+        ],
+        "accession_identifier_status": "YORYM : 1996.115 unverified; not found in accessible York Museums Trust collection-search output checked in this pass",
         "required_sources": [
           "York Museums Trust catalogue confirmation of the exact accession reference",
           "Archaeology Data Service crosswalk if available"
