@@ -184,6 +184,81 @@ circumstance.
   itemised claims if the museum catalogue records them as separate
   accessions.
 
+#### Claim 2 — Source attachment pass (2026-06-12)
+
+- **source_attachments**:
+  - **Yorkshire Museum / York Museums Trust — Ivory Bangle Lady**
+    (<https://www.yorkshiremuseum.org.uk/collections/collections-highlights/ivory-bangle-lady/>).
+    Institutional museum page. Supports: the remains were found with
+    jet and elephant ivory bracelets, earrings, pendants, beads, a
+    blue glass jug, and a glass mirror; the skeleton is described as a
+    high-status woman from Roman York; the skeleton and grave goods
+    are on display in the Yorkshire Museum.
+  - **Our Migration Story — Roman Britain: the Ivory Bangle Lady**
+    (<https://www.ourmigrationstory.org.uk/oms/roman-britain-the-ivory-bangle-lady>).
+    Public-history educational resource authored by Dr Hella Eckardt,
+    Associate Professor of Archaeology, University of Reading, with
+    university / AHRC project partners. Supports: the grave was a
+    stone sarcophagus with rich grave goods; objects included
+    bracelets made from local jet and more exotic ivory; a bone mount
+    inscription is described as probably from a box.
+- **source_quality**:
+  - The Yorkshire Museum page is the strongest source attached in this
+    pass because it is institutional and directly names the displayed
+    skeleton and grave goods.
+  - Our Migration Story corroborates the high-status / rich
+    grave-goods interpretation and distinguishes local jet from ivory,
+    but it is a public-facing interpretive article rather than an
+    object-level museum catalogue.
+  - Together, the attached sources support the broad Claim 2 statement
+    that the burial is associated with ivory bracelets and other
+    high-status grave goods.
+- **citation_notes**:
+  - Cite Yorkshire Museum / York Museums Trust first for the grave
+    goods list: jet and elephant ivory bracelets, earrings, pendants,
+    beads, blue glass jug, and glass mirror.
+  - Cite Our Migration Story for the "rich grave goods" framing and
+    local jet / ivory distinction.
+  - Do not cite Wikipedia as evidence. It was used only as
+    orientation.
+  - Do not cite the intake's "dual-material" or "capacitor" language
+    in any Tier I wording; that is Tier III speculative language.
+- **correction_notes**:
+  - Replace "ivory bangles and/or other high-status grave goods" with
+    a narrower sourced formulation naming **jet and elephant ivory
+    bracelets** and the other objects listed by Yorkshire Museum.
+  - Avoid unsourced object-level identifiers, including
+    `YORYM : 1996.115`, in Claim 2. Those belong to Claim 5 until an
+    exact York Museums Trust catalogue record is attached.
+  - Use "bracelets" where the museum page uses that term. Do not
+    force "bangles" if a source-specific citation is being written.
+- **remaining_gaps**:
+  - No object-level York Museums Trust catalogue records were attached
+    for the individual ivory bracelet, jet bracelet, glass vessel,
+    mirror, or other objects.
+  - No Archaeology Data Service object-level record was attached in
+    this pass.
+  - No peer-reviewed Antiquity / Leach et al. grave-goods table or
+    catalogue excerpt was attached in this pass.
+  - The exact accession number(s) for the skeleton, grave assemblage,
+    or individual grave goods remain unverified and must not be
+    promoted.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "Yorkshire Museum describes the Ivory Bangle Lady burial as
+  > including jet and elephant ivory bracelets, earrings, pendants,
+  > beads, a blue glass jug and a glass mirror, and presents the
+  > skeleton as that of a high-status woman from Roman York. Our
+  > Migration Story, authored by Dr Hella Eckardt, also describes the
+  > grave as a stone sarcophagus with rich grave goods including
+  > bracelets made from local jet and more exotic ivory."
+- **promotion_readiness**: nearly_ready for the broad grave-goods and
+  high-status interpretation. Operator approval is still required, and
+  object-level catalogue records / ADS records / peer-reviewed grave
+  goods tables would be required before promoting item-level accession
+  or catalogue claims.
+
 ---
 
 ### Claim 3 — Strontium / oxygen isotope analysis

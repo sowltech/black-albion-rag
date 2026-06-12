@@ -23,6 +23,12 @@ reason: high-claim mixed archaeological/geological/speculative item requires sou
 > attaches York Museums Trust / Yorkshire Museum and Our Migration Story
 > evidence for the Sycamore Terrace 1901 / Ivory Bangle Lady burial frame.
 > The claim remains unpromoted and canonical ingestion remains blocked.
+>
+> Claim 2 source attachment pass started 2026-06-12. The worksheet now
+> attaches York Museums Trust / Yorkshire Museum and Our Migration Story
+> evidence for the ivory / jet bracelets, wider grave-goods list, and
+> high-status burial interpretation. The claim remains unpromoted and
+> canonical ingestion remains blocked.
 
 # York / Eburacum Ivory Bangle Matrix Intake Review
 
