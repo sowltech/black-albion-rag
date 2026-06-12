@@ -144,5 +144,160 @@
     "operator_approval_required": true,
     "created_at": "2026-06-09",
     "notes": "Manual paste proposed for `backend/data/black_albion_sites.json` (a path that does not exist in this repo). The live equivalent is `data/raw/black_albion_sites.json` which is the curated Tier I ledger. No canonical ledger was modified. Pasted record mixes Tier I-shaped military-history claims with Tier III speculative framing; both tiers preserved in the quarantined raw artifact, separated in the review note, and held behind the promotion gate in `docs/intake-review-workflow.md`."
+  },
+  {
+    "candidate_id": "cand_york_eburacum_059",
+    "proposed_site_id": "site_york_eburacum_059",
+    "name": "The Eburacum Ivory Bangle Matrix and York Glacial Terraces",
+    "county": "North Yorkshire",
+    "nearest_place": "York City Centre / Sycamore Terrace",
+    "source_artifact": "research/intake/york_eburacum_ivory_bangle_raw.md",
+    "raw_artifact": "research/intake/york_eburacum_ivory_bangle_raw.md",
+    "review_note": "research/intake/york_eburacum_ivory_bangle_review.md",
+    "source_review_file": "research/intake/york_eburacum_ivory_bangle_source_review.md",
+    "origin_type": "manual_paste",
+    "origin_url": "",
+    "fetch_status": "manual",
+    "review_status": "quarantined",
+    "risk_level": "high",
+    "canonical_ingestion_allowed": false,
+    "promotion_commit_allowed": false,
+    "promotion_requires_separate_commit": true,
+    "operator_approval_required": true,
+    "operator_review_ready": false,
+    "proposed_target_file": "data/raw/black_albion_sites.json",
+    "promotion_blocked_reason": "mixed archaeological, geological, and speculative claims require source verification and operator approval before canonical ingestion",
+    "reason": "high-claim mixed archaeological/geological/speculative item requires source verification before canonical data insertion",
+    "allowed_use": [
+      "Tier II inspiration",
+      "research lead generation",
+      "candidate source hunting"
+    ],
+    "forbidden_use": [
+      "Tier I sourcing",
+      "verified claim creation",
+      "claim promotion without independent sources",
+      "writing to data/raw/black_albion_sites.json"
+    ],
+    "related_modules": [],
+    "candidate_claims": [
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_001",
+        "claim_text": "A York / Eburacum Late Roman high-status burial was discovered at or near Sycamore Terrace, York, in 1901.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "canonical_data_allowed": false,
+        "promotion_readiness": "not_ready",
+        "operator_approval_required": true,
+        "required_sources": [
+          "Yorkshire Museum / York Museums Trust catalogue record",
+          "Archaeology Data Service Sycamore Terrace burial group record",
+          "York Archaeology / York Archaeological Trust report"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_002",
+        "claim_text": "The burial is associated with ivory bangles and/or other high-status grave goods.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "canonical_data_allowed": false,
+        "promotion_readiness": "not_ready",
+        "operator_approval_required": true,
+        "required_sources": [
+          "Yorkshire Museum object catalogue entry for the ivory bangle / jet bracelet",
+          "Peer-reviewed publication itemising the grave goods"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_003",
+        "claim_text": "The individual has been discussed in relation to bioarchaeological isotope testing, including strontium / oxygen evidence.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "canonical_data_allowed": false,
+        "promotion_readiness": "not_ready",
+        "operator_approval_required": true,
+        "required_sources": [
+          "Leach et al. 2009/2010 'A Lady of York' (Antiquity) peer-reviewed citation with verbatim methodology",
+          "Subsequent peer-reviewed isotope-method commentary"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_004",
+        "claim_text": "The 'Ivory Bangle Lady' / 'A Lady of York' interpretation includes discussion of African or North African ancestry/origin, where supported by the source record.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "canonical_data_allowed": false,
+        "promotion_readiness": "not_ready",
+        "operator_approval_required": true,
+        "required_sources": [
+          "Verbatim ancestry/origin wording from the peer-reviewed Leach et al. paper",
+          "Institutional public-facing interpretive material from York Museums Trust"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_005",
+        "claim_text": "Museum accession / archive identifiers, including YORYM : 1996.115, require verification.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "canonical_data_allowed": false,
+        "promotion_readiness": "not_ready",
+        "operator_approval_required": true,
+        "required_sources": [
+          "York Museums Trust catalogue confirmation of the exact accession reference",
+          "Archaeology Data Service crosswalk if available"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_006",
+        "claim_text": "A 'Vivas in Deo' Christian inscription / inscribed object claim requires source verification.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "canonical_data_allowed": false,
+        "promotion_readiness": "not_ready",
+        "operator_approval_required": true,
+        "required_sources": [
+          "Roman Inscriptions of Britain (RIB) record for the inscribed object",
+          "Museum object record confirming the inscription wording and associated burial assemblage"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_007",
+        "claim_text": "Vale of York / Ouse-Foss / glacial terrace / alluvial geology claims require independent geology / hydrology sources.",
+        "tier_candidate": "I",
+        "source_status": "needs_independent_sources",
+        "canonical_data_allowed": false,
+        "promotion_readiness": "not_ready",
+        "operator_approval_required": true,
+        "required_sources": [
+          "British Geological Survey memoir / Sheet 63 York Quaternary mapping",
+          "Environment Agency hydrology record for the Ouse and Foss"
+        ]
+      },
+      {
+        "candidate_claim_id": "cand_claim_york_eburacum_008",
+        "claim_text": "Symbolic framing of 'Amenta Subsurface Core Extraction', 'Dual-material jet-ivory capacitors', 'fluvial siphon loop', 'counter-intelligence' framing, and 'system_lock' vocabulary.",
+        "tier_candidate": "III",
+        "source_status": "speculative_lens_only",
+        "canonical_data_allowed": false,
+        "tier_i_promotion_allowed": false,
+        "promotion_path": "none",
+        "promotion_recommendation": "do_not_promote_to_Tier_I",
+        "required_sources": []
+      }
+    ],
+    "source_review_checklist": [
+      "verify Yorkshire Museum accession YORYM : 1996.115 (or correct id)",
+      "verify Archaeology Data Service record for the Sycamore Terrace burial group",
+      "verify Leach et al. 2009/2010 'A Lady of York' citation (Antiquity)",
+      "verify strontium/oxygen isotope methodology and ancestry interpretation",
+      "verify 'Vivas in Deo' inscription via Roman Inscriptions of Britain",
+      "verify Vale of York / Ouse-Foss / glacial terrace / alluvium geology via BGS",
+      "verify York Archaeology / York Archaeological Trust reporting",
+      "verify Historic England / NHLE entries for any scheduled monument",
+      "confirm Tier I / Tier III separation"
+    ],
+    "required_action": "source_hunting",
+    "created_at": "2026-06-12",
+    "notes": "Manual paste proposed for `data/raw/black_albion_sites.json` (the curated Tier I sites ledger). No canonical ledger was modified. The intake mixes Tier I-shaped archaeological + geological claims (York / Eburacum Late Roman burial, Sycamore Terrace 1901, ivory bangle, YORYM : 1996.115, Leach et al. 2009 'A Lady of York', strontium/oxygen isotopes, 'Vivas in Deo' inscription, Vale of York / Ouse-Foss / glacial terrace geology) with Tier III speculative framing ('Amenta Subsurface Core Extraction', 'Dual-material jet-ivory capacitors', 'fluvial siphon loop', counter-intelligence framing, system_lock vocabulary). Tier I-shaped claims preserved in the quarantined raw artifact, separated in the review note, itemised in the source review worksheet, and held behind the promotion gate in `docs/intake-review-workflow.md`. The 2026-06-12 intake task referenced a verbatim JSON record but did not attach one; the raw artifact includes a placeholder fenced block awaiting the actual paste before any forward motion."
   }
 ]
