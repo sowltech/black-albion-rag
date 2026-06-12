@@ -18,6 +18,11 @@ reason: high-claim mixed archaeological/geological/speculative item requires sou
 > for per-claim findings, candidate sources, factual corrections required
 > before promotion, and the standing promotion gate. No canonical ledger
 > has been modified.
+>
+> Claim 1 source attachment pass started 2026-06-12. The worksheet now
+> attaches York Museums Trust / Yorkshire Museum and Our Migration Story
+> evidence for the Sycamore Terrace 1901 / Ivory Bangle Lady burial frame.
+> The claim remains unpromoted and canonical ingestion remains blocked.
 
 # York / Eburacum Ivory Bangle Matrix Intake Review
 

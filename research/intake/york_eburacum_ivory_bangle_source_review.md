@@ -69,6 +69,94 @@ circumstance.
   cemetery group, and discovery year using the institutional source
   rather than a paraphrase.
 
+#### Claim 1 — Source attachment pass (2026-06-12)
+
+- **source_attachments**:
+  - **Yorkshire Museum / York Museums Trust — Ivory Bangle Lady**
+    (<https://www.yorkshiremuseum.org.uk/collections/collections-highlights/ivory-bangle-lady/>).
+    Institutional museum page. Supports: the skeleton is known as the
+    Ivory Bangle Lady; it was found in 1901 near Sycamore Terrace in
+    York; the location is described between Bootham and the River Ouse;
+    the remains are dated to the second half of the fourth century;
+    the burial assemblage includes jet and elephant ivory bracelets,
+    earrings, pendants, beads, a blue glass jug, and a glass mirror;
+    the skeleton and grave goods are displayed in the Yorkshire Museum.
+  - **Our Migration Story — Roman Britain: the Ivory Bangle Lady**
+    (<https://www.ourmigrationstory.org.uk/oms/roman-britain-the-ivory-bangle-lady>).
+    Public-history educational resource authored by Dr Hella Eckardt,
+    Associate Professor of Archaeology, University of Reading, with
+    university / AHRC project partners. Supports: the remains of a
+    woman were discovered in Sycamore Terrace, York, in 1901; the skull
+    and teeth have been stored in Yorkshire Museum; the grave was a
+    stone sarcophagus with rich grave goods in the later fourth century;
+    it describes the objects as including local jet and ivory bracelets
+    and a bone mount inscription.
+- **source_quality**:
+  - The Yorkshire Museum page is the strongest institutional source
+    attached in this pass because it is the museum holding and
+    displaying the skeleton and grave goods.
+  - The Our Migration Story article is useful corroboration for the
+    Sycamore Terrace / 1901 / stone sarcophagus / rich grave-goods
+    framing and is authored by a relevant academic specialist, but it
+    should be treated as public-facing interpretation rather than the
+    primary excavation record.
+  - Together, these sources support the core claim that the Ivory
+    Bangle Lady / Late Roman high-status burial was discovered at or
+    near Sycamore Terrace, York, in 1901 and belongs to the later
+    fourth-century Roman York context.
+- **citation_notes**:
+  - Cite Yorkshire Museum / York Museums Trust first for the museum
+    record, display context, discovery year, Sycamore Terrace
+    location, fourth-century dating, and grave-goods summary.
+  - Cite Our Migration Story for the stone-sarcophagus wording and
+    public-facing academic explanation of the burial context.
+  - Do not cite Wikipedia as evidence. It was used only as orientation
+    during source discovery.
+  - Do not treat the intake wording itself as source authority.
+- **correction_notes**:
+  - Prefer **"near Sycamore Terrace, York"** in the corrected claim
+    because the Yorkshire Museum page uses "near to Sycamore Terrace";
+    Our Migration Story uses "in Sycamore Terrace". The corrected text
+    can preserve the safer "at or near" wording if the operator wants
+    to bridge both phrasings.
+  - Use **"later fourth-century Roman York burial"** or
+    **"second half of the fourth century"** rather than a vague "Late
+    Roman" label if the promoted claim needs tighter dating.
+  - Use **"Ivory Bangle Lady"** as the museum / public-facing name.
+    Do not add unsourced accession identifiers or object numbers to
+    Claim 1.
+- **remaining_gaps**:
+  - No contemporary 1901 newspaper report, excavation note, or
+    Yorkshire Philosophical Society / museum accession record has been
+    attached in this pass.
+  - No Archaeology Data Service record was attached; no stable ADS
+    Sycamore Terrace record was found through the lightweight source
+    search used in this pass.
+  - No object-level York Museums Trust accession record has been
+    attached for the skeleton or grave group.
+  - The exact relationship between the broader Sycamore Terrace
+    cemetery group and the specific Ivory Bangle Lady grave should be
+    checked against the Antiquity article and/or primary museum
+    catalogue before canonical promotion.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for operator
+  review only):
+  > "The high-status Roman York burial known as the Ivory Bangle Lady
+  > was found in or near Sycamore Terrace, York, in 1901. Yorkshire
+  > Museum describes the remains as those of a high-status woman from
+  > Roman York, dated to the second half of the fourth century and
+  > found with grave goods including jet and elephant ivory bracelets,
+  > earrings, pendants, beads, a blue glass jug and a glass mirror.
+  > Our Migration Story, authored by Dr Hella Eckardt, also describes
+  > the grave as a stone sarcophagus with rich grave goods in the later
+  > fourth century."
+- **promotion_readiness**: nearly_ready. The core Sycamore Terrace /
+  1901 / later fourth-century high-status Roman York burial claim is
+  supported by an institutional museum page and academic public-history
+  resource. Operator approval is still required, and a contemporary
+  1901 report, ADS record, or museum accession record would tighten the
+  claim before any Tier I promotion.
+
 ---
 
 ### Claim 2 — Ivory bangles and/or other high-status grave goods

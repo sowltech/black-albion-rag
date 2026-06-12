@@ -185,10 +185,15 @@
         "candidate_claim_id": "cand_claim_york_eburacum_001",
         "claim_text": "A York / Eburacum Late Roman high-status burial was discovered at or near Sycamore Terrace, York, in 1901.",
         "tier_candidate": "I",
-        "source_status": "needs_independent_sources",
+        "source_status": "partial_sources_attached",
         "canonical_data_allowed": false,
-        "promotion_readiness": "not_ready",
+        "promotion_readiness": "nearly_ready",
         "operator_approval_required": true,
+        "source_attachment_pass": "2026-06-12",
+        "attached_source_names": [
+          "Yorkshire Museum / York Museums Trust — Ivory Bangle Lady",
+          "Our Migration Story — Roman Britain: the Ivory Bangle Lady"
+        ],
         "required_sources": [
           "Yorkshire Museum / York Museums Trust catalogue record",
           "Archaeology Data Service Sycamore Terrace burial group record",
