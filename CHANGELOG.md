@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — v0.5.0 Source Verification Engine
+## v0.5.0 — Source Verification Engine
+
+Release date: 2026-06-13
 
 v0.5.0 adds a deterministic source verification engine and a new read-only
 Source Verification dashboard panel. The engine classifies candidate-claim
