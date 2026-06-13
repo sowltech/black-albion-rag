@@ -56,6 +56,11 @@ reason: high-claim mixed archaeological/geological/speculative item requires sou
 > box-or-casket context. Exact Latin text, RIB id, object accession, and
 > object-level catalogue evidence remain unresolved. Canonical ingestion
 > remains blocked.
+>
+> Operator review packet prepared 2026-06-13:
+> [`york_eburacum_ivory_bangle_operator_packet.md`](york_eburacum_ivory_bangle_operator_packet.md).
+> The packet summarises Claims 1-7 source readiness and keeps Claim 8
+> contained as Tier III speculative-only. It does not approve promotion.
 
 # York / Eburacum Ivory Bangle Matrix Intake Review
 

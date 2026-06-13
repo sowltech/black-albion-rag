@@ -155,10 +155,12 @@
     "raw_artifact": "research/intake/york_eburacum_ivory_bangle_raw.md",
     "review_note": "research/intake/york_eburacum_ivory_bangle_review.md",
     "source_review_file": "research/intake/york_eburacum_ivory_bangle_source_review.md",
+    "operator_packet": "research/intake/york_eburacum_ivory_bangle_operator_packet.md",
     "origin_type": "manual_paste",
     "origin_url": "",
     "fetch_status": "manual",
-    "review_status": "quarantined",
+    "review_status": "pending_review",
+    "operator_packet_status": "operator_packet_prepared",
     "risk_level": "high",
     "canonical_ingestion_allowed": false,
     "promotion_commit_allowed": false,
@@ -299,10 +301,25 @@
         "candidate_claim_id": "cand_claim_york_eburacum_007",
         "claim_text": "Vale of York / Ouse-Foss / glacial terrace / alluvial geology claims require independent geology / hydrology sources.",
         "tier_candidate": "I",
-        "source_status": "needs_independent_sources",
+        "source_status": "partial_sources_attached",
         "canonical_data_allowed": false,
-        "promotion_readiness": "not_ready",
+        "promotion_readiness": "nearly_ready_for_corrected_bgs_wording_only",
         "operator_approval_required": true,
+        "source_attachment_pass": "2026-06-13",
+        "attached_source_names": [
+          "British Geological Survey — Earthwise: Geological history of Yorkshire",
+          "British Geological Survey — Earthwise: OR/15/064 Cross section interpretation",
+          "British Geological Survey — Sherwood Sandstone Group",
+          "British Geological Survey — Geological indicators of flooding",
+          "City of York Council — Strategic Flood Risk Assessment candidate pointer"
+        ],
+        "unsupported_terms": [
+          "Vale of York Fault Flexures",
+          "Howardian Hills Fault Margin",
+          "Ouse-Foss fluvial siphon loop",
+          "Vale of York Basin unless independently sourced as a formal institutional label",
+          "subsurface aquifer saturated clays unless independently sourced"
+        ],
         "required_sources": [
           "British Geological Survey memoir / Sheet 63 York Quaternary mapping",
           "Environment Agency hydrology record for the Ouse and Foss"
