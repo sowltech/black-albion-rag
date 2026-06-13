@@ -104,7 +104,7 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("v0.3.0-planned", body)
                 self.assertIn("Latest release", body)
                 self.assertIn(
-                    "Unreleased — v0.7.0 Operator Decision Packet Engine",
+                    "v0.7.0 — Operator Decision Packet Engine",
                     body,
                 )
                 self.assertIn(

@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — v0.7.0 Operator Decision Packet Engine
+## v0.7.0 — Operator Decision Packet Engine
+
+Release date: 2026-06-13
 
 v0.7.0 adds a deterministic, read-only operator decision label layer on
 top of the v0.6 Promotion Readiness Engine. The layer recommends labels
