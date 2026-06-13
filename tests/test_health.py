@@ -103,7 +103,14 @@ class HealthTests(unittest.TestCase):
                     self.assertIn(f'href="{path}"', body)
                 self.assertIn("v0.3.0-planned", body)
                 self.assertIn("Latest release", body)
-                self.assertIn("v0.5.0 — Source Verification Engine", body)
+                self.assertIn(
+                    "Unreleased — v0.6.0 Promotion Readiness Engine",
+                    body,
+                )
+                self.assertIn(
+                    "v0.5.0 — Source Verification Engine",
+                    (PROJECT_ROOT / "CHANGELOG.md").read_text(encoding="utf-8"),
+                )
                 self.assertIn("CHANGELOG.md", body)
                 self.assertIn("Repo Estate", body)
                 self.assertIn("Total repos found", body)
@@ -213,8 +220,91 @@ class HealthTests(unittest.TestCase):
                     ),
                     "Source Verification panel must surface at least one tier name",
                 )
+                # v0.6.0 Promotion Readiness panel
+                self.assertIn("Promotion Readiness", body)
+                self.assertIn("Read-only promotion readiness", body)
+                self.assertIn("Does not approve promotion", body)
+                self.assertIn("Does not write canonical ledgers", body)
+                self.assertIn("cand_york_eburacum_059", body)
+                self.assertIn("YORYM : 1996.115", body)
+                self.assertIn("exact Latin / RIB", body)
+                self.assertIn("Tier III-only", body)
+                self.assertIn("separate operator-approved commit", body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
+
+    def test_promotion_readiness_york_claims_classify_safely(self) -> None:
+        from backend.app.promotion_readiness import (
+            summarize_promotion_readiness_queue,
+        )
+
+        candidates = json.loads(
+            (PROJECT_ROOT / "data/raw/black_albion_candidate_claims.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        queue = summarize_promotion_readiness_queue(candidates, PROJECT_ROOT)
+        york = next(
+            item
+            for item in queue["candidates"]
+            if item["candidate_id"] == "cand_york_eburacum_059"
+        )
+        by_number = {claim["claim_number"]: claim for claim in york["claims"]}
+
+        for number in (1, 2, 3, 4):
+            self.assertEqual(
+                "nearly_ready_for_operator_review",
+                by_number[number]["readiness"],
+            )
+        self.assertEqual(
+            "blocked_unverified_identifier",
+            by_number[5]["readiness"],
+        )
+        self.assertEqual(
+            "blocked_exact_text_unverified",
+            by_number[6]["readiness"],
+        )
+        self.assertEqual(
+            "ready_for_corrected_wording_review",
+            by_number[7]["readiness"],
+        )
+        self.assertEqual("tier_iii_only", by_number[8]["readiness"])
+        self.assertFalse(by_number[8]["canonical_ingestion_allowed"])
+        self.assertFalse(by_number[8]["promotion_commit_allowed"])
+
+    def test_promotion_readiness_never_promotes_quarantine_candidates(self) -> None:
+        from backend.app.promotion_readiness import (
+            summarize_promotion_readiness_queue,
+        )
+
+        candidates = json.loads(
+            (PROJECT_ROOT / "data/raw/black_albion_candidate_claims.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        queue = summarize_promotion_readiness_queue(candidates, PROJECT_ROOT)
+        candidates_by_id = {
+            item["candidate_id"]: item for item in queue["candidates"]
+        }
+
+        gemini = candidates_by_id["cand_gemini_share_002"]
+        self.assertEqual([], gemini["claims"])
+        self.assertEqual(0, gemini["nearly_ready_count"])
+
+        glos = candidates_by_id["cand_gloucestershire_egypt_058"]
+        glos_tier_iii = next(
+            claim for claim in glos["claims"] if claim["claim_number"] == 6
+        )
+        self.assertEqual("tier_iii_only", glos_tier_iii["readiness"])
+
+        for candidate in queue["candidates"]:
+            self.assertFalse(candidate["canonical_ingestion_allowed"])
+            self.assertFalse(candidate["promotion_commit_allowed"])
+            for claim in candidate["claims"]:
+                self.assertFalse(claim["canonical_ingestion_allowed"])
+                self.assertFalse(claim["promotion_commit_allowed"])
+                if claim["tier_iii_containment"]:
+                    self.assertEqual("tier_iii_only", claim["readiness"])
 
     def test_classify_source_london_gazette_url_is_primary(self) -> None:
         from backend.app.source_verification import classify_source_strength

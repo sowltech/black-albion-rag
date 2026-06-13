@@ -154,7 +154,7 @@ probe_get  "export_claims" "/export/claims.json" 200
 probe_get  "search" "/search?q=Winchcombe" 200
 probe_get  "openapi" "/openapi.json" 200
 probe_get_body "dashboard" "/dashboard" 200 "Operator Dashboard"
-probe_get_body "dashboard_release" "/dashboard" 200 "v0.5.0 — Source Verification Engine"
+probe_get_body "dashboard_release" "/dashboard" 200 "Unreleased — v0.6.0 Promotion Readiness Engine"
 probe_get_body "dashboard_repo_estate" "/dashboard" 200 "Repo Estate"
 probe_get_body "dashboard_repo_gold" "/dashboard" 200 "black-albion-rag"
 probe_get_body "dashboard_source_intake" "/dashboard" 200 "Source / Intake Review"
@@ -194,6 +194,12 @@ probe_get_body "dashboard_source_strength_summary" "/dashboard" 200 "Source Stre
 probe_get_body "dashboard_source_strength_intro" "/dashboard" 200 "Read-only source strength summary"
 probe_get_body "dashboard_source_strength_primary" "/dashboard" 200 "primary_source"
 probe_get_body "dashboard_source_strength_correction" "/dashboard" 200 "requires_correction"
+probe_get_body "dashboard_promotion_readiness" "/dashboard" 200 "Promotion Readiness"
+probe_get_body "dashboard_promotion_readiness_candidate" "/dashboard" 200 "cand_york_eburacum_059"
+probe_get_body "dashboard_promotion_readiness_yorym" "/dashboard" 200 "YORYM : 1996.115"
+probe_get_body "dashboard_promotion_readiness_tier_iii" "/dashboard" 200 "Tier III-only"
+probe_get_body "dashboard_promotion_readiness_no_approve" "/dashboard" 200 "Does not approve promotion"
+probe_get_body "dashboard_promotion_readiness_no_write" "/dashboard" 200 "Does not write canonical ledgers"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

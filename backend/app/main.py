@@ -600,6 +600,44 @@ SOURCE_STRENGTH_SUMMARY_LOCK_STATEMENTS = (
     "Promotion still requires a separate operator-approved commit",
 )
 
+PROMOTION_READINESS_EMPTY_MESSAGE = "No promotion readiness records available."
+PROMOTION_READINESS_LOCK_STATEMENTS = (
+    "Read-only promotion readiness",
+    "Does not approve promotion",
+    "Does not write canonical ledgers",
+    "Promotion requires separate operator-approved commit",
+)
+
+
+def _promotion_readiness_summary() -> Dict[str, Any]:
+    """Return read-only promotion readiness for candidate claims."""
+    from .promotion_readiness import summarize_promotion_readiness_queue
+
+    candidates: List[Dict[str, Any]] = []
+    if CANDIDATE_CLAIMS_PATH.exists():
+        try:
+            payload = json.loads(CANDIDATE_CLAIMS_PATH.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError):
+            payload = []
+        if isinstance(payload, list):
+            candidates = [row for row in payload if isinstance(row, dict)]
+
+    queue = summarize_promotion_readiness_queue(candidates, base_path=REPO_ROOT)
+    queue.update(
+        {
+            "title": "Promotion Readiness",
+            "intro": "Read-only promotion readiness",
+            "no_approve_note": "Does not approve promotion",
+            "no_write_note": "Does not write canonical ledgers",
+            "separate_commit_note": (
+                "Promotion requires separate operator-approved commit"
+            ),
+            "empty_message": PROMOTION_READINESS_EMPTY_MESSAGE,
+            "lock_statements": list(PROMOTION_READINESS_LOCK_STATEMENTS),
+        }
+    )
+    return queue
+
 
 def _source_strength_summary(
     per_candidate_items: List[Dict[str, Any]],
@@ -1140,6 +1178,7 @@ def create_app() -> FastAPI:
             source_verification["items"],
             per_claim_source_verification["items"],
         )
+        promotion_readiness = _promotion_readiness_summary()
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -1480,6 +1519,77 @@ def create_app() -> FastAPI:
             if source_strength["total_candidates_reviewed"] == 0
             else ""
         )
+        promotion_readiness_title = escape(promotion_readiness["title"])
+        promotion_readiness_intro = escape(promotion_readiness["intro"])
+        promotion_readiness_no_approve_note = escape(
+            promotion_readiness["no_approve_note"]
+        )
+        promotion_readiness_no_write_note = escape(
+            promotion_readiness["no_write_note"]
+        )
+        promotion_readiness_separate_commit_note = escape(
+            promotion_readiness["separate_commit_note"]
+        )
+        promotion_readiness_empty_message = escape(
+            promotion_readiness["empty_message"]
+        )
+        promotion_readiness_totals_html = (
+            f"<li>total candidates: <strong>{escape(str(promotion_readiness['total_candidates']))}</strong></li>"
+            f"<li>total claims: <strong>{escape(str(promotion_readiness['total_claims']))}</strong></li>"
+            f"<li>nearly-ready claims: <strong>{escape(str(promotion_readiness['total_nearly_ready']))}</strong></li>"
+            f"<li>blocked claims: <strong>{escape(str(promotion_readiness['total_blocked']))}</strong></li>"
+            f"<li>Tier III-only claims: <strong>{escape(str(promotion_readiness['total_tier_iii_only']))}</strong></li>"
+            f"<li>missing source references: <strong>{escape(str(promotion_readiness['total_missing_sources']))}</strong></li>"
+        )
+        if promotion_readiness["candidates"]:
+            promotion_readiness_items_html = "\n".join(
+                "<li>"
+                f"<strong>{escape(candidate['candidate_id'])}</strong>"
+                f" — review_status: <code>{escape(candidate['review_status'])}</code>"
+                "<ul>"
+                f"<li>operator_packet: <code>{escape(candidate['operator_packet']) or 'not detected'}</code></li>"
+                f"<li>nearly_ready_count: <strong>{escape(str(candidate['nearly_ready_count']))}</strong></li>"
+                f"<li>blocked_count: <strong>{escape(str(candidate['blocked_count']))}</strong></li>"
+                f"<li>Tier III-only count: <strong>{escape(str(candidate['tier_iii_only_count']))}</strong></li>"
+                f"<li>missing_source_count: <strong>{escape(str(candidate['missing_source_count']))}</strong></li>"
+                f"<li>canonical_promotion_locked: <code>{escape(str(candidate['canonical_promotion_locked']).lower())}</code></li>"
+                + "".join(
+                    "<li>"
+                    f"Claim {escape(str(claim['claim_number'] or 'n/a'))}: "
+                    f"<code>{escape(claim['readiness'])}</code>"
+                    f" — {escape(claim['recommendation'])}"
+                    + (
+                        "<ul>"
+                        + "".join(
+                            f"<li>{escape(term)}</li>"
+                            for term in claim["blocked_terms"][:4]
+                        )
+                        + "".join(
+                            f"<li>missing: {escape(src)}</li>"
+                            for src in claim["missing_sources"][:2]
+                        )
+                        + "</ul>"
+                        if claim["blocked_terms"] or claim["missing_sources"]
+                        else ""
+                    )
+                    + "</li>"
+                    for claim in candidate["claims"]
+                    if claim["readiness"]
+                    in (
+                        "blocked_unverified_identifier",
+                        "blocked_exact_text_unverified",
+                        "ready_for_corrected_wording_review",
+                        "tier_iii_only",
+                    )
+                )
+                + "</ul>"
+                "</li>"
+                for candidate in promotion_readiness["candidates"]
+            )
+        else:
+            promotion_readiness_items_html = (
+                f"<li>{promotion_readiness_empty_message}</li>"
+            )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -1844,6 +1954,21 @@ def create_app() -> FastAPI:
         <ul>
           {source_strength_empty_html}
         </ul>
+      </div>
+      <div class="panel">
+        <h2>{promotion_readiness_title}</h2>
+        <p><strong>{promotion_readiness_intro}</strong></p>
+        <p>{promotion_readiness_no_approve_note}.</p>
+        <p>{promotion_readiness_no_write_note}.</p>
+        <p>{promotion_readiness_separate_commit_note}.</p>
+        <h3>Totals</h3>
+        <ul>
+          {promotion_readiness_totals_html}
+        </ul>
+        <h3>Candidate Readiness</h3>
+        <ol>
+          {promotion_readiness_items_html}
+        </ol>
       </div>
       <div class="panel">
         <h2>{canonical_integrity_title}</h2>

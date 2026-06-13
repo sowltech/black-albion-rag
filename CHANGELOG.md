@@ -1,5 +1,50 @@
 # Changelog
 
+## Unreleased — v0.6.0 Promotion Readiness Engine
+
+v0.6.0 adds a deterministic, read-only Promotion Readiness Engine for
+candidate claim review. It classifies candidate claims into
+operator-readable readiness states without promoting, approving, or
+writing anything into canonical ledgers.
+
+### Added
+
+- Read-only promotion readiness classifier in
+  `backend/app/promotion_readiness.py`.
+- Candidate-level and claim-level readiness rollups for quarantined /
+  reviewed candidate rows.
+- New dashboard **Promotion Readiness** panel.
+- Missing source, blocked identifier, exact-text blocker, corrected
+  wording, and Tier III-only display.
+- Explicit dashboard lock language:
+  "Read-only promotion readiness", "Does not approve promotion",
+  "Does not write canonical ledgers", and "Promotion requires separate
+  operator-approved commit".
+- Safety handling for York/Eburacum review states: Claims 1–4 as
+  nearly ready for operator review, Claim 5 blocked on accession /
+  identifier verification, Claim 6 blocked on exact Latin / RIB /
+  object verification, Claim 7 ready only for corrected BGS wording
+  review, and Claim 8 as Tier III-only.
+- Safety handling for Gloucestershire/Egypt Tier III material and the
+  Gemini quarantine row so neither can become promotable from the
+  readiness engine.
+- New unit coverage for promotion readiness classification and
+  non-promotion guarantees.
+- New live smoke probes for the Promotion Readiness dashboard panel.
+
+### Safety Guarantees
+
+- No canonical writes.
+- No promotion actions.
+- No approve or promote buttons.
+- No canonical write endpoint.
+- No inference of `canonical_ingestion_allowed: true`.
+- No inference of `promotion_commit_allowed: true`.
+- Tier III claims never return a promotable readiness state.
+- Corrected wording remains draft-only.
+- Promotion still requires a separate operator-approved commit.
+- v0.5.0 Source Verification remains intact.
+
 ## v0.5.0 — Source Verification Engine
 
 Release date: 2026-06-13
