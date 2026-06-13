@@ -1552,12 +1552,14 @@ def create_app() -> FastAPI:
                 f"<li>blocked_count: <strong>{escape(str(candidate['blocked_count']))}</strong></li>"
                 f"<li>Tier III-only count: <strong>{escape(str(candidate['tier_iii_only_count']))}</strong></li>"
                 f"<li>missing_source_count: <strong>{escape(str(candidate['missing_source_count']))}</strong></li>"
+                f"<li>corrected_wording_count: <strong>{escape(str(candidate['corrected_wording_count']))}</strong></li>"
                 f"<li>canonical_promotion_locked: <code>{escape(str(candidate['canonical_promotion_locked']).lower())}</code></li>"
                 + "".join(
                     "<li>"
                     f"Claim {escape(str(claim['claim_number'] or 'n/a'))}: "
                     f"<code>{escape(claim['readiness'])}</code>"
                     f" — {escape(claim['recommendation'])}"
+                    f" corrected_wording_available: <code>{escape(str(claim['corrected_wording_available']).lower())}</code>"
                     + (
                         "<ul>"
                         + "".join(

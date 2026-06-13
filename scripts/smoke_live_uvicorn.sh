@@ -200,6 +200,10 @@ probe_get_body "dashboard_promotion_readiness_yorym" "/dashboard" 200 "YORYM : 1
 probe_get_body "dashboard_promotion_readiness_tier_iii" "/dashboard" 200 "Tier III-only"
 probe_get_body "dashboard_promotion_readiness_no_approve" "/dashboard" 200 "Does not approve promotion"
 probe_get_body "dashboard_promotion_readiness_no_write" "/dashboard" 200 "Does not write canonical ledgers"
+probe_get_body "dashboard_promotion_readiness_lock" "/dashboard" 200 "canonical_promotion_locked"
+probe_get_body "dashboard_promotion_readiness_blocked_identifier" "/dashboard" 200 "blocked_unverified_identifier"
+probe_get_body "dashboard_promotion_readiness_corrected" "/dashboard" 200 "ready_for_corrected_wording_review"
+probe_get_body "dashboard_promotion_readiness_no_action" "/dashboard" 200 "Promotion requires separate operator-approved commit"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,

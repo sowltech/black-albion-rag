@@ -229,7 +229,21 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("YORYM : 1996.115", body)
                 self.assertIn("exact Latin / RIB", body)
                 self.assertIn("Tier III-only", body)
+                self.assertIn("canonical_promotion_locked", body)
+                self.assertIn("corrected_wording_count", body)
+                self.assertIn("corrected_wording_available", body)
+                self.assertIn("ready_for_corrected_wording_review", body)
                 self.assertIn("separate operator-approved commit", body)
+                for forbidden in (
+                    ">Approve<",
+                    ">Promote<",
+                    'action="/approve',
+                    'action="/promote',
+                    'name="approve"',
+                    'name="promote"',
+                    "promote_now",
+                ):
+                    self.assertNotIn(forbidden, body)
             finally:
                 os.environ.pop("BLACK_ALBION_DATA_DIR", None)
 
@@ -268,6 +282,7 @@ class HealthTests(unittest.TestCase):
             "ready_for_corrected_wording_review",
             by_number[7]["readiness"],
         )
+        self.assertTrue(by_number[7]["corrected_wording_available"])
         self.assertEqual("tier_iii_only", by_number[8]["readiness"])
         self.assertFalse(by_number[8]["canonical_ingestion_allowed"])
         self.assertFalse(by_number[8]["promotion_commit_allowed"])
@@ -305,6 +320,59 @@ class HealthTests(unittest.TestCase):
                 self.assertFalse(claim["promotion_commit_allowed"])
                 if claim["tier_iii_containment"]:
                     self.assertEqual("tier_iii_only", claim["readiness"])
+
+    def test_promotion_readiness_negative_safety_rules(self) -> None:
+        from backend.app.promotion_readiness import classify_claim_readiness
+
+        defaulted = classify_claim_readiness(
+            {
+                "candidate_claim_id": "cand_claim_safety_001",
+                "claim_text": "Generic sourced claim.",
+                "source_status": "partial_sources_attached",
+            }
+        )
+        self.assertFalse(defaulted["canonical_ingestion_allowed"])
+        self.assertFalse(defaulted["promotion_commit_allowed"])
+
+        tier_iii = classify_claim_readiness(
+            {
+                "candidate_claim_id": "cand_claim_safety_008",
+                "claim_text": "Tier III symbolic lens.",
+                "tier_candidate": "III",
+                "source_status": "speculative_lens_only",
+                "promotion_readiness": "nearly_ready",
+            }
+        )
+        self.assertEqual("tier_iii_only", tier_iii["readiness"])
+
+        blocked_with_wording = classify_claim_readiness(
+            {
+                "candidate_claim_id": "cand_claim_safety_005",
+                "claim_text": "YORYM : 1996.115 accession identifier.",
+                "source_status": "partial_sources_attached",
+                "promotion_readiness": "not_ready",
+                "accession_identifier_status": "unverified",
+            },
+            worksheet_text=(
+                "### Claim 5 — Accession\n"
+                "- **corrected_claim_text**: draft only\n"
+            ),
+        )
+        self.assertEqual(
+            "blocked_unverified_identifier",
+            blocked_with_wording["readiness"],
+        )
+        self.assertTrue(blocked_with_wording["corrected_wording_available"])
+
+        for result in (defaulted, tier_iii, blocked_with_wording):
+            self.assertNotIn(
+                result["readiness"],
+                {
+                    "promote_now",
+                    "approved_for_promotion",
+                    "ready_for_canonical_promotion",
+                },
+            )
 
     def test_classify_source_london_gazette_url_is_primary(self) -> None:
         from backend.app.source_verification import classify_source_strength

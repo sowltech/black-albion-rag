@@ -31,6 +31,17 @@ writing anything into canonical ledgers.
 - New unit coverage for promotion readiness classification and
   non-promotion guarantees.
 - New live smoke probes for the Promotion Readiness dashboard panel.
+- Safety hardening for blocked claims with draft corrected wording:
+  corrected wording can be surfaced for review, but cannot make a
+  blocked claim promotable.
+- Negative no-promotion tests proving there is no direct "promote now"
+  readiness state and no dashboard approve/promote form action.
+- Dashboard lock-language hardening for canonical promotion lock,
+  corrected wording availability, blocked identifiers, and Tier
+  III-only containment.
+- Canonical ledger non-mutation guarantee remains enforced; the
+  Promotion Readiness Engine reads candidate metadata and supplemental
+  review text only.
 
 ### Safety Guarantees
 
