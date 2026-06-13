@@ -27,14 +27,36 @@
 - Local validation wrapper.
 - GitHub Actions governance validation.
 - GitHub Actions live runtime smoke test.
+- Released `v0.7.0 — Operator Decision Packet Engine`.
+- Read-only dashboard governance with source verification, promotion
+  readiness, and operator decision packet panels.
+- Canonical ledgers protected at sites 8 / claims 90 / modules 14 / sources
+  71.
+
+Current quality state after `v0.7.0`:
+
+- CI green: Enterprise GPT OS Validation and Live Uvicorn Smoke.
+- Canonical ledgers unchanged from the protected v0.7 baseline.
+- No automatic promotion.
+- No dashboard write actions.
+- No approve/promote buttons.
+- No canonical write endpoints.
+- Tier III containment enforced.
+- Strongest safety guarantee: candidate material can be reviewed, scored,
+  classified, and labelled without becoming canonical data.
+- Next recommended release direction: package the operator review flow into a
+  clearer release / GitHub Release artifact, then plan any future promotion
+  mechanism as a separate, approval-gated design rather than a dashboard action.
 
 ## Top 5 Strongest Repos
 
 1. `black-albion-rag`
    - Status: COMPLETE / WORKING.
    - Why it matters: Current reference implementation for governed, tested,
-     documented, CI-enforced repo quality.
-   - Recommended next action: Protect, keep clean, and tag `v0.2`.
+     documented, CI-enforced repo quality with a read-only candidate review
+     and operator decision pipeline.
+   - Recommended next action: Protect, keep clean, and prepare any post-v0.7
+     work on a branch with the full validation gate.
 
 2. `sowltech-shinobi-orca`
    - Status: MOSTLY WORKING.
@@ -100,7 +122,7 @@
 
 | Status | Repo | Path | Branch | Sync | Tests | CI | Docs | Smoke | Stack | Next Action |
 |---|---|---|---|---|---|---|---|---|---|---|
-| COMPLETE / WORKING | black-albion-rag | `/Users/siriusnexus/Documents/Sirius Nexus/black-albion-rag` | main | synced | pass recently | pass | README + CHANGELOG | yes | Python/FastAPI | Protect/tag v0.2 |
+| COMPLETE / WORKING | black-albion-rag | `/Users/siriusnexus/Documents/Sirius Nexus/black-albion-rag` | main | synced | pass recently | pass | README + CHANGELOG | yes | Python/FastAPI | Protect v0.7 baseline |
 | MOSTLY WORKING | assetsourced | `/Users/siriusnexus/assetsourced` | main | synced | exists | yes | README | yes | Python | Run tests, add changelog |
 | MOSTLY WORKING | gcde-repo-v1 | `/Users/siriusnexus/gcde-repo-v1` | main | synced | exists | yes | README | unclear | Python | Run tests, add release notes |
 | MOSTLY WORKING | loopguard-engine | `/Users/siriusnexus/loopguard-engine` | main | synced | exists | yes | README | unclear | Python | Run tests, add changelog |
@@ -197,7 +219,7 @@ A repo graduates to COMPLETE / WORKING only when it has:
 
 ## Next 3 Actions
 
-1. Protect and tag `black-albion-rag` v0.2.
+1. Protect the `black-albion-rag` v0.7 baseline.
 2. Clean dirty repos: `Sirius Nexus`, `OMNI-CORE`, `stepc-purchasegate`, and
    archived voice agent.
 3. Pick 3 mostly-working repos and graduate them to Black Albion standard.
