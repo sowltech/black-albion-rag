@@ -1,6 +1,8 @@
 # Changelog
 
-## Unreleased — v0.6.0 Promotion Readiness Engine
+## v0.6.0 — Promotion Readiness Engine
+
+Release date: 2026-06-13
 
 v0.6.0 adds a deterministic, read-only Promotion Readiness Engine for
 candidate claim review. It classifies candidate claims into

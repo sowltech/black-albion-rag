@@ -104,7 +104,7 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("v0.3.0-planned", body)
                 self.assertIn("Latest release", body)
                 self.assertIn(
-                    "Unreleased — v0.6.0 Promotion Readiness Engine",
+                    "v0.6.0 — Promotion Readiness Engine",
                     body,
                 )
                 self.assertIn(
