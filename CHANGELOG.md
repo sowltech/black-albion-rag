@@ -107,6 +107,46 @@ ledgers.
   `dashboard_source_strength_intro`,
   `dashboard_source_strength_primary`,
   `dashboard_source_strength_correction`.
+- Added quarantined York/Eburacum intake record
+  `cand_york_eburacum_059` for the Ivory Bangle Lady / Sycamore
+  Terrace / Vale of York geology candidate.
+- Added York/Eburacum raw intake artifact:
+  `research/intake/york_eburacum_ivory_bangle_raw.md`.
+- Added York/Eburacum intake review note:
+  `research/intake/york_eburacum_ivory_bangle_review.md`.
+- Added York/Eburacum source review worksheet:
+  `research/intake/york_eburacum_ivory_bangle_source_review.md`.
+- Added York/Eburacum operator review packet:
+  `research/intake/york_eburacum_ivory_bangle_operator_packet.md`.
+- Attached source-review notes for York/Eburacum Claims 1-7 without
+  promoting any candidate material into canonical ledgers:
+  - Claim 1: Sycamore Terrace / Roman York burial source attachment.
+  - Claim 2: ivory bracelets / high-status grave goods source attachment.
+  - Claim 3: isotope testing / strontium / oxygen evidence source
+    attachment.
+  - Claim 4: African or North African ancestry / origin interpretation
+    documented with careful wording and no overstatement of exact
+    birthplace, ethnicity, or modern race category.
+  - Claim 5: accession verification attempted; `YORYM : 1996.115`
+    remains unverified and blocked.
+  - Claim 6: "Vivas in Deo" / inscription / bone mount has partial
+    support for the English rendering and broad object context; exact
+    Latin / RIB / accession evidence remains unresolved and blocked.
+  - Claim 7: BGS-supported geology wording added; unsupported hydrology,
+    aquifer, basin, and fault phrases remain blocked.
+- Added explicit York/Eburacum Tier III containment:
+  - Claim 8 remains `speculative_lens_only`.
+  - `canonical_data_allowed: false`.
+  - `tier_i_promotion_allowed: false`.
+  - `promotion_path: none`.
+  - Amenta / jet-ivory capacitor / fluvial siphon loop /
+    counter-intelligence / `system_lock` vocabulary remains
+    non-canonical interpretive material only.
+- Candidate queue now includes `cand_gemini_share_002`,
+  `cand_gloucestershire_egypt_058`, and `cand_york_eburacum_059`.
+- Approval Queue, Promotion Blockers, Approval Evidence Links,
+  Canonical Ledger Integrity, and System Checks panels remain intact
+  alongside the v0.5.0 Source Verification panels.
 
 ### Verified
 
@@ -119,12 +159,30 @@ ledgers.
   `speculative_only_count >= 1` (Claim 6 Tier III lens). The row
   remains `canonical_ingestion_allowed: false` and
   `promotion_commit_allowed: false`.
+- `cand_york_eburacum_059` is held at the operator review gate with
+  `canonical_ingestion_allowed: false`,
+  `promotion_commit_allowed: false`, and an operator packet prepared.
+- York/Eburacum Claims 1-4 are `partial_sources_attached` and
+  `nearly_ready` for careful operator review only.
+- York/Eburacum Claim 5 remains blocked on direct accession / archive
+  verification for `YORYM : 1996.115`.
+- York/Eburacum Claim 6 remains blocked on exact Latin / RIB /
+  accession verification while preserving partial support for the
+  English inscription rendering and broad bone-mount context.
+- York/Eburacum Claim 7 is nearly ready only for corrected
+  BGS-supported geology wording; unsupported hydrology / fault
+  phrases remain blocked.
+- York/Eburacum Claim 8 remains Tier III speculative-only with no
+  Tier I promotion path.
 - Canonical ledgers unchanged (sites 8 / claims 90 / modules 14 /
   sources 71).
-- `bash scripts/smoke_live_uvicorn.sh` 43 probes pass.
-- `bash scripts/validate_enterprise_gpt_os.sh` PASS.
-- `python3 -m pytest -q` 73 passed (+11 new source-verification tests).
-- `python3 -m compileall -q backend` exit 0.
+- No canonical ledger promotion occurred.
+- `python3 -m json.tool data/raw/black_albion_candidate_claims.json`
+  passed.
+- `bash scripts/smoke_live_uvicorn.sh` passed.
+- `bash scripts/validate_enterprise_gpt_os.sh` passed.
+- `python3 -m pytest -q` 78 passed.
+- `python3 -m compileall -q backend` passed.
 - `git diff --check` / `git diff --cached --check` clean.
 - Secret-pattern scan clean.
 
