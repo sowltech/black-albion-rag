@@ -22,6 +22,14 @@ ledgers.
   approval.
 - Smoke probes and tests for operator decision packet visibility and
   no-promotion guarantees.
+- Decision safety hardening for explicit claim-level locks, so a
+  claim-level `false` cannot be overridden by broader candidate
+  metadata.
+- Negative no-execution tests for Tier III containment, missing source
+  claims, corrected wording review, rejected original phrasing, and
+  zero current `ready_for_separate_promotion_commit` claims.
+- Dashboard lock-language hardening for canonical promotion lock,
+  required approval, and zero-count promotion-ready state.
 
 ### Safety Guarantees
 
@@ -35,6 +43,8 @@ ledgers.
   operator approval metadata, and still requires a separate
   operator-approved commit.
 - Tier III always maps to `tier_iii_only` and remains non-promotable.
+- Canonical ledger non-mutation remains guaranteed; the decision engine
+  reads readiness metadata and never writes canonical data.
 
 ## v0.6.0 — Promotion Readiness Engine
 

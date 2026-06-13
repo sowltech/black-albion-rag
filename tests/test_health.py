@@ -246,6 +246,12 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("approve_for_corrected_wording_review", body)
                 self.assertIn("needs_more_source_work", body)
                 self.assertIn("tier_iii_only", body)
+                self.assertIn(
+                    "ready_for_separate_promotion_commit: <strong>0</strong>",
+                    body,
+                )
+                self.assertIn("canonical_promotion_locked", body)
+                self.assertIn("required approval", body)
                 for forbidden in (
                     ">Approve<",
                     ">Promote<",
@@ -453,6 +459,10 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("corrected_wording_available", claim)
                 self.assertIn("required_approval", claim)
                 self.assertFalse(claim["canonical_promotion_allowed"])
+                self.assertNotEqual(
+                    "ready_for_separate_promotion_commit",
+                    claim["decision_label"],
+                )
 
     def test_operator_decision_promotion_label_requires_explicit_metadata(self) -> None:
         from backend.app.operator_decisions import classify_operator_decision
@@ -488,6 +498,115 @@ class HealthTests(unittest.TestCase):
         )
         self.assertTrue(explicitly_approved["future_promotion_path_possible"])
         self.assertTrue(explicitly_approved["canonical_promotion_allowed"])
+
+    def test_operator_decision_negative_safety_boundaries(self) -> None:
+        from backend.app.operator_decisions import classify_operator_decision
+
+        candidate_unlocked = {
+            "canonical_ingestion_allowed": True,
+            "promotion_commit_allowed": True,
+            "operator_approved": True,
+        }
+
+        claim_explicitly_locked = classify_operator_decision(
+            {
+                "claim_id": "claim_locked_override",
+                "claim_number": 1,
+                "readiness": "nearly_ready_for_operator_review",
+                "canonical_ingestion_allowed": False,
+                "promotion_commit_allowed": False,
+            },
+            candidate_unlocked,
+        )
+        self.assertEqual(
+            "approve_for_corrected_wording_review",
+            claim_explicitly_locked["decision_label"],
+        )
+        self.assertFalse(claim_explicitly_locked["canonical_promotion_allowed"])
+        self.assertFalse(
+            claim_explicitly_locked["future_promotion_path_possible"]
+        )
+
+        tier_iii_even_with_bad_metadata = classify_operator_decision(
+            {
+                "claim_id": "claim_tier_iii_bad_metadata",
+                "claim_number": 8,
+                "readiness": "tier_iii_only",
+                "tier_iii_containment": True,
+                "canonical_ingestion_allowed": True,
+                "promotion_commit_allowed": True,
+                "operator_approved": True,
+            }
+        )
+        self.assertEqual(
+            "tier_iii_only",
+            tier_iii_even_with_bad_metadata["decision_label"],
+        )
+        self.assertFalse(
+            tier_iii_even_with_bad_metadata["canonical_promotion_allowed"]
+        )
+        self.assertFalse(
+            tier_iii_even_with_bad_metadata["future_promotion_path_possible"]
+        )
+
+        blocked_with_corrected_wording = classify_operator_decision(
+            {
+                "claim_id": "claim_blocked_with_wording",
+                "claim_number": 5,
+                "readiness": "blocked_unverified_identifier",
+                "corrected_wording_available": True,
+                "canonical_ingestion_allowed": True,
+                "promotion_commit_allowed": True,
+                "operator_approved": True,
+            }
+        )
+        self.assertEqual(
+            "needs_more_source_work",
+            blocked_with_corrected_wording["decision_label"],
+        )
+        self.assertTrue(
+            blocked_with_corrected_wording["corrected_wording_available"]
+        )
+        self.assertFalse(
+            blocked_with_corrected_wording["canonical_promotion_allowed"]
+        )
+
+        missing_sources = classify_operator_decision(
+            {
+                "claim_id": "claim_missing_sources",
+                "claim_number": 2,
+                "readiness": "blocked_missing_sources",
+                "missing_sources": ["institutional object record"],
+            }
+        )
+        self.assertEqual(
+            "needs_more_source_work",
+            missing_sources["decision_label"],
+        )
+        self.assertIn(
+            "institutional object record",
+            missing_sources["source_gaps"],
+        )
+
+        rejected_original = classify_operator_decision(
+            {
+                "claim_id": "claim_rejected_original",
+                "claim_number": 3,
+                "readiness": "ready_for_corrected_wording_review",
+                "recommendation": "do_not_promote unsupported original phrasing",
+            }
+        )
+        self.assertEqual("do_not_promote", rejected_original["decision_label"])
+
+        for result in (
+            claim_explicitly_locked,
+            tier_iii_even_with_bad_metadata,
+            blocked_with_corrected_wording,
+            missing_sources,
+            rejected_original,
+        ):
+            self.assertTrue(result["decision_is_recommendation_only"])
+            self.assertFalse(result["executed"])
 
     def test_classify_source_london_gazette_url_is_primary(self) -> None:
         from backend.app.source_verification import classify_source_strength

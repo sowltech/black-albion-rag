@@ -51,18 +51,34 @@ def _explicit_operator_approval(claim: Dict[str, Any], candidate: Optional[Dict[
     )
 
 
+def _metadata_bool(
+    claim: Dict[str, Any],
+    candidate: Optional[Dict[str, Any]],
+    key: str,
+) -> bool:
+    """Read a safety flag without letting candidate metadata override a claim.
+
+    Candidate-level flags are useful defaults, but a claim-level false value is
+    more specific and must keep that individual claim locked.
+    """
+    if key in claim:
+        return _truthy(claim.get(key))
+    return _truthy((candidate or {}).get(key))
+
+
 def _canonical_and_commit_allowed(
     claim: Dict[str, Any],
     candidate: Optional[Dict[str, Any]],
 ) -> bool:
-    candidate = candidate or {}
-    canonical_allowed = _truthy(
-        claim.get("canonical_ingestion_allowed")
-        or candidate.get("canonical_ingestion_allowed")
+    canonical_allowed = _metadata_bool(
+        claim,
+        candidate,
+        "canonical_ingestion_allowed",
     )
-    commit_allowed = _truthy(
-        claim.get("promotion_commit_allowed")
-        or candidate.get("promotion_commit_allowed")
+    commit_allowed = _metadata_bool(
+        claim,
+        candidate,
+        "promotion_commit_allowed",
     )
     return canonical_allowed and commit_allowed
 
@@ -112,8 +128,6 @@ def classify_operator_decision(
 
     if claim_readiness.get("tier_iii_containment") or readiness == "tier_iii_only":
         label = "tier_iii_only"
-    elif explicit_promotion_ready:
-        label = "ready_for_separate_promotion_commit"
     elif any(term in local_text for term in ("do_not_promote", "do not promote", "rejected original")):
         label = "do_not_promote"
     elif readiness in {
@@ -124,6 +138,8 @@ def classify_operator_decision(
         "unknown",
     }:
         label = "needs_more_source_work"
+    elif explicit_promotion_ready:
+        label = "ready_for_separate_promotion_commit"
     elif readiness in {
         "ready_for_corrected_wording_review",
         "nearly_ready_for_operator_review",

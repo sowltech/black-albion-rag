@@ -214,6 +214,9 @@ probe_get_body "dashboard_operator_decision_york" "/dashboard" 200 "cand_york_eb
 probe_get_body "dashboard_operator_decision_corrected" "/dashboard" 200 "approve_for_corrected_wording_review"
 probe_get_body "dashboard_operator_decision_more_sources" "/dashboard" 200 "needs_more_source_work"
 probe_get_body "dashboard_operator_decision_tier_iii" "/dashboard" 200 "tier_iii_only"
+probe_get_body "dashboard_operator_decision_no_ready_promotion" "/dashboard" 200 "ready_for_separate_promotion_commit: <strong>0</strong>"
+probe_get_body "dashboard_operator_decision_canonical_lock" "/dashboard" 200 "canonical_promotion_locked"
+probe_get_body "dashboard_operator_decision_required_approval" "/dashboard" 200 "required approval"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,
