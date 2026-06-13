@@ -779,6 +779,192 @@ circumstance.
   wording must stay in the Tier III block (see Claim 8) and must
   not leak into a Tier I geology statement.
 
+#### Claim 7 — Source attachment pass (2026-06-13)
+
+- **source_attachments**:
+  - **British Geological Survey — Earthwise: Geological history of
+    Yorkshire**
+    (<https://earthwise.bgs.ac.uk/index.php/Geological_history_of_Yorkshire>).
+    Institutional source. Verbatim phrasing: soft Triassic sandstones,
+    marls and evaporites are "rarely seen at outcrop, forming low
+    ground largely mantled by glacial deposits in the Vales of
+    Mowbray and York." Confirms the Triassic sequence as "fluvial
+    sandstones" (Sherwood Sandstone) overlain by "dolomitic and
+    silty mudstones (often red) and evaporites (principally halite)
+    of the Mercia Mudstone." Confirms "Glacial and glaciofluvial
+    sediments ... cover ... the lowlands of the Vale of York" with
+    "complex associations of till, sand and gravel, and laminated
+    lake clays."
+  - **British Geological Survey — Earthwise: OR/15/064 Cross
+    section interpretation**
+    (<https://earthwise.bgs.ac.uk/index.php/OR/15/064_Cross_section_interpretation>).
+    Institutional source. Confirms that "Equivalent clay-dominated
+    lacustrine deposits in the Vale of York contain saturated silty
+    sand horizons up to 2.5 m in thickness" and itemises the named
+    superficial deposits in the Vale of York group (till; sand and
+    gravel including delta / fan and marginal deposits; lacustrine
+    clay, silt and fine / coarse facies; alluvium with local organic
+    deposits and peat bodies; possible blown sand).
+  - **British Geological Survey — Sherwood Sandstone Group page**
+    (<https://www.bgs.ac.uk/geology-projects/engineering-geology-maps/engineering-geological-studies-of-bedrock-formations/sherwood-sandstone-group/>).
+    Institutional source for the Sherwood Sandstone Group as the
+    named Triassic bedrock unit beneath the Vale of York. Confirms
+    Sherwood Sandstone is "mostly obscured by thick deposits of
+    Quaternary glacial sediments in the low ground of the Vale of
+    York."
+  - **British Geological Survey — Geological indicators of flooding
+    dataset page**
+    (<https://www.bgs.ac.uk/datasets/geological-indicators-of-flooding/>).
+    Institutional source for the alluvium / river terrace /
+    floodplain framing along the River Ouse and River Foss as
+    drainage features of the Vale of York.
+  - **City of York Council — Strategic Flood Risk Assessment**
+    (<https://www.york.gov.uk/downloads/file/10035/sfra-revision-e-august-2022>).
+    Local-authority institutional source attached as a candidate
+    primary-source pointer for the Ouse / Foss floodplain context;
+    direct text extraction failed in this pass (the WebFetch
+    returned a corrupted PDF body), so the page must be re-fetched
+    before any verbatim quotation in a canonical ledger.
+  - **Wikipedia — Vale of York**
+    (<https://en.wikipedia.org/wiki/Vale_of_York>). Orientation
+    only, used to cross-check that the vale is "bounded by the
+    Howardian Hills and Yorkshire Wolds to the east and the
+    Pennines to the west" — a **topographic** boundary, not a
+    fault. No primary citation of a "Howardian Hills Fault" or a
+    "Vale of York Fault Flexure" was found.
+- **source_quality**: three institutional BGS-attached sources
+  cover the bedrock (Sherwood Sandstone Group, Mercia Mudstone
+  Group), the Quaternary superficials (till, sand and gravel,
+  glaciolacustrine clay, alluvium, river terrace deposits), and
+  the drainage framing (Ouse and Foss as named Vale of York
+  rivers, flood-indicator deposits). One local-authority source
+  (City of York Council SFRA) attached as a candidate pointer for
+  the Ouse / Foss floodplain. Wikipedia attached as orientation
+  only.
+- **citation_notes**:
+  - Cite the BGS Earthwise Yorkshire geological history page for
+    the named bedrock units (Sherwood Sandstone Group, Mercia
+    Mudstone Group, "fluvial sandstones") beneath the Vale of
+    York.
+  - Cite the BGS Earthwise OR/15/064 cross-section page for the
+    superficial-deposits inventory (till, sand and gravel,
+    glaciolacustrine clay, alluvium with peat bodies, possible
+    blown sand) and the saturated silty sand horizons up to 2.5 m
+    in the lacustrine clays.
+  - Cite the BGS Sherwood Sandstone Group page for the bedrock
+    formation name and for the statement that the Sherwood
+    Sandstone is "mostly obscured by thick deposits of Quaternary
+    glacial sediments in the low ground of the Vale of York."
+  - Cite the BGS "Geological indicators of flooding" dataset for
+    the alluvium / river terrace / floodplain framing.
+  - Cite the City of York Council SFRA for the Ouse / Foss
+    floodplain context **after a successful direct fetch**; do
+    not quote verbatim until that fetch lands a parseable body.
+  - **Do not** cite Wikipedia as primary; use it only for
+    orientation against the BGS-attached sources.
+- **geology_status**: **partially_supported**.
+  - **Supported:** Triassic Sherwood Sandstone Group as bedrock
+    beneath the Vale of York; Mercia Mudstone Group overlying;
+    Quaternary glacial / glaciofluvial cover dominated by till,
+    sand and gravel, and laminated lacustrine clays; recessional
+    and terminal moraines associated with the Devensian.
+  - **Not supported:** "Vale of York Fault Flexures",
+    "Howardian Hills Fault Margin" — no named fault was found in
+    BGS Earthwise's Vale of York coverage; the Howardian Hills
+    are a **topographic** boundary, not (per the surfaced
+    sources) a named fault feature. These two phrasings must be
+    dropped before any Tier I promotion.
+  - **Loaded but reframable:** "Triassic sandstone basement"
+    should be rendered as "Triassic Sherwood Sandstone Group
+    bedrock" to match the BGS naming.
+- **hydrology_status**: **partially_supported**.
+  - **Supported:** River Ouse and River Foss as named Vale of
+    York rivers; alluvium consisting of clay, silt and sand
+    deposited by these rivers; river terrace / floodplain
+    deposits along their courses.
+  - **Not supported:** "Ouse-Foss fluvial siphon loop" — the
+    "siphon loop" phrase is Tier III speculative-lens vocabulary
+    and was not found in any institutional hydrology source. It
+    must be dropped before any Tier I promotion and must stay
+    inside the Claim 8 Tier III block.
+  - **Not yet attached:** an Environment Agency or City of York
+    Council hydrogeology citation for the "subsurface aquifer
+    saturated clays" framing; lacustrine clays in the Vale of
+    York are institutionally attested but their aquifer status
+    is a separate hydrogeology claim that needs its own source.
+- **unsupported_terms** (must not enter Tier I):
+  - "Vale of York Fault Flexures"
+  - "Howardian Hills Fault Margin"
+  - "Ouse-Foss fluvial siphon loop"
+  - "Vale of York Basin" (the institutional naming is "Vale of
+    York" — a lowland / vale — not "basin"; if a basin-form is
+    needed it must be sourced directly from BGS)
+  - "subsurface aquifer saturated clays" (until a hydrogeology
+    source is attached the aquifer framing must be dropped; the
+    clays themselves are supported as glaciolacustrine deposits)
+- **correction_notes**:
+  - The pasted geology framing mixes institutional Quaternary
+    geology with Tier III speculative-lens vocabulary
+    ("fault flexure", "siphon loop"). All speculative-lens
+    wording must be moved into the Claim 8 Tier III block and
+    replaced with plain BGS-supported phrasing.
+  - The bedrock framing must use the institutional formation
+    names: **Sherwood Sandstone Group** (Triassic, fluvial
+    sandstones with floodplain mudstones / siltstones) and the
+    overlying **Mercia Mudstone Group**.
+  - The superficial framing must use the institutional deposit
+    names: **alluvium**, **river terrace deposits**, **glacial
+    till**, **glacial outwash sand and gravel**, **laminated /
+    glaciolacustrine clay**.
+- **original_claim_status**: requires_correction
+- **corrected_claim_text** (draft only; not promoted; for
+  operator review only — uses the operator-suggested safer
+  wording adjusted to match the BGS naming attached above):
+  > "York sits within the Vale of York lowland, close to the
+  > River Ouse and River Foss, on Triassic Sherwood Sandstone
+  > Group bedrock overlain by Mercia Mudstone Group, both
+  > 'mostly obscured by thick deposits of Quaternary glacial
+  > sediments in the low ground of the Vale of York' (BGS
+  > Sherwood Sandstone Group page). The local superficial
+  > deposits include alluvium, river terrace deposits, and
+  > glacially influenced sands, gravels, tills and laminated
+  > lacustrine clays, per the BGS Earthwise Vale of York
+  > geological history and OR/15/064 cross-section
+  > interpretation. There is no institutional source attached
+  > here for a named 'Vale of York Fault Flexure' or 'Howardian
+  > Hills Fault Margin' — those phrasings must be dropped — and
+  > the 'Ouse-Foss fluvial siphon loop' framing is Tier III
+  > speculative lens material that must remain inside Claim 8."
+- **remaining_gaps**:
+  - Local-authority hydrology source for the Ouse / Foss
+    floodplain has been **pointed at** (City of York Council
+    SFRA) but the direct WebFetch returned a corrupted PDF body
+    in this pass; the page must be re-fetched before verbatim
+    quotation.
+  - Environment Agency aquifer / hydrogeology citation for any
+    "saturated clays" / "aquifer" claim has not been attached.
+  - Named BGS published memoir + sheet number (e.g. Sheet 63
+    York or the modern equivalent) has not been attached in this
+    pass; Earthwise pages are institutional but a published
+    memoir reference would tighten the case.
+  - York Archaeology / York Archaeological Trust geology
+    appendix from a Roman-cemetery publication has not been
+    attached.
+- **promotion_readiness**: **nearly_ready** for the bedrock +
+  Quaternary superficials framing using the BGS-attached naming
+  (Sherwood Sandstone Group, Mercia Mudstone Group, till, sand
+  and gravel, glaciolacustrine clay, alluvium, river terrace
+  deposits). **not_ready** for any statement that relies on
+  "Vale of York Fault Flexures", "Howardian Hills Fault Margin",
+  "Ouse-Foss fluvial siphon loop", "Vale of York Basin" naming,
+  or aquifer / hydrogeology framing until further institutional
+  sources are attached.
+- **notes_on_claim_7_attachment**: Claim 7 stays Tier I-candidate
+  only; promotion blocked until the operator reviews the
+  `corrected_claim_text` above and either accepts the BGS-supported
+  reframing or refines it. Tier III "siphon loop" language remains
+  contained in the Claim 8 block.
+
 ---
 
 ### Claim 8 — Tier III speculative lens (containment)
