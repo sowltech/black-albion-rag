@@ -104,8 +104,12 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("v0.3.0-planned", body)
                 self.assertIn("Latest release", body)
                 self.assertIn(
-                    "v0.6.0 — Promotion Readiness Engine",
+                    "Unreleased — v0.7.0 Operator Decision Packet Engine",
                     body,
+                )
+                self.assertIn(
+                    "v0.6.0 — Promotion Readiness Engine",
+                    (PROJECT_ROOT / "CHANGELOG.md").read_text(encoding="utf-8"),
                 )
                 self.assertIn(
                     "v0.5.0 — Source Verification Engine",
@@ -234,13 +238,26 @@ class HealthTests(unittest.TestCase):
                 self.assertIn("corrected_wording_available", body)
                 self.assertIn("ready_for_corrected_wording_review", body)
                 self.assertIn("separate operator-approved commit", body)
+                # v0.7.0 Operator Decision Packets panel
+                self.assertIn("Operator Decision Packets", body)
+                self.assertIn("Read-only operator decision packets", body)
+                self.assertIn("Does not approve decisions", body)
+                self.assertIn("Decision labels are recommendations only", body)
+                self.assertIn("approve_for_corrected_wording_review", body)
+                self.assertIn("needs_more_source_work", body)
+                self.assertIn("tier_iii_only", body)
                 for forbidden in (
                     ">Approve<",
                     ">Promote<",
+                    ">Edit<",
+                    ">Sign<",
                     'action="/approve',
                     'action="/promote',
+                    'action="/edit',
+                    'action="/sign',
                     'name="approve"',
                     'name="promote"',
+                    'name="signature"',
                     "promote_now",
                 ):
                     self.assertNotIn(forbidden, body)
@@ -373,6 +390,104 @@ class HealthTests(unittest.TestCase):
                     "ready_for_canonical_promotion",
                 },
             )
+
+    def test_operator_decision_packets_map_current_candidates_safely(self) -> None:
+        from backend.app.operator_decisions import summarize_operator_decision_queue
+        from backend.app.promotion_readiness import (
+            summarize_promotion_readiness_queue,
+        )
+
+        candidates = json.loads(
+            (PROJECT_ROOT / "data/raw/black_albion_candidate_claims.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        readiness = summarize_promotion_readiness_queue(candidates, PROJECT_ROOT)
+        decisions = summarize_operator_decision_queue(readiness)
+        by_candidate = {
+            item["candidate_id"]: item for item in decisions["candidates"]
+        }
+        york = by_candidate["cand_york_eburacum_059"]
+        york_claims = {claim["claim_number"]: claim for claim in york["claims"]}
+
+        for number in (1, 2, 3, 4):
+            self.assertEqual(
+                "approve_for_corrected_wording_review",
+                york_claims[number]["decision_label"],
+            )
+            self.assertFalse(york_claims[number]["future_promotion_path_possible"])
+
+        self.assertEqual(
+            "needs_more_source_work",
+            york_claims[5]["decision_label"],
+        )
+        self.assertEqual(
+            "needs_more_source_work",
+            york_claims[6]["decision_label"],
+        )
+        self.assertEqual(
+            "approve_for_corrected_wording_review",
+            york_claims[7]["decision_label"],
+        )
+        self.assertEqual("tier_iii_only", york_claims[8]["decision_label"])
+
+        glos = by_candidate["cand_gloucestershire_egypt_058"]
+        glos_claim_6 = next(
+            claim for claim in glos["claims"] if claim["claim_number"] == 6
+        )
+        self.assertEqual("tier_iii_only", glos_claim_6["decision_label"])
+
+        gemini = by_candidate["cand_gemini_share_002"]
+        self.assertEqual([], gemini["claims"])
+        self.assertFalse(gemini["has_future_promotion_candidates"])
+
+        self.assertEqual(0, decisions["total_ready_for_separate_promotion_commit"])
+        for candidate in decisions["candidates"]:
+            self.assertFalse(candidate["has_future_promotion_candidates"])
+            for claim in candidate["claims"]:
+                self.assertTrue(claim["decision_is_recommendation_only"])
+                self.assertFalse(claim["executed"])
+                self.assertIn("reason", claim)
+                self.assertIn("evidence_basis", claim)
+                self.assertIn("source_gaps", claim)
+                self.assertIn("corrected_wording_available", claim)
+                self.assertIn("required_approval", claim)
+                self.assertFalse(claim["canonical_promotion_allowed"])
+
+    def test_operator_decision_promotion_label_requires_explicit_metadata(self) -> None:
+        from backend.app.operator_decisions import classify_operator_decision
+
+        nearly_ready_without_approval = classify_operator_decision(
+            {
+                "claim_id": "claim_without_approval",
+                "claim_number": 1,
+                "readiness": "nearly_ready_for_operator_review",
+                "canonical_ingestion_allowed": True,
+                "promotion_commit_allowed": True,
+                "operator_approved": False,
+            }
+        )
+        self.assertEqual(
+            "approve_for_corrected_wording_review",
+            nearly_ready_without_approval["decision_label"],
+        )
+
+        explicitly_approved = classify_operator_decision(
+            {
+                "claim_id": "claim_with_approval",
+                "claim_number": 1,
+                "readiness": "nearly_ready_for_operator_review",
+                "canonical_ingestion_allowed": True,
+                "promotion_commit_allowed": True,
+                "operator_approved": True,
+            }
+        )
+        self.assertEqual(
+            "ready_for_separate_promotion_commit",
+            explicitly_approved["decision_label"],
+        )
+        self.assertTrue(explicitly_approved["future_promotion_path_possible"])
+        self.assertTrue(explicitly_approved["canonical_promotion_allowed"])
 
     def test_classify_source_london_gazette_url_is_primary(self) -> None:
         from backend.app.source_verification import classify_source_strength

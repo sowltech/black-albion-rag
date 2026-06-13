@@ -608,6 +608,17 @@ PROMOTION_READINESS_LOCK_STATEMENTS = (
     "Promotion requires separate operator-approved commit",
 )
 
+OPERATOR_DECISION_PACKETS_EMPTY_MESSAGE = (
+    "No operator decision packet records available."
+)
+OPERATOR_DECISION_PACKETS_LOCK_STATEMENTS = (
+    "Read-only operator decision packets",
+    "Does not approve decisions",
+    "Does not write canonical ledgers",
+    "Decision labels are recommendations only",
+    "Promotion requires separate operator-approved commit",
+)
+
 
 def _promotion_readiness_summary() -> Dict[str, Any]:
     """Return read-only promotion readiness for candidate claims."""
@@ -634,6 +645,30 @@ def _promotion_readiness_summary() -> Dict[str, Any]:
             ),
             "empty_message": PROMOTION_READINESS_EMPTY_MESSAGE,
             "lock_statements": list(PROMOTION_READINESS_LOCK_STATEMENTS),
+        }
+    )
+    return queue
+
+
+def _operator_decision_packets_summary(
+    promotion_readiness: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Return read-only operator decision packets from readiness output."""
+    from .operator_decisions import summarize_operator_decision_queue
+
+    queue = summarize_operator_decision_queue(promotion_readiness)
+    queue.update(
+        {
+            "title": "Operator Decision Packets",
+            "intro": "Read-only operator decision packets",
+            "no_approve_note": "Does not approve decisions",
+            "no_write_note": "Does not write canonical ledgers",
+            "recommendation_note": "Decision labels are recommendations only",
+            "separate_commit_note": (
+                "Promotion requires separate operator-approved commit"
+            ),
+            "empty_message": OPERATOR_DECISION_PACKETS_EMPTY_MESSAGE,
+            "lock_statements": list(OPERATOR_DECISION_PACKETS_LOCK_STATEMENTS),
         }
     )
     return queue
@@ -1179,6 +1214,9 @@ def create_app() -> FastAPI:
             per_claim_source_verification["items"],
         )
         promotion_readiness = _promotion_readiness_summary()
+        operator_decision_packets = _operator_decision_packets_summary(
+            promotion_readiness
+        )
         system_checks = _system_checks_summary()
         links = [
             ("/health", "Health"),
@@ -1592,6 +1630,64 @@ def create_app() -> FastAPI:
             promotion_readiness_items_html = (
                 f"<li>{promotion_readiness_empty_message}</li>"
             )
+        operator_decision_title = escape(operator_decision_packets["title"])
+        operator_decision_intro = escape(operator_decision_packets["intro"])
+        operator_decision_no_approve_note = escape(
+            operator_decision_packets["no_approve_note"]
+        )
+        operator_decision_no_write_note = escape(
+            operator_decision_packets["no_write_note"]
+        )
+        operator_decision_recommendation_note = escape(
+            operator_decision_packets["recommendation_note"]
+        )
+        operator_decision_separate_commit_note = escape(
+            operator_decision_packets["separate_commit_note"]
+        )
+        operator_decision_empty_message = escape(
+            operator_decision_packets["empty_message"]
+        )
+        operator_decision_label_counts_html = "\n".join(
+            f"<li>{escape(label)}: <strong>{escape(str(count))}</strong></li>"
+            for label, count in operator_decision_packets["label_counts"].items()
+        )
+        if operator_decision_packets["candidates"]:
+            operator_decision_items_html = "\n".join(
+                "<li>"
+                f"<strong>{escape(candidate['candidate_id'])}</strong>"
+                f" — review_status: <code>{escape(candidate['review_status'])}</code>"
+                "<ul>"
+                f"<li>operator_packet: <code>{escape(candidate['operator_packet']) or 'not detected'}</code></li>"
+                f"<li>total_claims: <strong>{escape(str(candidate['total_claims']))}</strong></li>"
+                f"<li>canonical_promotion_locked: <code>{escape(str(candidate['canonical_promotion_locked']).lower())}</code></li>"
+                f"<li>has_future_promotion_candidates: <code>{escape(str(candidate['has_future_promotion_candidates']).lower())}</code></li>"
+                + "".join(
+                    f"<li>{escape(label)}: <strong>{escape(str(count))}</strong></li>"
+                    for label, count in candidate["decision_label_counts"].items()
+                )
+                + "".join(
+                    "<li>"
+                    f"Claim {escape(str(claim['claim_number'] or 'n/a'))}: "
+                    f"<code>{escape(claim['decision_label'])}</code>"
+                    f" — {escape(claim['reason'])}"
+                    "<ul>"
+                    f"<li>readiness source: <code>{escape(claim['evidence_basis']['readiness'])}</code></li>"
+                    f"<li>missing sources: <strong>{escape(str(len(claim['source_gaps'])))}</strong></li>"
+                    f"<li>corrected_wording_available: <code>{escape(str(claim['corrected_wording_available']).lower())}</code></li>"
+                    f"<li>Tier III containment: <code>{escape(str(claim['tier_iii_containment']).lower())}</code></li>"
+                    f"<li>required approval: {escape(claim['required_approval'])}</li>"
+                    "</ul>"
+                    "</li>"
+                    for claim in candidate["claims"]
+                )
+                + "</ul>"
+                "</li>"
+                for candidate in operator_decision_packets["candidates"]
+            )
+        else:
+            operator_decision_items_html = (
+                f"<li>{operator_decision_empty_message}</li>"
+            )
         read_only_note = escape(str(source_intake["read_only_note"]))
         governance_ci_status = escape(system_checks["governance_ci"])
         governance_ci_path = escape(system_checks["governance_ci_path"])
@@ -1970,6 +2066,22 @@ def create_app() -> FastAPI:
         <h3>Candidate Readiness</h3>
         <ol>
           {promotion_readiness_items_html}
+        </ol>
+      </div>
+      <div class="panel">
+        <h2>{operator_decision_title}</h2>
+        <p><strong>{operator_decision_intro}</strong></p>
+        <p>{operator_decision_no_approve_note}.</p>
+        <p>{operator_decision_no_write_note}.</p>
+        <p>{operator_decision_recommendation_note}.</p>
+        <p>{operator_decision_separate_commit_note}.</p>
+        <h3>Decision Label Counts</h3>
+        <ul>
+          {operator_decision_label_counts_html}
+        </ul>
+        <h3>Candidate Decision Packets</h3>
+        <ol>
+          {operator_decision_items_html}
         </ol>
       </div>
       <div class="panel">

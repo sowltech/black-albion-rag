@@ -1,5 +1,41 @@
 # Changelog
 
+## Unreleased — v0.7.0 Operator Decision Packet Engine
+
+v0.7.0 adds a deterministic, read-only operator decision label layer on
+top of the v0.6 Promotion Readiness Engine. The layer recommends labels
+only; it does not approve, promote, sign, mutate, or write canonical
+ledgers.
+
+### Added
+
+- Read-only operator decision label engine in
+  `backend/app/operator_decisions.py`.
+- Canonical operator decision labels:
+  `approve_for_corrected_wording_review`, `needs_more_source_work`,
+  `do_not_promote`, `tier_iii_only`, and
+  `ready_for_separate_promotion_commit`.
+- Candidate-level and claim-level operator decision packet summaries.
+- New dashboard **Operator Decision Packets** panel.
+- Decision output including reason, evidence basis, source gaps,
+  corrected wording availability, Tier III containment, and required
+  approval.
+- Smoke probes and tests for operator decision packet visibility and
+  no-promotion guarantees.
+
+### Safety Guarantees
+
+- No automatic approval.
+- No canonical writes.
+- No promotion actions.
+- No approve/promote/edit/signature controls.
+- Decision labels are recommendations only.
+- `ready_for_separate_promotion_commit` is gated behind explicit
+  `canonical_ingestion_allowed`, `promotion_commit_allowed`, and
+  operator approval metadata, and still requires a separate
+  operator-approved commit.
+- Tier III always maps to `tier_iii_only` and remains non-promotable.
+
 ## v0.6.0 — Promotion Readiness Engine
 
 Release date: 2026-06-13

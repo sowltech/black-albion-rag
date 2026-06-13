@@ -154,7 +154,7 @@ probe_get  "export_claims" "/export/claims.json" 200
 probe_get  "search" "/search?q=Winchcombe" 200
 probe_get  "openapi" "/openapi.json" 200
 probe_get_body "dashboard" "/dashboard" 200 "Operator Dashboard"
-probe_get_body "dashboard_release" "/dashboard" 200 "v0.6.0 — Promotion Readiness Engine"
+probe_get_body "dashboard_release" "/dashboard" 200 "Unreleased — v0.7.0 Operator Decision Packet Engine"
 probe_get_body "dashboard_repo_estate" "/dashboard" 200 "Repo Estate"
 probe_get_body "dashboard_repo_gold" "/dashboard" 200 "black-albion-rag"
 probe_get_body "dashboard_source_intake" "/dashboard" 200 "Source / Intake Review"
@@ -204,6 +204,16 @@ probe_get_body "dashboard_promotion_readiness_lock" "/dashboard" 200 "canonical_
 probe_get_body "dashboard_promotion_readiness_blocked_identifier" "/dashboard" 200 "blocked_unverified_identifier"
 probe_get_body "dashboard_promotion_readiness_corrected" "/dashboard" 200 "ready_for_corrected_wording_review"
 probe_get_body "dashboard_promotion_readiness_no_action" "/dashboard" 200 "Promotion requires separate operator-approved commit"
+probe_get_body "dashboard_operator_decision_packets" "/dashboard" 200 "Operator Decision Packets"
+probe_get_body "dashboard_operator_decision_read_only" "/dashboard" 200 "Read-only operator decision packets"
+probe_get_body "dashboard_operator_decision_no_approve" "/dashboard" 200 "Does not approve decisions"
+probe_get_body "dashboard_operator_decision_no_write" "/dashboard" 200 "Does not write canonical ledgers"
+probe_get_body "dashboard_operator_decision_recommendations" "/dashboard" 200 "Decision labels are recommendations only"
+probe_get_body "dashboard_operator_decision_separate_commit" "/dashboard" 200 "Promotion requires separate operator-approved commit"
+probe_get_body "dashboard_operator_decision_york" "/dashboard" 200 "cand_york_eburacum_059"
+probe_get_body "dashboard_operator_decision_corrected" "/dashboard" 200 "approve_for_corrected_wording_review"
+probe_get_body "dashboard_operator_decision_more_sources" "/dashboard" 200 "needs_more_source_work"
+probe_get_body "dashboard_operator_decision_tier_iii" "/dashboard" 200 "tier_iii_only"
 probe_post "query" "/query" '{
     "question": "Why has the Winchcombe corridor remained important?",
     "k": 3,
