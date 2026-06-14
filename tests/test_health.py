@@ -608,6 +608,146 @@ class HealthTests(unittest.TestCase):
             self.assertTrue(result["decision_is_recommendation_only"])
             self.assertFalse(result["executed"])
 
+    def test_operator_packet_export_queue_is_read_only_and_complete(self) -> None:
+        from backend.app.operator_decisions import summarize_operator_decision_queue
+        from backend.app.operator_packet_exports import (
+            build_operator_packet_export_queue,
+            build_operator_packet_markdown,
+            build_operator_packet_markdown_queue,
+        )
+        from backend.app.promotion_readiness import (
+            summarize_promotion_readiness_queue,
+        )
+
+        candidates = json.loads(
+            (PROJECT_ROOT / "data/raw/black_albion_candidate_claims.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        readiness = summarize_promotion_readiness_queue(candidates, PROJECT_ROOT)
+        decisions = summarize_operator_decision_queue(readiness)
+        export_queue = build_operator_packet_export_queue(decisions)
+
+        self.assertEqual("0.8.0", export_queue["schema_version"])
+        self.assertEqual("operator_packet_export_queue", export_queue["artifact_type"])
+        self.assertTrue(export_queue["read_only"])
+        self.assertFalse(export_queue["executed"])
+        self.assertEqual(
+            0,
+            export_queue["decision_summary"]["ready_for_separate_promotion_commit"],
+        )
+        self.assertEqual(3, export_queue["total_candidates"])
+
+        exports = {item["candidate_id"]: item for item in export_queue["exports"]}
+        self.assertEqual(
+            {
+                "cand_gemini_share_002",
+                "cand_gloucestershire_egypt_058",
+                "cand_york_eburacum_059",
+            },
+            set(exports),
+        )
+
+        for export in export_queue["exports"]:
+            self.assertEqual("0.8.0", export["schema_version"])
+            self.assertEqual("operator_packet_export", export["artifact_type"])
+            self.assertTrue(export["read_only"])
+            self.assertFalse(export["executed"])
+            self.assertTrue(export["canonical_lock"]["canonical_promotion_locked"])
+            self.assertFalse(export["canonical_lock"]["canonical_ingestion_allowed"])
+            self.assertFalse(export["canonical_lock"]["promotion_commit_allowed"])
+            self.assertFalse(export["canonical_lock"]["executed"])
+            self.assertTrue(export["export_safety"]["read_only"])
+            self.assertTrue(export["export_safety"]["does_not_approve"])
+            self.assertTrue(export["export_safety"]["does_not_promote"])
+            self.assertTrue(
+                export["export_safety"]["does_not_write_canonical_ledgers"]
+            )
+            self.assertTrue(
+                export["export_safety"][
+                    "requires_separate_operator_approved_commit"
+                ]
+            )
+            for claim in export["claims"]:
+                self.assertIn("claim_id", claim)
+                self.assertIn("claim_number", claim)
+                self.assertIn("decision_label", claim)
+                self.assertIn("readiness", claim)
+                self.assertIn("source_status", claim)
+                self.assertIn("source_gaps", claim)
+                self.assertIn("corrected_wording_available", claim)
+                self.assertIn("tier_iii_containment", claim)
+                self.assertIn("required_approval", claim)
+                self.assertIn("safety_notes", claim)
+                self.assertFalse(claim["executed"])
+
+        gemini = exports["cand_gemini_share_002"]
+        self.assertEqual([], gemini["claims"])
+        self.assertEqual(
+            0,
+            gemini["decision_summary"]["ready_for_separate_promotion_commit"],
+        )
+        self.assertFalse(gemini["tier_iii_containment"]["present"])
+
+        glos = exports["cand_gloucestershire_egypt_058"]
+        glos_claim_6 = next(
+            claim for claim in glos["claims"] if claim["claim_number"] == 6
+        )
+        self.assertEqual("tier_iii_only", glos_claim_6["decision_label"])
+        self.assertTrue(glos_claim_6["tier_iii_containment"])
+        self.assertIn(6, glos["tier_iii_containment"]["claim_numbers"])
+
+        york = exports["cand_york_eburacum_059"]
+        york_claims = {claim["claim_number"]: claim for claim in york["claims"]}
+        self.assertEqual(
+            "needs_more_source_work",
+            york_claims[5]["decision_label"],
+        )
+        self.assertTrue(
+            any("YORYM : 1996.115" in gap for gap in york_claims[5]["source_gaps"])
+        )
+        self.assertEqual(
+            "needs_more_source_work",
+            york_claims[6]["decision_label"],
+        )
+        self.assertTrue(
+            any(
+                "exact Latin" in gap or "RIB" in gap
+                for gap in york_claims[6]["source_gaps"]
+            )
+        )
+        self.assertEqual("tier_iii_only", york_claims[8]["decision_label"])
+        self.assertTrue(york_claims[8]["tier_iii_containment"])
+        self.assertIn(8, york["tier_iii_containment"]["claim_numbers"])
+
+        york_markdown = build_operator_packet_markdown(york)
+        self.assertIn("Operator Packet Export", york_markdown)
+        self.assertIn("Export Status", york_markdown)
+        self.assertIn("Candidate Summary", york_markdown)
+        self.assertIn("Decision Label Summary", york_markdown)
+        self.assertIn("Claim Review Table", york_markdown)
+        self.assertIn("Claim Details", york_markdown)
+        self.assertIn("Tier III Containment", york_markdown)
+        self.assertIn("Canonical Protection", york_markdown)
+        self.assertIn("executed: false", york_markdown)
+        self.assertIn(
+            "promotion requires separate operator-approved commit",
+            york_markdown,
+        )
+        self.assertIn("does_not_approve: true", york_markdown)
+        self.assertIn("does_not_promote: true", york_markdown)
+        self.assertIn("tier_iii_only", york_markdown)
+        self.assertNotIn("approved: true", york_markdown)
+        self.assertNotIn("promoted: true", york_markdown)
+
+        queue_markdown = build_operator_packet_markdown_queue(export_queue)
+        self.assertIn("Operator Packet Export Queue", queue_markdown)
+        self.assertIn("cand_gemini_share_002", queue_markdown)
+        self.assertIn("cand_gloucestershire_egypt_058", queue_markdown)
+        self.assertIn("cand_york_eburacum_059", queue_markdown)
+        self.assertIn("ready_for_separate_promotion_commit | 0", queue_markdown)
+        self.assertIn("does_not_write_canonical_ledgers: true", queue_markdown)
+
     def test_classify_source_london_gazette_url_is_primary(self) -> None:
         from backend.app.source_verification import classify_source_strength
 
