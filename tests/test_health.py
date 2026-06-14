@@ -6,6 +6,7 @@ import os
 import sys
 import tempfile
 import unittest
+import inspect
 from pathlib import Path
 
 from fastapi.testclient import TestClient
@@ -747,6 +748,120 @@ class HealthTests(unittest.TestCase):
         self.assertIn("cand_york_eburacum_059", queue_markdown)
         self.assertIn("ready_for_separate_promotion_commit | 0", queue_markdown)
         self.assertIn("does_not_write_canonical_ledgers: true", queue_markdown)
+
+    def test_operator_packet_export_builder_handles_missing_fields_safely(self) -> None:
+        from backend.app.operator_packet_exports import (
+            build_operator_packet_export,
+            build_operator_packet_export_queue,
+            build_operator_packet_markdown,
+            build_operator_packet_markdown_queue,
+        )
+
+        minimal_export = build_operator_packet_export({})
+        self.assertEqual("0.8.0", minimal_export["schema_version"])
+        self.assertEqual("operator_packet_export", minimal_export["artifact_type"])
+        self.assertEqual("", minimal_export["candidate_id"])
+        self.assertEqual("", minimal_export["operator_packet_source"])
+        self.assertEqual([], minimal_export["claims"])
+        self.assertTrue(minimal_export["read_only"])
+        self.assertFalse(minimal_export["executed"])
+        self.assertTrue(minimal_export["canonical_lock"]["canonical_promotion_locked"])
+        self.assertFalse(minimal_export["canonical_lock"]["canonical_ingestion_allowed"])
+        self.assertFalse(minimal_export["canonical_lock"]["promotion_commit_allowed"])
+        self.assertFalse(minimal_export["tier_iii_containment"]["present"])
+        self.assertEqual(
+            0,
+            minimal_export["decision_summary"]["ready_for_separate_promotion_commit"],
+        )
+
+        minimal_markdown = build_operator_packet_markdown(minimal_export)
+        self.assertIn("Operator Packet Export", minimal_markdown)
+        self.assertIn("operator_packet_source: not detected", minimal_markdown)
+        self.assertIn("No candidate claims extracted; no promotable facts.", minimal_markdown)
+        self.assertIn("executed: false", minimal_markdown)
+        self.assertIn("read_only: true", minimal_markdown)
+        self.assertIn("does_not_approve: true", minimal_markdown)
+        self.assertIn("does_not_promote: true", minimal_markdown)
+        self.assertNotIn("approved: true", minimal_markdown)
+        self.assertNotIn("promoted: true", minimal_markdown)
+
+        minimal_queue = build_operator_packet_export_queue({})
+        self.assertEqual("operator_packet_export_queue", minimal_queue["artifact_type"])
+        self.assertEqual([], minimal_queue["exports"])
+        self.assertEqual(0, minimal_queue["total_candidates"])
+        self.assertEqual(0, minimal_queue["total_claims"])
+        self.assertEqual(
+            0,
+            minimal_queue["decision_summary"]["ready_for_separate_promotion_commit"],
+        )
+
+        queue_markdown = build_operator_packet_markdown_queue(minimal_queue)
+        self.assertIn("Operator Packet Export Queue", queue_markdown)
+        self.assertIn("No candidate exports available.", queue_markdown)
+        self.assertIn("executed: false", queue_markdown)
+        self.assertIn("read_only: true", queue_markdown)
+        self.assertIn(
+            "promotion requires separate operator-approved commit",
+            queue_markdown,
+        )
+
+        sparse_markdown = build_operator_packet_markdown({})
+        self.assertIn("unknown_candidate", sparse_markdown)
+        self.assertIn("No candidate claims extracted; no promotable facts.", sparse_markdown)
+
+    def test_operator_packet_export_builder_does_not_write_files_or_ledgers(self) -> None:
+        import backend.app.operator_packet_exports as exports_module
+
+        source = inspect.getsource(exports_module)
+        for forbidden in (
+            "open(",
+            "write_text",
+            "write_bytes",
+            ".mkdir(",
+            ".unlink(",
+            ".rename(",
+            ".replace(",
+        ):
+            self.assertNotIn(forbidden, source)
+
+        ledger_paths = [
+            PROJECT_ROOT / "data/raw/black_albion_sites.json",
+            PROJECT_ROOT / "data/raw/black_albion_claims.json",
+            PROJECT_ROOT / "data/raw/black_albion_modules.json",
+            PROJECT_ROOT / "data/raw/black_albion_sources.json",
+            PROJECT_ROOT / "data/raw/black_albion_candidate_claims.json",
+        ]
+        before = {
+            path: (
+                path.stat().st_mtime_ns,
+                len(
+                    json.loads(path.read_text(encoding="utf-8"))
+                    if path.name != "black_albion_candidate_claims.json"
+                    else json.loads(path.read_text(encoding="utf-8"))
+                ),
+            )
+            for path in ledger_paths
+        }
+
+        minimal_export = exports_module.build_operator_packet_export(
+            {
+                "candidate_id": "candidate_no_write_check",
+                "decision_label_counts": {
+                    "ready_for_separate_promotion_commit": 0,
+                },
+            }
+        )
+        exports_module.build_operator_packet_markdown(minimal_export)
+        exports_module.build_operator_packet_export_queue({"candidates": []})
+
+        after = {
+            path: (
+                path.stat().st_mtime_ns,
+                len(json.loads(path.read_text(encoding="utf-8"))),
+            )
+            for path in ledger_paths
+        }
+        self.assertEqual(before, after)
 
     def test_classify_source_london_gazette_url_is_primary(self) -> None:
         from backend.app.source_verification import classify_source_strength

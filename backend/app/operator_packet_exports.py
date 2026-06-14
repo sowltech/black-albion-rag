@@ -35,6 +35,22 @@ def _label_counts(candidate_decision_packet: Dict[str, Any]) -> Dict[str, int]:
     return {label: int(raw_counts.get(label, 0) or 0) for label in DECISION_LABELS}
 
 
+def _canonical_lock(candidate_decision_packet: Dict[str, Any]) -> Dict[str, bool]:
+    canonical_allowed = _bool(
+        candidate_decision_packet.get("canonical_ingestion_allowed")
+    )
+    commit_allowed = _bool(candidate_decision_packet.get("promotion_commit_allowed"))
+    locked = _bool(candidate_decision_packet.get("canonical_promotion_locked", True))
+    if not (canonical_allowed and commit_allowed):
+        locked = True
+    return {
+        "canonical_ingestion_allowed": canonical_allowed,
+        "promotion_commit_allowed": commit_allowed,
+        "canonical_promotion_locked": locked,
+        "executed": False,
+    }
+
+
 def _claim_export(claim: Dict[str, Any]) -> Dict[str, Any]:
     evidence_basis = claim.get("evidence_basis") or {}
     return {
@@ -69,9 +85,7 @@ def build_operator_packet_export(
         if claim.get("tier_iii_containment")
         or claim.get("decision_label") == "tier_iii_only"
     ]
-    canonical_promotion_locked = _bool(
-        candidate_decision_packet.get("canonical_promotion_locked", True)
-    )
+    canonical_lock = _canonical_lock(candidate_decision_packet)
     decision_summary = _label_counts(candidate_decision_packet)
     return {
         "schema_version": SCHEMA_VERSION,
@@ -84,12 +98,7 @@ def build_operator_packet_export(
         "generated_from": GENERATED_FROM,
         "read_only": True,
         "executed": False,
-        "canonical_lock": {
-            "canonical_ingestion_allowed": not canonical_promotion_locked,
-            "promotion_commit_allowed": not canonical_promotion_locked,
-            "canonical_promotion_locked": canonical_promotion_locked,
-            "executed": False,
-        },
+        "canonical_lock": canonical_lock,
         "decision_summary": decision_summary,
         "claims": claims,
         "tier_iii_containment": {
@@ -139,26 +148,44 @@ def _markdown_list(values: List[Any]) -> str:
 
 def build_operator_packet_markdown(export_packet: Dict[str, Any]) -> str:
     """Render one operator packet export as deterministic Markdown."""
+    candidate_id = _as_text(export_packet.get("candidate_id")) or "unknown_candidate"
+    schema_version = _as_text(export_packet.get("schema_version")) or SCHEMA_VERSION
+    artifact_type = (
+        _as_text(export_packet.get("artifact_type")) or "operator_packet_export"
+    )
+    generated_from = _as_text(export_packet.get("generated_from")) or GENERATED_FROM
+    decision_summary = {
+        label: int((export_packet.get("decision_summary") or {}).get(label, 0) or 0)
+        for label in DECISION_LABELS
+    }
+    claims = [
+        claim
+        for claim in export_packet.get("claims", []) or []
+        if isinstance(claim, dict)
+    ]
+    tier_iii = export_packet.get("tier_iii_containment") or {}
+    lock = export_packet.get("canonical_lock") or {}
+    safety = {**EXPORT_SAFETY, **(export_packet.get("export_safety") or {})}
     lines: List[str] = [
-        f"# Operator Packet Export — {export_packet['candidate_id']}",
+        f"# Operator Packet Export — {candidate_id}",
         "",
         "## Export Status",
-        f"- schema_version: {export_packet['schema_version']}",
-        f"- artifact_type: {export_packet['artifact_type']}",
-        f"- generated_from: {export_packet['generated_from']}",
-        f"- read_only: {_markdown_bool(export_packet['read_only'])}",
-        f"- executed: {_markdown_bool(export_packet['executed'])}",
+        f"- schema_version: {schema_version}",
+        f"- artifact_type: {artifact_type}",
+        f"- generated_from: {generated_from}",
+        f"- read_only: {_markdown_bool(export_packet.get('read_only', True))}",
+        f"- executed: {_markdown_bool(export_packet.get('executed', False))}",
         "",
         "## Candidate Summary",
-        f"- candidate_id: {export_packet['candidate_id']}",
-        f"- review_status: {export_packet['review_status']}",
-        f"- operator_packet_source: {export_packet['operator_packet_source'] or 'not detected'}",
+        f"- candidate_id: {candidate_id}",
+        f"- review_status: {_as_text(export_packet.get('review_status')) or 'unknown'}",
+        f"- operator_packet_source: {_as_text(export_packet.get('operator_packet_source')) or 'not detected'}",
         "",
         "## Decision Label Summary",
         "| Label | Count |",
         "|---|---:|",
     ]
-    for label, count in export_packet["decision_summary"].items():
+    for label, count in decision_summary.items():
         lines.append(f"| {label} | {count} |")
 
     lines.extend(
@@ -169,7 +196,7 @@ def build_operator_packet_markdown(export_packet: Dict[str, Any]) -> str:
             "|---|---|---|---:|---|---|",
         ]
     )
-    for claim in export_packet["claims"]:
+    for claim in claims:
         lines.append(
             "| {claim_number} | {decision_label} | {readiness} | {gap_count} | {tier_iii} | {approval} |".format(
                 claim_number=claim.get("claim_number") or "n/a",
@@ -182,9 +209,9 @@ def build_operator_packet_markdown(export_packet: Dict[str, Any]) -> str:
         )
 
     lines.extend(["", "## Claim Details"])
-    if not export_packet["claims"]:
+    if not claims:
         lines.append("- No candidate claims extracted; no promotable facts.")
-    for claim in export_packet["claims"]:
+    for claim in claims:
         lines.extend(
             [
                 "",
@@ -204,23 +231,20 @@ def build_operator_packet_markdown(export_packet: Dict[str, Any]) -> str:
             ]
         )
 
-    tier_iii = export_packet["tier_iii_containment"]
-    lock = export_packet["canonical_lock"]
-    safety = export_packet["export_safety"]
     lines.extend(
         [
             "",
             "## Tier III Containment",
-            f"- present: {_markdown_bool(tier_iii['present'])}",
-            f"- claim_numbers: {tier_iii['claim_numbers']}",
-            f"- canonical_data_allowed: {_markdown_bool(tier_iii['canonical_data_allowed'])}",
-            f"- tier_i_promotion_allowed: {_markdown_bool(tier_iii['tier_i_promotion_allowed'])}",
+            f"- present: {_markdown_bool(tier_iii.get('present', False))}",
+            f"- claim_numbers: {tier_iii.get('claim_numbers', [])}",
+            f"- canonical_data_allowed: {_markdown_bool(tier_iii.get('canonical_data_allowed', False))}",
+            f"- tier_i_promotion_allowed: {_markdown_bool(tier_iii.get('tier_i_promotion_allowed', False))}",
             "",
             "## Canonical Protection",
-            f"- canonical_ingestion_allowed: {_markdown_bool(lock['canonical_ingestion_allowed'])}",
-            f"- promotion_commit_allowed: {_markdown_bool(lock['promotion_commit_allowed'])}",
-            f"- canonical_promotion_locked: {_markdown_bool(lock['canonical_promotion_locked'])}",
-            f"- executed: {_markdown_bool(lock['executed'])}",
+            f"- canonical_ingestion_allowed: {_markdown_bool(lock.get('canonical_ingestion_allowed', False))}",
+            f"- promotion_commit_allowed: {_markdown_bool(lock.get('promotion_commit_allowed', False))}",
+            f"- canonical_promotion_locked: {_markdown_bool(lock.get('canonical_promotion_locked', True))}",
+            f"- executed: {_markdown_bool(lock.get('executed', False))}",
             f"- read_only: {_markdown_bool(safety['read_only'])}",
             f"- does_not_approve: {_markdown_bool(safety['does_not_approve'])}",
             f"- does_not_promote: {_markdown_bool(safety['does_not_promote'])}",
@@ -233,38 +257,55 @@ def build_operator_packet_markdown(export_packet: Dict[str, Any]) -> str:
 
 def build_operator_packet_markdown_queue(export_queue: Dict[str, Any]) -> str:
     """Render a queue-level operator packet export as deterministic Markdown."""
+    schema_version = _as_text(export_queue.get("schema_version")) or SCHEMA_VERSION
+    artifact_type = (
+        _as_text(export_queue.get("artifact_type"))
+        or "operator_packet_export_queue"
+    )
+    generated_from = _as_text(export_queue.get("generated_from")) or GENERATED_FROM
+    exports = [
+        packet
+        for packet in export_queue.get("exports", []) or []
+        if isinstance(packet, dict)
+    ]
+    decision_summary = {
+        label: int((export_queue.get("decision_summary") or {}).get(label, 0) or 0)
+        for label in DECISION_LABELS
+    }
+    safety = {**EXPORT_SAFETY, **(export_queue.get("export_safety") or {})}
     lines: List[str] = [
         "# Operator Packet Export Queue",
         "",
         "## Export Status",
-        f"- schema_version: {export_queue['schema_version']}",
-        f"- artifact_type: {export_queue['artifact_type']}",
-        f"- generated_from: {export_queue['generated_from']}",
-        f"- read_only: {_markdown_bool(export_queue['read_only'])}",
-        f"- executed: {_markdown_bool(export_queue['executed'])}",
+        f"- schema_version: {schema_version}",
+        f"- artifact_type: {artifact_type}",
+        f"- generated_from: {generated_from}",
+        f"- read_only: {_markdown_bool(export_queue.get('read_only', True))}",
+        f"- executed: {_markdown_bool(export_queue.get('executed', False))}",
         "",
         "## Queue Summary",
-        f"- total_candidates: {export_queue['total_candidates']}",
-        f"- total_claims: {export_queue['total_claims']}",
+        f"- total_candidates: {export_queue.get('total_candidates', len(exports))}",
+        f"- total_claims: {export_queue.get('total_claims', 0)}",
         "",
         "## Decision Label Summary",
         "| Label | Count |",
         "|---|---:|",
     ]
-    for label, count in export_queue["decision_summary"].items():
+    for label, count in decision_summary.items():
         lines.append(f"| {label} | {count} |")
 
     lines.extend(["", "## Candidate Exports"])
-    for packet in export_queue["exports"]:
+    if not exports:
+        lines.append("- No candidate exports available.")
+    for packet in exports:
         lines.extend(
             [
                 "",
-                f"## Candidate — {packet['candidate_id']}",
+                f"## Candidate — {_as_text(packet.get('candidate_id')) or 'unknown_candidate'}",
                 build_operator_packet_markdown(packet).strip(),
             ]
         )
 
-    safety = export_queue["export_safety"]
     lines.extend(
         [
             "",
