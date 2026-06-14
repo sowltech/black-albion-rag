@@ -1,5 +1,55 @@
 # Changelog
 
+## v0.8.0 — Release Artifact / Operator Packet Export
+
+Release date: 2026-06-14
+
+v0.8.0 adds a pure read-only operator packet export builder for producing
+reviewable JSON and Markdown summaries from existing operator decision
+packet state. The export layer does not add API endpoints, dashboard
+panels, generated export files, approval actions, promotion actions, or
+canonical ledger writes.
+
+### Added
+
+- Pure read-only operator packet export builder in
+  `backend/app/operator_packet_exports.py`.
+- JSON export builder for candidate-level operator packet summaries.
+- Markdown export builder for human-reviewable operator packet summaries.
+- Queue-level JSON and Markdown export builders.
+- Export contract documentation in `docs/operator-packet-export.md`.
+- Export fields for canonical lock status, Tier III containment, operator
+  decision labels, source gaps, and `executed: false`.
+- Hardening for empty candidate packets, missing claims, missing decision
+  summaries, missing operator packet source, and no-write guarantees.
+
+### Safety Guarantees
+
+- No API endpoint added.
+- No dashboard export panel added.
+- No generated export files committed.
+- No canonical ledger writes.
+- No candidate ledger writes.
+- Exports include `executed: false`.
+- Exports include canonical lock status.
+- Exports include Tier III containment.
+- Exports include operator decision labels and source gaps.
+- `ready_for_separate_promotion_commit` remains `0` for current
+  candidates.
+- Promotion still requires a separate operator-approved commit.
+
+### Validation
+
+- `python3 -m pytest -q`: 87 passed.
+- `bash scripts/smoke_live_uvicorn.sh`: passed.
+- `bash scripts/validate_enterprise_gpt_os.sh`: passed.
+- `python3 -m compileall -q backend`: passed.
+- `python3 -m json.tool data/raw/black_albion_candidate_claims.json`:
+  passed.
+- Secret-pattern scan on changed files: clean.
+- Canonical ledgers unchanged at sites 8 / claims 90 / modules 14 /
+  sources 71 / candidates 3.
+
 ## v0.7.0 — Operator Decision Packet Engine
 
 Release date: 2026-06-13
