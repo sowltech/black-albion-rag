@@ -24,6 +24,11 @@ candidate claim review -> Aegis recommendation -> existing Black Albion human/op
 
 Default state is disabled. A missing config file or absent `aegis_canary.enabled` value is disabled. YAML `null` for `aegis_canary` or `enabled` is also disabled.
 
+Only lowercase YAML booleans are accepted:
+
+- `true` enables the canary.
+- `false` disables the canary.
+
 Accepted values:
 
 ```yaml
@@ -40,7 +45,7 @@ aegis_canary:
   require_audit_reference: true
 ```
 
-Strings, integers, lists, and mappings for `enabled` are rejected. Values such as `"false"`, `"true"`, `"yes"`, `"no"`, `"1"`, `"0"`, `0`, and `1` cannot silently enable the canary.
+Strings, integers, lists, and mappings for `enabled` are rejected. Values such as `"false"`, `"true"`, `yes`, `no`, `on`, `off`, `True`, `False`, `TRUE`, `FALSE`, `"1"`, `"0"`, `0`, and `1` cannot silently enable the canary. The adapter uses a PyYAML SafeLoader variant whose boolean resolver is restricted to lowercase `true` and `false`.
 
 ## Mapping
 
@@ -63,6 +68,8 @@ Tier score defaults are adapter rules, not new Black Albion evidence tiers:
 
 If required provenance is absent, the canary returns `recommend_hold`.
 
+The adapter depends on `PyYAML>=6.0,<7`, matching the repository's minimum-bound style while preventing an unreviewed major-version jump.
+
 ## Recommendation Rules
 
 - Aegis `Accepted` -> `recommend_promote`
@@ -74,17 +81,16 @@ If required provenance is absent, the canary returns `recommend_hold`.
 
 ## Idempotency And History
 
-The adapter derives a deterministic request fingerprint from:
+The adapter derives a deterministic request fingerprint from a stable JSON payload using `sort_keys=True`, compact separators, NFC Unicode normalization, and whitespace collapse. The payload includes:
 
-- candidate claim ID;
-- canonical claim text;
-- sorted evidence IDs;
-- sorted source IDs;
-- evidence versions;
-- adapter version;
-- Aegis schema version.
+- candidate claim ID, canonical claim text, claim content hash, candidate status, module/domain, evidence tier, claim version, and provenance references;
+- each evidence ID, canonical excerpt, excerpt content hash, source ID, source title, evidence tier, authority score, quality score, freshness timestamp, relationship polarity, evidence version, and provenance reference;
+- sorted source IDs, source titles, source tiers, source authority scores, source versions, and source provenance references;
+- adapter version, mapping-rule version, Aegis schema version, and canonicalization version.
 
-Identical evidence snapshots reuse the existing history entry for that fingerprint. Changed evidence or claim text creates a new fingerprint and a new recommendation history row. The helper returns updated review data but does not write canonical ledgers.
+Identical evidence snapshots reuse the existing history entry for that fingerprint. Shuffled evidence/source ordering, stable JSON key ordering, equivalent whitespace, and equivalent Unicode after NFC normalization do not change the fingerprint. Material changes to evidence text, source identity, source title, evidence tier, authority score, quality score, freshness, relationship polarity, provenance, claim text, claim/evidence version, adapter version, mapping version, or Aegis schema version create a new fingerprint and a new recommendation history row.
+
+Recommendation history is returned as inert review data by the helper. It is not a persistent database claim unless a future Black Albion storage path explicitly writes it.
 
 ## Rollback
 
@@ -96,4 +102,3 @@ aegis_canary:
 ```
 
 When disabled, Black Albion makes zero Aegis calls and the existing promotion readiness output remains unchanged. Historical recommendation rows remain inert review evidence.
-

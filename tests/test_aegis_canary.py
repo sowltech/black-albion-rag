@@ -5,6 +5,7 @@ from pathlib import Path
 
 import pytest
 
+import backend.app.aegis_canary as aegis_canary
 from backend.app.aegis_canary import (
     AEGIS_SCHEMA_VERSION,
     ADAPTER_VERSION,
@@ -16,6 +17,7 @@ from backend.app.aegis_canary import (
     append_recommendation_history,
     candidate_from_dict,
     evidence_from_dicts,
+    fingerprint_payload,
     load_aegis_canary_config,
     normalised_aegis_request,
     recommendation_from_aegis_decision,
@@ -100,9 +102,37 @@ def test_feature_flag_defaults_disabled_and_accepts_only_yaml_booleans(tmp_path:
     assert load_aegis_canary_config(_write_config(tmp_path, "aegis_canary:\n  enabled: true\n")).enabled is True
     assert load_aegis_canary_config(_write_config(tmp_path, "aegis_canary:\n")).enabled is False
 
-    for value in ('"false"', '"true"', '"yes"', '"no"', '"1"', '"0"', "0", "1", "[]", "{}"):
+    for value in (
+        "True",
+        "False",
+        "TRUE",
+        "FALSE",
+        "yes",
+        "no",
+        "on",
+        "off",
+        '"false"',
+        '"true"',
+        '"yes"',
+        '"no"',
+        '"1"',
+        '"0"',
+        "0",
+        "1",
+        "[]",
+        "{}",
+    ):
         with pytest.raises(BlackAlbionAegisConfigError):
             load_aegis_canary_config(_write_config(tmp_path, f"aegis_canary:\n  enabled: {value}\n"))
+
+
+def test_invalid_config_cannot_trigger_aegis_call(tmp_path: Path) -> None:
+    client = RecordingClient(_recommendation())
+
+    with pytest.raises(BlackAlbionAegisConfigError):
+        load_aegis_canary_config(_write_config(tmp_path, "aegis_canary:\n  enabled: yes\n"))
+
+    assert client.calls == 0
 
 
 def test_disabled_path_preserves_baseline_and_makes_zero_aegis_calls() -> None:
@@ -141,6 +171,109 @@ def test_mapping_preserves_provenance_and_deterministic_fingerprint() -> None:
     request = normalised_aegis_request(mapped, list(reversed(evidence)), list(reversed(sources)), fingerprint=first)
     request_again = normalised_aegis_request(mapped, evidence, sources, fingerprint=second)
     assert json.dumps(request, sort_keys=True) == json.dumps(request_again, sort_keys=True)
+
+
+def test_fingerprint_payload_includes_material_fields() -> None:
+    candidate = candidate_from_dict(_candidate(), _claim())
+    evidence, sources = evidence_from_dicts(_candidate(), _claim())
+    payload = fingerprint_payload(candidate, evidence, sources)
+
+    assert payload["adapter_version"] == ADAPTER_VERSION
+    assert payload["aegis_schema_version"] == AEGIS_SCHEMA_VERSION
+    assert payload["mapping_version"] == aegis_canary.MAPPING_VERSION
+    assert payload["canonicalization_version"] == aegis_canary.CANONICALIZATION_VERSION
+    assert payload["claim"]["content_hash"]
+    assert payload["evidence"][0]["content_hash"]
+    assert {"authority", "quality", "freshness", "relationship", "provenance", "source_title"} <= set(
+        payload["evidence"][0]
+    )
+
+
+def _fingerprint_with_change(**updates) -> str:
+    candidate = candidate_from_dict(_candidate(), _claim())
+    evidence, sources = evidence_from_dicts(_candidate(), _claim())
+    if "claim_text" in updates:
+        candidate = type(candidate)(**{**candidate.__dict__, "claim_text": updates["claim_text"]})
+        updates = {key: value for key, value in updates.items() if key != "claim_text"}
+    if "claim_created_at" in updates:
+        candidate = type(candidate)(**{**candidate.__dict__, "created_at": updates["claim_created_at"]})
+        updates = {key: value for key, value in updates.items() if key != "claim_created_at"}
+    if "adapter_version" in updates:
+        original = aegis_canary.ADAPTER_VERSION
+        aegis_canary.ADAPTER_VERSION = updates["adapter_version"]
+        try:
+            return request_fingerprint(candidate, evidence, sources)
+        finally:
+            aegis_canary.ADAPTER_VERSION = original
+    if "mapping_version" in updates:
+        original = aegis_canary.MAPPING_VERSION
+        aegis_canary.MAPPING_VERSION = updates["mapping_version"]
+        try:
+            return request_fingerprint(candidate, evidence, sources)
+        finally:
+            aegis_canary.MAPPING_VERSION = original
+    if "aegis_schema_version" in updates:
+        original = aegis_canary.AEGIS_SCHEMA_VERSION
+        aegis_canary.AEGIS_SCHEMA_VERSION = updates["aegis_schema_version"]
+        try:
+            return request_fingerprint(candidate, evidence, sources)
+        finally:
+            aegis_canary.AEGIS_SCHEMA_VERSION = original
+    if updates:
+        first = evidence[0]
+        evidence[0] = type(first)(**{**first.__dict__, **updates})
+    return request_fingerprint(candidate, evidence, sources)
+
+
+@pytest.mark.parametrize(
+    "updates",
+    [
+        {"excerpt": "new contradictory meaning"},
+        {"authority_score": 0.1},
+        {"quality_score": 0.1},
+        {"evidence_tier": "III"},
+        {"freshness_timestamp": "2026-07-17"},
+        {"relationship": "attacks"},
+        {"provenance_location": "research/intake/changed.md"},
+        {"source_id": "changed-source"},
+        {"claim_text": "Materially changed claim text"},
+        {"evidence_version": "version-2"},
+        {"claim_created_at": "2026-07-17"},
+        {"adapter_version": "black-albion-aegis-canary.v2"},
+        {"mapping_version": "black-albion-aegis-mapping.v2"},
+        {"aegis_schema_version": "aegis.v2"},
+    ],
+)
+def test_material_fingerprint_changes(updates: dict) -> None:
+    baseline = _fingerprint_with_change()
+
+    assert _fingerprint_with_change(**updates) != baseline
+
+
+def test_source_title_change_invalidates_fingerprint() -> None:
+    candidate = candidate_from_dict(_candidate(), _claim())
+    evidence, sources = evidence_from_dicts(_candidate(), _claim())
+    baseline = request_fingerprint(candidate, evidence, sources)
+    sources[0] = type(sources[0])(**{**sources[0].__dict__, "title": "Changed source title"})
+
+    assert request_fingerprint(candidate, evidence, sources) != baseline
+
+
+def test_fingerprint_stability_for_equivalent_snapshots() -> None:
+    candidate = candidate_from_dict(_candidate(), _claim())
+    evidence, sources = evidence_from_dicts(_candidate(), _claim())
+    baseline = request_fingerprint(candidate, evidence, sources)
+    whitespace_candidate = type(candidate)(
+        **{**candidate.__dict__, "claim_text": "Synthetic   Black Albion canary claim has bounded support and opposition."}
+    )
+    unicode_candidate = type(candidate)(**{**candidate.__dict__, "claim_text": "Cafe\u0301"})
+    unicode_candidate_nfc = type(candidate)(**{**candidate.__dict__, "claim_text": "Café"})
+
+    assert request_fingerprint(candidate, list(reversed(evidence)), list(reversed(sources))) == baseline
+    assert request_fingerprint(whitespace_candidate, evidence, sources) == baseline
+    assert request_fingerprint(unicode_candidate, evidence, sources) == request_fingerprint(
+        unicode_candidate_nfc, evidence, sources
+    )
 
 
 def test_mapping_handles_source_quality_cases_and_missing_provenance_holds() -> None:
@@ -248,6 +381,23 @@ def test_history_is_idempotent_and_changed_evidence_creates_new_record() -> None
     assert len(updated) == 2
     assert history[0]["recommendation"] == "recommend_hold"
     assert updated[1]["request_fingerprint"] == "fingerprint-b"
+
+
+def test_material_change_prevents_stale_history_reuse() -> None:
+    candidate = candidate_from_dict(_candidate(), _claim())
+    evidence, sources = evidence_from_dicts(_candidate(), _claim())
+    original = request_fingerprint(candidate, evidence, sources)
+    changed = list(evidence)
+    changed[0] = type(changed[0])(**{**changed[0].__dict__, "excerpt": "new contradictory meaning"})
+    changed_fingerprint = request_fingerprint(candidate, changed, sources)
+
+    history = append_recommendation_history([], _recommendation("recommend_hold", original))
+    updated = append_recommendation_history(history, _recommendation("recommend_reject", changed_fingerprint))
+
+    assert changed_fingerprint != original
+    assert len(updated) == 2
+    assert updated[0]["request_fingerprint"] == original
+    assert updated[1]["request_fingerprint"] == changed_fingerprint
 
 
 def test_security_limits_and_inert_claim_text() -> None:

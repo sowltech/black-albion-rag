@@ -14,7 +14,9 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import re
 from typing import Any, Dict, Iterable, List, Mapping, Optional, Sequence
+import unicodedata
 
 import httpx
 import yaml
@@ -22,6 +24,8 @@ import yaml
 
 ADAPTER_VERSION = "black-albion-aegis-canary.v1"
 AEGIS_SCHEMA_VERSION = "aegis.v1"
+MAPPING_VERSION = "black-albion-aegis-mapping.v1"
+CANONICALIZATION_VERSION = "nfc-whitespace-collapse.v1"
 RECOMMEND_PROMOTE = "recommend_promote"
 RECOMMEND_HOLD = "recommend_hold"
 RECOMMEND_REJECT = "recommend_reject"
@@ -68,6 +72,7 @@ class EvidenceRecord:
     freshness_timestamp: str = ""
     evidence_tier: str = ""
     provenance_location: str = ""
+    evidence_version: str = ""
 
 
 @dataclass(frozen=True)
@@ -77,6 +82,7 @@ class SourceRecord:
     source_tier: str = ""
     authority_score: float = 0.5
     provenance_location: str = ""
+    source_version: str = ""
 
 
 @dataclass(frozen=True)
@@ -107,6 +113,25 @@ def _strict_bool(value: Any, field_name: str) -> bool:
     raise BlackAlbionAegisConfigError(f"{field_name} must be a YAML boolean")
 
 
+class _StrictBooleanLoader(yaml.SafeLoader):
+    pass
+
+
+_StrictBooleanLoader.yaml_implicit_resolvers = {
+    key: [
+        (tag, regexp)
+        for tag, regexp in resolvers
+        if tag != "tag:yaml.org,2002:bool"
+    ]
+    for key, resolvers in yaml.SafeLoader.yaml_implicit_resolvers.items()
+}
+_StrictBooleanLoader.add_implicit_resolver(
+    "tag:yaml.org,2002:bool",
+    re.compile(r"^(?:true|false)$"),
+    list("tf"),
+)
+
+
 def load_aegis_canary_config(path: Optional[Path] = None) -> AegisCanaryConfig:
     """Load strict Aegis canary config.
 
@@ -118,7 +143,7 @@ def load_aegis_canary_config(path: Optional[Path] = None) -> AegisCanaryConfig:
     if raw_path is None:
         return AegisCanaryConfig(enabled=False)
     try:
-        payload = yaml.safe_load(raw_path.read_text(encoding="utf-8"))
+        payload = yaml.load(raw_path.read_text(encoding="utf-8"), Loader=_StrictBooleanLoader)
     except OSError as exc:
         raise BlackAlbionAegisConfigError("Aegis canary config could not be read") from exc
     except yaml.YAMLError as exc:
@@ -157,7 +182,7 @@ def load_aegis_canary_config(path: Optional[Path] = None) -> AegisCanaryConfig:
 
 
 def _canonical_json(payload: Any) -> str:
-    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
+    return json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
 
 
 def _stable_id(prefix: str, value: str) -> str:
@@ -166,7 +191,7 @@ def _stable_id(prefix: str, value: str) -> str:
 
 
 def _normalise_text(value: Any) -> str:
-    return " ".join(str(value or "").split())
+    return unicodedata.normalize("NFC", " ".join(str(value or "").split()))
 
 
 def _tier_authority(tier: str) -> float:
@@ -242,9 +267,77 @@ def evidence_from_dicts(
                     freshness_timestamp=_normalise_text(claim.get("source_attachment_pass") or candidate.get("created_at")),
                     evidence_tier=tier,
                     provenance_location=provenance,
+                    evidence_version=_normalise_text(claim.get("evidence_version") or claim.get("source_attachment_pass")),
                 )
             )
     return evidence, sorted(sources, key=lambda item: item.source_id)
+
+
+def _hash_material(value: str) -> str:
+    return hashlib.sha256(_normalise_text(value).encode("utf-8")).hexdigest()
+
+
+def fingerprint_payload(
+    candidate_claim: CandidateClaim,
+    evidence: Sequence[EvidenceRecord],
+    sources: Sequence[SourceRecord],
+) -> Dict[str, Any]:
+    source_by_id = {source.source_id: source for source in sources}
+    return {
+        "adapter_version": ADAPTER_VERSION,
+        "aegis_schema_version": AEGIS_SCHEMA_VERSION,
+        "mapping_version": MAPPING_VERSION,
+        "canonicalization_version": CANONICALIZATION_VERSION,
+        "claim": {
+            "id": _normalise_text(candidate_claim.claim_id),
+            "text": _normalise_text(candidate_claim.claim_text),
+            "content_hash": _hash_material(candidate_claim.claim_text),
+            "version": _normalise_text(candidate_claim.created_at),
+            "domain": _normalise_text(candidate_claim.module),
+            "status": _normalise_text(candidate_claim.candidate_status),
+            "evidence_tier": _normalise_text(candidate_claim.evidence_tier),
+            "provenance_refs": sorted(_normalise_text(item) for item in candidate_claim.provenance_refs),
+        },
+        "evidence": [
+            {
+                "id": _normalise_text(item.evidence_id),
+                "content_hash": _hash_material(item.excerpt),
+                "excerpt": _normalise_text(item.excerpt),
+                "source_id": _normalise_text(item.source_id),
+                "source_title": _normalise_text(source_by_id.get(item.source_id, SourceRecord(item.source_id, "")).title),
+                "source_version": _normalise_text(
+                    source_by_id.get(item.source_id, SourceRecord(item.source_id, "")).source_version
+                ),
+                "tier": _normalise_text(item.evidence_tier),
+                "authority": item.authority_score,
+                "quality": item.quality_score,
+                "freshness": _normalise_text(item.freshness_timestamp),
+                "relationship": _normalise_text(item.relationship),
+                "version": _normalise_text(item.evidence_version),
+                "provenance": _normalise_text(item.provenance_location),
+            }
+            for item in sorted(
+                evidence,
+                key=lambda row: (
+                    _normalise_text(row.relationship),
+                    _normalise_text(row.evidence_id),
+                    _normalise_text(row.source_id),
+                    _normalise_text(row.excerpt),
+                ),
+            )
+        ],
+        "sources": [
+            {
+                "id": _normalise_text(source.source_id),
+                "title": _normalise_text(source.title),
+                "source_tier": _normalise_text(source.source_tier),
+                "authority": source.authority_score,
+                "provenance": _normalise_text(source.provenance_location),
+                "version": _normalise_text(source.source_version),
+            }
+            for source in sorted(sources, key=lambda row: (_normalise_text(row.source_id), _normalise_text(row.title)))
+        ],
+    }
 
 
 def request_fingerprint(
@@ -252,18 +345,7 @@ def request_fingerprint(
     evidence: Sequence[EvidenceRecord],
     sources: Sequence[SourceRecord],
 ) -> str:
-    payload = {
-        "adapter_version": ADAPTER_VERSION,
-        "aegis_schema_version": AEGIS_SCHEMA_VERSION,
-        "claim_id": candidate_claim.claim_id,
-        "claim_text": _normalise_text(candidate_claim.claim_text),
-        "evidence_ids": sorted(item.evidence_id for item in evidence),
-        "source_ids": sorted(item.source_id for item in sources),
-        "evidence_versions": sorted(
-            f"{item.evidence_id}:{item.freshness_timestamp}:{item.evidence_tier}:{item.relationship}"
-            for item in evidence
-        ),
-    }
+    payload = fingerprint_payload(candidate_claim, evidence, sources)
     return hashlib.sha256(_canonical_json(payload).encode("utf-8")).hexdigest()
 
 
@@ -468,4 +550,3 @@ def append_recommendation_history(
             return history
     history.append(recommendation.to_dict())
     return history
-
