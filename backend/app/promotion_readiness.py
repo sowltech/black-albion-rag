@@ -10,6 +10,13 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from .aegis_canary import (
+    AegisCanaryConfig,
+    AegisRecommendationClient,
+    append_recommendation_history,
+    review_candidate_claim,
+)
+
 
 READINESS_STATES = (
     "nearly_ready_for_operator_review",
@@ -274,13 +281,30 @@ def summarize_candidate_readiness(
     candidate: Dict[str, Any],
     worksheet_text: str = "",
     packet_text: str = "",
+    *,
+    aegis_config: Optional[AegisCanaryConfig] = None,
+    aegis_client: Optional[AegisRecommendationClient] = None,
 ) -> Dict[str, Any]:
     """Summarise promotion readiness for one candidate intake row."""
-    claims = [
-        classify_claim_readiness(claim, worksheet_text, packet_text)
-        for claim in candidate.get("candidate_claims", []) or []
-        if isinstance(claim, dict)
-    ]
+    claims: List[Dict[str, Any]] = []
+    for claim in candidate.get("candidate_claims", []) or []:
+        if not isinstance(claim, dict):
+            continue
+        readiness = classify_claim_readiness(claim, worksheet_text, packet_text)
+        if aegis_config is not None:
+            recommendation = review_candidate_claim(
+                candidate,
+                claim,
+                config=aegis_config,
+                client=aegis_client,
+            )
+            history = append_recommendation_history(
+                claim.get("aegis_recommendation_history", []),
+                recommendation,
+            )
+            readiness["aegis_canary"] = recommendation.to_dict()
+            readiness["aegis_canary_history"] = history
+        claims.append(readiness)
     nearly_ready_count = sum(
         1 for claim in claims if claim["readiness"] == "nearly_ready_for_operator_review"
     )
@@ -334,6 +358,9 @@ def _read_optional_text(base_path: Path, relative_path: Any) -> str:
 def summarize_promotion_readiness_queue(
     candidates: List[Dict[str, Any]],
     base_path: Optional[Path] = None,
+    *,
+    aegis_config: Optional[AegisCanaryConfig] = None,
+    aegis_client: Optional[AegisRecommendationClient] = None,
 ) -> Dict[str, Any]:
     """Summarise readiness across candidate rows without mutating anything."""
     root = base_path or Path(".")
@@ -347,7 +374,13 @@ def summarize_promotion_readiness_queue(
             candidate.get("operator_packet") or candidate.get("operator_packet_file"),
         )
         summaries.append(
-            summarize_candidate_readiness(candidate, worksheet_text, packet_text)
+            summarize_candidate_readiness(
+                candidate,
+                worksheet_text,
+                packet_text,
+                aegis_config=aegis_config,
+                aegis_client=aegis_client,
+            )
         )
 
     total_claims = sum(len(candidate["claims"]) for candidate in summaries)
