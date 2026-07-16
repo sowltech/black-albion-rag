@@ -135,6 +135,51 @@ def test_invalid_config_cannot_trigger_aegis_call(tmp_path: Path) -> None:
     assert client.calls == 0
 
 
+@pytest.mark.parametrize(
+    "config_text, duplicate_key",
+    [
+        ("aegis_canary:\n  enabled: false\n  enabled: true\n", "enabled"),
+        ("aegis_canary:\n  enabled: true\n  enabled: false\n", "enabled"),
+        ("aegis_canary:\n  enabled: false\naegis_canary:\n  enabled: true\n", "aegis_canary"),
+        ("aegis_canary:\n  timeout_seconds: 2\n  timeout_seconds: 3\n", "timeout_seconds"),
+        ("aegis_canary:\n  base_url: http://localhost:8055\n  base_url: http://localhost:9999\n", "base_url"),
+        ("aegis_canary:\n  transport:\n    timeout: 2\n    timeout: 3\n", "timeout"),
+        ("aegis_canary:\n  \"ena\\u0062led\": false\n  enabled: true\n", "enabled"),
+    ],
+)
+def test_duplicate_yaml_keys_are_rejected_before_activation(
+    tmp_path: Path,
+    config_text: str,
+    duplicate_key: str,
+) -> None:
+    client = RecordingClient(_recommendation())
+    candidate = _candidate()
+    claim = _claim()
+    baseline = summarize_candidate_readiness(candidate | {"candidate_claims": [claim]})
+    original_history = list(claim.get("aegis_recommendation_history", []))
+
+    with pytest.raises(BlackAlbionAegisConfigError, match=f"duplicate YAML key: {duplicate_key}"):
+        load_aegis_canary_config(_write_config(tmp_path, config_text))
+
+    assert client.calls == 0
+    assert claim.get("aegis_recommendation_history", []) == original_history
+    assert summarize_candidate_readiness(candidate | {"candidate_claims": [claim]}) == baseline
+
+
+def test_same_yaml_key_is_allowed_in_separate_mapping_objects(tmp_path: Path) -> None:
+    config = load_aegis_canary_config(
+        _write_config(
+            tmp_path,
+            "aegis_canary:\n"
+            "  enabled: false\n"
+            "other_section:\n"
+            "  enabled: true\n",
+        )
+    )
+
+    assert config.enabled is False
+
+
 def test_disabled_path_preserves_baseline_and_makes_zero_aegis_calls() -> None:
     candidate = _candidate()
     claim = _claim()

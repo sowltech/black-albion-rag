@@ -117,6 +117,24 @@ class _StrictBooleanLoader(yaml.SafeLoader):
     pass
 
 
+def _construct_unique_mapping(
+    loader: yaml.SafeLoader,
+    node: yaml.nodes.MappingNode,
+    deep: bool = False,
+) -> Dict[Any, Any]:
+    mapping: Dict[Any, Any] = {}
+    for key_node, value_node in node.value:
+        key = loader.construct_object(key_node, deep=deep)
+        try:
+            already_seen = key in mapping
+        except TypeError as exc:
+            raise BlackAlbionAegisConfigError("YAML mapping keys must be hashable") from exc
+        if already_seen:
+            raise BlackAlbionAegisConfigError(f"duplicate YAML key: {key}")
+        mapping[key] = loader.construct_object(value_node, deep=deep)
+    return mapping
+
+
 _StrictBooleanLoader.yaml_implicit_resolvers = {
     key: [
         (tag, regexp)
@@ -130,6 +148,11 @@ _StrictBooleanLoader.add_implicit_resolver(
     re.compile(r"^(?:true|false)$"),
     list("tf"),
 )
+_StrictBooleanLoader.add_constructor(
+    yaml.resolver.BaseResolver.DEFAULT_MAPPING_TAG,
+    _construct_unique_mapping,
+)
+
 
 
 def load_aegis_canary_config(path: Optional[Path] = None) -> AegisCanaryConfig:

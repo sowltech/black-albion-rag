@@ -47,6 +47,8 @@ aegis_canary:
 
 Strings, integers, lists, and mappings for `enabled` are rejected. Values such as `"false"`, `"true"`, `yes`, `no`, `on`, `off`, `True`, `False`, `TRUE`, `FALSE`, `"1"`, `"0"`, `0`, and `1` cannot silently enable the canary. The adapter uses a PyYAML SafeLoader variant whose boolean resolver is restricted to lowercase `true` and `false`.
 
+Duplicate YAML mapping keys are rejected at every mapping depth. Ambiguous configuration such as repeating `aegis_canary` or repeating `enabled` fails closed before feature activation, makes zero Aegis calls, and creates no recommendation history.
+
 ## Mapping
 
 | Black Albion field | Aegis field |
