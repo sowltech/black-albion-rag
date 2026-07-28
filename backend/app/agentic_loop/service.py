@@ -8,6 +8,7 @@ a contradiction -- there is no such method on any collaborator it holds.
 """
 from __future__ import annotations
 
+import logging
 from datetime import datetime, timezone
 from typing import Callable, List, Optional, Sequence, Set
 
@@ -43,6 +44,8 @@ from .retriever import Retriever
 from .synthesiser import SynthesisResult, synthesise
 
 Clock = Callable[[], str]
+
+logger = logging.getLogger(__name__)
 
 
 def _default_clock() -> str:
@@ -119,9 +122,21 @@ class AgenticLoopService:
         try:
             return self._run(request, run_id)
         except AgenticLoopError as exc:
-            return self._failure_result(request, run_id, str(exc))
-        except Exception as exc:  # noqa: BLE001 - deliberate INTERNAL_ERROR boundary
-            return self._failure_result(request, run_id, f"internal error: {exc}")
+            # Typed loop errors carry a stable class name; the public result
+            # gets only that code. The message (our own, but still internal
+            # detail) goes to the internal log with the run_id for
+            # correlation, never into AgenticResult.
+            logger.error("agentic loop error run_id=%s: %s", run_id, exc)
+            return self._failure_result(
+                request, run_id, f"internal error [ERR_{type(exc).__name__.upper()}]"
+            )
+        except Exception:  # noqa: BLE001 - deliberate INTERNAL_ERROR boundary
+            # Unexpected exception text may contain anything (paths,
+            # credentials, adapter responses). The public result gets a
+            # fixed opaque code; the full traceback goes only to the
+            # internal log, keyed by run_id.
+            logger.exception("unexpected agentic loop failure run_id=%s", run_id)
+            return self._failure_result(request, run_id, "internal error [ERR_UNEXPECTED]")
 
     def _failure_result(self, request: AgenticQueryRequest, run_id: str, reason: str) -> AgenticResult:
         return AgenticResult(
@@ -146,6 +161,30 @@ class AgenticLoopService:
     def _run(self, request: AgenticQueryRequest, run_id: str) -> AgenticResult:
         budgets = resolve_budgets(request)
         policy_block_reason = _check_policy(request)
+        if policy_block_reason is not None:
+            # Pre-retrieval policy gate: a policy-blocked request must never
+            # reach the planner or retriever. Iterations are defined as
+            # completed retrieval cycles, so none happened and no iteration
+            # receipt is fabricated -- the chain head stays at genesis.
+            return AgenticResult(
+                run_id=run_id,
+                question=request.question,
+                outcome=TerminalOutcome.POLICY_BLOCKED,
+                answer="",
+                supported_claims=[],
+                unsupported_claims=[],
+                evidence_ids=[],
+                open_gaps=[],
+                contradictions=[],
+                iterations_completed=0,
+                retrieval_calls_used=0,
+                stop_reason=f"POLICY_BLOCKED: {policy_block_reason}",
+                final_confidence=0.0,
+                final_coverage=0.0,
+                receipt_chain_head=GENESIS_HASH,
+                operator_review_required=False,
+            )
+        allowed_tiers = set(request.include_tiers)
 
         state = LoopState.RECEIVED
         state = self._advance(state, LoopState.DECOMPOSING)
@@ -189,6 +228,7 @@ class AgenticLoopService:
             retrieval_calls_used_before = retrieval_calls_used
             evidence_count_before = len(evidence_all)
             iteration_new_raw: List[EvidenceItem] = []
+            excluded_tier_count = 0
             for query in new_queries:
                 if repetition_tracker.is_repeat(query.text):
                     continue
@@ -197,7 +237,24 @@ class AgenticLoopService:
                 repetition_tracker.register(query.text)
                 retrieval_calls_used += 1
                 queries_all.append(query)
-                iteration_new_raw.extend(self._retriever.retrieve(query))
+                # Tier scope is enforced here, at the governed service
+                # boundary: the retriever may return mixed tiers, but
+                # evidence outside request.include_tiers is dropped before
+                # it can touch scoring, dedup state, budgets, coverage,
+                # confidence, gain, contradictions, synthesis, or receipts.
+                for item in self._retriever.retrieve(query):
+                    if item.tier in allowed_tiers:
+                        iteration_new_raw.append(item)
+                    else:
+                        excluded_tier_count += 1
+            if excluded_tier_count:
+                logger.info(
+                    "run_id=%s iteration=%d excluded %d evidence item(s) outside include_tiers=%s",
+                    run_id,
+                    iteration,
+                    excluded_tier_count,
+                    sorted(allowed_tiers),
+                )
 
             state = self._advance(state, LoopState.SCORING)
             scored = scoring.score_batch(iteration_new_raw)

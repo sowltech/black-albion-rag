@@ -310,8 +310,12 @@ def test_policy_blocked():
     request = AgenticQueryRequest(question="a proof-mode request", mode="proof", include_tiers=["II", "III"])
     result = service.run(request, run_id="run-policy")
     assert result.outcome == TerminalOutcome.POLICY_BLOCKED
-    assert result.iterations_completed == 1
-    _assert_well_formed(result)
+    # The policy gate fires before any retrieval cycle, so no iteration ever
+    # completes and no receipt is fabricated for one.
+    assert result.iterations_completed == 0
+    assert result.retrieval_calls_used == 0
+    assert result.evidence_ids == []
+    assert result.stop_reason.startswith("POLICY_BLOCKED:")
 
 
 def test_hard_ceiling_cannot_be_bypassed_by_caller():
