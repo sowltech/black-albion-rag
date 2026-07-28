@@ -1,6 +1,82 @@
 # Elite Governed Agentic RAG Loop
 
-Status: implementation contract
+Status: Phase 1 implemented
+
+## Phase 1 implementation status
+
+**Implemented** (`backend/app/agentic_loop/`, tests in `tests/agentic_loop/`,
+239 tests total including full existing-suite regression):
+
+- Typed request/result/receipt contracts (`models.py`), including the
+  `LoopState` state machine with an explicit transition table and typed
+  `InvalidTransitionError` / `TerminalStateError` on misuse.
+- Mode presets (fast/deep/proof), hard budget ceilings that clamp any
+  caller-supplied override, and the evidence-scoring and information-gain
+  weight tables (`policy.py`).
+- Deterministic query planning, normalisation, and repeated-query detection
+  (`planner.py`) via a configuration-driven `StaticPlanner` test double.
+- A read-only `Retriever` protocol plus a deterministic in-memory test
+  double (`retriever.py`); no network or vector-database calls anywhere in
+  Phase 1.
+- Evidence scoring from documented weights and deduplication that preserves
+  independent corroboration (`scorer.py`).
+- Structural gap detection over subquestions/evidence/contradictions
+  (`gap_detector.py`) -- no generative semantic judgement.
+- Contradiction lifecycle: structural pairing from evidence
+  `supports_claims`/`opposes_claims`, materiality classification, and
+  explicit reasoned resolution (never automatic from a score comparison)
+  (`contradiction.py`).
+- The information-gain formula and the single authoritative
+  continue/synthesise/stop/escalate governor covering every mandatory stop
+  rule (`governor.py`).
+- Hash-chained, tamper-evident iteration receipts with a documented
+  canonical-serialisation and verification routine (`receipts.py`).
+- Deterministic, non-generative synthesis that runs with no LLM present
+  (`synthesiser.py`).
+- The orchestration service wiring all of the above into the state machine,
+  with typed-error and unexpected-exception boundaries mapped to
+  `INTERNAL_ERROR` (`service.py`).
+- Direct test coverage for every terminal outcome:
+  `ANSWERED`, `PARTIAL_EVIDENCE`, `INSUFFICIENT_EVIDENCE`,
+  `CONTRADICTION_UNRESOLVED`, `BUDGET_EXHAUSTED`, `NO_INFORMATION_GAIN`,
+  `REPEATED_QUERY`, `OPERATOR_REVIEW_REQUIRED`, `POLICY_BLOCKED`.
+
+**Designed, not yet wired** (this document's contract, ahead of adapter work):
+
+- The exact `/agentic-query` API surface below (request/response shape is
+  stable; the FastAPI route itself is Phase 3).
+
+**Deferred to later phases** (see "Delivery phases" below):
+
+1. A read-only adapter from `Retriever` onto the real Black Albion ledgers
+   (`backend/app/retriever.py`, `data/raw/*.json`). Phase 1 runs entirely
+   against `InMemoryRetriever` fixtures.
+2. Semantic (as opposed to structural) contradiction and gap detection once
+   real ledger content is available to reason over.
+3. `/agentic-query` and run-inspection API endpoints, dashboard visibility,
+   and proof-bundle export.
+4. Stable SCROLLMIND / Brain API contract and local/remote model routing.
+5. Governed candidate proposals behind explicit operator approval.
+
+## Safety boundaries confirmed by Phase 1
+
+- **Canonical / candidate writes**: nothing in `backend/app/agentic_loop/`
+  imports or calls any ledger-write path. `policy.forbid_canonical_write`
+  and `errors.CanonicalWriteDeniedError` exist specifically so this
+  invariant is a concrete, raisable, testable assertion rather than only a
+  comment.
+- **Automatic promotion**: there is no code path from a `TerminalOutcome`
+  to a canonical write. `ANSWERED` is a returned `AgenticResult`, nothing
+  more.
+- **Tier mutation**: `scorer.score_evidence` only ever updates
+  `overall_score`; it never touches `EvidenceItem.tier`. Tier III material
+  cannot become Tier I evidence anywhere in this package.
+- **Contradiction preservation**: contradictions are never deleted, and are
+  never resolved except through an explicit, reasoned call to
+  `contradiction.resolve_partially` / `resolve_fully` / `escalate` supplying
+  a non-empty reason and evidence IDs that are actually part of the
+  contradiction. The orchestration loop itself never calls these -- Phase 1
+  has no automatic resolution path.
 
 ## Purpose
 
@@ -23,14 +99,24 @@ This is a governed inquiry engine, not an autonomous truth writer.
 
 ## State machine
 
+As implemented in `models.py` (`LoopState`, `TRANSITIONS`,
+`validate_transition`):
+
 ```text
-UNDERSTAND -> PLAN -> RETRIEVE -> NORMALISE -> SCORE -> ASSESS
-ASSESS -> REFINE -> RETRIEVE
-ASSESS -> RESOLVE_CONTRADICTION -> RETRIEVE
-ASSESS -> VERIFY -> ASSESS
-ASSESS -> SYNTHESISE | ABSTAIN | ESCALATE
-terminal -> RECEIPT -> COMPLETE
+RECEIVED -> DECOMPOSING -> PLANNING -> RETRIEVING -> SCORING
+  -> ASSESSING_GAPS -> ASSESSING_CONTRADICTIONS -> GOVERNING
+GOVERNING -> PLANNING            (continue: budgets remain, gap addressable)
+GOVERNING -> SYNTHESISING        (every other governor decision)
+SYNTHESISING -> COMPLETED        (outcome == ANSWERED)
+SYNTHESISING -> STOPPED          (every other outcome)
+<any non-terminal state> -> FAILED   (unexpected error; INTERNAL_ERROR)
 ```
+
+`COMPLETED`, `STOPPED`, and `FAILED` are terminal: `validate_transition`
+raises `TerminalStateError` if asked to leave one, and
+`InvalidTransitionError` for any edge not listed above (including skipping a
+state). One iteration's receipt is emitted per full pass through
+`GOVERNING`.
 
 Terminal outcomes:
 
@@ -140,7 +226,8 @@ Candidate proposals may be added later only through quarantine plus explicit ope
 ## Package structure
 
 ```text
-backend/app/agentic_loop/
+backend/app/agentic_loop/       # Phase 1: implemented, listed in delivery order
+  errors.py
   models.py
   policy.py
   planner.py
@@ -149,13 +236,11 @@ backend/app/agentic_loop/
   gap_detector.py
   contradiction.py
   governor.py
-  verifier.py
-  synthesiser.py
   receipts.py
+  synthesiser.py
   service.py
-  errors.py
 
-tests/agentic_loop/
+tests/agentic_loop/             # 114 tests, plus 125 pre-existing (239 total)
   test_models.py
   test_policy.py
   test_planner.py
@@ -165,8 +250,14 @@ tests/agentic_loop/
   test_governor.py
   test_receipts.py
   test_service.py
-  test_api.py
 ```
+
+Claim verification against evidence is not a separate module: it is the
+combined result of `scorer.py` (decomposed, tier-aware scores),
+`contradiction.py` (never silently averaging incompatible claims), and
+`synthesiser.py` (a subquestion is only reported supported when Tier I/II
+evidence backs it and no unresolved contradiction touches that evidence).
+`test_api.py` moves to Phase 3 once `/agentic-query` exists to test against.
 
 ## API boundary
 
