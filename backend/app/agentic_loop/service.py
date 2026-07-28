@@ -122,20 +122,26 @@ class AgenticLoopService:
         try:
             return self._run(request, run_id)
         except AgenticLoopError as exc:
-            # Typed loop errors carry a stable class name; the public result
-            # gets only that code. The message (our own, but still internal
-            # detail) goes to the internal log with the run_id for
-            # correlation, never into AgenticResult.
-            logger.error("agentic loop error run_id=%s: %s", run_id, exc)
-            return self._failure_result(
-                request, run_id, f"internal error [ERR_{type(exc).__name__.upper()}]"
+            # Both the public result and the internal log carry only safe
+            # structured metadata: run_id, the stable error code, and the
+            # exception class name. Exception messages and tracebacks are
+            # never emitted -- even a typed error's message could embed an
+            # adapter's raw text, and process logs feed aggregators, CI
+            # output, and support bundles.
+            error_code = f"ERR_{type(exc).__name__.upper()}"
+            logger.error(
+                "Agentic loop handled failure run_id=%s error_code=%s exception_type=%s",
+                run_id,
+                error_code,
+                type(exc).__name__,
             )
-        except Exception:  # noqa: BLE001 - deliberate INTERNAL_ERROR boundary
-            # Unexpected exception text may contain anything (paths,
-            # credentials, adapter responses). The public result gets a
-            # fixed opaque code; the full traceback goes only to the
-            # internal log, keyed by run_id.
-            logger.exception("unexpected agentic loop failure run_id=%s", run_id)
+            return self._failure_result(request, run_id, f"internal error [{error_code}]")
+        except Exception as exc:  # noqa: BLE001 - deliberate INTERNAL_ERROR boundary
+            logger.error(
+                "Agentic loop unexpected failure run_id=%s error_code=ERR_UNEXPECTED exception_type=%s",
+                run_id,
+                type(exc).__name__,
+            )
             return self._failure_result(request, run_id, "internal error [ERR_UNEXPECTED]")
 
     def _failure_result(self, request: AgenticQueryRequest, run_id: str, reason: str) -> AgenticResult:

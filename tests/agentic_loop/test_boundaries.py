@@ -80,11 +80,27 @@ class ExplodingRetriever:
     """Raises an unexpected exception whose text simulates leaked secrets."""
 
     SECRET_MESSAGE = (
-        "database password=supersecret token=abc123 at /Users/operator/private/creds.env"
+        "password=supersecret token=abc123 "
+        "postgresql://user:pass@host/database "
+        "/Users/operator/private/path"
     )
 
     def retrieve(self, query):
         raise RuntimeError(self.SECRET_MESSAGE)
+
+    def available_source_types(self):
+        return set()
+
+
+class TypedErrorRetriever:
+    """Raises a typed loop error whose message simulates leaked secrets."""
+
+    SECRET_MESSAGE = "token=typedsecret /Users/private"
+
+    def retrieve(self, query):
+        from backend.app.agentic_loop.errors import InvalidRequestError
+
+        raise InvalidRequestError(self.SECRET_MESSAGE)
 
     def available_source_types(self):
         return set()
@@ -308,7 +324,8 @@ def test_stop_reason_contains_no_credentials():
 def test_stop_reason_contains_no_filesystem_paths():
     result = _exploding_run()
     assert "/Users/" not in result.stop_reason
-    assert "creds.env" not in result.stop_reason
+    assert "operator/private" not in result.stop_reason
+    assert "postgresql://" not in result.stop_reason
 
 
 def test_internal_error_result_is_structurally_valid():
@@ -332,3 +349,101 @@ def test_internal_error_classification_is_stable_across_runs():
     second = _exploding_run()
     assert first.stop_reason == second.stop_reason
     assert first.stop_reason == "internal error [ERR_UNEXPECTED]"
+
+
+# ---------------------------------------------------------------------------
+# Finding 3 (follow-up): internal process logs must be secret-safe too
+# ---------------------------------------------------------------------------
+
+_LOGGER_NAME = "backend.app.agentic_loop.service"
+
+
+def _typed_error_run():
+    planner = StaticPlanner()
+    service = AgenticLoopService(planner, TypedErrorRetriever(), clock=_fixed_clock)
+    request = AgenticQueryRequest(question="a question hitting a typed error", mode="fast")
+    return service.run(request, run_id="run-typed-explode")
+
+
+def _captured_log_text(caplog):
+    return "\n".join(
+        record.getMessage() for record in caplog.records if record.name == _LOGGER_NAME
+    )
+
+
+def test_unexpected_failure_log_contains_only_safe_metadata(caplog):
+    with caplog.at_level("ERROR", logger=_LOGGER_NAME):
+        _exploding_run()
+    text = _captured_log_text(caplog)
+    assert "run-explode" in text
+    assert "ERR_UNEXPECTED" in text
+    assert "RuntimeError" in text
+
+
+def test_unexpected_failure_log_contains_no_secrets(caplog):
+    with caplog.at_level("ERROR", logger=_LOGGER_NAME):
+        _exploding_run()
+    text = _captured_log_text(caplog)
+    assert "supersecret" not in text
+    assert "abc123" not in text
+    assert "postgresql://" not in text
+    assert "user:pass" not in text
+    assert "/Users/operator/private/path" not in text
+    assert "password=" not in text
+    assert "token=" not in text
+    assert ExplodingRetriever.SECRET_MESSAGE not in text
+    assert "Traceback" not in text
+
+
+def test_typed_failure_log_contains_only_safe_metadata(caplog):
+    with caplog.at_level("ERROR", logger=_LOGGER_NAME):
+        result = _typed_error_run()
+    text = _captured_log_text(caplog)
+    assert "run-typed-explode" in text
+    assert "ERR_INVALIDREQUESTERROR" in text
+    assert "InvalidRequestError" in text
+    assert result.stop_reason == "internal error [ERR_INVALIDREQUESTERROR]"
+
+
+def test_typed_failure_log_contains_no_secrets(caplog):
+    with caplog.at_level("ERROR", logger=_LOGGER_NAME):
+        _typed_error_run()
+    text = _captured_log_text(caplog)
+    assert "typedsecret" not in text
+    assert "/Users/private" not in text
+    assert "token=" not in text
+    assert TypedErrorRetriever.SECRET_MESSAGE not in text
+    assert "Traceback" not in text
+
+
+def test_failure_logs_never_enable_exc_info_or_stack_info(caplog):
+    with caplog.at_level("ERROR", logger=_LOGGER_NAME):
+        _exploding_run()
+        _typed_error_run()
+    records = [r for r in caplog.records if r.name == _LOGGER_NAME]
+    assert records, "expected failure log records to be captured"
+    for record in records:
+        assert record.exc_info is None
+        assert record.exc_text is None
+        assert record.stack_info is None
+
+
+def test_typed_failure_public_result_regression():
+    result = _typed_error_run()
+    assert result.outcome == TerminalOutcome.INTERNAL_ERROR
+    assert result.evidence_ids == []
+    assert result.supported_claims == []
+    assert TypedErrorRetriever.SECRET_MESSAGE not in result.stop_reason
+
+
+def test_failure_logging_stable_across_repeated_executions(caplog):
+    with caplog.at_level("ERROR", logger=_LOGGER_NAME):
+        first = _exploding_run()
+        second = _exploding_run()
+    assert first.stop_reason == second.stop_reason
+    messages = [
+        r.getMessage() for r in caplog.records if r.name == _LOGGER_NAME
+    ]
+    assert len(messages) == 2
+    assert messages[0] == messages[1]  # same run_id fixture -> identical safe line
+    assert all("ERR_UNEXPECTED" in m for m in messages)
