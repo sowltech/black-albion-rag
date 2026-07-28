@@ -17,3 +17,4 @@ data/processed/*
 # Legacy embeddings cache locations (kept for safety)
 backend/rag/.embeddings_cache.pkl
 backend/app/.embeddings_cache.pkl
+.venv_test/
